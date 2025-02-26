@@ -45,10 +45,6 @@
               {{ isExpanded[index] ? "Tampilkan Ringkas" : "Lihat Selengkapnya" }}
             </button>
 
-            <!-- Tombol "Baca Sumber" jika ada link -->
-            <a v-if="slide.link" :href="slide.link" target="_blank" class="btn source-btn">
-              Baca Sumber
-            </a>
           </div>
         </div>
       </SwiperSlide>
