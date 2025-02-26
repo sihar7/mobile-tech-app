@@ -3,13 +3,12 @@
     <!-- Tombol Fullscreen & Pause -->
     <div class="controls">
       <button @click="toggleFullscreen" class="btn fullscreen-btn">
-        {{ isFullscreen ? "Keluar Fullscreen" : "Fullscreen" }}
+        <i :class="isFullscreen ? 'fas fa-compress' : 'fas fa-expand'"></i>
       </button>
       <button @click="toggleAutoplay" class="btn play-btn">
-        {{ isPaused ? "Play" : "Pause" }}
+        <i :class="isPaused ? 'fas fa-play' : 'fas fa-pause'"></i>
       </button>
     </div>
-
     <Swiper
       ref="swiperRef"
       :modules="[Navigation, Pagination, Autoplay]"

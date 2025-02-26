@@ -5,23 +5,34 @@
       :key="week.id"
       :to="isUnlocked(week) ? `/week/${week.id}` : '#'"
       :class="[
-        'p-6 rounded-xl shadow-lg text-center transition-all duration-300 transform hover:scale-105 relative overflow-hidden',
-        isUnlocked(week) && !isPast(week) ? 'bg-gradient-to-br from-purple-500 to-orange-400 text-white hover:from-purple-600 hover:to-orange-500' : '',
-        isPast(week) ? 'bg-gray-400 text-gray-200 cursor-not-allowed' : '',
-        !isUnlocked(week) ? 'bg-gray-300 text-gray-500 opacity-75' : ''
+        'p-6 rounded-2xl shadow-lg text-center transition-all duration-300 transform hover:scale-105 relative overflow-hidden border-2',
+        isUnlocked(week) && !isPast(week)
+          ? 'bg-gradient-to-br from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 border-transparent'
+          : '',
+        isPast(week)
+          ? 'bg-gray-200 text-gray-500 cursor-not-allowed border-gray-300'
+          : '',
+        !isUnlocked(week)
+          ? 'bg-gray-100 text-gray-400 border-gray-200'
+          : ''
       ]"
       @click="handleClick(week)"
     >
       <!-- Teks Pertemuan -->
-      <span class="text-lg font-semibold tracking-wide">Pertemuan {{ week.id }}</span>
+      <span class="text-xl font-bold tracking-wide">Pertemuan {{ week.id }}</span>
 
       <!-- Icon untuk minggu yang sudah lewat -->
-      <span v-if="isPast(week)" class="absolute top-2 right-2 text-xl opacity-90 text-red-500">❌</span>
+      <span
+        v-if="isPast(week)"
+        class="absolute top-2 right-2 text-2xl opacity-90 text-red-500"
+      >
+        ❌
+      </span>
 
       <!-- Animasi Gesture Tangan -->
       <span
         v-if="isUnlocked(week) && !isPast(week)"
-        class="absolute -right-4 top-1/2 transform -translate-y-1/2 text-3xl text-yellow-300 animate-pulse"
+        class="absolute -right-4 top-1/2 transform -translate-y-1/2 text-4xl text-yellow-300 animate-bounce"
       >
         👉
       </span>
@@ -29,14 +40,14 @@
       <!-- Overlay untuk minggu yang terkunci -->
       <div
         v-if="!isUnlocked(week)"
-        class="absolute inset-0 bg-black bg-opacity-30 flex flex-col items-center justify-center rounded-lg"
+        class="absolute inset-0 bg-black/20 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl"
       >
-        <span class="text-white text-sm font-bold">🔒 Terkunci</span>
+        <span class="text-white text-lg font-bold drop-shadow-md">🔒 Terkunci</span>
+        <span class="text-white text-sm mt-1 drop-shadow-md">Buka pada {{ week.unlockDate }}</span>
       </div>
     </router-link>
   </div>
 </template>
-
 
 <script setup>
 import { ref } from 'vue';
