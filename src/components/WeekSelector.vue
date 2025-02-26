@@ -7,19 +7,19 @@
       :class="[ 
         'p-6 rounded-2xl shadow-2xl text-center transition-all duration-300 transform hover:scale-105 relative overflow-hidden',
         isUnlocked(week) && !isPast(week)
-          ? 'bg-gradient-to-br from-teal-400 to-indigo-600 text-white hover:from-teal-500 hover:to-indigo-700 border-4 border-purple-500'
+          ? 'bg-gradient-to-br from-sky-400 to-blue-600 text-white hover:from-sky-500 hover:to-blue-700 border-4 border-blue-500'
           : '',
         isPast(week)
-          ? 'bg-gray-300 text-gray-600 cursor-not-allowed border-gray-400'
+          ? 'bg-pink-100 text-pink-700 cursor-not-allowed border-pink-300'
           : '',
         !isUnlocked(week)
-          ? 'bg-gray-100 text-gray-500 border-gray-300'
+          ? 'bg-blue-50 text-blue-600 border-blue-200'
           : ''
       ]"
       @click="handleClick(week)"
     >
       <!-- Teks Pertemuan -->
-      <span class="text-xl font-bold tracking-wide text-gray-900">Pertemuan {{ week.id }}</span>
+      <span class="text-xl font-bold tracking-wide">Pertemuan {{ week.id }}</span>
 
       <!-- Icon untuk minggu yang sudah lewat -->
       <span
@@ -40,17 +40,23 @@
       <!-- Overlay untuk minggu yang terkunci -->
       <div
         v-if="!isUnlocked(week)"
-        class="absolute inset-0 bg-black/30 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl"
+        class="absolute inset-0 bg-gradient-to-br from-blue-900/30 to-blue-800/40 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl"
       >
-        <span class="text-white text-lg font-bold drop-shadow-md">🔒 Terkunci</span>
-        <span class="text-white text-sm mt-1 drop-shadow-md">Buka pada {{ week.unlockDate }}</span>
+        <!-- Icon Kunci dengan efek glow, diubah ukuran font-nya -->
+        <span class="text-white text-2xl drop-shadow-md">🔒</span>
+        
+        <!-- Teks "Terkunci" dengan ukuran font lebih kecil -->
+        <span class="text-white text-sm font-bold drop-shadow-md mt-1">Terkunci</span>
+        
+        <!-- Tanggal Pembukaan dengan ukuran font lebih kecil dan lebar teks diatur agar tidak terpotong -->
+        <span class="text-white text-xs font-normal drop-shadow-md mt-0 text-center max-w-xs break-words">
+          Buka pada {{ formatDate(week.date) }}
+        </span>
       </div>
+
     </router-link>
   </div>
 </template>
-
-
-
 
 <script setup>
 import { ref } from 'vue';
@@ -70,6 +76,7 @@ const today = new Date();
 const weeks = Array.from({ length: 14 }, (_, i) => {
   const date = new Date(startDate);
   date.setDate(startDate.getDate() + i * 7);
+
   return { id: i + 1, date };
 });
 
@@ -112,16 +119,16 @@ const handleClick = (week) => {
 </script>
 
 <style>
-/* Animasi tangan */
-.bounce-enter-active {
-  animation: bounce 0.8s infinite;
-}
 @keyframes bounce {
   0%, 100% {
     transform: translateX(0);
   }
   50% {
-    transform: translateX(-10px);
+    transform: translateX(10px);
   }
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
 }
 </style>

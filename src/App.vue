@@ -1,28 +1,30 @@
 <template>
-  <div class="relative min-h-screen flex flex-col bg-gradient-to-br from-purple-800 via-purple-600 to-purple-400 overflow-hidden">
-    <!-- Animated Background Waves -->
-    <div class="absolute inset-0 opacity-20">
-      <div class="wave wave1"></div>
-      <div class="wave wave2"></div>
+  <div class="relative min-h-screen flex flex-col bg-gradient-to-br from-sky-400 via-blue-500 to-blue-800 overflow-hidden">
+    <!-- Animated Clouds -->
+    <div class="absolute inset-0 opacity-50">
+      <div class="cloud cloud1"></div>
+      <div class="cloud cloud2"></div>
+      <div class="cloud cloud3"></div>
     </div>
 
     <!-- Navbar -->
     <nav class="relative z-10 w-full max-w-7xl mx-auto bg-white/20 backdrop-blur-md shadow-lg rounded-xl p-4 flex justify-between items-center border border-white/30 mt-6">
       <h1 class="text-2xl font-bold text-white drop-shadow-md flex items-center gap-2">
         <!-- Logo dengan efek menyala -->
-        <span class="text-3xl animate-glow">📱</span> 
+        <span class="text-3xl animate-glow">📱</span>
         <!-- Teks Mobile Teknologi dengan efek menyala -->
         <span class="animate-glow">Mobile Teknologi</span>
       </h1>
       <div class="flex gap-4">
-        <button class="text-white text-lg hover:text-gray-300 transition">🔍</button>
-        <button class="text-white text-lg hover:text-gray-300 transition">⚙️</button>
+        <button class="text-white text-lg hover:text-gray-200 transition">🔍</button>
+        <button class="text-white text-lg hover:text-gray-200 transition">⚙️</button>
       </div>
     </nav>
+
     <!-- Main Content -->
     <div
       class="relative z-10 flex-grow w-full max-w-7xl mx-auto mt-8 p-8 rounded-2xl shadow-lg bg-white/90 backdrop-blur-md border border-white/20
-            hover:shadow-2xl hover:border-purple-400/50 transition-all duration-500 transform hover:-translate-y-1 hover:bg-white/80"
+            hover:shadow-2xl hover:border-blue-400/50 transition-all duration-500 transform hover:-translate-y-1 hover:bg-white/80"
     >
       <router-view />
     </div>
@@ -46,51 +48,61 @@
   opacity: 0;
 }
 
-/* Animated Background Waves */
-.wave {
+/* Animated Clouds */
+.cloud {
   position: absolute;
-  width: 200%;
-  height: 100%;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, rgba(255,255,255,0) 70%);
-  animation: moveWave 12s infinite linear;
+  background: white;
+  border-radius: 1000px;
+  opacity: 0.8;
+  animation: moveCloud 20s infinite linear;
 }
 
-.wave1 {
-  top: -30%;
-  left: -50%;
-  animation-delay: 0s;
+.cloud1 {
+  width: 200px;
+  height: 60px;
+  top: 10%;
+  left: -20%;
+  animation-duration: 25s;
 }
 
-.wave2 {
+.cloud2 {
+  width: 150px;
+  height: 50px;
+  top: 30%;
+  left: -15%;
+  animation-duration: 30s;
+}
+
+.cloud3 {
+  width: 250px;
+  height: 70px;
   top: 50%;
-  left: -50%;
-  animation-delay: 6s;
+  left: -25%;
+  animation-duration: 35s;
 }
 
-@keyframes moveWave {
+@keyframes moveCloud {
   0% {
-    transform: translateX(-10%);
-  }
-  50% {
-    transform: translateX(10%);
+    transform: translateX(-100%);
   }
   100% {
-    transform: translateX(-10%);
+    transform: translateX(100vw);
   }
 }
+
+/* Efek Glow */
 @keyframes glow {
   0% {
-    text-shadow: 0 0 10px #ffffff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff;
+    text-shadow: 0 0 10px #ffffff, 0 0 20px #00aaff, 0 0 30px #00aaff, 0 0 40px #00aaff;
   }
   50% {
-    text-shadow: 0 0 20px #ffffff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff;
+    text-shadow: 0 0 20px #ffffff, 0 0 30px #00aaff, 0 0 40px #00aaff, 0 0 50px #00aaff;
   }
   100% {
-    text-shadow: 0 0 10px #ffffff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff;
+    text-shadow: 0 0 10px #ffffff, 0 0 20px #00aaff, 0 0 30px #00aaff, 0 0 40px #00aaff;
   }
 }
 
-/* Terapkan animasi glow pada logo dan teks */
 .animate-glow {
   animation: glow 1.5s infinite alternate;
 }
