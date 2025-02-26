@@ -59,9 +59,6 @@
           🔍
         </button>
       </form>
-
-      <!-- Tempat Hasil Pencarian Google -->
-      <div class="gcse-searchresults-only"></div>
     </div>
 
     <!-- Tombol Musik -->
@@ -98,6 +95,9 @@
             hover:shadow-2xl hover:border-blue-400/50 transition-all duration-500 transform hover:-translate-y-1"
       style="background-image: url('https://www.transparenttextures.com/patterns/fresh-snow.png'), linear-gradient(to bottom, #E0F2FE, #BAE6FD); background-blend-mode: overlay;"
     >
+    
+      <!-- Tempat Hasil Pencarian Google -->
+      <div class="gcse-searchresults-only"></div>
       <router-view />
     </div>
 
