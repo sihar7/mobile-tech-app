@@ -4,22 +4,22 @@
       v-for="week in weeks"
       :key="week.id"
       :to="isUnlocked(week) ? `/week/${week.id}` : '#'"
-      :class="[
-        'p-6 rounded-2xl shadow-lg text-center transition-all duration-300 transform hover:scale-105 relative overflow-hidden border-2',
+      :class="[ 
+        'p-6 rounded-2xl shadow-2xl text-center transition-all duration-300 transform hover:scale-105 relative overflow-hidden',
         isUnlocked(week) && !isPast(week)
-          ? 'bg-gradient-to-br from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 border-transparent'
+          ? 'bg-gradient-to-br from-teal-400 to-indigo-600 text-white hover:from-teal-500 hover:to-indigo-700 border-4 border-purple-500'
           : '',
         isPast(week)
-          ? 'bg-gray-200 text-gray-500 cursor-not-allowed border-gray-300'
+          ? 'bg-gray-300 text-gray-600 cursor-not-allowed border-gray-400'
           : '',
         !isUnlocked(week)
-          ? 'bg-gray-100 text-gray-400 border-gray-200'
+          ? 'bg-gray-100 text-gray-500 border-gray-300'
           : ''
       ]"
       @click="handleClick(week)"
     >
       <!-- Teks Pertemuan -->
-      <span class="text-xl font-bold tracking-wide">Pertemuan {{ week.id }}</span>
+      <span class="text-xl font-bold tracking-wide text-gray-900">Pertemuan {{ week.id }}</span>
 
       <!-- Icon untuk minggu yang sudah lewat -->
       <span
@@ -40,7 +40,7 @@
       <!-- Overlay untuk minggu yang terkunci -->
       <div
         v-if="!isUnlocked(week)"
-        class="absolute inset-0 bg-black/20 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl"
+        class="absolute inset-0 bg-black/30 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl"
       >
         <span class="text-white text-lg font-bold drop-shadow-md">🔒 Terkunci</span>
         <span class="text-white text-sm mt-1 drop-shadow-md">Buka pada {{ week.unlockDate }}</span>
@@ -48,6 +48,9 @@
     </router-link>
   </div>
 </template>
+
+
+
 
 <script setup>
 import { ref } from 'vue';
