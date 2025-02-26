@@ -1,5 +1,5 @@
 <template>
-  <div ref="swiperWrapper" class="slide-container">
+  <div ref="swiperWrapper" class="w-full max-w-4xl mx-auto p-6">
     <!-- Progress Bar -->
     <div class="progress-bar">
       <div class="progress" :style="{ width: progressPercentage + '%' }"></div>
