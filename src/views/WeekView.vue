@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full max-w-4xl mx-auto p-6">
+  <div class="w-full max-w-full mx-auto p-6">
     <!-- Judul Pertemuan -->
-    <h2 class="text-2xl font-bold mb-6 blue-700">
+    <h2 class="text-2xl font-bold mb-6 ">
       Pertemuan {{ $route.params.id }}
     </h2>
 
