@@ -2,9 +2,24 @@
   <div class="relative min-h-screen flex flex-col bg-gradient-to-br from-sky-400 via-blue-500 to-blue-800 overflow-hidden">
     <!-- Animated Clouds -->
     <div class="absolute inset-0 opacity-50">
-      <div class="cloud cloud1"></div>
-      <div class="cloud cloud2"></div>
-      <div class="cloud cloud3"></div>
+      <div class="cloud cloud1">
+        <div class="cloud-part part1"></div>
+        <div class="cloud-part part2"></div>
+        <div class="cloud-part part3"></div>
+        <div class="cloud-part part4"></div>
+      </div>
+      <div class="cloud cloud2">
+        <div class="cloud-part part1"></div>
+        <div class="cloud-part part2"></div>
+        <div class="cloud-part part3"></div>
+        <div class="cloud-part part4"></div>
+      </div>
+      <div class="cloud cloud3">
+        <div class="cloud-part part1"></div>
+        <div class="cloud-part part2"></div>
+        <div class="cloud-part part3"></div>
+        <div class="cloud-part part4"></div>
+      </div>
     </div>
 
     <!-- Navbar -->
@@ -51,34 +66,62 @@
 /* Animated Clouds */
 .cloud {
   position: absolute;
-  background: white;
-  border-radius: 1000px;
-  opacity: 0.8;
+  width: 200px;
+  height: 100px;
   animation: moveCloud 20s infinite linear;
 }
 
 .cloud1 {
-  width: 200px;
-  height: 60px;
   top: 10%;
   left: -20%;
   animation-duration: 25s;
 }
 
 .cloud2 {
-  width: 150px;
-  height: 50px;
   top: 30%;
   left: -15%;
   animation-duration: 30s;
 }
 
 .cloud3 {
-  width: 250px;
-  height: 70px;
   top: 50%;
   left: -25%;
   animation-duration: 35s;
+}
+
+.cloud-part {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+.cloud .part1 {
+  width: 80px;
+  height: 80px;
+  top: 0;
+  left: 0;
+}
+
+.cloud .part2 {
+  width: 100px;
+  height: 100px;
+  top: -30px;
+  left: 50px;
+}
+
+.cloud .part3 {
+  width: 120px;
+  height: 120px;
+  top: -50px;
+  left: 120px;
+}
+
+.cloud .part4 {
+  width: 80px;
+  height: 80px;
+  top: 0;
+  left: 180px;
 }
 
 @keyframes moveCloud {
