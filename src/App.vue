@@ -78,17 +78,7 @@
     </audio>
   </nav>
 
-    <!-- Tempat Hasil Pencarian Google -->
-    <div v-if="showResults" class="gcse-searchresults-only mt-8"></div>
 
-    <!-- Tombol Close -->
-    <button
-      v-if="showResults"
-      @click="closeResults"
-      class="fixed bottom-4 right-4 bg-red-500 text-white p-3 rounded-full shadow-lg hover:bg-red-600 transition-all"
-    >
-      ✕
-    </button>
     <!-- Main Content -->
     <div
       class="relative z-10 flex-grow w-full max-w-7xl mx-auto mt-8 p-8 rounded-2xl shadow-lg backdrop-blur-md border border-white/20
