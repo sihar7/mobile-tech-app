@@ -60,26 +60,27 @@ const handleClick = (week) => {
   if (isUnlocked(week)) {
     router.push(`/week/${week.id}`);
   } else {
-    Swal.fire({
-      title: `<span style="color:#d9534f; font-weight:bold;">🔒 Belum Bisa Diakses!</span>`,
-      html: `
-        <div class="flex justify-center items-center mt-4">
-          📅 Pertemuan <b>${week.id}</b> baru bisa diakses pada <b>&nbsp;${week.date.toLocaleDateString()}</b>.
-        </div>
-        <div style="display: flex; justify-content: center; align-items: center; margin-top: 15px;">
-          <img src="https://media.giphy.com/media/26AHONQ79FdWZhAI0/giphy.gif" alt="Wait" style="width: 120px; border-radius: 10px;">
-        </div>
-      `,
-      icon: 'warning',
-      background: '#fef3c7',
-      confirmButtonColor: '#d97706',
-      confirmButtonText: 'Oke deh 😢',
-      customClass: {
-        popup: 'rounded-xl shadow-lg',
-        title: 'text-lg font-bold',
-        confirmButton: 'bg-yellow-500 text-white p-2 rounded-lg',
-      }
-    });
+   Swal.fire({
+    title: `<span style="color:#8B5CF6; font-weight:bold;">🔒 Belum Bisa Diakses!</span>`,
+    html: `
+      <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 10px; font-size: 16px; color: #4C1D95;">
+        📅 Pertemuan <b>${week.id}</b> baru bisa diakses pada <b>${week.date.toLocaleDateString()}</b>.
+      </div>
+      <div style="display: flex; justify-content: center; align-items: center; margin-top: 15px;">
+        <img src="https://media.giphy.com/media/26AHONQ79FdWZhAI0/giphy.gif" alt="Wait" style="width: 120px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
+      </div>
+    `,
+    icon: 'warning',
+    background: '#EDE9FE', // Ungu muda
+    confirmButtonColor: '#8B5CF6', // Ungu lebih gelap
+    confirmButtonText: 'Oke deh 😢',
+    customClass: {
+      popup: 'rounded-xl shadow-lg',
+      title: 'text-lg font-bold',
+      confirmButton: 'bg-purple-500 text-white p-2 rounded-lg hover:bg-purple-600',
+    }
+  });
+
   }
 };
 
