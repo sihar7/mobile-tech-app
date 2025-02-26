@@ -9,14 +9,16 @@
     <!-- Navbar -->
     <nav class="relative z-10 w-full max-w-7xl mx-auto bg-white/20 backdrop-blur-md shadow-lg rounded-xl p-4 flex justify-between items-center border border-white/30 mt-6">
       <h1 class="text-2xl font-bold text-white drop-shadow-md flex items-center gap-2">
-        <span class="text-3xl">📱</span> Mobile Teknologi
+        <!-- Logo dengan efek menyala -->
+        <span class="text-3xl animate-glow">📱</span> 
+        <!-- Teks Mobile Teknologi dengan efek menyala -->
+        <span class="animate-glow">Mobile Teknologi</span>
       </h1>
       <div class="flex gap-4">
         <button class="text-white text-lg hover:text-gray-300 transition">🔍</button>
         <button class="text-white text-lg hover:text-gray-300 transition">⚙️</button>
       </div>
     </nav>
-
     <!-- Main Content -->
     <div
       class="relative z-10 flex-grow w-full max-w-7xl mx-auto mt-8 p-8 rounded-2xl shadow-lg bg-white/90 backdrop-blur-md border border-white/20
@@ -75,5 +77,21 @@
   100% {
     transform: translateX(-10%);
   }
+}
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 10px #ffffff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff;
+  }
+  50% {
+    text-shadow: 0 0 20px #ffffff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff;
+  }
+  100% {
+    text-shadow: 0 0 10px #ffffff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff;
+  }
+}
+
+/* Terapkan animasi glow pada logo dan teks */
+.animate-glow {
+  animation: glow 1.5s infinite alternate;
 }
 </style>
