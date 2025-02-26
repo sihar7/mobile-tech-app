@@ -86,7 +86,7 @@ const handleClick = (week) => {
           📅 Pertemuan <b style="color: #7C3AED;">${week.id}</b> baru bisa diakses pada <b style="color: #7C3AED;">${formatDate(week.date)}</b>.
         </div>
         <div style="display: flex; justify-content: center; align-items: center; margin-top: 10px;">
-          <img src="https://media.giphy.com/media/3o7aD2d7hy9ktXNDP2/giphy.gif" alt="Wait" style="width: 120px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);">
+          <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnh2MmczY2NmaGQxZzgyN211d295b3F2N3B0bnRvdng3aTJicTNjZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JYx5as9hOA8hwvv7FE/giphy.gif" alt="Wait" style="width: 120px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);">
         </div>
       `,
       icon: 'warning',
