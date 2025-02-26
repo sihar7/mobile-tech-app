@@ -1,17 +1,30 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-purple-600 to-purple-400 flex flex-col items-center p-6 transition-all duration-300">
+  <div class="relative min-h-screen flex flex-col items-center p-6 bg-gradient-to-br from-purple-700 via-purple-500 to-purple-400 overflow-hidden">
+    <!-- Animated Background Waves -->
+    <div class="absolute inset-0 opacity-20">
+      <div class="wave wave1"></div>
+      <div class="wave wave2"></div>
+    </div>
+
     <!-- Navbar -->
-    <nav class="w-full max-w-4xl bg-white/20 backdrop-blur-md shadow-lg rounded-xl p-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold text-white drop-shadow-md">📱 Mobile Teknologi</h1>
+    <nav class="relative z-10 w-full max-w-4xl bg-white/20 backdrop-blur-md shadow-lg rounded-xl p-4 flex justify-between items-center border border-white/30">
+      <h1 class="text-2xl font-bold text-white drop-shadow-md flex items-center gap-2">
+        <span class="text-3xl">📱</span> Mobile Teknologi
+      </h1>
+      <div class="flex gap-4">
+        <button class="text-white text-lg hover:text-gray-300 transition">🔍</button>
+        <button class="text-white text-lg hover:text-gray-300 transition">⚙️</button>
+      </div>
     </nav>
 
     <!-- Main Content -->
-    <div
-      class="w-full max-w-4xl mt-6 p-8 rounded-2xl shadow-xl bg-white/90 backdrop-blur-sm border border-white/20
-            hover:shadow-2xl hover:border-purple-300/50 transition-all duration-300 transform hover:-translate-y-1"
-    >
-      <router-view />
-    </div>
+  <div
+    class="relative z-10 w-full max-w-4xl mt-8 p-8 rounded-2xl shadow-lg bg-white/80 backdrop-blur-md border border-white/20
+          hover:shadow-2xl hover:border-purple-400/50 transition-all duration-500 transform hover:-translate-y-1 hover:bg-white/70"
+  >
+    <router-view />
+  </div>
+
   </div>
 </template>
 
@@ -25,5 +38,38 @@
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+/* Animated Background Waves */
+.wave {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 10%, rgba(255,255,255,0) 70%);
+  animation: moveWave 8s infinite linear;
+}
+
+.wave1 {
+  top: -30%;
+  left: -50%;
+  animation-delay: 0s;
+}
+
+.wave2 {
+  top: 50%;
+  left: -50%;
+  animation-delay: 4s;
+}
+
+@keyframes moveWave {
+  0% {
+    transform: translateX(-10%);
+  }
+  50% {
+    transform: translateX(10%);
+  }
+  100% {
+    transform: translateX(-10%);
+  }
 }
 </style>

@@ -76,26 +76,33 @@ const handleClick = (week) => {
   if (isUnlocked(week)) {
     router.push(`/week/${week.id}`);
   } else {
-    Swal.fire({
-      title: `<span style="color:#8B5CF6; font-weight:bold;">🔒 Belum Bisa Diakses!</span>`,
+   Swal.fire({
+      title: `<span style="color: #7C3AED; font-weight: bold; font-size: 20px;">🔒 Belum Bisa Diakses!</span>`,
       html: `
         <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 10px; font-size: 16px; color: #4C1D95;">
-          📅 Pertemuan <b>${week.id}</b> baru bisa diakses pada <b>${formatDate(week.date)}</b>.
+          📅 Pertemuan <b style="color: #7C3AED;">${week.id}</b> baru bisa diakses pada <b style="color: #7C3AED;">${formatDate(week.date)}</b>.
         </div>
-        <div style="display: flex; justify-content: center; align-items: center; margin-top: 15px;">
-          <img src="https://media.giphy.com/media/26AHONQ79FdWZhAI0/giphy.gif" alt="Wait" style="width: 120px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
+        <div style="display: flex; justify-content: center; align-items: center; margin-top: 10px;">
+          <img src="https://media.giphy.com/media/3o7aD2d7hy9ktXNDP2/giphy.gif" alt="Wait" style="width: 120px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);">
         </div>
       `,
       icon: 'warning',
-      background: '#EDE9FE', // Ungu muda
-      confirmButtonColor: '#8B5CF6', // Ungu lebih gelap
+      background: '#F5F3FF',
+      confirmButtonColor: '#7C3AED',
       confirmButtonText: 'Oke deh 😢',
       customClass: {
         popup: 'rounded-xl shadow-lg',
-        title: 'text-lg font-bold',
-        confirmButton: 'bg-purple-500 text-white p-2 rounded-lg hover:bg-purple-600',
-      }
+        title: 'text-xl font-bold',
+        confirmButton: 'bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600 transition-all duration-200',
+      },
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown',
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp',
+      },
     });
+
     }
 };
 
