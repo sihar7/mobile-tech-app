@@ -24,6 +24,7 @@
 
     <!-- Navbar -->
     <nav class="relative z-10 w-full max-w-7xl mx-auto bg-white/20 backdrop-blur-md shadow-lg rounded-xl p-4 flex justify-between items-center border border-white/30 mt-6">
+      <!-- Logo dan Petir -->
       <div class="lightning-container">
         <h1 class="text-2xl font-bold text-white drop-shadow-md flex items-center gap-2">
           <span class="text-3xl animate-glow">📱</span>
@@ -41,22 +42,53 @@
           />
         </svg>
       </div>
+
+      <!-- Form Pencarian Custom -->
+      <div class="flex-grow mx-4">
+        <form @submit.prevent="performSearch" class="flex items-center gap-2">
+          <input
+            v-model="searchQuery"
+            type="text"
+            placeholder="Cari di Google..."
+            class="w-full px-4 py-2 rounded-lg bg-white/20 backdrop-blur-md text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            type="submit"
+            class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all"
+          >
+            🔍
+          </button>
+        </form>
+      </div>
+
+      <!-- Tombol Musik -->
       <div class="flex gap-4">
-       <!-- Tombol Musik -->
         <button
           ref="musicToggle"
-          class="fixed bottom-4 right-4 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition-all"
+          class="bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition-all"
         >
           <span ref="musicIcon">🎵</span>
         </button>
-
-        <!-- Audio -->
-        <audio ref="backgroundMusic" loop>
-          <source src="@/assets/lily.mp3" type="audio/mpeg" />
-          Browser Anda tidak mendukung elemen audio.
-        </audio>
       </div>
+
+      <!-- Audio -->
+      <audio ref="backgroundMusic" loop>
+        <source src="@/assets/lily.mp3" type="audio/mpeg" />
+        Browser Anda tidak mendukung elemen audio.
+      </audio>
     </nav>
+
+    <!-- Tempat Hasil Pencarian Google -->
+    <div v-show="showResults" class="gcse-searchresults-only mt-8"></div>
+
+    <!-- Tombol Close -->
+    <button
+      v-if="showResults"
+      @click="closeResults"
+      class="fixed bottom-4 right-4 bg-red-500 text-white p-3 rounded-full shadow-lg hover:bg-red-600 transition-all"
+    >
+      ✕
+    </button>
 
     <!-- Main Content -->
     <div
@@ -71,10 +103,9 @@
     <footer class="relative z-10 w-full max-w-7xl mx-auto text-center text-white p-4 rounded-xl mt-8 mb-6">
       <p class="text-sm">© 2025 Sigit Hardianto. All rights reserved.</p>
     </footer>
-
-   
   </div>
 </template>
+
 <script setup>
 import { ref, onMounted } from 'vue';
 
@@ -83,6 +114,11 @@ const musicToggle = ref(null);
 const musicIcon = ref(null);
 const backgroundMusic = ref(null);
 
+// State untuk pencarian Google
+const searchQuery = ref('');
+const showResults = ref(false); // Kontrol visibilitas hasil pencarian
+
+// Fungsi untuk memutar/menghentikan musik
 onMounted(() => {
   // Pastikan elemen DOM sudah ada
   if (musicToggle.value && musicIcon.value && backgroundMusic.value) {
@@ -98,7 +134,54 @@ onMounted(() => {
   } else {
     console.error('Elemen tidak ditemukan!');
   }
+
+  // Load Google Custom Search script
+  const script = document.createElement('script');
+  script.src = 'https://cse.google.com/cse.js?cx=84c3a5d56e2924c61&noLogging=true'; // Tambahkan noLogging
+  script.async = true;
+  script.onload = () => {
+    console.log('Google Custom Search script loaded successfully!');
+  };
+  script.onerror = () => {
+    console.error('Failed to load Google Custom Search script.');
+  };
+  document.head.appendChild(script);
 });
+
+// Fungsi untuk melakukan pencarian Google
+const performSearch = () => {
+  if (searchQuery.value.trim()) {
+    showResults.value = true; // Tampilkan hasil pencarian
+    setTimeout(() => {
+      const googleInput = document.querySelector('.gsc-input input');
+      const googleForm = document.querySelector('.gsc-search-box form');
+
+      if (googleInput && googleForm) {
+        googleInput.value = searchQuery.value;
+        const event = new Event('input', { bubbles: true });
+        googleInput.dispatchEvent(event);
+        googleForm.submit();
+      } else {
+        console.error('Elemen Google input tidak ditemukan!');
+      }
+    }, 1000); // Tunggu 1 detik sebelum mencoba mengakses elemen
+  }
+};
+
+// Fungsi untuk menutup hasil pencarian
+const closeResults = () => {
+  showResults.value = false; // Sembunyikan hasil pencarian
+  searchQuery.value = ''; // Bersihkan input pencarian
+  clearResults(); // Bersihkan konten hasil pencarian
+};
+
+// Fungsi untuk membersihkan hasil pencarian
+const clearResults = () => {
+  const resultsContainer = document.querySelector('.gcse-searchresults-only');
+  if (resultsContainer) {
+    resultsContainer.innerHTML = ''; // Kosongkan konten
+  }
+};
 </script>
 
 <style>
@@ -309,5 +392,30 @@ footer::before {
   animation: ripple 4s infinite ease-in-out;
   border-radius: 15px;
   pointer-events: none; /* Agar tidak mengganggu interaksi */
+}
+
+/* Sembunyikan form default Google */
+.gsc-control-cse {
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+.gsc-input-box {
+  border: none !important;
+  background: transparent !important;
+}
+
+.gsc-input {
+  display: none !important; /* Sembunyikan input default */
+}
+
+.gsc-search-button {
+  display: none !important; /* Sembunyikan tombol search default */
+}
+
+/* Hasil pencarian */
+.gsc-results {
+  margin-top: 20px;
 }
 </style>
