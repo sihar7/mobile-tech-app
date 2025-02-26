@@ -86,24 +86,24 @@ const handleClick = (week) => {
   if (isUnlocked(week)) {
     router.push(`/week/${week.id}`);
   } else {
-   Swal.fire({
-      title: `<span style="color: #7C3AED; font-weight: bold; font-size: 20px;">🔒 Belum Bisa Diakses!</span>`,
+      Swal.fire({
+      title: `<span style="color: #3B82F6; font-weight: bold; font-size: 1.5rem;">🔒 Belum Bisa Diakses!</span>`,
       html: `
-        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 10px; font-size: 16px; color: #4C1D95;">
-          📅 Pertemuan <b style="color: #7C3AED;">${week.id}</b> baru bisa diakses pada <b style="color: #7C3AED;">${formatDate(week.date)}</b>.
+        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 1rem; font-size: 1rem; color: #1E40AF;">
+          📅 Pertemuan <b style="color: #3B82F6;">${week.id}</b> baru bisa diakses pada <b style="color: #3B82F6;">${formatDate(week.date)}</b>.
         </div>
-        <div style="display: flex; justify-content: center; align-items: center; margin-top: 10px;">
-          <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnh2MmczY2NmaGQxZzgyN211d295b3F2N3B0bnRvdng3aTJicTNjZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JYx5as9hOA8hwvv7FE/giphy.gif" alt="Wait" style="width: 120px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);">
+        <div style="display: flex; justify-content: center; align-items: center; margin-top: 1rem;">
+          <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnh2MmczY2NmaGQxZzgyN211d295b3F2N3B0bnRvdng3aTJicTNjZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JYx5as9hOA8hwvv7FE/giphy.gif" alt="Wait" style="width: 100%; max-width: 120px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);">
         </div>
       `,
-      icon: 'warning',
-      background: '#F5F3FF',
-      confirmButtonColor: '#7C3AED',
+      icon: 'info', // Ganti icon menjadi 'info' untuk tema biru
+      background: '#EFF6FF', // Warna background biru langit yang soft
+      confirmButtonColor: '#3B82F6', // Warna tombol biru langit
       confirmButtonText: 'Oke deh 😢',
       customClass: {
         popup: 'rounded-xl shadow-lg',
         title: 'text-xl font-bold',
-        confirmButton: 'bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600 transition-all duration-200',
+        confirmButton: 'bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-2 rounded-md hover:from-blue-600 hover:to-blue-700 transition-all duration-300',
       },
       showClass: {
         popup: 'animate__animated animate__fadeInDown',
@@ -111,8 +111,12 @@ const handleClick = (week) => {
       hideClass: {
         popup: 'animate__animated animate__fadeOutUp',
       },
+      didOpen: () => {
+        // Tambahkan efek hover pada tombol
+        const confirmButton = document.querySelector('.swal2-confirm');
+        confirmButton.style.transition = 'all 0.3s ease';
+      },
     });
-
     }
 };
 
