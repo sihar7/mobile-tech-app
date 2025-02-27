@@ -399,7 +399,7 @@ const performSearch = () => {
 footer {
   position: relative;
   overflow: hidden; /* Agar efek ripple tidak keluar dari footer */
-  background: linear-gradient(90deg, rgba(0, 123, 255, 0.6), rgba(0, 255, 255, 0.6), rgba(0, 123, 255, 0.6));
+   background: linear-gradient(to bottom, #0091ff, #a4dcfc);
   background-size: 200% 100%; /* Membuat gradien lebih lebar untuk animasi */
   animation: flowing-water 6s infinite linear; /* Animasi gradien bergerak */
   border: 1px solid rgba(255, 255, 255, 0.3); /* Border transparan */
