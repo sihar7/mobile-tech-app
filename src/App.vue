@@ -28,7 +28,6 @@
     <div class="lightning-container">
         <h1 class="text-2xl font-bold text-white drop-shadow-md flex items-center gap-2">
           <span class="text-3xl animate-glow"><img src="@/assets/tayo.png" alt="Icon" class="w-20 h-20"></span>
-          <span class="animate-glow">Mobile Teknologi</span>
         </h1>
         <!-- SVG untuk petir -->
         <svg class="lightning" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
