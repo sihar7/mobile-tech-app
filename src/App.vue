@@ -1,5 +1,5 @@
 <template>
-  <div class="relative min-h-screen flex flex-col bg-gradient-to-br from-sky-400 via-blue-500 to-blue-800 overflow-hidden">
+  <div :class="{'dark-theme': isDarkMode}" class="relative min-h-screen flex flex-col overflow-hidden">
     <!-- Animated Clouds -->
     <div class="absolute inset-0 opacity-50">
       <div class="cloud cloud1">
@@ -23,84 +23,100 @@
     </div>
 
     <!-- Navbar -->
-  <nav class="relative z-10 w-full max-w-7xl mx-auto bg-white/20 backdrop-blur-md shadow-lg rounded-xl p-4 flex justify-between items-center border border-white/30 mt-6">
-  <!-- Logo dan Petir -->
-  <div class="lightning-container">
-    <h1 class="text-2xl font-bold text-white drop-shadow-md flex items-center gap-2">
-      <span class="text-3xl animate-glow">📱</span>
-      <span class="animate-glow">Mobile Teknologi</span>
-    </h1>
-    <!-- SVG untuk petir -->
-    <svg class="lightning" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M50 0 L60 30 L50 40 L70 50 L40 70 L50 60 L30 50 Z"
-        fill="none"
-        stroke="#ffffff"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-    </svg>
-  </div>
+    <nav class="relative z-10 w-full max-w-7xl mx-auto bg-white/20 backdrop-blur-md shadow-lg rounded-xl p-4 flex justify-between items-center border border-white/30 mt-6">
+      <!-- Logo dan Petir -->
+      <div class="lightning-container">
+        <h1 class="text-2xl font-bold text-white drop-shadow-md flex items-center gap-2">
+          <span class="text-3xl animate-glow">📱</span>
+          <span class="animate-glow">Mobile Teknologi</span>
+        </h1>
+        <!-- SVG untuk petir -->
+        <svg class="lightning" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M50 0 L60 30 L50 40 L70 50 L40 70 L50 60 L30 50 Z"
+            fill="none"
+            stroke="#ffffff"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
 
-   <!-- Form Pencarian Custom -->
-    <div class="flex-grow mx-4">
-      <form @submit.prevent="performSearch" class="flex items-center gap-2">
-        <input
-          v-model="searchQuery"
-          type="text"
-          placeholder="Cari di Google..."
-          class="w-full px-4 py-2 rounded-lg bg-white/20 backdrop-blur-md text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+      <!-- Form Pencarian Custom -->
+      <div class="flex-grow mx-4">
+        <form @submit.prevent="performSearch" class="flex items-center gap-2">
+          <input
+            v-model="searchQuery"
+            type="text"
+            placeholder="Cari di Google..."
+            class="w-full px-4 py-2 rounded-lg bg-white/20 backdrop-blur-md text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            type="submit"
+            class=" px-4 py-2 rounded-lg bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all"
+          >
+            🔍
+          </button>
+        </form>
+      </div>
+
+      <!-- Tombol Toggle Tema -->
+     
+
+      <!-- Tombol Musik -->
+      <div class="flex justify-between gap-4">
         <button
-          type="submit"
-          class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all"
+          @click="toggleTheme"
+          class="p-3 rounded-full shadow-lg bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all"
         >
-          🔍
+          <span v-if="isDarkMode">🌞</span>
+          <span v-else>🌙</span>
         </button>
-      </form>
-    </div>
 
-    <!-- Tombol Musik -->
-    <div class="flex gap-4">
-      <button
-        ref="musicToggle"
-        class="bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition-all"
-      >
-        <span ref="musicIcon">🎵</span>
-      </button>
-    </div>
+        <button
+          ref="musicToggle"
+          class="p-3 rounded-full shadow-lg bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all"
+        >
+          <span ref="musicIcon">🎵</span>
+        </button>
+      </div>
+
+
+    </nav>
 
     <!-- Audio -->
     <audio ref="backgroundMusic" loop>
       <source src="@/assets/lily.mp3" type="audio/mpeg" />
       Browser Anda tidak mendukung elemen audio.
     </audio>
-  </nav>
-
     <!-- Main Content -->
     <div
-      class="relative z-10 flex-grow w-full max-w-7xl mx-auto mt-8 p-8 rounded-2xl shadow-lg backdrop-blur-md border border-white/20
-            hover:shadow-2xl hover:border-blue-400/50 transition-all duration-500 transform hover:-translate-y-1"
-      style="background-image: url('https://www.transparenttextures.com/patterns/cartographer.png'), linear-gradient(to bottom, #0091ff, #a4dcfc); background-blend-mode: overlay;"
+      class="relative z-10 flex-grow w-full max-w-7xl mx-auto mt-8 p-8 rounded-2xl shadow-lg backdrop-blur-md border border-white/20 hover:shadow-2xl hover:border-blue-400/50 transition-all duration-500 transform hover:-translate-y-1"
+      :style="{
+        backgroundImage: isDarkMode
+          ? 'url(https://www.transparenttextures.com/patterns/cartographer.png), linear-gradient(to bottom, #0a0a23, #1a1a2e)' /* Gradien gerhana bulan */
+          : 'url(https://www.transparenttextures.com/patterns/cartographer.png), linear-gradient(to bottom, #0091ff, #a4dcfc)', /* Gradien langit cerah */
+        backgroundBlendMode: 'overlay',
+      }"
     >
-    
       <!-- Tempat Hasil Pencarian Google -->
       <div class="gcse-searchresults-only"></div>
       <router-view />
     </div>
 
     <!-- Footer -->
-    <footer class="relative z-10 w-full max-w-7xl mx-auto text-center text-white p-4 rounded-xl mt-8 mb-6">
-      <p class="text-sm">© 2025 Sigit Hardianto. All rights reserved.</p>
-    </footer>
-
-   
+   <footer
+    class="relative z-10 w-full max-w-7xl mx-auto text-center text-white p-4 rounded-xl mt-8 mb-6"
+    :class="{'dark-theme-footer': isDarkMode, 'light-theme-footer': !isDarkMode}"
+  >
+    <p class="text-sm">© 2025 Sigit Hardianto. All rights reserved.</p>
+  </footer>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, provide } from 'vue';
 
 // Refs untuk elemen DOM
 const musicToggle = ref(null);
@@ -110,9 +126,19 @@ const backgroundMusic = ref(null);
 // State untuk pencarian Google
 const searchQuery = ref('');
 
+// State untuk tema gelap
+const isDarkMode = ref(localStorage.getItem('theme') === 'dark');
+
+// Fungsi untuk mengubah tema
+const toggleTheme = () => {
+  isDarkMode.value = !isDarkMode.value;
+  document.documentElement.classList.toggle('dark-theme', isDarkMode.value);
+  localStorage.setItem('theme', isDarkMode.value ? 'dark' : 'light');
+};
+
+provide('isDarkMode', isDarkMode);
 // Fungsi untuk memutar/menghentikan musik
 onMounted(() => {
-  // Pastikan elemen DOM sudah ada
   if (musicToggle.value && musicIcon.value && backgroundMusic.value) {
     musicToggle.value.addEventListener('click', () => {
       if (backgroundMusic.value.paused) {
@@ -137,22 +163,22 @@ onMounted(() => {
     console.error('Failed to load Google Custom Search script.');
   };
   document.head.appendChild(script);
+
+
+  if (isDarkMode.value) {
+    document.documentElement.classList.add('dark-theme');
+  }
 });
 
 // Fungsi untuk melakukan pencarian Google
 const performSearch = () => {
   if (searchQuery.value.trim()) {
-    // Tunggu sebentar untuk memastikan elemen Google sudah siap
     setTimeout(() => {
-      // Cari elemen input Google
       const googleInput = document.querySelector('.gsc-input input');
       if (googleInput) {
-        // Set nilai query ke input Google
         googleInput.value = searchQuery.value;
-        // Trigger event input (agar Google mengenali perubahan)
         const event = new Event('input', { bubbles: true });
         googleInput.dispatchEvent(event);
-        // Submit form Google
         const googleForm = document.querySelector('.gsc-search-box form');
         if (googleForm) {
           googleForm.submit();
@@ -160,25 +186,75 @@ const performSearch = () => {
       } else {
         console.error('Elemen Google input tidak ditemukan!');
       }
-    }, 500); // Tunggu 500ms sebelum mencoba mengakses elemen
+    }, 500);
   }
 };
-
 </script>
 
 <style>
-/* Optional: Tambahkan animasi fade-in saat komponen dimuat */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
+/* Tema Gelap */
+.dark-theme {
+  background: linear-gradient(to bottom, #0a0a23, #1a1a2e); /* Gradien biru tua ke hitam */
+  color: #ffffff; /* Warna teks putih */
 }
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+.dark-theme nav {
+  background: rgba(0, 0, 0, 0.5); /* Latar belakang semi-transparan */
+  border-color: rgba(255, 255, 255, 0.1); /* Warna border */
 }
 
-/* Animated Clouds */
+.dark-theme input {
+  background: rgba(255, 255, 255, 0.1); /* Latar belakang input semi-transparan */
+  color: #ffffff; /* Warna teks input */
+}
+
+.dark-theme .cloud-part {
+  background: rgba(255, 255, 255, 0.1); /* Latar belakang elemen awan */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Bayangan untuk efek kedalaman */
+}
+
+/* Efek tambahan untuk nuansa gerhana bulan */
+.dark-theme::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.1), transparent 70%);
+  pointer-events: none;
+}
+
+/* Tema Terang */
+:root {
+  background: linear-gradient(to bottom, #0091ff, #a4dcfc); /* Gradien biru langit cerah */
+  color: #000000; /* Warna teks hitam */
+}
+
+:root nav {
+  background: rgba(255, 255, 255, 0.2); /* Latar belakang semi-transparan */
+  border-color: rgba(255, 255, 255, 0.3); /* Warna border */
+}
+
+:root input {
+  background: rgba(255, 255, 255, 0.2); /* Latar belakang input semi-transparan */
+  color: #000000; /* Warna teks input */
+}
+
+:root .cloud-part {
+  background: rgba(255, 255, 255, 0.8); /* Latar belakang elemen awan */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan untuk efek kedalaman */
+}
+/* Animasi dan efek lainnya */
+@keyframes moveCloud {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
 .cloud {
   position: absolute;
   width: 200px;
@@ -186,27 +262,8 @@ const performSearch = () => {
   animation: moveCloud 20s infinite linear;
 }
 
-.cloud1 {
-  top: 10%;
-  left: -20%;
-  animation-duration: 25s;
-}
-
-.cloud2 {
-  top: 30%;
-  left: -15%;
-  animation-duration: 30s;
-}
-
-.cloud3 {
-  top: 50%;
-  left: -25%;
-  animation-duration: 35s;
-}
-
 .cloud-part {
   position: absolute;
-  background: white;
   border-radius: 50%;
   opacity: 0.8;
 }
@@ -239,14 +296,6 @@ const performSearch = () => {
   left: 180px;
 }
 
-@keyframes moveCloud {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100vw);
-  }
-}
 /* Container untuk petir */
 .lightning-container {
   position: relative;
@@ -374,6 +423,18 @@ footer::before {
   animation: ripple 4s infinite ease-in-out;
   border-radius: 15px;
   pointer-events: none; /* Agar tidak mengganggu interaksi */
+}
+
+.dark-theme-footer {
+  background: linear-gradient(to bottom, #0a0a23, #1a1a2e);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.light-theme-footer {
+  background: linear-gradient(90deg, rgba(0, 123, 255, 0.6), rgba(0, 255, 255, 0.6), rgba(0, 123, 255, 0.6));
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
 }
 
 /* Sembunyikan form default Google */

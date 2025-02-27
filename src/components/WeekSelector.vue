@@ -7,13 +7,19 @@
       :class="[ 
         'p-6 rounded-2xl shadow-2xl text-center transition-all duration-300 transform hover:scale-105 relative overflow-hidden',
         isUnlocked(week) && !isPast(week)
-          ? 'bg-gradient-to-br from-sky-400 to-blue-600 text-white hover:from-sky-500 hover:to-blue-700 border-4 border-blue-500'
+          ? isDarkMode
+            ? 'bg-gradient-to-br from-gray-700 to-gray-900 text-white hover:from-gray-600 hover:to-gray-800 border-4 border-gray-600'
+            : 'bg-gradient-to-br from-sky-400 to-blue-600 text-white hover:from-sky-500 hover:to-blue-700 border-4 border-blue-500'
           : '',
         isPast(week)
-          ? 'bg-pink-100 text-pink-700 cursor-not-allowed border-pink-300'
+          ? isDarkMode
+            ? 'bg-gray-800 text-gray-400 cursor-not-allowed border-gray-600'
+            : 'bg-pink-100 text-pink-700 cursor-not-allowed border-pink-300'
           : '',
         !isUnlocked(week)
-          ? 'bg-blue-50 text-blue-600 border-blue-200'
+          ? isDarkMode
+            ? 'bg-gray-900 text-gray-500 border-gray-700'
+            : 'bg-blue-50 text-blue-600 border-blue-200'
           : ''
       ]"
       @click="handleClick(week)"
@@ -40,26 +46,26 @@
       <!-- Overlay untuk minggu yang terkunci -->
       <div
         v-if="!isUnlocked(week)"
-        class="absolute inset-0 bg-gradient-to-br from-blue-900/30 to-blue-800/40 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl"
+        class="absolute inset-0 bg-gradient-to-br from-blue-900/30 to-blue-800/40 dark:from-gray-700/30 dark:to-gray-600/40 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl"
       >
-        <!-- Icon Kunci dengan efek glow, diubah ukuran font-nya -->
+        <!-- Icon Kunci dengan efek glow -->
         <span class="text-white text-2xl drop-shadow-md">🔒</span>
         
-        <!-- Teks "Terkunci" dengan ukuran font lebih kecil -->
+        <!-- Teks "Terkunci" -->
         <span class="text-white text-sm font-bold drop-shadow-md mt-1">Terkunci</span>
         
-        <!-- Tanggal Pembukaan dengan ukuran font lebih kecil dan lebar teks diatur agar tidak terpotong -->
+        <!-- Tanggal Pembukaan -->
         <span class="text-white text-xs font-normal drop-shadow-md mt-0 text-center max-w-xs break-words">
           Buka pada {{ formatDate(week.date) }}
         </span>
       </div>
-
     </router-link>
   </div>
 </template>
 
+
 <script setup>
-import { ref } from 'vue';
+import { ref, inject  } from 'vue';
 import { useRouter } from 'vue-router';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -69,6 +75,7 @@ function formatDate(date) {
   return `${days[date.getDay()]}, ${date.toLocaleDateString()}`;
 }
 
+const isDarkMode = inject('isDarkMode');
 const router = useRouter();
 const startDate = new Date(2025, 2, 5);
 const today = new Date();
@@ -135,4 +142,5 @@ const handleClick = (week) => {
 .animate-bounce {
   animation: bounce 1s infinite;
 }
+
 </style>

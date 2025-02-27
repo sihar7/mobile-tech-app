@@ -15,7 +15,7 @@
     <!-- Layout Sidebar dan Konten -->
     <div class="sidebar-layout">
       <!-- Sidebar -->
-      <div class="sidebar">
+      <div :class="['sidebar', isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900']">
         <div
           v-for="(slide, index) in slides"
           :key="index"
@@ -29,36 +29,37 @@
       </div>
 
       <!-- Konten -->
-      <div class="content">
-       <div v-if="activeIndex !== null" class="accordion-content" :key="activeIndex">
-        <!-- Gambar Materi -->
-        <img
-          v-if="slides[activeIndex].image"
-          :src="slides[activeIndex].image"
-          alt="Materi"
-          class="slide-image"
-        />
+      <div :class="['content', isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900']">
+        <div v-if="activeIndex !== null" class="accordion-content" :key="activeIndex">
+          <!-- Gambar Materi -->
+          <img
+            v-if="slides[activeIndex].image"
+            :src="slides[activeIndex].image"
+            alt="Materi"
+            class="slide-image"
+          />
 
-        <!-- Deskripsi Materi -->
-        <p
-          class="slide-description"
-          v-html="
-            isExpanded[activeIndex]
-              ? slides[activeIndex].description
-              : shortenText(slides[activeIndex].description, 300)
-          "
-        ></p>
+          <!-- Deskripsi Materi -->
+          <p
+            class="slide-description"
+            v-html="
+              isExpanded[activeIndex]
+                ? slides[activeIndex].description
+                : shortenText(slides[activeIndex].description, 300)
+            "
+          ></p>
 
-        <!-- Tombol "Lihat Selengkapnya" untuk teks panjang -->
-        <button
-          v-if="slides[activeIndex].description.length > 300"
-          @click="toggleExpand(activeIndex)"
-          class="btn toggle-btn"
-          style="float: right;"
-        >
-          {{ isExpanded[activeIndex] ? "Tampilkan Ringkas" : "Lihat Selengkapnya" }}
-        </button>
-      </div>
+          <!-- Tombol "Lihat Selengkapnya" untuk teks panjang -->
+          <button
+            v-if="slides[activeIndex].description.length > 300"
+            @click="toggleExpand(activeIndex)"
+            class="btn toggle-btn"
+            :class="isDarkMode ? 'bg-gray-700 text-white' : 'bg-gray-200 text-gray-900'"
+            style="float: right;"
+          >
+            {{ isExpanded[activeIndex] ? "Tampilkan Ringkas" : "Lihat Selengkapnya" }}
+          </button>
+        </div>
         <div v-else class="empty-content">
           <p>Pilih materi dari sidebar untuk melihat konten.</p>
         </div>
@@ -68,7 +69,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from "vue";
+import { ref, computed, onMounted, onUnmounted, watch, inject } from "vue";
 
 const props = defineProps({
   slides: Array,
@@ -79,6 +80,8 @@ const activeIndex = ref(null);
 const isExpanded = ref([]);
 const isFullscreen = ref(false);
 
+const isDarkMode = inject('isDarkMode');
+console.log(isDarkMode.value);
 // Progress bar calculation
 const progressPercentage = computed(() => {
   if (!props.slides || props.slides.length === 0) return 0;
