@@ -26,7 +26,7 @@
     <nav class="relative z-10 w-full max-w-7xl mx-auto bg-white/20 backdrop-blur-md shadow-lg rounded-xl p-4 flex justify-between items-center border border-white/30 mt-6">
       <!-- Logo dan Petir -->
       <div class="lightning-container">
-        <img src="@/assets/tayo.png" alt="Icon" class="w-20 h-20 animate-glow">
+        <img src="@/assets/tayo.png" alt="Icon" class="w-24 h-24 animate-glow">
         <!-- SVG untuk petir -->
         <svg class="lightning" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -92,8 +92,8 @@
       class="relative z-10 flex-grow w-full max-w-7xl mx-auto mt-8 p-8 rounded-2xl shadow-lg backdrop-blur-md border border-white/20 hover:shadow-2xl hover:border-blue-400/50 transition-all duration-500 transform hover:-translate-y-1"
       :style="{
         backgroundImage: isDarkMode
-          ? 'url(@/assets/cartographer.png), linear-gradient(to bottom, #0a0a23, #1a1a2e)' /* Gradien gerhana bulan */
-          : 'url(@/assets/cartographer.png), linear-gradient(to bottom, #0091ff, #a4dcfc)', /* Gradien langit cerah */
+          ? 'url(assets/cartographer.png), linear-gradient(to bottom, #0a0a23, #1a1a2e)' /* Gradien gerhana bulan */
+          : 'url(assets/cartographer.png), linear-gradient(to bottom, #0091ff, #a4dcfc)', /* Gradien langit cerah */
         backgroundBlendMode: 'overlay',
       }"
     >
