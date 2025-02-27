@@ -4,8 +4,7 @@ export const pertemuanData = {
       title: "Pengertian Mobile Teknologi",
       description:
         "Apakah Definisi Tekmo? Teknologi mobile adalah sebutan istilah yang dipakai untuk menjelaskan tentang pendukung terhadap perangkat ponsel agar tercipta sebuah fitur pendukung yang dibutuhkan oleh user dalam berkomunikasi dan tindakan lain. Misalnya, Anda memiliki ponsel jadul yang masih belum bisa memutar video maka era tersebut dirasakan telah masuk ke sebuah teknologi paling sempurna. Ternyata makin ke sini makin brilian ide user untuk mengembangkan inovasi terbarunya agar user lain bisa menonton film atau video hanya dalam 1 perangkat, bisa melihat wajah lawan user tanpa bertemu langsung. Untuk itu dibuatlah tekmo yang mampu mengabulkan sebuah aktivitas tersebut. Dengan lahirnya jaringan lebih tinggi dan aplikasi pendukung videonya maka semua bisa terlaksana dengan sukses. Maka, salah satu contoh tekmo terkini yaitu video call dan voice call yang bisa user nikmati.",
-      image:
-        "https://fingerspot.com/upload/news/ori_TpIjwf4f_20180123103212.jpg",
+      image: "https://harmonipermata.com/wp-content/uploads/2018/09/rter.jpg",
     },
     {
       title: "Sejarah Mobile Teknologi",

@@ -54,6 +54,7 @@
           v-if="slides[activeIndex].description.length > 300"
           @click="toggleExpand(activeIndex)"
           class="btn toggle-btn"
+          style="float: right;"
         >
           {{ isExpanded[activeIndex] ? "Tampilkan Ringkas" : "Lihat Selengkapnya" }}
         </button>
