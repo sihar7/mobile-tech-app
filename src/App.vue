@@ -82,7 +82,7 @@
     <div
       class="relative z-10 flex-grow w-full max-w-7xl mx-auto mt-8 p-8 rounded-2xl shadow-lg backdrop-blur-md border border-white/20
             hover:shadow-2xl hover:border-blue-400/50 transition-all duration-500 transform hover:-translate-y-1"
-      style="background-image: url('https://www.transparenttextures.com/patterns/cartographer.png'), linear-gradient(to bottom, #E0F2FE, #BAE6FD); background-blend-mode: overlay;"
+      style="background-image: url('https://www.transparenttextures.com/patterns/cartographer.png'), linear-gradient(to bottom, #0091ff, #a4dcfc); background-blend-mode: overlay;"
     >
     
       <!-- Tempat Hasil Pencarian Google -->
