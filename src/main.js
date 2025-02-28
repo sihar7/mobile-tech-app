@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import "./assets/main.css";
 
+// ✅ Gunakan import, bukan require
 import Prism from "prismjs";
 import "prismjs/components/prism-bash.js";
 import "prismjs/components/prism-dart.js";
@@ -15,3 +16,10 @@ import "prismjs/plugins/line-numbers/prism-line-numbers.css";
 const app = createApp(App);
 app.use(router);
 app.mount("#app");
+
+// ✅ Tambahkan ini jika perlu highlight otomatis setelah render
+app.directive("prism", {
+  mounted(el) {
+    Prism.highlightElement(el);
+  },
+});
