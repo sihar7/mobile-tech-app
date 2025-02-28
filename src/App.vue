@@ -114,6 +114,8 @@
 
 <script setup>
 import { ref, onMounted, provide } from 'vue';
+// import NProgress from 'nprogress';
+// import 'nprogress/nprogress.css';
 
 // Refs untuk elemen DOM
 const musicToggle = ref(null);
@@ -170,8 +172,7 @@ onMounted(() => {
 // Fungsi untuk melakukan pencarian Google
 const performSearch = () => {
   if (searchQuery.value.trim()) {
-    NProgress.start();
-
+    // NProgress.start();
     setTimeout(() => {
       const googleInput = document.querySelector('.gsc-input input');
       if (googleInput) {
@@ -181,13 +182,11 @@ const performSearch = () => {
         const googleForm = document.querySelector('.gsc-search-box form');
         if (googleForm) {
           googleForm.submit();
-           setTimeout(() => {
-            NProgress.done(); 
-          }, 1000);
+          // NProgress.done(); 
         }
       } else {
         console.error('Elemen Google input tidak ditemukan!');
-        NProgress.done(); 
+        // NProgress.done(); 
       }
     }, 500);
   }
@@ -195,6 +194,15 @@ const performSearch = () => {
 </script>
 
 <style>
+/* #nprogress .bar {
+  background: oklch(0.129 0.042 264.695); /* Warna biru Tailwind */
+  height: 3px;
+}
+
+#nprogress .spinner {
+  display: none; /* Sembunyikan spinner */
+} */
+
 /* Tema Gelap */
 .dark-theme {
   background: linear-gradient(to bottom, #0a0a23, #1a1a2e); /* Gradien biru tua ke hitam */
