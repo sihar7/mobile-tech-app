@@ -92,6 +92,12 @@ export const pertemuanData = {
         }`,
       language: "dart",
     },
+    // {
+    //   title: "Spesifikasi Perangkat Mobile",
+    //   description: "",
+    //   image: "",
+    //   video: "https://www.youtube.com/watch?v=c7xl9Og8eEM",
+    // },
   ],
   2: [
     {

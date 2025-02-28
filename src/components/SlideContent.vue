@@ -38,6 +38,15 @@
             alt="Materi"
             class="slide-image"
           />
+          <!-- Slide Video (YouTube) -->
+          <div v-if="slides[activeIndex].video" class="video-container">
+            <youtube
+              :video-id="getYouTubeVideoId(slides[activeIndex].video)"
+              :player-vars="playerVars"
+              width="100%"
+              height="400"
+            ></youtube>
+          </div>
 
           <!-- Slide Description -->
           <p
@@ -78,6 +87,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch, inject } from "vue";
 import CodeBlock from "@/components/CodeBlock.vue";
+import { Youtube } from 'vue3-youtube';
 const props = defineProps({
   slides: {
     type: Array,
@@ -150,6 +160,18 @@ onMounted(() => {
 onUnmounted(() => {
   document.removeEventListener("fullscreenchange", handleFullscreenChange);
 });
+
+// Fungsi untuk mengekstrak video ID dari URL YouTube
+const getYouTubeVideoId = (url) => {
+  const match = url.match(/[?&]v=([^&]+)/);
+  return match ? match[1] : null;
+};
+
+// Opsi pemutar YouTube
+const playerVars = {
+  autoplay: 0, // Tidak autoplay
+  controls: 1, // Tampilkan kontrol
+};
 </script>
 
 <style scoped>
@@ -202,6 +224,7 @@ onUnmounted(() => {
 /* Layout Sidebar dan Konten */
 .sidebar-layout {
   display: flex;
+  flex-direction: row;
   gap: 20px;
 }
 
@@ -211,6 +234,8 @@ onUnmounted(() => {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px;
+  flex: 0 0 250px; /* Sidebar lebar tetap 250px */
+  overflow-y: auto; /* Scroll jika konten terlalu panjang */
 }
 
 .sidebar-item {
@@ -259,6 +284,7 @@ onUnmounted(() => {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  overflow-y: auto; 
 }
 
 .empty-content {
@@ -269,11 +295,13 @@ onUnmounted(() => {
 
 /* Gambar */
 .slide-image {
-  width: 100%;
-  max-height: 300px;
+  max-width: 100%;
+  height: auto; 
   object-fit: cover;
   border-radius: 5px;
   margin-bottom: 15px;
+  display: block;
+  margin: 20px 0;
 }
 
 /* Deskripsi */
@@ -288,5 +316,34 @@ onUnmounted(() => {
   background-color: #28a745;
 }
 
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  margin: 20px 0;
+}
 
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .sidebar-layout {
+    flex-direction: column; /* Sidebar dan content ditumpuk secara vertikal */
+  }
+
+  .sidebar {
+    flex: 0 0 auto; /* Sidebar menyesuaikan tinggi konten */
+    width: 100%; /* Sidebar mengambil lebar penuh */
+  }
+
+  .content {
+    width: 100%; /* Content mengambil lebar penuh */
+  }
+}
 </style>

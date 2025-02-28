@@ -12,9 +12,11 @@ import "prismjs/components/prism-typescript.js";
 import "prismjs/components/prism-jsx.js";
 import "prismjs/plugins/line-numbers/prism-line-numbers.js";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
+import Vue3Youtube from "vue3-youtube";
 
 const app = createApp(App);
 app.use(router);
+app.use(Vue3Youtube);
 app.mount("#app");
 
 // ✅ Tambahkan ini jika perlu highlight otomatis setelah render

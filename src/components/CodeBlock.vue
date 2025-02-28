@@ -1,5 +1,5 @@
 <template>
-  <div class="code-container">
+  <div :class="['code-container', isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900']">
     <div class="controls">
       <span @click="toggleCode" class="toggle-btn">
         {{ isCodeVisible ? 'Hide' : 'Show' }}
@@ -7,12 +7,13 @@
       <span @click="copyCode" class="copy-btn">Copy</span>
     </div>
     <pre v-show="isCodeVisible" :class="`language-${language} line-numbers`">
-      <code ref="codeBlock"></code>
+      <code ref="codeBlock">{{ code }}</code>
     </pre>
   </div>
 </template>
 
 <script>
+import { inject } from 'vue';
 import Prism from "prismjs";
 import "prismjs/plugins/line-numbers/prism-line-numbers";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
@@ -38,6 +39,10 @@ export default {
     return {
       isCodeVisible: true,
     };
+  },
+   setup() {
+    const isDarkMode = inject('isDarkMode');
+    return { isDarkMode };
   },
   mounted() {
     this.highlightCode();
@@ -78,7 +83,7 @@ export default {
     },
     copyCode() {
       navigator.clipboard.writeText(this.code).then(() => {
-        alert("Code copied to clipboard!");
+    
       });
     },
     async formatCode(code) {
