@@ -321,8 +321,27 @@ const performSearch = () => {
   }
 }
 
-/* Efek petir */
-.lightning {
+.dark-theme .lightning {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 20%,
+    rgba(0, 0, 0, 0.6) 50%,
+    transparent 80%
+  );
+  clip-path: polygon(50% 0%, 60% 20%, 55% 40%, 65% 60%, 50% 80%, 35% 60%, 45% 40%, 40% 20%);
+  animation: lightning-strike 2s infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+
+/* Efek petir untuk tema terang */
+:root .lightning {
   position: absolute;
   top: 0;
   left: 0;
@@ -339,13 +358,11 @@ const performSearch = () => {
   pointer-events: none;
   z-index: 1;
 }
-
-/* Efek glow pada teks dan ikon */
-.animate-glow {
-  animation: glow 1.5s infinite alternate;
+:root .animate-glow {
+  animation: glow-light 1.5s infinite alternate;
 }
 
-@keyframes glow {
+@keyframes glow-light {
   0% {
     text-shadow: 
       0 0 5px #ffffff, 
@@ -369,6 +386,37 @@ const performSearch = () => {
     filter: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 10px #00ffff);
   }
 }
+
+
+.dark-theme .animate-glow {
+  animation: glow-dark 1.5s infinite alternate;
+}
+
+@keyframes glow-dark {
+  0% {
+    text-shadow: 
+      0 0 5px #000000, 
+      0 0 10px #000000, 
+      0 0 20px #0077ff, 
+      0 0 40px #0077ff, 
+      0 0 80px #0077ff;
+    filter: drop-shadow(0 0 5px #000000) drop-shadow(0 0 10px #0077ff);
+  }
+  90% {
+    text-shadow: none;
+    filter: none;
+  }
+  100% {
+    text-shadow: 
+      0 0 5px #000000, 
+      0 0 10px #000000, 
+      0 0 20px #0077ff, 
+      0 0 40px #0077ff, 
+      0 0 80px #0077ff;
+    filter: drop-shadow(0 0 5px #000000) drop-shadow(0 0 10px #0077ff);
+  }
+}
+
 /* Animasi gradien bergerak seperti air mengalir */
 @keyframes flowing-water {
   0% {
