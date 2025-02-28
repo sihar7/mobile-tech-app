@@ -78,7 +78,6 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch, inject } from "vue";
 import CodeBlock from "@/components/CodeBlock.vue";
-import VueTruncateCollapsed from "vue-truncate-collapsed";
 const props = defineProps({
   slides: {
     type: Array,
