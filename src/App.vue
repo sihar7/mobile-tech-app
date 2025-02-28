@@ -26,7 +26,10 @@
     <nav class="relative z-10 w-full max-w-7xl mx-auto bg-white/20 backdrop-blur-md shadow-lg rounded-xl p-4 flex justify-between items-center border border-white/30 mt-6">
       <!-- Logo dan Petir -->
       <div class="lightning-container">
-        <img src="@/assets/tayo.png" alt="Icon" class="w-24 h-24 animate-glow">
+        <h1 class="text-2xl font-bold text-white drop-shadow-md flex items-center gap-2">
+          <span class="text-3xl animate-glow">📱</span>
+          <span class="animate-glow">Mobile Teknologi</span>
+        </h1>
         <!-- SVG untuk petir -->
         <svg class="lightning" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <path
