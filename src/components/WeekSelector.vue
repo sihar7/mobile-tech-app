@@ -130,17 +130,5 @@ const handleClick = (week) => {
 </script>
 
 <style>
-@keyframes bounce {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(10px);
-  }
-}
-
-.animate-bounce {
-  animation: bounce 1s infinite;
-}
 
 </style>
