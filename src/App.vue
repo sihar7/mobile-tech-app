@@ -226,7 +226,7 @@ const performSearch = () => {
 }
 
 /* Tema Terang */
-:root {
+:root:root {
   background: linear-gradient(to bottom, #0091ff, #a4dcfc); /* Gradien biru langit cerah */
   color: #000000; /* Warna teks hitam */
 }

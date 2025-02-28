@@ -1,22 +1,96 @@
 export const pertemuanData = {
   1: [
     {
-      title: "Pengertian Mobile Teknologi",
-      description:
-        "Apakah Definisi Tekmo? Teknologi mobile adalah sebutan istilah yang dipakai untuk menjelaskan tentang pendukung terhadap perangkat ponsel agar tercipta sebuah fitur pendukung yang dibutuhkan oleh user dalam berkomunikasi dan tindakan lain. Misalnya, Anda memiliki ponsel jadul yang masih belum bisa memutar video maka era tersebut dirasakan telah masuk ke sebuah teknologi paling sempurna. Ternyata makin ke sini makin brilian ide user untuk mengembangkan inovasi terbarunya agar user lain bisa menonton film atau video hanya dalam 1 perangkat, bisa melihat wajah lawan user tanpa bertemu langsung. Untuk itu dibuatlah tekmo yang mampu mengabulkan sebuah aktivitas tersebut. Dengan lahirnya jaringan lebih tinggi dan aplikasi pendukung videonya maka semua bisa terlaksana dengan sukses. Maka, salah satu contoh tekmo terkini yaitu video call dan voice call yang bisa user nikmati.",
-      image: "https://harmonipermata.com/wp-content/uploads/2018/09/rter.jpg",
+      title: "Spesifikasi Minimum dan Rekomendasi untuk Flutter",
+      description: `<h2 class="text-2xl font-bold text-gray-800">Spesifikasi Minimum dan Rekomendasi</h2>
+        <ul class="list-disc list-inside mt-2 text-gray-700">
+          <li><strong>Sistem Operasi:</strong>
+            <ul class="list-inside ml-4">
+              <li>Windows: Windows 10 (64-bit) atau lebih baru</li>
+              <li>macOS: macOS 13 (Ventura) atau lebih baru</li>
+              <li>Linux: Distribusi 64-bit dengan bash, curl, git, dan unzip</li>
+            </ul>
+          </li>
+          <li><strong>Penyimpanan:</strong> Minimum 10 GB, Direkomendasikan 20+ GB</li>
+          <li><strong>RAM:</strong> Minimum 4 GB, Direkomendasikan 8 GB atau lebih</li>
+          <li><strong>Prosesor:</strong> Minimum 64-bit CPU, Direkomendasikan Intel i5/i7, AMD Ryzen 5/7, atau Apple Silicon</li>
+          <li><strong>Perangkat Lunak Tambahan:</strong>
+            <ul class="list-inside ml-4">
+              <li>Git (untuk mengelola proyek dan dependensi)</li>
+              <li>Android Studio (untuk emulator dan pengembangan Android)</li>
+              <li>VS Code atau IDE lain (opsional, untuk coding lebih nyaman)</li>
+            </ul>
+          </li>
+        </ul>`,
+      image: "",
+      code: ``,
+      language: "bash",
     },
     {
-      title: "Sejarah Mobile Teknologi",
-      description:
-        "Dimulai dari telepon genggam generasi pertama hingga smartphone modern yang kita gunakan saat ini. Perkembangan teknologi mobile dibagi menjadi beberapa generasi, mulai dari 1G hingga 5G, dengan peningkatan kecepatan, fitur, dan konektivitas.",
-      image: "https://example.com/history.jpg",
+      title: "Tutorial Instalasi Flutter",
+      description: `
+       <h2 class="text-2xl font-bold text-gray-800">Tutorial Instalasi Flutter</h2>
+        <p class="mt-2 text-gray-600">Berikut adalah langkah-langkah untuk menginstal Flutter di sistem Anda:</p>
+        <ol class="list-decimal list-inside mt-4 space-y-2 text-gray-700">
+          <li><strong>Unduh Flutter SDK</strong>: Kunjungi situs resmi Flutter <a href="https://flutter.dev" target="_blank" class="text-blue-600 hover:underline">di sini</a> dan unduh Flutter SDK sesuai sistem operasi Anda.</li>
+          <li><strong>Ekstrak Flutter SDK</strong>: Ekstrak file yang telah diunduh ke direktori yang diinginkan, misalnya <code class="bg-gray-200 px-1 rounded">C:\\flutter</code> (Windows) atau <code class="bg-gray-200 px-1 rounded">/opt/flutter</code> (Linux/macOS).</li>
+          <li><strong>Tambahkan Flutter ke PATH</strong>: Buka terminal atau command prompt dan tambahkan path Flutter ke variabel lingkungan PATH.</li>
+          <li><strong>Cek Instalasi</strong>: Jalankan perintah <code class="bg-gray-200 px-1 rounded">flutter doctor</code> untuk memastikan Flutter terinstal dengan benar.</li>
+          <li><strong>Instal Android Studio (Opsional)</strong>: Jika Anda ingin mengembangkan aplikasi Android, instal Android Studio dan plugin Flutter.</li>
+          <li><strong>Instal VS Code (Opsional)</strong>: Jika Anda lebih suka menggunakan Visual Studio Code, instal VS Code dan tambahkan ekstensi Flutter.</li>
+          <li><strong>Buat Proyek Flutter Pertama</strong>: Jalankan perintah berikut untuk membuat proyek Flutter baru:</li>
+        </ol>`,
+      image: "",
+      code: `
+      # Contoh perintah Flutter
+      flutter create my_first_app
+      cd my_first_app
+      flutter run
+    `,
+      language: "bash",
     },
     {
-      title: "Tren Teknologi Masa Kini",
-      description:
-        "Teknologi terbaru seperti AI, 5G, dan mobile computing semakin canggih. Tren ini mencakup penggunaan asisten virtual, Internet of Things (IoT), augmented reality (AR), dan keamanan mobile.",
-      image: "https://example.com/trends.jpg",
+      title: "Contoh Kode Sederhana Flutter",
+      description: `
+       <h2 class="text-2xl font-bold text-gray-800">Contoh Kode Sederhana Flutter</h2>
+      <p class="mt-2 text-gray-600">Berikut adalah contoh kode sederhana Flutter untuk menampilkan pesan 'Hello, Flutter!' di layar.</p>`,
+      image: "",
+      code: `import 'package:flutter/material.dart';
+
+        void main() {
+          runApp(MyApp());
+        }
+
+        class MyApp extends StatelessWidget {
+          @override
+          Widget build(BuildContext context) {
+            return MaterialApp(
+              title: 'Flutter Demo',
+              theme: ThemeData(
+                primarySwatch: Colors.blue,
+              ),
+              home: MyHomePage(),
+            );
+          }
+        }
+
+        class MyHomePage extends StatelessWidget {
+          @override
+          Widget build(BuildContext context) {
+            return Scaffold(
+              appBar: AppBar(
+                title: Text('Flutter Demo Home Page'),
+              ),
+              body: Center(
+                child: Text(
+                  'Hello, Flutter!',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+              ),
+            );
+          }
+        }`,
+      language: "dart",
     },
   ],
   2: [

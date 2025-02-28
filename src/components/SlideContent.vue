@@ -5,14 +5,14 @@
       <div class="progress" :style="{ width: progressPercentage + '%' }"></div>
     </div>
 
-    <!-- Tombol Fullscreen -->
+    <!-- Fullscreen Button -->
     <div class="controls">
-      <button @click="toggleFullscreen" class="btn fullscreen-btn">
+      <button @click="toggleFullscreen" class="btn bg-white/20 backdrop-blur-md hover:bg-white/30">
         <i :class="isFullscreen ? 'fas fa-compress' : 'fas fa-expand'"></i>
       </button>
     </div>
 
-    <!-- Layout Sidebar dan Konten -->
+    <!-- Sidebar and Content Layout -->
     <div class="sidebar-layout">
       <!-- Sidebar -->
       <div :class="['sidebar', isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900']">
@@ -28,10 +28,10 @@
         </div>
       </div>
 
-      <!-- Konten -->
-      <div :class="['content', isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900']">
+      <!-- Content -->
+      <div :class="['content', isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900']">
         <div v-if="activeIndex !== null" class="accordion-content" :key="activeIndex">
-          <!-- Gambar Materi -->
+          <!-- Slide Image -->
           <img
             v-if="slides[activeIndex].image"
             :src="slides[activeIndex].image"
@@ -39,7 +39,7 @@
             class="slide-image"
           />
 
-          <!-- Deskripsi Materi -->
+          <!-- Slide Description -->
           <p
             class="slide-description"
             v-html="
@@ -49,7 +49,14 @@
             "
           ></p>
 
-          <!-- Tombol "Lihat Selengkapnya" untuk teks panjang -->
+          <!-- Code Block -->
+          <CodeBlock 
+            v-if="slides[activeIndex].code && slides[activeIndex].language" 
+            :code="slides[activeIndex].code" 
+            :language="slides[activeIndex].language" 
+          />
+
+          <!-- Expand/Collapse Button -->
           <button
             v-if="slides[activeIndex].description.length > 300"
             @click="toggleExpand(activeIndex)"
@@ -70,9 +77,13 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch, inject } from "vue";
-
+import CodeBlock from "@/components/CodeBlock.vue";
+import VueTruncateCollapsed from "vue-truncate-collapsed";
 const props = defineProps({
-  slides: Array,
+  slides: {
+    type: Array,
+    default: () => [], // Mencegah null/undefined
+  },
 });
 
 // Refs
@@ -81,7 +92,6 @@ const isExpanded = ref([]);
 const isFullscreen = ref(false);
 
 const isDarkMode = inject('isDarkMode');
-console.log(isDarkMode.value);
 // Progress bar calculation
 const progressPercentage = computed(() => {
   if (!props.slides || props.slides.length === 0) return 0;
@@ -199,7 +209,6 @@ onUnmounted(() => {
 /* Sidebar */
 .sidebar {
   width: 250px;
-  background: white;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px;
@@ -248,7 +257,6 @@ onUnmounted(() => {
 /* Konten */
 .content {
   flex: 1;
-  background: white;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -280,4 +288,6 @@ onUnmounted(() => {
   margin-top: 10px;
   background-color: #28a745;
 }
+
+
 </style>
