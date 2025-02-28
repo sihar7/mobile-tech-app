@@ -170,6 +170,8 @@ onMounted(() => {
 // Fungsi untuk melakukan pencarian Google
 const performSearch = () => {
   if (searchQuery.value.trim()) {
+    NProgress.start();
+
     setTimeout(() => {
       const googleInput = document.querySelector('.gsc-input input');
       if (googleInput) {
@@ -179,9 +181,13 @@ const performSearch = () => {
         const googleForm = document.querySelector('.gsc-search-box form');
         if (googleForm) {
           googleForm.submit();
+           setTimeout(() => {
+            NProgress.done(); 
+          }, 1000);
         }
       } else {
         console.error('Elemen Google input tidak ditemukan!');
+        NProgress.done(); 
       }
     }, 500);
   }
