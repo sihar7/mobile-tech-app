@@ -194,14 +194,7 @@ const performSearch = () => {
 </script>
 
 <style>
-/* #nprogress .bar {
-  background: oklch(0.129 0.042 264.695); /* Warna biru Tailwind */
-  height: 3px;
-}
 
-#nprogress .spinner {
-  display: none; /* Sembunyikan spinner */
-} */
 
 /* Tema Gelap */
 .dark-theme {
