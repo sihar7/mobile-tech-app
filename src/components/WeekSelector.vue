@@ -77,7 +77,7 @@ function formatDate(date) {
 
 const isDarkMode = inject('isDarkMode');
 const router = useRouter();
-const startDate = new Date(2025, 2, 5);
+const startDate = new Date(2025, 2, 12);
 const today = new Date();
 
 const weeks = Array.from({ length: 14 }, (_, i) => {
