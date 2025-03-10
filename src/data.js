@@ -27,28 +27,125 @@ export const pertemuanData = {
       language: "bash",
     },
     {
-      title: "Tutorial Instalasi Flutter",
+      title: "Panduan Instalasi Android Studio",
+      description: `<h2 class="text-2xl font-bold text-gray-800">Cara Instal Android Studio</h2>
+        <p class="mt-2 text-gray-700">Ikuti langkah-langkah berikut untuk menginstal Android Studio di sistem operasi yang kamu gunakan.</p>
+        
+        <h3 class="text-xl font-semibold text-gray-800 mt-4">1. Unduh Android Studio</h3>
+        <p class="text-gray-700">Kunjungi situs resmi Android Studio dan unduh versi terbaru:</p>
+        <p class="text-gray-700"><a href="https://developer.android.com/studio" class="text-blue-500 underline">Download Android Studio</a></p>
+        
+        <h3 class="text-xl font-semibold text-gray-800 mt-4">2. Instalasi di Windows</h3>
+        <ul class="list-disc list-inside mt-2 text-gray-700">
+          <li>Jalankan file <code class="bg-gray-200 p-1 rounded">.exe</code> yang telah diunduh.</li>
+          <li>Ikuti wizard instalasi dan pilih opsi default.</li>
+          <li>Pastikan opsi "Android Virtual Device (AVD)" dicentang.</li>
+          <li>Setelah selesai, buka Android Studio dan lakukan konfigurasi awal.</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-800 mt-4">3. Instalasi di macOS</h3>
+        <ul class="list-disc list-inside mt-2 text-gray-700">
+          <li>Ekstrak file <code class="bg-gray-200 p-1 rounded">.dmg</code> yang telah diunduh.</li>
+          <li>Seret ikon Android Studio ke folder <code class="bg-gray-200 p-1 rounded">Applications</code>.</li>
+          <li>Buka Android Studio dan ikuti wizard konfigurasi.</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-800 mt-4">4. Instalasi di Linux</h3>
+        <ul class="list-disc list-inside mt-2 text-gray-700">
+          <li>Ekstrak file ZIP yang telah diunduh.</li>
+          <li>Jalankan perintah berikut di terminal:</li>
+          <pre class="bg-gray-900 text-white p-2 rounded"><code>cd android-studio/bin && ./studio.sh</code></pre>
+          <li>Ikuti wizard instalasi untuk menyelesaikan konfigurasi.</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-800 mt-4">5. Instal SDK dan Emulator</h3>
+        <ul class="list-disc list-inside mt-2 text-gray-700">
+          <li>Setelah instalasi selesai, buka Android Studio.</li>
+          <li>Pilih opsi "More Actions" > "SDK Manager".</li>
+          <li>Pastikan SDK terbaru telah diinstal.</li>
+          <li>Untuk menguji aplikasi, buka "AVD Manager" dan buat emulator.</li>
+        </ul>`,
+      image: "",
+      code: `# Instalasi Android Studio di Linux
+        tar -xvf android-studio-*.tar.gz
+        cd android-studio/bin
+        ./studio.sh`,
+      language: "bash",
+    },
+    {
+      title: "Panduan Instalasi Visual Studio Code dan Ekstensi untuk Flutter",
+      description: `<h2 class="text-2xl font-bold text-gray-800">Cara Instal Visual Studio Code</h2>
+        <p class="mt-2 text-gray-700">Ikuti langkah-langkah berikut untuk menginstal Visual Studio Code serta ekstensi yang dibutuhkan untuk pengembangan Android dan Flutter.</p>
+
+        <h3 class="text-xl font-semibold text-gray-800 mt-4">1. Unduh Visual Studio Code</h3>
+        <p class="text-gray-700">Kunjungi situs resmi dan unduh VS Code sesuai sistem operasi kamu:</p>
+        <p class="text-gray-700"><a href="https://code.visualstudio.com/" class="text-blue-500 underline">Download Visual Studio Code</a></p>
+
+        <h3 class="text-xl font-semibold text-gray-800 mt-4">2. Instal Visual Studio Code</h3>
+        <ul class="list-disc list-inside mt-2 text-gray-700">
+          <li>Jalankan file installer yang telah diunduh.</li>
+          <li>Ikuti petunjuk instalasi dan centang opsi **"Add to PATH"** agar bisa diakses dari terminal.</li>
+          <li>Klik **Next**, lalu **Install**, dan tunggu hingga proses selesai.</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-800 mt-4">3. Instal Ekstensi Wajib</h3>
+        <p class="text-gray-700">Buka VS Code, lalu instal ekstensi berikut untuk pengembangan Flutter:</p>
+        <ul class="list-disc list-inside mt-2 text-gray-700">
+          <li><strong>Flutter & Dart</strong> - Untuk mengembangkan aplikasi Flutter.</li>
+          <li><strong>Android iOS Emulator</strong> - Untuk menjalankan emulator langsung dari VS Code.</li>
+          <li><strong>Material Icon Theme</strong> - Untuk ikon yang lebih menarik di file explorer.</li>
+          <li><strong>Code Runner</strong> - Untuk menjalankan kode langsung di VS Code.</li>
+        </ul>
+        <p class="text-gray-700">Kamu bisa menginstal ekstensi ini dengan membuka <strong>Extensions Marketplace (Ctrl+Shift+X)</strong>, lalu cari nama ekstensi dan klik **Install**.</p>`,
+      image: "",
+      code: "",
+      language: "bash",
+    },
+    {
+      title: "Tutorial Instalasi Flutter dan Sinkronisasi dengan VS Code",
       description: `
-       <h2 class="text-2xl font-bold text-gray-800">Tutorial Instalasi Flutter</h2>
-        <p class="mt-2 text-gray-600">Berikut adalah langkah-langkah untuk menginstal Flutter di sistem Anda:</p>
+        <h2 class="text-2xl font-bold text-gray-800">Tutorial Instalasi Flutter</h2>
+        <p class="mt-2 text-gray-600">Berikut adalah langkah-langkah untuk menginstal Flutter di sistem Anda dan menyinkronkan Android Studio dengan Visual Studio Code:</p>
         <ol class="list-decimal list-inside mt-4 space-y-2 text-gray-700">
           <li><strong>Unduh Flutter SDK</strong>: Kunjungi situs resmi Flutter <a href="https://flutter.dev" target="_blank" class="text-blue-600 hover:underline">di sini</a> dan unduh Flutter SDK sesuai sistem operasi Anda.</li>
           <li><strong>Ekstrak Flutter SDK</strong>: Ekstrak file yang telah diunduh ke direktori yang diinginkan, misalnya <code class="bg-gray-200 px-1 rounded">C:\\flutter</code> (Windows) atau <code class="bg-gray-200 px-1 rounded">/opt/flutter</code> (Linux/macOS).</li>
           <li><strong>Tambahkan Flutter ke PATH</strong>: Buka terminal atau command prompt dan tambahkan path Flutter ke variabel lingkungan PATH.</li>
           <li><strong>Cek Instalasi</strong>: Jalankan perintah <code class="bg-gray-200 px-1 rounded">flutter doctor</code> untuk memastikan Flutter terinstal dengan benar.</li>
-          <li><strong>Instal Android Studio (Opsional)</strong>: Jika Anda ingin mengembangkan aplikasi Android, instal Android Studio dan plugin Flutter.</li>
-          <li><strong>Instal VS Code (Opsional)</strong>: Jika Anda lebih suka menggunakan Visual Studio Code, instal VS Code dan tambahkan ekstensi Flutter.</li>
+          <li><strong>Instal Plugin Flutter dan Dart di Android Studio</strong>:  
+            <ul class="list-disc list-inside ml-5">
+              <li>Buka Android Studio, lalu masuk ke <strong>Preferences/Settings</strong>.</li>
+              <li>Pilih **Plugins** → Cari **Flutter** → Klik **Install**.</li>
+              <li>Plugin Dart akan otomatis terinstal bersama Flutter.</li>
+              <li>Restart Android Studio setelah instalasi.</li>
+            </ul>
+          </li>
+          <li><strong>Instal Ekstensi Flutter dan Dart di VS Code</strong>:  
+            <ul class="list-disc list-inside ml-5">
+              <li>Buka VS Code, tekan <code class="bg-gray-200 px-1 rounded">Ctrl + Shift + X</code> untuk membuka Extensions Marketplace.</li>
+              <li>Cari **Flutter** dan klik **Install**.</li>
+              <li>Ekstensi Dart akan otomatis terinstal bersama Flutter.</li>
+            </ul>
+          </li>
+          <li><strong>Sinkronisasi Android Studio dengan VS Code</strong>:  
+            <ul class="list-disc list-inside ml-5">
+              <li>Buka terminal dan jalankan perintah berikut untuk menambahkan Android SDK ke Flutter:</li>
+            </ul>
+            <pre class="bg-gray-900 text-white p-3 rounded"><code>flutter config --android-sdk "C:\\Users\\NamaAnda\\AppData\\Local\\Android\\Sdk"</code></pre>
+            <p class="mt-2 text-gray-700">Gantilah <code>C:\\Users\\NamaAnda\\AppData\\Local\\Android\\Sdk</code> dengan lokasi Android SDK Anda.</p>
+          </li>
+          <li><strong>Cek Instalasi</strong>: Jalankan perintah <code class="bg-gray-200 px-1 rounded">flutter doctor</code> dan pastikan tidak ada error.</li>
           <li><strong>Buat Proyek Flutter Pertama</strong>: Jalankan perintah berikut untuk membuat proyek Flutter baru:</li>
         </ol>`,
       image: "",
       code: `
-      # Contoh perintah Flutter
-      flutter create my_first_app
-      cd my_first_app
-      flutter run
-    `,
+        # Contoh perintah Flutter
+        flutter create my_first_app
+        cd my_first_app
+        flutter run
+      `,
       language: "bash",
     },
+
     {
       title: "Contoh Kode Sederhana Flutter",
       description: `

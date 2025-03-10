@@ -77,7 +77,7 @@ function formatDate(date) {
 
 const isDarkMode = inject('isDarkMode', ref(false));
 const router = useRouter();
-const startDate = new Date(2025, 2, 12);
+const startDate = new Date(2025, 2, 10);
 const today = new Date();
 const currentHour = today.getHours();
 const currentMinutes = today.getMinutes();
@@ -90,16 +90,22 @@ const weeks = Array.from({ length: 14 }, (_, i) => {
 });
 
 const isUnlocked = (week) => {
-  const isTimeValid = (currentHour === 7 || (currentHour === 9 && currentMinutes <= 30) || (currentHour === 8));
+  const isTimeValid = (currentHour === 15 || (currentHour === 17 && currentMinutes <= 30) || (currentHour === 16));
   
   return today >= week.date && isTimeValid;
 };
 
-const isPast = (week) => today > week.date && week.id !== weeks.length;
+const isPast = (week) => {
+  const endOfValidTime = new Date(week.date);
+  endOfValidTime.setHours(17, 30, 0, 0); // Set batas waktu ke 09:30
+
+  return today > endOfValidTime && week.id !== weeks.length;
+};
+
 
 const handleClick = (week) => {
   const isDark = isDarkMode.value;
-  const isTimeValid = (currentHour === 7 || (currentHour === 9 && currentMinutes <= 30) || currentHour === 8);
+  const isTimeValid = (currentHour === 15 || (currentHour === 17 && currentMinutes <= 30) || (currentHour === 16));
   const isDateValid = today >= week.date;
 
   let message = "";

@@ -1,14 +1,27 @@
 <template>
   <div :class="['code-container', isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900']">
     <div class="controls">
-      <span @click="toggleCode" class="toggle-btn">
-        {{ isCodeVisible ? 'Hide' : 'Show' }}
-      </span>
-      <span @click="copyCode" class="copy-btn">Copy</span>
+      <button @click="toggleCode" class="btn">
+        <i :class="isCodeVisible ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+        {{ isCodeVisible ? 'Hide Code' : 'Show Code' }}
+      </button>
+      <button ref="copyButton" @click="copyCode" class="btn">
+        <i class="fas fa-copy"></i> Copy
+      </button>
+      <button @click="runCode" class="btn">
+        <i class="fas fa-play"></i> Run Code
+      </button>
     </div>
-    <pre v-show="isCodeVisible" :class="`language-${language} line-numbers`">
-      <code ref="codeBlock">{{ code }}</code>
-    </pre>
+
+    <transition name="fade">
+      <pre v-show="isCodeVisible" :class="`language-${language} line-numbers`">
+        <code ref="codeBlock">{{ code }}</code>
+      </pre>
+    </transition>
+
+    <div v-if="isRunning" class="dartpad-container">
+      <iframe :src="dartpadUrl" frameborder="0" width="100%" height="500"></iframe>
+    </div>
   </div>
 </template>
 
@@ -16,64 +29,40 @@
 import { inject } from 'vue';
 import Prism from "prismjs";
 import "prismjs/plugins/line-numbers/prism-line-numbers";
-import "prismjs/plugins/line-numbers/prism-line-numbers.css";
 import "prismjs/themes/prism-tomorrow.css";
 import "prismjs/components/prism-dart";
 import ClipboardJS from "clipboard";
-import prettier from "prettier/standalone";
-import parserBabel from "prettier/parser-babel";
-import parserHtml from "prettier/parser-html";
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 export default {
   props: {
-    code: {
-      type: String,
-      required: true,
-    },
-    language: {
-      type: String,
-      default: "javascript",
-    },
+    code: { type: String, required: true },
+    language: { type: String, default: "javascript" },
   },
   data() {
     return {
       isCodeVisible: true,
+      isRunning: false,
     };
   },
-   setup() {
+  computed: {
+    dartpadUrl() {
+      return `https://dartpad.dev/embed-flutter.html?theme=dark&run=true&split=50&ga_id=your-ga-id&code=${encodeURIComponent(this.code)}`;
+    },
+  },
+  setup() {
     const isDarkMode = inject('isDarkMode');
     return { isDarkMode };
   },
   mounted() {
     this.highlightCode();
-    this.preventLineNumberCopy();
     this.initClipboard();
   },
   methods: {
-    async highlightCode() {
-      if (this.$refs.codeBlock && this.code) {
-        const grammar = Prism.languages[this.language];
-        if (!grammar) {
-          console.warn(`PrismJS does not support language: ${this.language}`);
-          return;
-        }
-        const formattedCode = await this.formatCode(this.code); // Tunggu hasil format
-        this.$refs.codeBlock.textContent = formattedCode;
+    highlightCode() {
+      if (this.$refs.codeBlock) {
         Prism.highlightElement(this.$refs.codeBlock);
-      }
-    },
-    toggleCode() {
-      this.isCodeVisible = !this.isCodeVisible;
-    },
-    preventLineNumberCopy() {
-      const codeBlock = this.$refs.codeBlock;
-      if (codeBlock) {
-        codeBlock.addEventListener("copy", (event) => {
-          const selection = window.getSelection().toString();
-          const cleanedText = selection.replace(/\s*\d+\s+/gm, "");
-          event.clipboardData.setData("text/plain", cleanedText);
-          event.preventDefault();
-        });
       }
     },
     initClipboard() {
@@ -82,53 +71,54 @@ export default {
       });
     },
     copyCode() {
-      navigator.clipboard.writeText(this.code).then(() => {
-    
-      });
-    },
-    async formatCode(code) {
-      try {
-        return await prettier.format(code, {
-          parser: ["javascript", "dart"].includes(this.language) ? "babel" : "html",
-          plugins: [parserBabel, parserHtml],
-          semi: true,
-          singleQuote: true,
-          trailingComma: "es5",
+      navigator.clipboard.writeText(this.code)
+        .then(() => {
+          Swal.fire({
+            toast: true,
+            position: "top-end",
+            icon: "success",
+            title: "Kode berhasil disalin!",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        })
+        .catch(() => {
+          Swal.fire({
+            toast: true,
+            position: "top-end",
+            icon: "error",
+            title: "Gagal menyalin kode!",
+            showConfirmButton: false,
+            timer: 1500
+          });
         });
-      } catch (error) {
-        console.error("Error formatting code:", error);
-        return code;
-      }
+    },
+    toggleCode() {
+      this.isCodeVisible = !this.isCodeVisible;
+    },
+    runCode() {
+      this.isRunning = true;
     },
   },
-  watch: {
-    async code() {
-      await this.highlightCode();
-    },
-    async language() {
-      await this.highlightCode();
-    },
-  },
-
 };
 </script>
 
+
 <style scoped>
 .code-container {
-  position: relative;
-  margin-bottom: 10px;
   background: #1e1e1e;
-  border-radius: 5px;
-  padding: 15px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
 }
 
 .controls {
-  position: absolute;
-  top: 10px;
-  right: 10px;
   display: flex;
-  gap: 10px;
-  z-index: 10; /* Menjamin tombol berada di atas */
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .toggle-btn,
@@ -158,5 +148,29 @@ pre {
 
 .line-numbers .line-numbers-rows {
   border-right: 1px solid #444;
+}
+
+.btn {
+  background: oklch(0.704 0.04 256.788);
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.3s ease;
+  border: none;
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>
