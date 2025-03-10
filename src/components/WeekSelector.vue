@@ -75,7 +75,7 @@ function formatDate(date) {
   return `${days[date.getDay()]}, ${date.toLocaleDateString()}`;
 }
 
-const isDarkMode = inject('isDarkMode');
+const isDarkMode = inject('isDarkMode', ref(false));
 const router = useRouter();
 const startDate = new Date(2025, 2, 12);
 const today = new Date();
@@ -89,28 +89,35 @@ const weeks = Array.from({ length: 14 }, (_, i) => {
 
 const isUnlocked = (week) => today >= week.date;
 const isPast = (week) => today > week.date && week.id !== weeks.length;
+
 const handleClick = (week) => {
   if (isUnlocked(week)) {
     router.push(`/week/${week.id}`);
   } else {
+     const isDark = isDarkMode.value;
+
       Swal.fire({
-      title: `<span style="color: #3B82F6; font-weight: bold; font-size: 1.5rem;">🔒 Belum Bisa Diakses!</span>`,
+      title: `<span style="color: ${isDark ? '#9CA3AF' : '#3B82F6'}; font-weight: bold; font-size: 1.5rem;">🔒 Belum Bisa Diakses!</span>`,
       html: `
-        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 1rem; font-size: 1rem; color: #1E40AF;">
-          📅 Pertemuan <b style="color: #3B82F6;">${week.id}</b> baru bisa diakses pada <b style="color: #3B82F6;">${formatDate(week.date)}</b>.
+        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 1rem; font-size: 1rem; color: ${isDark ? '#9CA3AF' : '#1E40AF'};">
+          📅 Pertemuan <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${week.id}</b> baru bisa diakses pada <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${formatDate(week.date)}</b>.
         </div>
         <div style="display: flex; justify-content: center; align-items: center; margin-top: 1rem;">
-          <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnh2MmczY2NmaGQxZzgyN211d295b3F2N3B0bnRvdng3aTJicTNjZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JYx5as9hOA8hwvv7FE/giphy.gif" alt="Wait" style="width: 100%; max-width: 120px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);">
+          <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnh2MmczY2NmaGQxZzgyN211d295b3F2N3B0bnRvdng3aTJicTNjZiZlcD12MV9pbnRlcm5naWZfYnlfaWQmY3Q9Zw/JYx5as9hOA8hwvv7FE/giphy.gif" 
+               alt="Wait" 
+               style="width: 100%; max-width: 120px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);">
         </div>
       `,
-      icon: 'info', // Ganti icon menjadi 'info' untuk tema biru
-      background: '#EFF6FF', // Warna background biru langit yang soft
-      confirmButtonColor: '#3B82F6', // Warna tombol biru langit
+      icon: 'info',
+      background: isDark ? '#111827' : '#EFF6FF',
+      confirmButtonColor: isDark ? '#1F2937' : '#3B82F6', 
       confirmButtonText: 'Oke deh 😢',
       customClass: {
-        popup: 'rounded-xl shadow-lg',
+        popup: `rounded-xl shadow-lg ${isDark ? 'bg-gray-900 text-gray-500 border-gray-700' : 'bg-blue-50 text-blue-600 border-blue-200'}`,
         title: 'text-xl font-bold',
-        confirmButton: 'bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-2 rounded-md hover:from-blue-600 hover:to-blue-700 transition-all duration-300',
+        confirmButton: `px-6 py-2 rounded-md transition-all duration-300 ${
+          isDark ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-blue-500 text-white hover:bg-blue-600'
+        }`,
       },
       showClass: {
         popup: 'animate__animated animate__fadeInDown',
@@ -118,13 +125,8 @@ const handleClick = (week) => {
       hideClass: {
         popup: 'animate__animated animate__fadeOutUp',
       },
-      didOpen: () => {
-        // Tambahkan efek hover pada tombol
-        const confirmButton = document.querySelector('.swal2-confirm');
-        confirmButton.style.transition = 'all 0.3s ease';
-      },
     });
-    }
+  }
 };
 
 </script>
