@@ -79,6 +79,8 @@ const isDarkMode = inject('isDarkMode', ref(false));
 const router = useRouter();
 const startDate = new Date(2025, 2, 12);
 const today = new Date();
+const currentHour = today.getHours();
+const currentMinutes = today.getMinutes();
 
 const weeks = Array.from({ length: 14 }, (_, i) => {
   const date = new Date(startDate);
@@ -87,20 +89,38 @@ const weeks = Array.from({ length: 14 }, (_, i) => {
   return { id: i + 1, date };
 });
 
-const isUnlocked = (week) => today >= week.date;
+const isUnlocked = (week) => {
+  const isTimeValid = (currentHour === 7 || (currentHour === 9 && currentMinutes <= 30) || (currentHour === 8));
+  
+  return today >= week.date && isTimeValid;
+};
+
 const isPast = (week) => today > week.date && week.id !== weeks.length;
 
 const handleClick = (week) => {
+  const isDark = isDarkMode.value;
+  const isTimeValid = (currentHour === 7 || (currentHour === 9 && currentMinutes <= 30) || currentHour === 8);
+  const isDateValid = today >= week.date;
+
+  let message = "";
+
+  if (!isDateValid) {
+    // Jika tanggal masih belum sesuai
+    message = `📅 Pertemuan <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${week.id}</b> baru bisa diakses pada <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${formatDate(week.date)}</b>`;
+  } else if (!isTimeValid) {
+    // Jika tanggal sudah sesuai, tapi jam tidak valid
+    message = `⏰ Pertemuan hanya bisa diakses antara pukul <b>07:00 - 09:30</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
+  }
+
   if (isUnlocked(week)) {
     router.push(`/week/${week.id}`);
   } else {
-     const isDark = isDarkMode.value;
 
       Swal.fire({
       title: `<span style="color: ${isDark ? '#9CA3AF' : '#3B82F6'}; font-weight: bold; font-size: 1.5rem;">🔒 Belum Bisa Diakses!</span>`,
       html: `
         <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 1rem; font-size: 1rem; color: ${isDark ? '#9CA3AF' : '#1E40AF'};">
-          📅 Pertemuan <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${week.id}</b> baru bisa diakses pada <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${formatDate(week.date)}</b>
+          ${message}
         </div>
         <div style="display: flex; justify-content: center; align-items: center; margin-top: 1rem;">
           <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnh2MmczY2NmaGQxZzgyN211d295b3F2N3B0bnRvdng3aTJicTNjZiZlcD12MV9pbnRlcm5naWZfYnlfaWQmY3Q9Zw/JYx5as9hOA8hwvv7FE/giphy.gif" 
