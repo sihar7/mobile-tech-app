@@ -1,31 +1,13 @@
 export const pertemuanData = {
   1: [
     {
-      title: "Spesifikasi Minimum dan Rekomendasi untuk Flutter",
-      description: `<h2 class="text-2xl font-bold text-gray-800">Spesifikasi Minimum dan Rekomendasi</h2>
-        <ul class="list-disc list-inside mt-2 text-gray-700">
-          <li><strong>Sistem Operasi:</strong>
-            <ul class="list-inside ml-4">
-              <li>Windows: Windows 10 (64-bit) atau lebih baru</li>
-              <li>macOS: macOS 13 (Ventura) atau lebih baru</li>
-              <li>Linux: Distribusi 64-bit dengan bash, curl, git, dan unzip</li>
-            </ul>
-          </li>
-          <li><strong>Penyimpanan:</strong> Minimum 10 GB, Direkomendasikan 20+ GB</li>
-          <li><strong>RAM:</strong> Minimum 4 GB, Direkomendasikan 8 GB atau lebih</li>
-          <li><strong>Prosesor:</strong> Minimum 64-bit CPU, Direkomendasikan Intel i5/i7, AMD Ryzen 5/7, atau Apple Silicon</li>
-          <li><strong>Perangkat Lunak Tambahan:</strong>
-            <ul class="list-inside ml-4">
-              <li>Git (untuk mengelola proyek dan dependensi)</li>
-              <li>Android Studio (untuk emulator dan pengembangan Android)</li>
-              <li>VS Code atau IDE lain (opsional, untuk coding lebih nyaman)</li>
-            </ul>
-          </li>
-        </ul>`,
+      title: "Apa itu mobile teknologi?",
+      description: `\n   <h2 class="text-2xl font-bold text-gray-800">Apa itu Pemrograman Mobile?</h2>\n  <p class="mt-2 text-gray-600">Pemrograman mobile adalah proses menulis kode program untuk membuat aplikasi yang ditujukan untuk perangkat bergerak (Mobile). Aplikasi ini bisa berjalan di berbagai perangkat seperti smartphone, tablet, smartwatch, dan lainnya.</p>\n  \n  <h2 class="text-2xl font-bold text-gray-800">Macam-Macam Perangkat Mobile</h2>\n  <ul class="list-disc list-inside mt-2 text-gray-700">\n    <li><strong>Smartphone:</strong> Perangkat paling populer saat ini, terutama dengan sistem operasi Android dan iOS.</li>\n    <li><strong>Tablet:</strong> Digunakan untuk keperluan kerja dan hiburan.</li>\n    <li><strong>Smartwatch:</strong> Perangkat kecil dengan sistem operasi mobile.</li>\n    <li><strong>E-Reader:</strong> Contohnya Kindle dari Amazon.</li>\n  </ul>\n  \n  <h2 class="text-2xl font-bold text-gray-800">Sistem Operasi Mobile</h2>\n  <ul class="list-disc list-inside mt-2 text-gray-700">\n    <li><strong>Android:</strong> OS mobile terpopuler yang dikembangkan oleh Google.</li>\n    <li><strong>iOS:</strong> Sistem operasi eksklusif untuk perangkat Apple.</li>\n    <li><strong>Windows Phone:</strong> Dikembangkan oleh Microsoft, namun sudah tidak populer.</li>\n    <li><strong>BlackBerry OS:</strong> Pernah populer sebelum kalah bersaing dengan Android.</li>\n  </ul>\n  \n  <h2 class="text-2xl font-bold text-gray-800">Apa itu Aplikasi Mobile?</h2>\n  <p class="mt-2 text-gray-600">Aplikasi mobile adalah software yang dirancang khusus untuk perangkat bergerak seperti smartphone dan tablet. Dibuat menggunakan bahasa pemrograman tertentu dan memiliki berbagai keunggulan.</p>\n  \n  <h2 class="text-2xl font-bold text-gray-800">Keunggulan Aplikasi Mobile</h2>\n  <ul class="list-disc list-inside mt-2 text-gray-700">\n    <li>Antarmuka pengguna yang lebih interaktif dan mudah digunakan.</li>\n    <li>Bisa digunakan secara offline pada beberapa jenis aplikasi.</li>\n    <li>Mudah diakses dari mana saja melalui perangkat mobile.</li>\n  </ul>\n  \n  <h2 class="text-2xl font-bold text-gray-800">Spesifikasi Minimum dan Rekomendasi</h2>\n  <ul class="list-disc list-inside mt-2 text-gray-700">\n    <li><strong>Sistem Operasi:</strong>\n      <ul class="list-inside ml-4">\n        <li>Windows: Windows 10 (64-bit) atau lebih baru</li>\n        <li>macOS: macOS 13 (Ventura) atau lebih baru</li>\n        <li>Linux: Distribusi 64-bit dengan bash, curl, git, dan unzip</li>\n      </ul>\n    </li>\n    <li><strong>Penyimpanan:</strong> Minimum 10 GB, Direkomendasikan 20+ GB</li>\n    <li><strong>RAM:</strong> Minimum 4 GB, Direkomendasikan 8 GB atau lebih</li>\n    <li><strong>Prosesor:</strong> Minimum 64-bit CPU, Direkomendasikan Intel i5/i7, AMD Ryzen 5/7, atau Apple Silicon</li>\n    <li><strong>Perangkat Lunak Tambahan:</strong>\n      <ul class="list-inside ml-4">\n        <li>Git (untuk mengelola proyek dan dependensi)</li>\n        <li>Android Studio (untuk emulator dan pengembangan Android)</li>\n        <li>VS Code atau IDE lain (opsional, untuk coding lebih nyaman)</li>\n      </ul>\n    </li>\n  </ul>`,
       image: "",
-      code: ``,
+      code: "",
       language: "bash",
     },
+
     {
       title: "Panduan Instalasi Android Studio",
       description: `<h2 class="text-2xl font-bold text-gray-800">Cara Instal Android Studio</h2>
@@ -153,11 +135,13 @@ export const pertemuanData = {
       <p class="mt-2 text-gray-600">Berikut adalah contoh kode sederhana Flutter untuk menampilkan pesan 'Hello, Flutter!' di layar.</p>`,
       image: "",
       code: `import 'package:flutter/material.dart';
-
+        
+        // Fungsi utama yang akan dijalankan pertama kali
         void main() {
           runApp(MyApp());
         }
 
+        // Class utama aplikasi yang merupakan StatelessWidget
         class MyApp extends StatelessWidget {
           @override
           Widget build(BuildContext context) {
@@ -170,7 +154,8 @@ export const pertemuanData = {
             );
           }
         }
-
+        
+        // Class halaman utama
         class MyHomePage extends StatelessWidget {
           @override
           Widget build(BuildContext context) {
