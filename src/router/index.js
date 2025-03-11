@@ -31,7 +31,7 @@ const routes = [
     component: WeekPage,
     beforeEnter: (to, from, next) => {
       if (!isUnlocked(to.params.id)) {
-        next(); // Redirect ke home jika minggu belum terbuka
+        next("/");
       } else {
         next();
       }
