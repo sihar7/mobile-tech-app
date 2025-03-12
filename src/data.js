@@ -45,7 +45,14 @@ export const pertemuanData = {
       code: "",
       language: "bash",
     },
-
+    // {
+    //   title: "Spesifikasi Perangkat Mobile",
+    //   description: "",
+    //   image: "",
+    //   video: "https://www.youtube.com/watch?v=c7xl9Og8eEM",
+    // },
+  ],
+  2: [
     {
       title: "Panduan Instalasi Android Studio",
       description: `<h2 class="text-2xl font-bold text-gray-800">Cara Instal Android Studio</h2>
@@ -212,26 +219,6 @@ export const pertemuanData = {
           }
         }`,
       language: "dart",
-    },
-    // {
-    //   title: "Spesifikasi Perangkat Mobile",
-    //   description: "",
-    //   image: "",
-    //   video: "https://www.youtube.com/watch?v=c7xl9Og8eEM",
-    // },
-  ],
-  2: [
-    {
-      title: "Spesifikasi Perangkat Mobile",
-      description:
-        "Menjelaskan spesifikasi utama seperti CPU, RAM, Storage, dan layar dalam perangkat mobile. Spesifikasi ini menentukan performa dan pengalaman pengguna dalam menggunakan perangkat.",
-      image: "https://example.com/specs.jpg",
-    },
-    {
-      title: "Sistem Operasi Mobile",
-      description:
-        "Mengenal berbagai OS seperti Android, iOS, dan HarmonyOS. Sistem operasi ini menjadi dasar untuk menjalankan aplikasi dan mengelola sumber daya perangkat.",
-      image: "https://example.com/os.jpg",
     },
   ],
   3: [
