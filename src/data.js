@@ -550,45 +550,45 @@ export const pertemuanData = {
       </p>`,
     code: `import 'package:flutter/material.dart'; // Import Flutter Material
 
-          void main() {
-            runApp(MyApp()); // Menjalankan aplikasi
-          }
+        void main() {
+          runApp(MyApp()); // Menjalankan aplikasi
+        }
 
-          class MyApp extends StatelessWidget {
-            @override
-            Widget build(BuildContext context) {
-              return MaterialApp(
-                debugShowCheckedModeBanner: false,
-                home: BackgroundScreen(),
-              );
-            }
+        class MyApp extends StatelessWidget {
+          @override
+          Widget build(BuildContext context) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: BackgroundScreen(),
+            );
           }
+        }
 
-          class BackgroundScreen extends StatelessWidget {
-            @override
-            Widget build(BuildContext context) {
-              return Scaffold(
-                body: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/background.jpg"), // Gambar latar dari assets
-                      fit: BoxFit.cover, // Mengatur gambar agar menutupi seluruh layar
-                    ),
+        class BackgroundScreen extends StatelessWidget {
+          @override
+          Widget build(BuildContext context) {
+            return Scaffold(
+              body: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/background.jpg"), // Gambar latar dari assets
+                    fit: BoxFit.cover, // Mengatur gambar agar menutupi seluruh layar
                   ),
-                  child: Center(
-                    child: Text(
-                      "Halo, Flutter!",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                ),
+                child: Center(
+                  child: Text(
+                    "Halo, Flutter!",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
                 ),
-              );
-            }
-          }`,
+              ),
+            );
+          }
+        }`,
     language: "dart",
   },
   {
