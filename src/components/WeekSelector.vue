@@ -90,7 +90,7 @@ const weeks = Array.from({ length: 14 }, (_, i) => {
 });
 
 const isUnlocked = (week) => {
-  const isTimeValid = (currentHour === 9 || (currentHour === 20 && currentMinutes <= 30) || (currentHour === 19));
+  const isTimeValid = (currentHour > 9 || (currentHour === 20 && currentMinutes <= 30) || (currentHour === 19));
   
   return today >= week.date && isTimeValid;
 };
@@ -105,7 +105,7 @@ const isPast = (week) => {
 
 const handleClick = (week) => {
   const isDark = isDarkMode.value;
-  const isTimeValid = (currentHour === 9 || (currentHour === 20 && currentMinutes <= 30) || (currentHour === 19));
+  const isTimeValid = (currentHour > 9 || (currentHour === 20 && currentMinutes <= 30) || (currentHour === 19));
   const isDateValid = today >= week.date;
 
   let message = "";
