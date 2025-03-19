@@ -3,7 +3,7 @@
     <router-link
       v-for="week in weeks"
       :key="week.id"
-      :to="isUnlocked(week) ? `/week/${week.id}` : '#'"
+      :to="(isUnlocked(week) || isHolidayUnlocked(week)) ? `/week/${week.id}` : '#'"
       :class="[ 
         'p-6 rounded-2xl shadow-2xl text-center transition-all duration-300 transform hover:scale-105 relative overflow-hidden',
         isUnlocked(week) && !isPast(week)
@@ -24,8 +24,15 @@
       ]"
       @click="handleClick(week)"
     >
-      <!-- Teks Pertemuan -->
       <span class="text-xl font-bold tracking-wide">Pertemuan {{ week.id }}</span>
+
+      <!-- Ikon untuk minggu yang bisa diakses karena masih liburan -->
+      <span
+        v-if="isHolidayUnlocked(week.date)"
+        class="absolute top-2 left-2 text-2xl opacity-90 text-green-500"
+      >
+        🌴
+      </span>
 
       <!-- Icon untuk minggu yang sudah lewat -->
       <span
@@ -35,26 +42,13 @@
         ❌
       </span>
 
-      <!-- Animasi Gesture Tangan -->
-      <span
-        v-if="isUnlocked(week) && !isPast(week)"
-        class="absolute -right-4 top-1/2 transform -translate-y-1/2 text-4xl text-yellow-300 animate-bounce"
-      >
-        👉
-      </span>
-
       <!-- Overlay untuk minggu yang terkunci -->
       <div
-        v-if="!isUnlocked(week)"
+        v-if="!(isUnlocked(week) || isHolidayUnlocked(week.date))"
         class="absolute inset-0 bg-gradient-to-br from-blue-900/30 to-blue-800/40 dark:from-gray-700/30 dark:to-gray-600/40 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl"
       >
-        <!-- Icon Kunci dengan efek glow -->
         <span class="text-white text-2xl drop-shadow-md">🔒</span>
-        
-        <!-- Teks "Terkunci" -->
         <span class="text-white text-sm font-bold drop-shadow-md mt-1">Terkunci</span>
-        
-        <!-- Tanggal Pembukaan -->
         <span class="text-white text-xs font-normal drop-shadow-md mt-0 text-center max-w-xs break-words">
           Buka pada {{ formatDate(week.date) }}
         </span>
@@ -65,7 +59,7 @@
 
 
 <script setup>
-import { ref, inject  } from 'vue';
+import { ref, inject } from 'vue';
 import { useRouter } from 'vue-router';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -77,86 +71,72 @@ function formatDate(date) {
 
 const isDarkMode = inject('isDarkMode', ref(false));
 const router = useRouter();
-const startDate = new Date(2025, 2, 12);
+const startDate = new Date(2025, 2, 12); // Mulai 12 Maret 2025
 const today = new Date();
 const currentHour = today.getHours();
 const currentMinutes = today.getMinutes();
+const isTimeValid = (currentHour >= 9 && (currentHour < 20 || (currentHour === 20 && currentMinutes <= 30)));
+
+// Menentukan tanggal liburan
+const holidayEnd = new Date(2025, 3, 4); // 4 April 2025
 
 const weeks = Array.from({ length: 14 }, (_, i) => {
   const date = new Date(startDate);
   date.setDate(startDate.getDate() + i * 7);
-
   return { id: i + 1, date };
 });
 
-const isUnlocked = (week) => {
-  const isTimeValid = (currentHour > 9 || (currentHour === 20 && currentMinutes <= 30) || (currentHour === 19));
-  
-  return today >= week.date && isTimeValid;
+// Cek apakah minggu bisa dibuka karena liburan
+const isHolidayUnlocked = (weekDate) => {
+  return weekDate <= holidayEnd;
 };
 
+// Cek apakah minggu bisa diakses
+const isUnlocked = (week) => {
+ return today >= week.date || isHolidayUnlocked(week.date);
+};
+
+// Cek apakah minggu sudah lewat
 const isPast = (week) => {
   const endOfValidTime = new Date(week.date);
-  endOfValidTime.setHours(20, 30, 0, 0); // Set batas waktu ke 09:30
-
+  endOfValidTime.setHours(20, 30, 0, 0);
   return today > endOfValidTime && week.id !== weeks.length;
 };
 
-
 const handleClick = (week) => {
+
+console.log("Week:", week.id, "isUnlocked:", isUnlocked(week), "isHolidayUnlocked:", isHolidayUnlocked(week.date));
   const isDark = isDarkMode.value;
-  const isTimeValid = (currentHour > 9 || (currentHour === 20 && currentMinutes <= 30) || (currentHour === 19));
-  const isDateValid = today >= week.date;
+  const isDateValid = today >= week.date || isHolidayUnlocked(week.date);
+  const isWeekAfterHoliday = week.date > holidayEnd; // Minggu setelah liburan tetap terkunci
 
   let message = "";
 
-  if (!isDateValid) {
-    // Jika tanggal masih belum sesuai
+  if (isWeekAfterHoliday) {
+    message = `📅 Minggu ini masih terkunci karena berada di luar masa liburan.`;
+  } else if (!isDateValid && !isWeekAfterHoliday) {
     message = `📅 Pertemuan <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${week.id}</b> baru bisa diakses pada <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${formatDate(week.date)}</b>`;
   } else if (!isTimeValid) {
-    // Jika tanggal sudah sesuai, tapi jam tidak valid
     message = `⏰ Pertemuan hanya bisa diakses antara pukul <b>09:00 - 20:30</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
   }
 
-  if (isUnlocked(week)) {
+  if (isUnlocked(week) && !isWeekAfterHoliday) {
     router.push(`/week/${week.id}`);
   } else {
-
-      Swal.fire({
+    Swal.fire({
       title: `<span style="color: ${isDark ? '#9CA3AF' : '#3B82F6'}; font-weight: bold; font-size: 1.5rem;">🔒 Belum Bisa Diakses!</span>`,
       html: `
         <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 1rem; font-size: 1rem; color: ${isDark ? '#9CA3AF' : '#1E40AF'};">
           ${message}
-        </div>
-        <div style="display: flex; justify-content: center; align-items: center; margin-top: 1rem;">
-          <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnh2MmczY2NmaGQxZzgyN211d295b3F2N3B0bnRvdng3aTJicTNjZiZlcD12MV9pbnRlcm5naWZfYnlfaWQmY3Q9Zw/JYx5as9hOA8hwvv7FE/giphy.gif" 
-               alt="Wait" 
-               style="width: 100%; max-width: 120px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);">
         </div>
       `,
       icon: 'info',
       background: isDark ? '#111827' : '#EFF6FF',
       confirmButtonColor: isDark ? '#1F2937' : '#3B82F6', 
       confirmButtonText: 'Oke deh 😢',
-      customClass: {
-        popup: `rounded-xl shadow-lg ${isDark ? 'bg-gray-900 text-gray-500 border-gray-700' : 'bg-blue-50 text-blue-600 border-blue-200'}`,
-        title: 'text-xl font-bold',
-        confirmButton: `px-6 py-2 rounded-md transition-all duration-300 ${
-          isDark ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-blue-500 text-white hover:bg-blue-600'
-        }`,
-      },
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown',
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp',
-      },
+      showClass: { popup: 'animate__animated animate__fadeInDown' },
+      hideClass: { popup: 'animate__animated animate__fadeOutUp' },
     });
   }
 };
-
 </script>
-
-<style>
-
-</style>

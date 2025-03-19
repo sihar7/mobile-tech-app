@@ -222,33 +222,480 @@ export const pertemuanData = {
     },
   ],
   3: [
-    {
-      title: "Jaringan dan Konektivitas",
-      description:
-        "Jaringan seluler (2G, 3G, 4G, 5G) dan teknologi konektivitas seperti Wi-Fi dan Bluetooth. Jaringan ini memungkinkan perangkat mobile terhubung ke internet dan perangkat lain.",
-      image: "https://example.com/network.jpg",
+  {
+    title: "Membuat Halaman Utama di Flutter",
+    description: `
+      <h2 class="text-2xl font-bold text-gray-800">Membuat Halaman Utama di Flutter</h2>
+      <p class="mt-2 text-gray-600">
+        Kita akan membuat halaman utama menggunakan <code>Scaffold</code>, yang terdiri dari <b>AppBar</b>, <b>Body</b>, dan <b>FloatingActionButton</b>.
+      </p>`,
+    image: "",
+    code: `import 'package:flutter/material.dart';
+
+        void main() {
+          runApp(MyApp()); 
+        }
+
+        // StatelessWidget digunakan karena halaman ini tidak memiliki perubahan state
+        class MyApp extends StatelessWidget {
+          @override
+          Widget build(BuildContext context) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false, 
+              title: 'Home Page',
+              home: HomePage(), 
+            );
+          }
+        }
+
+        // Halaman Utama
+        class HomePage extends StatelessWidget {
+          @override
+          Widget build(BuildContext context) {
+            return Scaffold(
+              appBar: AppBar(
+                title: Text('Home Page'), 
+              ),
+              body: Center(
+                child: Text(
+                  'Selamat Datang di Flutter!',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  print('Tombol ditekan!');
+                },
+                child: Icon(Icons.add), 
+              ),
+            );
+          }
+        }`,
+      language: "dart",
     },
+
     {
-      title: "Keamanan Perangkat Mobile",
-      description:
-        "Teknologi keamanan seperti enkripsi data, autentikasi biometrik (sidik jari, pengenalan wajah), dan aplikasi antivirus untuk melindungi data pengguna.",
-      image: "https://example.com/security.jpg",
-    },
-  ],
+      title: "Membuat Tombol yang Bergerak Secara Acak",
+      description: `
+        <h2 class="text-2xl font-bold text-gray-800">Membuat Tombol yang Bergerak Secara Acak</h2>
+        <p class="mt-2 text-gray-600">
+          Kita akan membuat tombol yang berpindah posisi secara acak ketika ditekan, menggunakan <code>AnimatedPositioned</code>.
+        </p>`,
+      image: "",
+      code: `import 'package:flutter/material.dart';
+        import 'dart:math'; // Untuk membuat angka acak
+
+        void main() {
+          runApp(MyApp());
+        }
+
+        // Widget utama aplikasi
+        class MyApp extends StatelessWidget {
+          @override
+          Widget build(BuildContext context) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Animated Button',
+              home: AnimatedButtonPage(),
+            );
+          }
+        }
+
+        // StatefulWidget karena tombol akan berpindah posisi
+        class AnimatedButtonPage extends StatefulWidget {
+          @override
+          _AnimatedButtonPageState createState() => _AnimatedButtonPageState();
+        }
+
+        class _AnimatedButtonPageState extends State<AnimatedButtonPage> {
+          double _top = 150; 
+          double _left = 150; 
+
+          // Fungsi untuk memindahkan tombol ke posisi acak
+          void _moveButton() {
+            final random = Random();
+            setState(() {
+              _top = random.nextDouble() * 400; 
+              _left = random.nextDouble() * 300; 
+            });
+          }
+
+          @override
+          Widget build(BuildContext context) {
+            return Scaffold(
+              appBar: AppBar(title: Text('Animated Button')),
+              body: Stack( 
+                children: [
+                  AnimatedPositioned(
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.easeInOut,
+                    top: _top,
+                    left: _left,
+                    child: ElevatedButton(
+                      onPressed: _moveButton, 
+                      child: Text('Pindah!'),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+        }`,
+      language: "dart",
+      },
+
+      {
+        title: "Form Input dengan Validasi",
+        description: `
+          <h2 class="text-2xl font-bold text-gray-800">Form Input dengan Validasi</h2>
+          <p class="mt-2 text-gray-600">
+            Kita akan membuat form input yang memvalidasi apakah pengguna sudah mengisi nama atau belum.
+          </p>`,
+        image: "",
+        code: `import 'package:flutter/material.dart';
+
+        void main() {
+          runApp(MyApp());
+        }
+
+        // StatelessWidget untuk menjalankan aplikasi
+        class MyApp extends StatelessWidget {
+          @override
+          Widget build(BuildContext context) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Form Validation',
+              home: FormPage(),
+            );
+          }
+        }
+
+        // StatefulWidget karena ada perubahan pada form
+        class FormPage extends StatefulWidget {
+          @override
+          _FormPageState createState() => _FormPageState();
+        }
+
+        class _FormPageState extends State<FormPage> {
+          final _formKey = GlobalKey<FormState>(); 
+          final TextEditingController _nameController = TextEditingController(); 
+
+          @override
+          void dispose() {
+            _nameController.dispose(); 
+            super.dispose();
+          }
+
+          @override
+          Widget build(BuildContext context) {
+            return Scaffold(
+              appBar: AppBar(title: Text('Form Validation')),
+              body: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: _nameController,
+                        decoration: InputDecoration(labelText: 'Nama'),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Nama tidak boleh kosong'; 
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            String enteredName = _nameController.text;
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text('Berhasil'),
+                                  content: Text('Halo, ' + enteredName + '!'), 
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
+                        },
+                        child: Text('Submit'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }
+        }`,
+        language: "dart",
+      },
+
+      {
+        title: "Membuat ListView dengan Data Dummy",
+        description: `
+          <h2 class="text-2xl font-bold text-gray-800">Membuat ListView dengan Data Dummy</h2>
+          <p class="mt-2 text-gray-600">
+            Kita akan membuat daftar item menggunakan <code>ListView.builder</code> untuk menampilkan data secara dinamis.
+          </p>`,
+        image: "",
+        code: `import 'package:flutter/material.dart';
+
+          void main() {
+            runApp(MyApp());
+          }
+
+          class MyApp extends StatelessWidget {
+            @override
+            Widget build(BuildContext context) {
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: 'ListView Example',
+                home: ListViewExample(),
+              );
+            }
+          }
+
+          class ListViewExample extends StatelessWidget {
+            final List<String> items = List.generate(10, (index) => 'Item \${index + 1}');
+
+            @override
+            Widget build(BuildContext context) {
+              return Scaffold(
+                appBar: AppBar(title: Text('ListView Example')),
+                body: ListView.builder(
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(items[index]),
+                      leading: Icon(Icons.star),
+                      onTap: () {
+                        print('Tapped on: ' + items[index]);
+                      },
+                    );
+                  },
+                ),
+              );
+            }
+          }`,
+          language: "dart",
+        },
+      ],
   4: [
-    {
-      title: "Aplikasi Mobile",
-      description:
-        "Jenis aplikasi mobile seperti aplikasi native, hybrid, dan web. Aplikasi ini dirancang untuk memenuhi kebutuhan pengguna dalam berbagai bidang seperti e-commerce, kesehatan, dan pendidikan.",
-      image: "https://example.com/apps.jpg",
-    },
-    {
-      title: "Pengembangan Aplikasi Mobile",
-      description:
-        "Proses pengembangan aplikasi mobile, mulai dari perencanaan, desain, pengkodean, hingga pengujian dan peluncuran.",
-      image: "https://example.com/app-dev.jpg",
-    },
-  ],
+  {
+    title: "Membuat Button dengan Style Kustom",
+    description: `
+      <h2 class="text-2xl font-bold text-gray-800">Membuat Button dengan Style Kustom</h2>
+      <p class="mt-2 text-gray-600">
+        Menggunakan <code>ElevatedButton.styleFrom()</code> untuk mengubah warna, padding, dan radius button.
+      </p>`,
+    code: `import 'package:flutter/material.dart'; // Import package Material untuk UI
+
+        void main() {
+          runApp(MyApp()); // Menjalankan aplikasi
+        }
+
+        class MyApp extends StatelessWidget {
+          @override
+          Widget build(BuildContext context) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false, // Menghilangkan banner debug
+              home: HomePage(),
+            );
+          }
+        }
+
+        class HomePage extends StatelessWidget {
+          @override
+          Widget build(BuildContext context) {
+            return Scaffold(
+              appBar: AppBar(title: Text("Styled Button")), // Menampilkan AppBar
+              body: Center(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue, // Mengatur warna tombol
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Mengatur padding
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10), // Mengatur radius tombol
+                    ),
+                  ),
+                  onPressed: () {
+                    print("Tombol ditekan!"); // Aksi ketika tombol ditekan
+                  },
+                  child: Text("Klik Saya", style: TextStyle(color: Colors.white)), // Teks tombol
+                ),
+              ),
+            );
+          }
+        }`,
+    language: "dart",
+  },
+  {
+    title: "Menambahkan Background Gambar di Flutter",
+    description: `
+      <h2 class="text-2xl font-bold text-gray-800">Menambahkan Background Gambar</h2>
+      <p class="mt-2 text-gray-600">
+        Menggunakan <code>BoxDecoration</code> untuk menambahkan background gambar di aplikasi Flutter.
+      </p>`,
+    code: `import 'package:flutter/material.dart'; // Import Flutter Material
+
+          void main() {
+            runApp(MyApp()); // Menjalankan aplikasi
+          }
+
+          class MyApp extends StatelessWidget {
+            @override
+            Widget build(BuildContext context) {
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                home: BackgroundScreen(),
+              );
+            }
+          }
+
+          class BackgroundScreen extends StatelessWidget {
+            @override
+            Widget build(BuildContext context) {
+              return Scaffold(
+                body: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/background.jpg"), // Gambar latar dari assets
+                      fit: BoxFit.cover, // Mengatur gambar agar menutupi seluruh layar
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Halo, Flutter!",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }
+          }`,
+    language: "dart",
+  },
+  {
+    title: "Membuat GridView di Flutter",
+    description: `
+      <h2 class="text-2xl font-bold text-gray-800">Membuat GridView</h2>
+      <p class="mt-2 text-gray-600">
+        Menggunakan <code>GridView.builder()</code> untuk membuat tata letak grid di Flutter.
+      </p>`,
+    code: `import 'package:flutter/material.dart'; // Import Flutter Material
+
+        void main() {
+          runApp(MyApp()); // Menjalankan aplikasi
+        }
+
+        class MyApp extends StatelessWidget {
+          @override
+          Widget build(BuildContext context) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: GridScreen(),
+            );
+          }
+        }
+
+        class GridScreen extends StatelessWidget {
+          @override
+          Widget build(BuildContext context) {
+            return Scaffold(
+              appBar: AppBar(title: Text("GridView")),
+              body: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, // Jumlah kolom
+                  crossAxisSpacing: 10, // Jarak horizontal antar item
+                  mainAxisSpacing: 10, // Jarak vertikal antar item
+                ),
+                itemCount: 6, // Jumlah item dalam grid
+                itemBuilder: (context, index) {
+                  return Container(
+                    color: Colors.blue, // Warna latar item
+                    child: Center(
+                      child: Text(
+                        "Item \$index",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );
+          }
+        }`,
+  language: "dart",
+  },
+  {
+    title: "Membuat Menu Chat di Flutter",
+    description: `
+      <h2 class="text-2xl font-bold text-gray-800">Membuat Menu Chat</h2>
+      <p class="mt-2 text-gray-600">
+        Menggunakan <code>ListView</code> dan <code>TextField</code> untuk membuat tampilan menu chat.
+      </p>`,
+    code: `import 'package:flutter/material.dart';
+
+        void main() {
+          runApp(MyApp());
+        }
+
+        class MyApp extends StatelessWidget {
+          @override
+          Widget build(BuildContext context) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: ChatScreen(),
+            );
+          }
+        }
+
+        class ChatScreen extends StatelessWidget {
+          @override
+          Widget build(BuildContext context) {
+            return Scaffold(
+              appBar: AppBar(title: Text("Chat")),
+              body: Column(
+                children: [
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        ListTile(title: Text("Halo!")),
+                        ListTile(title: Text("Apa kabar?")),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: TextField(
+                      decoration: InputDecoration(hintText: "Ketik pesan..."),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+        }`,
+  language: "dart",
+  }
+],
+
   5: [
     {
       title: "Pengenalan Flutter",
@@ -389,4 +836,5 @@ export const pertemuanData = {
       image: "https://example.com/health-app.jpg",
     },
   ],
+
 };
