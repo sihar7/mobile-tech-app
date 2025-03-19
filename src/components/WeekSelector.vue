@@ -75,7 +75,12 @@ const startDate = new Date(2025, 2, 12); // Mulai 12 Maret 2025
 const today = new Date();
 const currentHour = today.getHours();
 const currentMinutes = today.getMinutes();
-const isTimeValid = (currentHour >= 9 && (currentHour < 20 || (currentHour === 20 && currentMinutes <= 30)));
+const isTimeValid = (weekDate) => {
+  if (isHolidayUnlocked(weekDate)) {
+    return true; // Jika minggu liburan, bisa diakses 24 jam
+  }
+  return currentHour >= 9 && (currentHour < 20 || (currentHour === 20 && currentMinutes <= 30));
+};
 
 // Menentukan tanggal liburan
 const holidayEnd = new Date(2025, 3, 4); // 4 April 2025

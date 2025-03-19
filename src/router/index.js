@@ -8,10 +8,12 @@ const currentHour = today.getHours();
 const currentMinutes = today.getMinutes();
 
 // Jam akses dari 09:00 sampai 20:30
-const isTimeValid =
-  currentHour > 9 || (currentHour === 9 && currentMinutes >= 0) // Minimal jam 09:00
-    ? currentHour < 20 || (currentHour === 20 && currentMinutes <= 30) // Maksimal 20:30
-    : false;
+const isTimeValid = (weekDate) => {
+  if (isHolidayUnlocked(weekDate)) {
+    return true; // Jika minggu liburan, bisa diakses 24 jam
+  }
+  return currentHour >= 9 && (currentHour < 20 || (currentHour === 20 && currentMinutes <= 30));
+};
 
 // Generate daftar minggu
 const weeks = Array.from({ length: 14 }, (_, i) => {
