@@ -115,20 +115,28 @@ export default {
 
 .controls {
   display: flex;
-  flex-wrap: wrap; /* ⬅️ Biar tombol tidak acak-acakan */
-  justify-content: flex-start;
+  flex-wrap: wrap; /* ⬅️ Agar tombol tidak bertumpuk */
   align-items: center;
   gap: 8px; /* ⬅️ Tambahkan jarak antar tombol */
   padding: 8px 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* Supaya tombol "Run Code" tetap di kanan */
+.controls .btn:last-child {
+  margin-left: auto;
+}
+
 /* Responsif untuk layar kecil */
 @media (max-width: 600px) {
   .controls {
-    justify-content: center; /* ⬅️ Pusatkan tombol di layar kecil */
+    justify-content: center; /* ⬅️ Pusatkan tombol selain "Run Code" */
+  }
+  .controls .btn:last-child {
+    margin-left: 0; /* ⬅️ Di mobile, Run Code tidak mepet ke kanan */
   }
 }
+
 
 
 .toggle-btn,
