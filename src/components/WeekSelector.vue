@@ -115,7 +115,7 @@ const handleClick = (week) => {
     message = `📅 Pertemuan <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${week.id}</b> baru bisa diakses pada <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${formatDate(week.date)}</b>`;
   } else if (!isTimeValid) {
     // Jika tanggal sudah sesuai, tapi jam tidak valid
-    message = `⏰ Pertemuan hanya bisa diakses antara pukul <b>08:00 - 10:30</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
+    message = `⏰ Pertemuan hanya bisa diakses antara pukul <b>09:00 - 12:30</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
   }
 
   if (isUnlocked(week)) {
