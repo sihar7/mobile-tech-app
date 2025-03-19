@@ -19,8 +19,8 @@ function isUnlocked(weekId) {
 
   const isTimeValid =
     currentHour === 9 ||
-    (currentHour === 12 && currentMinutes <= 30) ||
-    currentHour === 11;
+    (currentHour === 20 && currentMinutes <= 30) ||
+    currentHour === 19;
   return today >= week.date && isTimeValid;
 }
 

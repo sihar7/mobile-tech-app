@@ -90,14 +90,14 @@ const weeks = Array.from({ length: 14 }, (_, i) => {
 });
 
 const isUnlocked = (week) => {
-  const isTimeValid = (currentHour === 9 || (currentHour === 12 && currentMinutes <= 30) || (currentHour === 11));
+  const isTimeValid = (currentHour === 9 || (currentHour === 20 && currentMinutes <= 30) || (currentHour === 19));
   
   return today >= week.date && isTimeValid;
 };
 
 const isPast = (week) => {
   const endOfValidTime = new Date(week.date);
-  endOfValidTime.setHours(12, 30, 0, 0); // Set batas waktu ke 09:30
+  endOfValidTime.setHours(20, 30, 0, 0); // Set batas waktu ke 09:30
 
   return today > endOfValidTime && week.id !== weeks.length;
 };
@@ -105,7 +105,7 @@ const isPast = (week) => {
 
 const handleClick = (week) => {
   const isDark = isDarkMode.value;
-  const isTimeValid = (currentHour === 9 || (currentHour === 12 && currentMinutes <= 30) || (currentHour === 11));
+  const isTimeValid = (currentHour === 9 || (currentHour === 20 && currentMinutes <= 30) || (currentHour === 19));
   const isDateValid = today >= week.date;
 
   let message = "";
@@ -115,7 +115,7 @@ const handleClick = (week) => {
     message = `📅 Pertemuan <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${week.id}</b> baru bisa diakses pada <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${formatDate(week.date)}</b>`;
   } else if (!isTimeValid) {
     // Jika tanggal sudah sesuai, tapi jam tidak valid
-    message = `⏰ Pertemuan hanya bisa diakses antara pukul <b>09:00 - 12:30</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
+    message = `⏰ Pertemuan hanya bisa diakses antara pukul <b>09:00 - 20:30</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
   }
 
   if (isUnlocked(week)) {
