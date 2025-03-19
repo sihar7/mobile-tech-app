@@ -115,11 +115,21 @@ export default {
 
 .controls {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap; /* ⬅️ Biar tombol tidak acak-acakan */
+  justify-content: flex-start;
   align-items: center;
+  gap: 8px; /* ⬅️ Tambahkan jarak antar tombol */
   padding: 8px 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
+
+/* Responsif untuk layar kecil */
+@media (max-width: 600px) {
+  .controls {
+    justify-content: center; /* ⬅️ Pusatkan tombol di layar kecil */
+  }
+}
+
 
 .toggle-btn,
 .copy-btn {
