@@ -5,8 +5,14 @@
       <div class="progress" :style="{ width: progressPercentage + '%' }"></div>
     </div>
 
-    <!-- Fullscreen Button -->
+    <!-- Fullscreen & Back Button -->
     <div class="controls">
+      <!-- Back Button -->
+      <button @click="goBack" class="btn bg-white/20 backdrop-blur-md hover:bg-white/30">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+
+      <!-- Fullscreen Button -->
       <button @click="toggleFullscreen" class="btn bg-white/20 backdrop-blur-md hover:bg-white/30">
         <i :class="isFullscreen ? 'fas fa-compress' : 'fas fa-expand'"></i>
       </button>
@@ -84,8 +90,10 @@
   </div>
 </template>
 
+
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch, inject } from "vue";
+import { useRouter } from "vue-router";
 import CodeBlock from "@/components/CodeBlock.vue";
 import { Youtube } from 'vue3-youtube';
 const props = defineProps({
@@ -95,6 +103,7 @@ const props = defineProps({
   },
 });
 
+const router = useRouter(); 
 // Refs
 const activeIndex = ref(null);
 const isExpanded = ref([]);
@@ -141,6 +150,10 @@ const toggleFullscreen = () => {
   } else {
     document.exitFullscreen();
   }
+};
+
+const goBack = () => {
+  router.push("/"); // ⬅️ Pindah ke halaman utama
 };
 
 watch(activeIndex, (newIndex) => {
