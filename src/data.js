@@ -222,15 +222,15 @@ export const pertemuanData = {
     },
   ],
   3: [
-  {
-    title: "Membuat Halaman Utama di Flutter",
-    description: `
+    {
+      title: "Membuat Halaman Utama di Flutter",
+      description: `
       <h2 class="text-2xl font-bold text-gray-800">Membuat Halaman Utama di Flutter</h2>
       <p class="mt-2 text-gray-600">
         Kita akan membuat halaman utama menggunakan <code>Scaffold</code>, yang terdiri dari <b>AppBar</b>, <b>Body</b>, dan <b>FloatingActionButton</b>.
       </p>`,
-    image: "",
-    code: `import 'package:flutter/material.dart';
+      image: "",
+      code: `import 'package:flutter/material.dart';
 
         void main() {
           runApp(MyApp()); 
@@ -342,17 +342,17 @@ export const pertemuanData = {
           }
         }`,
       language: "dart",
-      },
+    },
 
-      {
-        title: "Form Input dengan Validasi",
-        description: `
+    {
+      title: "Form Input dengan Validasi",
+      description: `
           <h2 class="text-2xl font-bold text-gray-800">Form Input dengan Validasi</h2>
           <p class="mt-2 text-gray-600">
             Kita akan membuat form input yang memvalidasi apakah pengguna sudah mengisi nama atau belum.
           </p>`,
-        image: "",
-        code: `import 'package:flutter/material.dart';
+      image: "",
+      code: `import 'package:flutter/material.dart';
 
         void main() {
           runApp(MyApp());
@@ -439,18 +439,18 @@ export const pertemuanData = {
             );
           }
         }`,
-        language: "dart",
-      },
+      language: "dart",
+    },
 
-      {
-        title: "Membuat ListView dengan Data Dummy",
-        description: `
+    {
+      title: "Membuat ListView dengan Data Dummy",
+      description: `
           <h2 class="text-2xl font-bold text-gray-800">Membuat ListView dengan Data Dummy</h2>
           <p class="mt-2 text-gray-600">
             Kita akan membuat daftar item menggunakan <code>ListView.builder</code> untuk menampilkan data secara dinamis.
           </p>`,
-        image: "",
-        code: `import 'package:flutter/material.dart';
+      image: "",
+      code: `import 'package:flutter/material.dart';
 
           void main() {
             runApp(MyApp());
@@ -489,18 +489,219 @@ export const pertemuanData = {
               );
             }
           }`,
-          language: "dart",
-        },
-      ],
+      language: "dart",
+    },
+    {
+      type: "question",
+      title: "Tugas Integrasi: Aplikasi Flutter Dasar",
+      description: `
+    <div class="bg-white p-6 rounded-lg shadow">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Tugas: Aplikasi Manajemen Kontak</h2>
+      <p class="text-gray-600 mb-6">Gabungkan 4 materi utama (Halaman Utama, Tombol Acak, Form Validasi, dan ListView) dalam satu aplikasi.</p>
+
+      <div class="space-y-6">
+        <!-- TASK 1 - Halaman Utama -->
+        <div class="border-l-4 border-blue-500 pl-4">
+          <h3 class="text-xl font-semibold text-gray-700">1. Halaman Utama (Scaffold)</h3>
+          <ul class="list-disc pl-5 mt-2 text-gray-600">
+            <li>Buat Scaffold dengan AppBar (judul "Kontak Saya")</li>
+            <li>Body berisi Column dengan:
+              <ul class="list-circle pl-5">
+                <li>Text "Selamat Datang" di center</li>
+                <li>Tombol "Tambah Kontak" yang navigasi ke form</li>
+              </ul>
+            </li>
+          </ul>
+          <div class="mt-2 p-3 bg-gray-50 rounded">
+            <pre class="bg-gray-800 text-white p-2 rounded text-sm">Scaffold(
+  appBar: AppBar(title: Text("Kontak Saya")),
+  body: Center(child: Text("Selamat Datang")),
+)</pre>
+          </div>
+        </div>
+
+        <!-- TASK 2 - Tombol Acak -->
+        <div class="border-l-4 border-green-500 pl-4">
+          <h3 class="text-xl font-semibold text-gray-700">2. Tombol Acak (Game)</h3>
+          <ul class="list-disc pl-5 mt-2 text-gray-600">
+            <li>Buat halaman baru dengan tombol yang berpindah posisi saat dihover/ditekan</li>
+            <li>Gunakan AnimatedPositioned dengan durasi 300ms</li>
+            <li>Tampilkan counter berapa kali tombol berhasil diklik</li>
+          </ul>
+        </div>
+
+        <!-- TASK 3 - Form Validasi -->
+        <div class="border-l-4 border-purple-500 pl-4">
+          <h3 class="text-xl font-semibold text-gray-700">3. Form Validasi Kontak</h3>
+          <ul class="list-disc pl-5 mt-2 text-gray-600">
+            <li>Buat form dengan field:
+              <ul class="list-circle pl-5">
+                <li>Nama (min 3 karakter)</li>
+                <li>Nomor HP (harus angka, min 10 digit)</li>
+                <li>Email (harus mengandung @)</li>
+              </ul>
+            </li>
+            <li>Tombol submit yang menyimpan data ke List</li>
+          </ul>
+        </div>
+
+        <!-- TASK 4 - ListView -->
+        <div class="border-l-4 border-yellow-500 pl-4">
+          <h3 class="text-xl font-semibold text-gray-700">4. ListView Kontak</h3>
+          <ul class="list-disc pl-5 mt-2 text-gray-600">
+            <li>Tampilkan daftar kontak dalam ListView.builder</li>
+            <li>Setiap item menampilkan:
+              <ul class="list-circle pl-5">
+                <li>Avatar lingkaran (gunakan CircleAvatar)</li>
+                <li>Nama kontak</li>
+                <li>Nomor HP</li>
+                <li>Tombol delete</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+      
+<!-- SUBMISSION -->
+<div class="bg-blue-50 p-4 rounded-lg">
+  <h3 class="font-bold text-lg text-blue-800">Pengumpulan Tugas:</h3>
+  
+  <div class="mt-3 bg-white p-4 rounded-lg border border-blue-200 shadow-sm">
+    <h4 class="font-semibold text-blue-700 mb-3 flex items-center">
+      <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      Petunjuk Pengumpulan
+    </h4>
+    
+    <!-- File Naming Section -->
+    <div class="mb-4 p-3 bg-gray-50 rounded-md border border-gray-200">
+      <h5 class="font-medium text-gray-700 mb-2">1. Format Penamaan File</h5>
+      
+      <div class="flex items-start mb-2">
+        <div class="flex-shrink-0 mt-1">
+          <div class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center">
+            <svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="ml-3">
+          <p class="text-sm text-gray-600">Buat folder utama dengan format:</p>
+          <div class="mt-1 flex items-center">
+            <code class="bg-gray-100 px-2 py-1 rounded-md text-sm font-mono">NIM_Nama_Kelas</code>
+            <span class="ml-2 text-xs text-gray-500">(Contoh: <code class="bg-gray-100 px-1 rounded text-xs">10520056_SigitHardianto_IF2</code>)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-start">
+        <div class="flex-shrink-0 mt-1">
+          <div class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center">
+            <svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="ml-3">
+          <p class="text-sm text-gray-600">Dalam folder tersebut, masukkan file dengan format:</p>
+          <ul class="list-disc list-inside ml-4 mt-1 space-y-1 text-sm">
+            <li>Screenshot: <code class="bg-gray-100 px-1 rounded">1_HomePage.jpg</code>, <code class="bg-gray-100 px-1 rounded">2_RandomButton.jpg</code>, dst</li>
+            <li>Video demo: <code class="bg-gray-100 px-1 rounded">Demo_NIM.mp4</code></li>
+            <li>Dokumentasi: <code class="bg-gray-100 px-1 rounded">Readme_NIM.pdf</code></li>
+          </ul>
+          <p class="mt-1 text-xs text-gray-500">• Gunakan underscore (_) sebagai pemisah<br>• Hindari spasi dan karakter khusus</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload Section -->
+    <div class="mb-4 p-3 bg-blue-50 rounded-md border border-blue-200">
+      <h5 class="font-medium text-blue-700 mb-2">2. Upload ke Google Drive</h5>
+      <div class="flex items-center">
+        <svg class="w-5 h-5 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        </svg>
+        <a href="https://drive.google.com/drive/folders/1AEESOBAdB7rs_7whHa5ibv11RA3zI0eJ?usp=sharing" 
+           class="text-blue-600 hover:underline font-medium" 
+           target="_blank">
+          Klik di sini untuk mengumpulkan
+        </a>
+      </div>
+      <p class="ml-7 mt-1 text-sm text-gray-600">Pastikan mengupload ke folder kelas Anda</p>
+    </div>
+
+    <!-- Documentation Section -->
+    <div class="p-3 bg-purple-50 rounded-md border border-purple-200">
+      <h5 class="font-medium text-purple-700 mb-2">3. Dokumentasi Wajib</h5>
+      <div class="flex items-start">
+        <div class="flex-shrink-0 mt-1">
+          <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+        </div>
+        <div class="ml-3">
+          <p class="text-sm text-gray-600">Buat file PDF berisi:</p>
+          <ul class="list-disc list-inside ml-4 mt-1 space-y-1 text-sm">
+            <li>Identitas (Nama, NIM, Kelas)</li>
+            <li>Penjelasan singkat tiap fitur</li>
+            <li>Kendala yang dihadapi + solusi</li>
+            <li>Screenshot alur aplikasi</li>
+          </ul>
+          <p class="mt-2 text-xs text-purple-600">Format nama file: <code class="bg-purple-100 px-1 rounded">Readme_NIM.pdf</code></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Deadline Notice -->
+  <div class="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200 flex items-start">
+    <svg class="flex-shrink-0 h-5 w-5 text-yellow-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+    </svg>
+    <div class="ml-3">
+      <h4 class="font-semibold text-yellow-800">Penting!</h4>
+      <ul class="list-disc list-inside ml-4 mt-1 text-sm text-yellow-700">
+        <li>Deadline: <span class="font-bold">1 minggu setelah tugas diberikan</span></li>
+        <li>File yang tidak sesuai format akan dikembalikan</li>
+        <li>Pastikan semua file dapat diakses (tidak private)</li>
+        <li>Tidak menerima pengumpulan terlambat</li>
+      </ul>
+    </div>
+  </div>
+</div>
+  </div>
+        </div>
+      </div>
+    </div>`,
+      image: "",
+      code: `// Contoh data kontak
+          List<Map<String, dynamic>> contacts = [
+            {
+              'name': 'Budi',
+              'phone': '08123456789',
+              'email': 'budi@example.com'
+            },
+            {
+              'name': 'Ani',
+              'phone': '08987654321', 
+              'email': 'ani@example.com'
+            }
+          ];`,
+      language: "dart",
+      submitLink:
+        "https://drive.google.com/drive/folders/1AEESOBAdB7rs_7whHa5ibv11RA3zI0eJ?usp=sharing",
+    },
+  ],
   4: [
-  {
-    title: "Membuat Button dengan Style Kustom",
-    description: `
+    {
+      title: "Membuat Button dengan Style Kustom",
+      description: `
       <h2 class="text-2xl font-bold text-gray-800">Membuat Button dengan Style Kustom</h2>
       <p class="mt-2 text-gray-600">
         Menggunakan <code>ElevatedButton.styleFrom()</code> untuk mengubah warna, padding, dan radius button.
       </p>`,
-    code: `import 'package:flutter/material.dart'; // Import package Material untuk UI
+      code: `import 'package:flutter/material.dart'; // Import package Material untuk UI
 
         void main() {
           runApp(MyApp()); // Menjalankan aplikasi
@@ -539,16 +740,16 @@ export const pertemuanData = {
             );
           }
         }`,
-    language: "dart",
-  },
-  {
-    title: "Menambahkan Background Gambar di Flutter",
-    description: `
+      language: "dart",
+    },
+    {
+      title: "Menambahkan Background Gambar di Flutter",
+      description: `
       <h2 class="text-2xl font-bold text-gray-800">Menambahkan Background Gambar</h2>
       <p class="mt-2 text-gray-600">
         Menggunakan <code>BoxDecoration</code> untuk menambahkan background gambar di aplikasi Flutter.
       </p>`,
-    code: `import 'package:flutter/material.dart'; // Import Flutter Material
+      code: `import 'package:flutter/material.dart'; // Import Flutter Material
 
         void main() {
           runApp(MyApp()); // Menjalankan aplikasi
@@ -589,16 +790,16 @@ export const pertemuanData = {
             );
           }
         }`,
-    language: "dart",
-  },
-  {
-    title: "Membuat GridView di Flutter",
-    description: `
+      language: "dart",
+    },
+    {
+      title: "Membuat GridView di Flutter",
+      description: `
       <h2 class="text-2xl font-bold text-gray-800">Membuat GridView</h2>
       <p class="mt-2 text-gray-600">
         Menggunakan <code>GridView.builder()</code> untuk membuat tata letak grid di Flutter.
       </p>`,
-    code: `import 'package:flutter/material.dart'; // Import Flutter Material
+      code: `import 'package:flutter/material.dart'; // Import Flutter Material
 
         void main() {
           runApp(MyApp()); // Menjalankan aplikasi
@@ -641,16 +842,16 @@ export const pertemuanData = {
             );
           }
         }`,
-  language: "dart",
-  },
-  {
-    title: "Membuat Menu Chat di Flutter",
-    description: `
+      language: "dart",
+    },
+    {
+      title: "Membuat Menu Chat di Flutter",
+      description: `
       <h2 class="text-2xl font-bold text-gray-800">Membuat Menu Chat</h2>
       <p class="mt-2 text-gray-600">
         Menggunakan <code>ListView</code> dan <code>TextField</code> untuk membuat tampilan menu chat.
       </p>`,
-    code: `import 'package:flutter/material.dart';
+      code: `import 'package:flutter/material.dart';
 
         void main() {
           runApp(MyApp());
@@ -692,9 +893,9 @@ export const pertemuanData = {
             );
           }
         }`,
-  language: "dart",
-  }
-],
+      language: "dart",
+    },
+  ],
 
   5: [
     {
@@ -836,5 +1037,4 @@ export const pertemuanData = {
       image: "https://example.com/health-app.jpg",
     },
   ],
-
 };

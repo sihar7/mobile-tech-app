@@ -29,7 +29,9 @@
           :class="{ active: activeIndex === index }"
           @click="toggleAccordion(index)"
         >
-          <span class="slide-badge">Materi {{ index + 1 }}</span>
+          <span class="slide-badge">
+            {{ slide.type === 'question' ? 'Soal' : 'Materi' }} {{ index + 1 }}
+          </span>
           <h3 class="slide-title">{{ slide.title }}</h3>
         </div>
       </div>
@@ -44,6 +46,7 @@
             alt="Materi"
             class="slide-image"
           />
+
           <!-- Slide Video (YouTube) -->
           <div v-if="slides[activeIndex].video" class="video-container">
             <youtube
@@ -81,6 +84,20 @@
           >
             {{ isExpanded[activeIndex] ? "Tampilkan Ringkas" : "Lihat Selengkapnya" }}
           </button>
+
+          <!-- Soal Submit Link (jika type soal) -->
+          <div
+            v-if="slides[activeIndex].type === 'question' && slides[activeIndex].submitLink"
+            class="submit-link mt-4"
+          >
+            <a
+              :href="slides[activeIndex].submitLink"
+              target="_blank"
+              class="btn bg-green-500 text-white hover:bg-green-600"
+            >
+              Kumpulkan Jawaban via Google Drive
+            </a>
+          </div>
         </div>
         <div v-else class="empty-content">
           <p>Pilih materi dari sidebar untuk melihat konten.</p>
