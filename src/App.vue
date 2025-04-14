@@ -84,7 +84,7 @@
 
     <!-- Audio -->
     <audio ref="backgroundMusic" loop>
-      <source src="@/assets/lily.mp3" type="audio/mpeg" />
+      <source src="@/assets/wildflower.mp3" type="audio/mpeg" />
       Browser Anda tidak mendukung elemen audio.
     </audio>
     <!-- Main Content -->
