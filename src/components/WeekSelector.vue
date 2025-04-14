@@ -71,34 +71,49 @@ function formatDate(date) {
 
 const isDarkMode = inject('isDarkMode', ref(false));
 const router = useRouter();
-const startDate = new Date(2025, 2, 12); // Mulai 12 Maret 2025
 const today = new Date();
 const currentHour = today.getHours();
 const currentMinutes = today.getMinutes();
+
+// Tanggal mulai pertemuan dan tanggal akhir liburan
+const startDate = new Date(2025, 2, 12); // 12 Maret 2025
+const holidayStart = new Date(2025, 2, 26); // Libur dimulai 26 Maret
+const holidayEnd = new Date(2025, 3, 15); // Libur berakhir 15 April
+
+// Membuat array minggu berdasarkan logika libur
+const weeks = [];
+let currentDate = new Date(startDate);
+
+for (let i = 1; i <= 14; i++) {
+  // Jika tanggal sekarang masuk masa libur, lompat ke setelah liburan
+  while (currentDate >= holidayStart && currentDate <= holidayEnd) {
+    currentDate.setDate(currentDate.getDate() + 7);
+  }
+
+  weeks.push({
+    id: i,
+    date: new Date(currentDate)
+  });
+
+  currentDate.setDate(currentDate.getDate() + 7);
+}
+
+// Fungsi waktu akses
 const isTimeValid = (weekDate) => {
   if (isHolidayUnlocked(weekDate)) {
-    return true; // Jika minggu liburan, bisa diakses 24 jam
+    return true;
   }
   return currentHour >= 9 && (currentHour < 20 || (currentHour === 20 && currentMinutes <= 30));
 };
 
-// Menentukan tanggal liburan
-const holidayEnd = new Date(2025, 3, 4); // 4 April 2025
-
-const weeks = Array.from({ length: 14 }, (_, i) => {
-  const date = new Date(startDate);
-  date.setDate(startDate.getDate() + i * 7);
-  return { id: i + 1, date };
-});
-
-// Cek apakah minggu bisa dibuka karena liburan
+// Cek minggu dalam masa libur
 const isHolidayUnlocked = (weekDate) => {
-  return weekDate <= holidayEnd;
+  return weekDate >= holidayStart && weekDate <= holidayEnd;
 };
 
-// Cek apakah minggu bisa diakses
+// Cek apakah minggu bisa dibuka
 const isUnlocked = (week) => {
- return today >= week.date || isHolidayUnlocked(week.date);
+  return today >= week.date || isHolidayUnlocked(week.date);
 };
 
 // Cek apakah minggu sudah lewat
@@ -108,20 +123,19 @@ const isPast = (week) => {
   return today > endOfValidTime && week.id !== weeks.length;
 };
 
+// Handle klik
 const handleClick = (week) => {
-
-console.log("Week:", week.id, "isUnlocked:", isUnlocked(week), "isHolidayUnlocked:", isHolidayUnlocked(week.date));
   const isDark = isDarkMode.value;
   const isDateValid = today >= week.date || isHolidayUnlocked(week.date);
-  const isWeekAfterHoliday = week.date > holidayEnd; // Minggu setelah liburan tetap terkunci
+  const isWeekAfterHoliday = week.date > holidayEnd && week.date < startDate;
 
   let message = "";
 
   if (isWeekAfterHoliday) {
     message = `📅 Minggu ini masih terkunci karena berada di luar masa liburan.`;
-  } else if (!isDateValid && !isWeekAfterHoliday) {
+  } else if (!isDateValid) {
     message = `📅 Pertemuan <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${week.id}</b> baru bisa diakses pada <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${formatDate(week.date)}</b>`;
-  } else if (!isTimeValid) {
+  } else if (!isTimeValid(week.date)) {
     message = `⏰ Pertemuan hanya bisa diakses antara pukul <b>09:00 - 20:30</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
   }
 
@@ -137,7 +151,7 @@ console.log("Week:", week.id, "isUnlocked:", isUnlocked(week), "isHolidayUnlocke
       `,
       icon: 'info',
       background: isDark ? '#111827' : '#EFF6FF',
-      confirmButtonColor: isDark ? '#1F2937' : '#3B82F6', 
+      confirmButtonColor: isDark ? '#1F2937' : '#3B82F6',
       confirmButtonText: 'Oke deh 😢',
       showClass: { popup: 'animate__animated animate__fadeInDown' },
       hideClass: { popup: 'animate__animated animate__fadeOutUp' },
