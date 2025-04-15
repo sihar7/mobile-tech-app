@@ -171,7 +171,6 @@ export const pertemuanData = {
         flutter run
       `,
       language: "bash",
-      video: "https://www.youtube.com/watch?v=8X79G8iZiJk",
     },
 
     {

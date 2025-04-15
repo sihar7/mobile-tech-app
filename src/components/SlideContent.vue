@@ -47,21 +47,15 @@
             class="slide-image"
           />
 
-       <!-- Video Player -->
-        <div v-if="slides.length > 0 && activeIndex !== null && slides[activeIndex]">
-          <div v-if="getYouTubeVideoId(slides[activeIndex].video)">
-            <Youtube
-              :video-id="getYouTubeVideoId(slides[activeIndex].video)"
-              :player-vars="playerVars"
-              width="100%"
-              height="400"
-            />
-          </div>
-          <div v-else class="text-red-500">Video tidak tersedia atau tidak valid.</div>
+        <div v-if="getYouTubeVideoId(slides[activeIndex].video)">
+          <Youtube
+            :video-id="getYouTubeVideoId(slides[activeIndex].video)"
+            :player-vars="playerVars"
+            :key="slides[activeIndex]?.video"
+            width="100%"
+            height="400"
+          />
         </div>
-        <div v-else class="text-gray-500 italic">Silakan pilih materi untuk memutar video.</div>
-
-
           <!-- Slide Description -->
           <p
             class="slide-description"
@@ -199,17 +193,19 @@ onUnmounted(() => {
 
 // Fungsi untuk mengekstrak video ID dari URL YouTube
 const getYouTubeVideoId = (url) => {
-  const regExp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/i;
+  if (!url) return null;
+  const regExp = /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
   const match = url.match(regExp);
-  return match && match[1] ? match[1] : null;
+  return match ? match[1] : null;
 };
+
 
 // Opsi pemutar YouTube
 const playerVars = {
   autoplay: 0,
-  controls: 1,
-  modestbranding: 1
+  controls: 1
 };
+
 </script>
 
 <style scoped>
