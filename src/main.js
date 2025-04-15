@@ -3,7 +3,6 @@ import App from "./App.vue";
 import router from "./router";
 import "./assets/main.css";
 
-// ✅ Gunakan import, bukan require
 import Prism from "prismjs";
 import "prismjs/components/prism-bash.js";
 import "prismjs/components/prism-dart.js";
@@ -12,14 +11,15 @@ import "prismjs/components/prism-typescript.js";
 import "prismjs/components/prism-jsx.js";
 import "prismjs/plugins/line-numbers/prism-line-numbers.js";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
-import Vue3Youtube from "vue3-youtube";
+
+import YouTube from "vue3-youtube";
 
 const app = createApp(App);
 app.use(router);
-app.use(Vue3Youtube);
+app.component("youtube", YouTube); // ✅ Perbaikan di sini
 app.mount("#app");
 
-// ✅ Tambahkan ini jika perlu highlight otomatis setelah render
+// Optional: directive untuk PrismJS
 app.directive("prism", {
   mounted(el) {
     Prism.highlightElement(el);

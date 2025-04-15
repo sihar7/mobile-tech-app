@@ -47,15 +47,20 @@
             class="slide-image"
           />
 
-          <!-- Slide Video (YouTube) -->
-          <div v-if="slides[activeIndex].video" class="video-container">
-            <youtube
+       <!-- Video Player -->
+        <div v-if="slides.length > 0 && activeIndex !== null && slides[activeIndex]">
+          <div v-if="getYouTubeVideoId(slides[activeIndex].video)">
+            <Youtube
               :video-id="getYouTubeVideoId(slides[activeIndex].video)"
               :player-vars="playerVars"
               width="100%"
               height="400"
-            ></youtube>
+            />
           </div>
+          <div v-else class="text-red-500">Video tidak tersedia atau tidak valid.</div>
+        </div>
+        <div v-else class="text-gray-500 italic">Silakan pilih materi untuk memutar video.</div>
+
 
           <!-- Slide Description -->
           <p
@@ -112,7 +117,8 @@
 import { ref, computed, onMounted, onUnmounted, watch, inject } from "vue";
 import { useRouter } from "vue-router";
 import CodeBlock from "@/components/CodeBlock.vue";
-import { Youtube } from 'vue3-youtube';
+import Youtube from 'vue3-youtube'; // ✅ Benar
+
 const props = defineProps({
   slides: {
     type: Array,
@@ -193,14 +199,16 @@ onUnmounted(() => {
 
 // Fungsi untuk mengekstrak video ID dari URL YouTube
 const getYouTubeVideoId = (url) => {
-  const match = url.match(/[?&]v=([^&]+)/);
-  return match ? match[1] : null;
+  const regExp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/i;
+  const match = url.match(regExp);
+  return match && match[1] ? match[1] : null;
 };
 
 // Opsi pemutar YouTube
 const playerVars = {
-  autoplay: 0, // Tidak autoplay
-  controls: 1, // Tampilkan kontrol
+  autoplay: 0,
+  controls: 1,
+  modestbranding: 1
 };
 </script>
 
