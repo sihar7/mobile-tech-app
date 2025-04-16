@@ -103,10 +103,10 @@ const isHolidayUnlocked = (date) => {
   return date >= holidayStart && date <= holidayEnd;
 };
 
-// Cek waktu akses valid (jam 09:00–20:30 atau dalam masa libur)
+// Cek waktu akses valid (jam 09:00–24:59 atau dalam masa libur)
 const isTimeValid = (weekDate) => {
   if (isHolidayUnlocked(weekDate)) return true;
-  return currentHour >= 9 && (currentHour < 20 || (currentHour === 20 && currentMinutes <= 30));
+  return currentHour >= 9 && (currentHour < 24 || (currentHour === 24 && currentMinutes <= 59));
 };
 
 // Cek apakah minggu sudah terbuka
@@ -117,7 +117,7 @@ const isUnlocked = (week) => {
 // Cek apakah minggu sudah lewat (kecuali minggu terakhir)
 const isPast = (week) => {
   const endOfValidTime = new Date(week.date);
-  endOfValidTime.setHours(20, 30, 0, 0);
+  endOfValidTime.setHours(24, 59, 0, 0);
   return today > endOfValidTime && week.id !== weeks.length;
 };
 

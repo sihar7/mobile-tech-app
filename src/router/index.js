@@ -36,7 +36,7 @@ const isTimeValid = (weekDate) => {
   }
   return (
     currentHour >= 9 &&
-    (currentHour < 20 || (currentHour === 20 && currentMinutes <= 30))
+    (currentHour < 24 || (currentHour === 24 && currentMinutes <= 59))
   );
 };
 
