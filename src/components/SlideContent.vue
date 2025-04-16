@@ -57,15 +57,14 @@
           />
         </div>
           <!-- Slide Description -->
-          <div
+          <p
             class="slide-description"
             v-html="
               isExpanded[activeIndex]
                 ? slides[activeIndex].description
-                : shortenHtml(slides[activeIndex].description, 300)
+                : shortenText(slides[activeIndex].description, 300)
             "
-          ></div>
-
+          ></p>
 
           <!-- Code Block -->
           <CodeBlock 
