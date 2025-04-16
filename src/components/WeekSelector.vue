@@ -75,17 +75,17 @@ const today = new Date();
 const currentHour = today.getHours();
 const currentMinutes = today.getMinutes();
 
-// Tanggal mulai pertemuan dan tanggal akhir liburan
+// Tanggal mulai pertemuan dan liburan
 const startDate = new Date(2025, 2, 12); // 12 Maret 2025
-const holidayStart = new Date(2025, 2, 26); // Libur dimulai 26 Maret
-const holidayEnd = new Date(2025, 3, 15); // Libur berakhir 15 April
+const holidayStart = new Date(2025, 2, 26); // Libur mulai 26 Maret
+const holidayEnd = new Date(2025, 3, 15); // Libur selesai 15 April
 
-// Membuat array minggu berdasarkan logika libur
+// Generate minggu-minggu kuliah
 const weeks = [];
 let currentDate = new Date(startDate);
 
 for (let i = 1; i <= 14; i++) {
-  // Jika tanggal sekarang masuk masa libur, lompat ke setelah liburan
+  // Skip jika sedang masa libur
   while (currentDate >= holidayStart && currentDate <= holidayEnd) {
     currentDate.setDate(currentDate.getDate() + 7);
   }
@@ -98,48 +98,44 @@ for (let i = 1; i <= 14; i++) {
   currentDate.setDate(currentDate.getDate() + 7);
 }
 
-// Fungsi waktu akses
+// Cek apakah tanggal berada dalam masa libur
+const isHolidayUnlocked = (date) => {
+  return date >= holidayStart && date <= holidayEnd;
+};
+
+// Cek waktu akses valid (jam 09:00–20:30 atau dalam masa libur)
 const isTimeValid = (weekDate) => {
-  if (isHolidayUnlocked(weekDate)) {
-    return true;
-  }
+  if (isHolidayUnlocked(weekDate)) return true;
   return currentHour >= 9 && (currentHour < 20 || (currentHour === 20 && currentMinutes <= 30));
 };
 
-// Cek minggu dalam masa libur
-const isHolidayUnlocked = (weekDate) => {
-  return weekDate >= holidayStart && weekDate <= holidayEnd;
-};
-
-// Cek apakah minggu bisa dibuka
+// Cek apakah minggu sudah terbuka
 const isUnlocked = (week) => {
   return today >= week.date || isHolidayUnlocked(week.date);
 };
 
-// Cek apakah minggu sudah lewat
+// Cek apakah minggu sudah lewat (kecuali minggu terakhir)
 const isPast = (week) => {
   const endOfValidTime = new Date(week.date);
   endOfValidTime.setHours(20, 30, 0, 0);
   return today > endOfValidTime && week.id !== weeks.length;
 };
 
-// Handle klik
+// Klik handler
 const handleClick = (week) => {
   const isDark = isDarkMode.value;
-  const isDateValid = today >= week.date || isHolidayUnlocked(week.date);
-  const isWeekAfterHoliday = week.date > holidayEnd && week.date < startDate;
+  const dateValid = today >= week.date || isHolidayUnlocked(week.date);
+  const inHoliday = isHolidayUnlocked(week.date);
 
-  let message = "";
+  let message = '';
 
-  if (isWeekAfterHoliday) {
-    message = `📅 Minggu ini masih terkunci karena berada di luar masa liburan.`;
-  } else if (!isDateValid) {
+  if (!dateValid) {
     message = `📅 Pertemuan <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${week.id}</b> baru bisa diakses pada <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${formatDate(week.date)}</b>`;
   } else if (!isTimeValid(week.date)) {
     message = `⏰ Pertemuan hanya bisa diakses antara pukul <b>09:00 - 20:30</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
   }
 
-  if (isUnlocked(week) && !isWeekAfterHoliday) {
+  if (isUnlocked(week)) {
     router.push(`/week/${week.id}`);
   } else {
     Swal.fire({
@@ -159,3 +155,4 @@ const handleClick = (week) => {
   }
 };
 </script>
+
