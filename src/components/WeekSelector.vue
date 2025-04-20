@@ -124,39 +124,43 @@ const isPast = (week) => {
 // Klik handler
 const handleClick = (week) => {
   const isDark = isDarkMode.value;
-  const dateValid = today >= week.date || isHolidayUnlocked(week.date);
-  const inHoliday = isHolidayUnlocked(week.date);
-  const timeValid = isTimeValid(week.date);
+  const now = new Date(); // Ambil waktu terkini
+  const currentHour = now.getHours();
+  const currentMinutes = now.getMinutes();
+
+  const dateValid = now >= week.date || isHolidayUnlocked(week.date);
+  const timeValid = isHolidayUnlocked(week.date) || (currentHour >= 9 && (currentHour < 21 || (currentHour === 20 && currentMinutes <= 30)));
   const past = isPast(week);
 
   let message = '';
 
-    if (!dateValid) {
-      message = `📅 Pertemuan <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${week.id}</b> baru bisa diakses pada <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${formatDate(week.date)}</b>`;
-    } else if (past && !timeValid) {
-      message = `⚠️ Pertemuan <b>${week.id}</b> sudah lewat, tapi masih bisa dibuka. Namun hanya bisa diakses antara <b>09:00 - 20:30</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
-    } else if (!timeValid) {
-      message = `⏰ Pertemuan hanya bisa diakses antara pukul <b>09:00 - 20:30</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
-    }
+  if (!dateValid) {
+    message = `📅 Pertemuan <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${week.id}</b> baru bisa diakses pada <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${formatDate(week.date)}</b>`;
+  } else if (past && !timeValid) {
+    message = `⚠️ Pertemuan <b>${week.id}</b> sudah lewat, tapi masih bisa dibuka. Namun hanya bisa diakses antara <b>09:00 - 20:30</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
+  } else if (!timeValid) {
+    message = `⏰ Pertemuan hanya bisa diakses antara pukul <b>09:00 - 20:30</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
+  }
 
-    if (isUnlocked(week) && timeValid) {
-      router.push(`/week/${week.id}`);
-    } else if (message) {
-      Swal.fire({
-        title: `<span style="color: ${isDark ? '#9CA3AF' : '#3B82F6'}; font-weight: bold; font-size: 1.5rem;">🔒 Belum Bisa Diakses!</span>`,
-        html: `
-          <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 1rem; font-size: 1rem; color: ${isDark ? '#9CA3AF' : '#1E40AF'};">
-            ${message}
-          </div>
-        `,
-        icon: 'info',
-        background: isDark ? '#111827' : '#EFF6FF',
-        confirmButtonColor: isDark ? '#1F2937' : '#3B82F6',
-        confirmButtonText: 'Oke deh 😢',
-        showClass: { popup: 'animate__animated animate__fadeInDown' },
-        hideClass: { popup: 'animate__animated animate__fadeOutUp' },
-      });
-    }
+  if (isUnlocked(week) && timeValid) {
+    router.push(`/week/${week.id}`);
+  } else if (message) {
+    Swal.fire({
+      title: `<span style="color: ${isDark ? '#9CA3AF' : '#3B82F6'}; font-weight: bold; font-size: 1.5rem;">🔒 Belum Bisa Diakses!</span>`,
+      html: `
+        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 1rem; font-size: 1rem; color: ${isDark ? '#9CA3AF' : '#1E40AF'};">
+          ${message}
+        </div>
+      `,
+      icon: 'info',
+      background: isDark ? '#111827' : '#EFF6FF',
+      confirmButtonColor: isDark ? '#1F2937' : '#3B82F6',
+      confirmButtonText: 'Oke deh 😢',
+      showClass: { popup: 'animate__animated animate__fadeInDown' },
+      hideClass: { popup: 'animate__animated animate__fadeOutUp' },
+    });
+  }
 };
+
 </script>
 
