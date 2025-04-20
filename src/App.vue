@@ -61,19 +61,36 @@
       </form>
     </div> -->
     <!-- Jam Digital di Navbar -->
-    <div class="flex-grow mx-4 w-full md:w-auto mt-4 md:mt-0 flex justify-center">
+   <!-- Jam Digital + Cuaca -->
+    <div class="flex-grow mx-4 w-full md:w-auto mt-4 md:mt-0 flex justify-center items-center gap-4">
+      <!-- Jam -->
       <div
-        class="px-6 py-2 rounded-2xl font-mono text-2xl md:text-3xl text-center tracking-widest shadow-lg animate-pulse"
+        class="px-5 py-2 rounded-2xl font-mono text-2xl md:text-3xl text-center tracking-widest shadow-xl"
         :class="[
           isDarkMode
             ? 'text-blue-300 bg-white/10 border border-blue-500/30'
-            : 'text-blue-900 bg-white/50 border border-blue-300/50',
+            : 'text-blue-900 bg-white/60 border border-blue-300/50',
           'backdrop-blur-md transition-all duration-700'
         ]"
       >
         ⏰ {{ currentTime }}
       </div>
+
+      <!-- Cuaca -->
+      <div
+        class="flex items-center gap-2 px-4 py-2 rounded-2xl shadow-xl"
+        :class="[
+          isDarkMode
+            ? 'text-white bg-white/10 border border-white/20'
+            : 'text-blue-900 bg-white/60 border border-blue-300/50',
+          'backdrop-blur-md transition-all duration-700'
+        ]"
+      >
+        <span v-if="weatherIcon" v-html="weatherIcon"></span>
+        <span>{{ weatherDescription }}</span>
+      </div>
     </div>
+
 
 
     <!-- Tombol Toggle Tema dan Musik -->
@@ -142,6 +159,8 @@ const backgroundMusic = ref(null);
 const searchQuery = ref('');
 const currentTime = ref("");
 const notified = ref(false); // supaya notifikasi jam 12:00 cuma muncul sekali
+const weatherDescription = ref('Memuat cuaca...')
+const weatherIcon = ref(null)
 
 // State untuk tema gelap
 const isDarkMode = ref(localStorage.getItem('theme') === 'dark');
@@ -156,37 +175,8 @@ const toggleTheme = () => {
 provide('isDarkMode', isDarkMode);
 // Fungsi untuk memutar/menghentikan musik
 onMounted(() => {
-  if (musicToggle.value && musicIcon.value && backgroundMusic.value) {
-    musicToggle.value.addEventListener('click', () => {
-      if (backgroundMusic.value.paused) {
-        backgroundMusic.value.play();
-        musicIcon.value.textContent = '⏸️';
-      } else {
-        backgroundMusic.value.pause();
-        musicIcon.value.textContent = '🎵';
-      }
-    });
-  } else {
-    console.error('Elemen tidak ditemukan!');
-  }
-
-  const script = document.createElement('script');
-  script.src = 'https://cse.google.com/cse.js?cx=84c3a5d56e2924c61';
-  script.async = true;
-  script.onload = () => {
-    console.log('Google Custom Search script loaded successfully!');
-  };
-  script.onerror = () => {
-    console.error('Failed to load Google Custom Search script.');
-  };
-  document.head.appendChild(script);
-
-
-  if (isDarkMode.value) {
-    document.documentElement.classList.add('dark-theme');
-  }
-
-   const updateTime = () => {
+  // Update waktu & notifikasi
+  const updateTime = () => {
     const now = new Date();
     const hours = now.getHours().toString().padStart(2, "0");
     const minutes = now.getMinutes().toString().padStart(2, "0");
@@ -213,32 +203,83 @@ onMounted(() => {
     }
   };
 
-  updateTime(); // update pertama langsung
+  updateTime();
   setInterval(updateTime, 1000);
+
+  // Cek tema dark
+  if (isDarkMode.value) {
+    document.documentElement.classList.add('dark-theme');
+  }
+
+  // Toggle musik
+  if (musicToggle.value && musicIcon.value && backgroundMusic.value) {
+    musicToggle.value.addEventListener('click', () => {
+      if (backgroundMusic.value.paused) {
+        backgroundMusic.value.play();
+        musicIcon.value.textContent = '⏸️';
+      } else {
+        backgroundMusic.value.pause();
+        musicIcon.value.textContent = '🎵';
+      }
+    });
+  } else {
+    console.error('Elemen musik tidak ditemukan!');
+  }
+
+  // Load Google Custom Search
+  // const script = document.createElement('script');
+  // script.src = 'https://cse.google.com/cse.js?cx=84c3a5d56e2924c61';
+  // script.async = true;
+  // script.onload = () => {
+  //   console.log('Google Custom Search script loaded successfully!');
+  // };
+  // script.onerror = () => {
+  //   console.error('Failed to load Google Custom Search script.');
+  // };
+  // document.head.appendChild(script);
+
+  // Ambil cuaca (langsung di sini)
+  const apiKey = 'de0f12646e3de7223784e55a1e406b03'; // ← Ganti ini!
+  const lat = -6.9015868;
+  const lon = 107.5972338;
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=id&appid=${apiKey}`;
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      weatherDescription.value = `${data.weather[0].description}`;
+      const iconCode = data.weather[0].icon;
+      weatherIcon.value = `<img src="https://openweathermap.org/img/wn/${iconCode}@2x.png" class="w-8 h-8" />`;
+    })
+    .catch(err => {
+      weatherDescription.value = 'Gagal ambil cuaca';
+      console.error('Fetch weather error:', err);
+    });
 });
 
+
 // Fungsi untuk melakukan pencarian Google
-const performSearch = () => {
-  if (searchQuery.value.trim()) {
-    // NProgress.start();
-    setTimeout(() => {
-      const googleInput = document.querySelector('.gsc-input input');
-      if (googleInput) {
-        googleInput.value = searchQuery.value;
-        const event = new Event('input', { bubbles: true });
-        googleInput.dispatchEvent(event);
-        const googleForm = document.querySelector('.gsc-search-box form');
-        if (googleForm) {
-          googleForm.submit();
-          // NProgress.done(); 
-        }
-      } else {
-        console.error('Elemen Google input tidak ditemukan!');
-        // NProgress.done(); 
-      }
-    }, 500);
-  }
-};
+// const performSearch = () => {
+//   if (searchQuery.value.trim()) {
+//     // NProgress.start();
+//     setTimeout(() => {
+//       const googleInput = document.querySelector('.gsc-input input');
+//       if (googleInput) {
+//         googleInput.value = searchQuery.value;
+//         const event = new Event('input', { bubbles: true });
+//         googleInput.dispatchEvent(event);
+//         const googleForm = document.querySelector('.gsc-search-box form');
+//         if (googleForm) {
+//           googleForm.submit();
+//           // NProgress.done(); 
+//         }
+//       } else {
+//         console.error('Elemen Google input tidak ditemukan!');
+//         // NProgress.done(); 
+//       }
+//     }, 500);
+//   }
+// };
 </script>
 
 <style>
