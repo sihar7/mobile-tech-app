@@ -100,9 +100,14 @@
       <!-- Tempat Hasil Pencarian Google -->
       <div class="gcse-searchresults-only"></div>
       <!-- Waktu Berjalan -->
-      <div class="text-white text-center text-xl font-mono mb-4">
-        🕒 Sekarang: {{ currentTime }}
+     <div class="flex justify-center items-center mb-6">
+      <div
+        class="px-6 py-3 rounded-xl shadow-xl text-3xl font-semibold font-mono text-white backdrop-blur-md bg-white/10 border border-white/20 hover:border-blue-400 transition-all duration-500"
+        :class="isDarkMode ? 'text-blue-300' : 'text-blue-900'"
+      >
+        🕒 {{ currentTime }}
       </div>
+    </div>
 
       <router-view />
     </div>
