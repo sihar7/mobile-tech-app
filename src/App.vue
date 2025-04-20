@@ -60,18 +60,12 @@
         </button>
       </form>
     </div> -->
-    <!-- Jam Digital di Navbar -->
    <!-- Jam Digital + Cuaca -->
     <div class="flex-grow mx-4 w-full md:w-auto mt-4 md:mt-0 flex justify-center items-center gap-4">
       <!-- Jam -->
       <div
         class="px-5 py-2 rounded-2xl font-mono text-2xl md:text-3xl text-center tracking-widest shadow-xl"
-        :class="[
-          isDarkMode
-            ? 'text-blue-300 bg-white/10 border border-blue-500/30'
-            : 'text-blue-900 bg-white/60 border border-blue-300/50',
-          'backdrop-blur-md transition-all duration-700'
-        ]"
+        :class="[isDarkMode ? 'text-blue-300 bg-white/10 border border-blue-500/30' : 'text-blue-900 bg-white/60 border border-blue-300/50', 'backdrop-blur-md transition-all duration-700']"
       >
         ⏰ {{ currentTime }}
       </div>
@@ -79,18 +73,12 @@
       <!-- Cuaca -->
       <div
         class="flex items-center gap-2 px-4 py-2 rounded-2xl shadow-xl"
-        :class="[
-          isDarkMode
-            ? 'text-white bg-white/10 border border-white/20'
-            : 'text-blue-900 bg-white/60 border border-blue-300/50',
-          'backdrop-blur-md transition-all duration-700'
-        ]"
+        :class="[isDarkMode ? 'text-white bg-white/10 border border-white/20' : 'text-blue-900 bg-white/60 border border-blue-300/50', 'backdrop-blur-md transition-all duration-700']"
       >
         <span v-if="weatherIcon" v-html="weatherIcon"></span>
-        <span>{{ weatherDescription }}</span>
+        <span>{{ location }}: {{ weatherDescription }}</span>
       </div>
     </div>
-
 
 
     <!-- Tombol Toggle Tema dan Musik -->
@@ -243,6 +231,7 @@ onMounted(() => {
   const lat = -6.901277336454229;
   const lon = 107.59783869058961;
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=id&appid=${apiKey}`;
+
   fetch(url)
     .then(res => {
       if (!res.ok) {
@@ -255,13 +244,19 @@ onMounted(() => {
         weatherDescription.value = `${data.weather[0].description}`;
         const iconCode = data.weather[0].icon;
         weatherIcon.value = `<img src="https://openweathermap.org/img/wn/${iconCode}@2x.png" class="w-8 h-8" />`;
+        
+        // Menambahkan nama kota
+        const city = data.name; // Nama kota dari data API
+        location.value = `Cuaca di ${city}`; // Menampilkan nama kota di depan deskripsi cuaca
       } else {
         weatherDescription.value = 'Data cuaca kosong';
         weatherIcon.value = '';
+        location.value = '';
       }
     })
     .catch(err => {
       weatherDescription.value = 'Gagal ambil cuaca';
+      location.value = '';
       console.error('Fetch weather error:', err);
     });
 
