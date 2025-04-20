@@ -239,7 +239,7 @@ onMounted(() => {
   // document.head.appendChild(script);
 
   // Ambil cuaca (langsung di sini)
-  const apiKey = 'de0f12646e3de7223784e55a1e406b03'; // ← Ganti ini!
+  const apiKey = 'b3a273f9c8b9b6b545daeddc92c6d50a'; // ← Ganti ini!
   const lat = -6.9015868;
   const lon = 107.5972338;
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=id&appid=${apiKey}`;
