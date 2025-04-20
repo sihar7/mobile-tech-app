@@ -99,6 +99,11 @@
     >
       <!-- Tempat Hasil Pencarian Google -->
       <div class="gcse-searchresults-only"></div>
+      <!-- Waktu Berjalan -->
+      <div class="text-white text-center text-xl font-mono mb-4">
+        🕒 Sekarang: {{ currentTime }}
+      </div>
+
       <router-view />
     </div>
 
@@ -167,6 +172,36 @@ onMounted(() => {
   if (isDarkMode.value) {
     document.documentElement.classList.add('dark-theme');
   }
+
+   const updateTime = () => {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, "0");
+    const minutes = now.getMinutes().toString().padStart(2, "0");
+    const seconds = now.getSeconds().toString().padStart(2, "0");
+    currentTime.value = `${hours}:${minutes}:${seconds}`;
+
+    // Notifikasi jam pelajaran selesai
+    if (hours === "12" && minutes === "00" && !notified.value) {
+      Swal.fire({
+        title: "📚 Jam Pelajaran Selesai!",
+        text: "Waktunya istirahat atau lanjut ke kegiatan lainnya.",
+        icon: "success",
+        confirmButtonText: "Siap! 🚀",
+        background: isDarkMode.value ? "#1f2937" : "#f0f9ff",
+        color: isDarkMode.value ? "#f9fafb" : "#1f2937",
+        confirmButtonColor: isDarkMode.value ? "#4ade80" : "#3b82f6",
+      });
+      notified.value = true;
+    }
+
+    // Reset notifikasi keesokan harinya
+    if (hours === "00" && minutes === "00" && seconds === "00") {
+      notified.value = false;
+    }
+  };
+
+  updateTime(); // update pertama langsung
+  setInterval(updateTime, 1000);
 });
 
 // Fungsi untuk melakukan pencarian Google

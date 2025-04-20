@@ -36,7 +36,7 @@ const isTimeValid = (weekDate) => {
   }
   return (
     currentHour >= 9 &&
-    (currentHour < 24 || (currentHour === 23 && currentMinutes <= 59))
+    (currentHour < 21 || (currentHour === 20 && currentMinutes <= 30))
   );
 };
 
@@ -47,6 +47,23 @@ function isUnlocked(weekId) {
 
   return today >= week.date && isTimeValid(week.date);
 }
+
+function isDateUnlocked(weekId) {
+  const week = weeks.find((w) => w.id === parseInt(weekId));
+  if (!week) return false;
+
+  return today >= week.date || isHolidayUnlocked(week.date);
+}
+
+function isPast(weekId) {
+  const week = weeks.find((w) => w.id === parseInt(weekId));
+  if (!week) return false;
+
+  const endOfValidTime = new Date(week.date);
+  endOfValidTime.setHours(23, 59, 0, 0);
+  return today > endOfValidTime && week.id !== weeks.length;
+}
+
 
 // Route config
 const routes = [

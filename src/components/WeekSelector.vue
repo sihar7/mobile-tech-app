@@ -106,7 +106,7 @@ const isHolidayUnlocked = (date) => {
 // Cek waktu akses valid (jam 09:00–23:59 atau dalam masa libur)
 const isTimeValid = (weekDate) => {
   if (isHolidayUnlocked(weekDate)) return true;
-  return currentHour >= 9 && (currentHour < 23 || (currentHour === 23 && currentMinutes <= 59));
+  return currentHour >= 9 && (currentHour < 21 || (currentHour === 20 && currentMinutes <= 30));
 };
 
 // Cek apakah minggu sudah terbuka
@@ -126,33 +126,37 @@ const handleClick = (week) => {
   const isDark = isDarkMode.value;
   const dateValid = today >= week.date || isHolidayUnlocked(week.date);
   const inHoliday = isHolidayUnlocked(week.date);
+  const timeValid = isTimeValid(week.date);
+  const past = isPast(week);
 
   let message = '';
 
-  if (!dateValid) {
-    message = `📅 Pertemuan <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${week.id}</b> baru bisa diakses pada <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${formatDate(week.date)}</b>`;
-  } else if (!isTimeValid(week.date)) {
-    message = `⏰ Pertemuan hanya bisa diakses antara pukul <b>09:00 - 23:59</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
-  }
+    if (!dateValid) {
+      message = `📅 Pertemuan <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${week.id}</b> baru bisa diakses pada <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${formatDate(week.date)}</b>`;
+    } else if (past && !timeValid) {
+      message = `⚠️ Pertemuan <b>${week.id}</b> sudah lewat, tapi masih bisa dibuka. Namun hanya bisa diakses antara <b>09:00 - 20:30</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
+    } else if (!timeValid) {
+      message = `⏰ Pertemuan hanya bisa diakses antara pukul <b>09:00 - 20:30</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
+    }
 
-  if (isUnlocked(week)) {
-    router.push(`/week/${week.id}`);
-  } else {
-    Swal.fire({
-      title: `<span style="color: ${isDark ? '#9CA3AF' : '#3B82F6'}; font-weight: bold; font-size: 1.5rem;">🔒 Belum Bisa Diakses!</span>`,
-      html: `
-        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 1rem; font-size: 1rem; color: ${isDark ? '#9CA3AF' : '#1E40AF'};">
-          ${message}
-        </div>
-      `,
-      icon: 'info',
-      background: isDark ? '#111827' : '#EFF6FF',
-      confirmButtonColor: isDark ? '#1F2937' : '#3B82F6',
-      confirmButtonText: 'Oke deh 😢',
-      showClass: { popup: 'animate__animated animate__fadeInDown' },
-      hideClass: { popup: 'animate__animated animate__fadeOutUp' },
-    });
-  }
+    if (isUnlocked(week) && timeValid) {
+      router.push(`/week/${week.id}`);
+    } else if (message) {
+      Swal.fire({
+        title: `<span style="color: ${isDark ? '#9CA3AF' : '#3B82F6'}; font-weight: bold; font-size: 1.5rem;">🔒 Belum Bisa Diakses!</span>`,
+        html: `
+          <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 1rem; font-size: 1rem; color: ${isDark ? '#9CA3AF' : '#1E40AF'};">
+            ${message}
+          </div>
+        `,
+        icon: 'info',
+        background: isDark ? '#111827' : '#EFF6FF',
+        confirmButtonColor: isDark ? '#1F2937' : '#3B82F6',
+        confirmButtonText: 'Oke deh 😢',
+        showClass: { popup: 'animate__animated animate__fadeInDown' },
+        hideClass: { popup: 'animate__animated animate__fadeOutUp' },
+      });
+    }
 };
 </script>
 
