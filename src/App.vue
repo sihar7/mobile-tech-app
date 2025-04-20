@@ -61,24 +61,27 @@
       </form>
     </div> -->
    <!-- Jam Digital + Cuaca -->
-    <div class="flex-grow mx-4 w-full md:w-auto mt-4 md:mt-0 flex justify-center items-center gap-4">
-      <!-- Jam -->
-      <div
-        class="px-5 py-2 rounded-2xl font-mono text-2xl md:text-3xl text-center tracking-widest shadow-xl"
-        :class="[isDarkMode ? 'text-blue-300 bg-white/10 border border-blue-500/30' : 'text-blue-900 bg-white/60 border border-blue-300/50', 'backdrop-blur-md transition-all duration-700']"
-      >
-        ⏰ {{ currentTime }}
-      </div>
+    <div class="flex-grow mx-4 w-full md:w-auto mt-4 md:mt-0 flex flex-col md:flex-row justify-center items-center gap-4">
+    <!-- Jam -->
+    <div
+      class="px-6 py-3 rounded-2xl font-mono text-3xl md:text-4xl text-center tracking-[0.3em] shadow-lg transition-all duration-700 backdrop-blur-md"
+      :class="[isDarkMode ? 'text-blue-300 bg-white/10 border border-blue-500/30' : 'text-blue-900 bg-white/70 border border-blue-300/30']"
+    >
+      ⏰ {{ currentTime }}
+    </div>
 
-      <!-- Cuaca -->
-      <div
-        class="flex items-center gap-2 px-4 py-2 rounded-2xl shadow-xl"
-        :class="[isDarkMode ? 'text-white bg-white/10 border border-white/20' : 'text-blue-900 bg-white/60 border border-blue-300/50', 'backdrop-blur-md transition-all duration-700']"
-      >
-        <span v-if="weatherIcon" v-html="weatherIcon"></span>
-        <span>{{ location }}: {{ weatherDescription }}</span>
+    <!-- Cuaca -->
+    <div
+      class="flex items-center gap-3 px-5 py-3 rounded-2xl shadow-lg transition-all duration-700 backdrop-blur-md"
+      :class="[isDarkMode ? 'text-white bg-white/10 border border-white/20' : 'text-blue-900 bg-white/70 border border-blue-300/30']"
+    >
+      <span v-if="weatherIcon" v-html="weatherIcon" class="text-2xl"></span>
+      <div class="text-base md:text-lg leading-snug">
+        <div class="font-semibold">{{ location }}</div>
+        <div class="opacity-80">{{ weatherDescription }}</div>
       </div>
     </div>
+  </div>
 
 
     <!-- Tombol Toggle Tema dan Musik -->

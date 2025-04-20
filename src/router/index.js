@@ -1,79 +1,102 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/views/HomeView.vue";
 import WeekPage from "@/views/WeekView.vue";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 const startDate = new Date(2025, 2, 12); // 12 Maret 2025
 const holidayStart = new Date(2025, 2, 26); // 26 Maret 2025
 const holidayEnd = new Date(2025, 3, 15); // 15 April 2025
-const today = new Date();
-const currentHour = today.getHours();
-const currentMinutes = today.getMinutes();
 
-// Buat daftar minggu, skip tanggal dalam masa liburan
 const weeks = [];
 let currentDate = new Date(startDate);
 
 for (let i = 1; i <= 14; i++) {
-  // skip minggu liburan
   while (currentDate >= holidayStart && currentDate <= holidayEnd) {
     currentDate.setDate(currentDate.getDate() + 7);
   }
-
   weeks.push({ id: i, date: new Date(currentDate) });
-
   currentDate.setDate(currentDate.getDate() + 7);
 }
 
-// Cek apakah minggu masuk masa liburan
 const isHolidayUnlocked = (weekDate) => {
   return weekDate >= holidayStart && weekDate <= holidayEnd;
 };
 
-// Cek waktu akses valid
 const isTimeValid = (weekDate) => {
-  if (isHolidayUnlocked(weekDate)) {
-    return true;
-  }
-  return (
-    currentHour >= 9 &&
-    (currentHour < 21 || (currentHour === 20 && currentMinutes <= 30))
-  );
+  const now = new Date();
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+
+  if (isHolidayUnlocked(weekDate)) return true;
+
+  return hour >= 9 && (hour < 21 || (hour === 20 && minute <= 30));
 };
 
-// Cek apakah minggu terbuka
-function isUnlocked(weekId) {
+const isDateUnlocked = (weekId) => {
   const week = weeks.find((w) => w.id === parseInt(weekId));
   if (!week) return false;
-
-  return today >= week.date && isTimeValid(week.date);
-}
-
-function isDateUnlocked(weekId) {
-  const week = weeks.find((w) => w.id === parseInt(weekId));
-  if (!week) return false;
-
+  const today = new Date();
   return today >= week.date || isHolidayUnlocked(week.date);
-}
+};
 
-function isPast(weekId) {
-  const week = weeks.find((w) => w.id === parseInt(weekId));
-  if (!week) return false;
+const isTimeInvalid = (weekDate) => !isTimeValid(weekDate);
 
-  const endOfValidTime = new Date(week.date);
-  endOfValidTime.setHours(23, 59, 0, 0);
-  return today > endOfValidTime && week.id !== weeks.length;
-}
-
-
-// Route config
 const routes = [
   { path: "/", component: Home },
   {
     path: "/week/:id",
     component: WeekPage,
     beforeEnter: (to, from, next) => {
-      if (!isUnlocked(to.params.id)) {
+      const weekId = parseInt(to.params.id);
+      const week = weeks.find((w) => w.id === weekId);
+      if (!week) {
         next("/");
+        return;
+      }
+
+      const today = new Date();
+      const nowHour = today.getHours();
+      const nowMinutes = today.getMinutes().toString().padStart(2, "0");
+
+      const isUnlockedByDate = isDateUnlocked(weekId);
+      const timeValid = isTimeValid(week.date);
+      const inHoliday = isHolidayUnlocked(week.date);
+
+      if (!isUnlockedByDate) {
+        Swal.fire({
+          title: "🔒 Belum Bisa Diakses!",
+          html: `📅 Pertemuan <b style="color:#3B82F6">${weekId}</b> baru bisa dibuka pada <b>${week.date.toLocaleDateString("id-ID", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          })}</b>`,
+          icon: "info",
+          confirmButtonText: "Oke deh 😢",
+          background: "#EFF6FF",
+          confirmButtonColor: "#3B82F6",
+        });
+        next("/");
+      } else if (!timeValid) {
+        Swal.fire({
+          title: "⏰ Di Luar Jam Akses!",
+          html: `Pertemuan ini hanya bisa dibuka antara pukul <b>09:00 - 20:30</b>. Sekarang jam <b>${nowHour}:${nowMinutes}</b>.<br><br>${
+            inHoliday
+              ? `<i>Tapi karena ini masa liburan 🌴, masih bisa diakses kapan saja! 😄</i>`
+              : "<i>Silakan kembali di rentang jam tersebut ya.</i>"
+          }`,
+          icon: "warning",
+          confirmButtonText: "Mengerti 🫡",
+          background: "#FEF2F2",
+          confirmButtonColor: "#EF4444",
+        });
+
+        if (inHoliday) {
+          next(); // tetap lanjut karena liburan
+        } else {
+          next("/");
+        }
       } else {
         next();
       }
