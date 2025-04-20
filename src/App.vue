@@ -129,6 +129,8 @@ const backgroundMusic = ref(null);
 
 // State untuk pencarian Google
 const searchQuery = ref('');
+const currentTime = ref("");
+const notified = ref(false); // supaya notifikasi jam 12:00 cuma muncul sekali
 
 // State untuk tema gelap
 const isDarkMode = ref(localStorage.getItem('theme') === 'dark');
