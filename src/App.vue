@@ -240,20 +240,19 @@ onMounted(() => {
       return res.json();
     })
     .then(data => {
+      const city = data.name || 'Lokasi tidak diketahui';
+      location.value = `Cuaca di ${city}`;
+
       if (data.weather && data.weather.length > 0) {
         weatherDescription.value = `${data.weather[0].description}`;
         const iconCode = data.weather[0].icon;
         weatherIcon.value = `<img src="https://openweathermap.org/img/wn/${iconCode}@2x.png" class="w-8 h-8" />`;
-
-        // Menambahkan nama kota dari data API
-        const city = data.name; // Mengambil nama kota dari API
-        location.value = `Cuaca di ${city}`; // Menampilkan nama kota di depan deskripsi cuaca
       } else {
         weatherDescription.value = 'Data cuaca kosong';
         weatherIcon.value = '';
-        location.value = '';
       }
     })
+
     .catch(err => {
       weatherDescription.value = 'Gagal ambil cuaca';
       location.value = '';
