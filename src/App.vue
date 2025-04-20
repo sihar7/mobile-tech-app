@@ -149,6 +149,7 @@ const currentTime = ref("");
 const notified = ref(false); // supaya notifikasi jam 12:00 cuma muncul sekali
 const weatherDescription = ref('Memuat cuaca...')
 const weatherIcon = ref(null)
+const location = ref(''); 
 
 // State untuk tema gelap
 const isDarkMode = ref(localStorage.getItem('theme') === 'dark');
