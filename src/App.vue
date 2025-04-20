@@ -44,7 +44,7 @@
     </div>
 
     <!-- Form Pencarian Custom -->
-    <div class="flex-grow mx-4 w-full md:w-auto mt-4 md:mt-0">
+    <!-- <div class="flex-grow mx-4 w-full md:w-auto mt-4 md:mt-0">
       <form @submit.prevent="performSearch" class="flex items-center gap-2">
         <input
           v-model="searchQuery"
@@ -59,7 +59,22 @@
           🔍
         </button>
       </form>
+    </div> -->
+    <!-- Jam Digital di Navbar -->
+    <div class="flex-grow mx-4 w-full md:w-auto mt-4 md:mt-0 flex justify-center">
+      <div
+        class="px-6 py-2 rounded-2xl font-mono text-2xl md:text-3xl text-center tracking-widest shadow-lg animate-pulse"
+        :class="[
+          isDarkMode
+            ? 'text-blue-300 bg-white/10 border border-blue-500/30'
+            : 'text-blue-900 bg-white/50 border border-blue-300/50',
+          'backdrop-blur-md transition-all duration-700'
+        ]"
+      >
+        ⏰ {{ currentTime }}
+      </div>
     </div>
+
 
     <!-- Tombol Toggle Tema dan Musik -->
     <div class="flex justify-between gap-4 mt-4 md:mt-0">
@@ -98,17 +113,8 @@
       }"
     >
       <!-- Tempat Hasil Pencarian Google -->
-      <div class="gcse-searchresults-only"></div>
-      <!-- Waktu Berjalan -->
-     <div class="flex justify-center items-center mb-6">
-      <div
-        class="px-6 py-3 rounded-xl shadow-xl text-3xl font-semibold font-mono text-white backdrop-blur-md bg-white/10 border border-white/20 hover:border-blue-400 transition-all duration-500"
-        :class="isDarkMode ? 'text-blue-300' : 'text-blue-900'"
-      >
-        🕒 {{ currentTime }}
-      </div>
-    </div>
-
+      <!-- <div class="gcse-searchresults-only"></div>
+  -->
       <router-view />
     </div>
 
