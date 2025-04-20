@@ -23,71 +23,96 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="relative z-10 w-full max-w-7xl mx-auto bg-white/20 backdrop-blur-md shadow-lg rounded-xl p-4 flex flex-wrap md:flex-nowrap justify-between items-center border border-white/30 mt-6 gap-4">
-
-  <!-- Kiri: Logo -->
-  <div class="flex items-center gap-2">
-    <h1 class="text-2xl font-bold text-white drop-shadow-md flex items-center gap-2">
-      <span class="text-3xl animate-glow">📱</span>
-      <span class="animate-glow">Mobile Teknologi</span>
-    </h1>
-    <svg class="lightning" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <path d="M50 0 L60 30 L50 40 L70 50 L40 70 L50 60 L30 50 Z"
-        fill="none"
-        stroke="#ffffff"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-    </svg>
-  </div>
-
-  <!-- Tengah: Jam + Cuaca -->
-  <div class="flex-1 flex justify-center items-center gap-4 flex-wrap">
-    <!-- Jam -->
-    <div
-      class="px-6 py-3 rounded-2xl font-mono text-3xl text-center tracking-widest shadow-xl min-w-[200px]"
-      :class="[
-        isDarkMode
-          ? 'text-blue-300 bg-white/10 border border-blue-500/30'
-          : 'text-blue-900 bg-white/60 border border-blue-300/50',
-        'backdrop-blur-md transition-all duration-700'
-      ]"
-    >
-      ⏰ {{ currentTime }}
+    <nav class="relative z-10 w-full max-w-7xl mx-auto bg-white/20 backdrop-blur-md shadow-lg rounded-xl p-4 flex flex-col md:flex-row justify-between items-center border border-white/30 mt-6">
+    <!-- Logo dan Petir -->
+    <div class="lightning-container flex items-center gap-2">
+      <h1 class="text-2xl font-bold text-white drop-shadow-md flex items-center gap-2">
+        <span class="text-3xl animate-glow">📱</span>
+        <span class="animate-glow">Mobile Teknologi</span>
+      </h1>
+      <!-- SVG untuk petir -->
+      <svg class="lightning" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M50 0 L60 30 L50 40 L70 50 L40 70 L50 60 L30 50 Z"
+          fill="none"
+          stroke="#ffffff"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
     </div>
 
-    <!-- Cuaca -->
-    <div
-      class="flex items-center gap-2 px-4 py-2 rounded-2xl shadow-xl"
-      :class="[
-        isDarkMode
-          ? 'text-white bg-white/10 border border-white/20'
-          : 'text-blue-900 bg-white/60 border border-blue-300/50',
-        'backdrop-blur-md transition-all duration-700'
-      ]"
-    >
-      <span v-if="weatherIcon" v-html="weatherIcon"></span>
-      <span>{{ weatherDescription }}</span>
+    <!-- Form Pencarian Custom -->
+    <!-- <div class="flex-grow mx-4 w-full md:w-auto mt-4 md:mt-0">
+      <form @submit.prevent="performSearch" class="flex items-center gap-2">
+        <input
+          v-model="searchQuery"
+          type="text"
+          placeholder="Cari di Google..."
+          class="w-full px-4 py-2 rounded-lg bg-white/20 backdrop-blur-md text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+        />
+        <button
+          type="submit"
+          class="px-4 py-2 rounded-lg bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all"
+        >
+          🔍
+        </button>
+      </form>
+    </div> -->
+    <!-- Jam Digital di Navbar -->
+   <!-- Jam Digital + Cuaca -->
+    <div class="flex-grow mx-4 w-full md:w-auto mt-4 md:mt-0 flex justify-center items-center gap-4">
+      <!-- Jam -->
+      <div
+        class="px-5 py-2 rounded-2xl font-mono text-2xl md:text-3xl text-center tracking-widest shadow-xl"
+        :class="[
+          isDarkMode
+            ? 'text-blue-300 bg-white/10 border border-blue-500/30'
+            : 'text-blue-900 bg-white/60 border border-blue-300/50',
+          'backdrop-blur-md transition-all duration-700'
+        ]"
+      >
+        ⏰ {{ currentTime }}
+      </div>
+
+      <!-- Cuaca -->
+      <div
+        class="flex items-center gap-2 px-4 py-2 rounded-2xl shadow-xl"
+        :class="[
+          isDarkMode
+            ? 'text-white bg-white/10 border border-white/20'
+            : 'text-blue-900 bg-white/60 border border-blue-300/50',
+          'backdrop-blur-md transition-all duration-700'
+        ]"
+      >
+        <span v-if="weatherIcon" v-html="weatherIcon"></span>
+        <span>{{ weatherDescription }}</span>
+      </div>
     </div>
-  </div>
 
-  <!-- Kanan: Toggle Tema & Musik -->
-  <div class="flex gap-4">
-    <button @click="toggleTheme"
-      class="p-3 rounded-full shadow-lg bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all">
-      <span v-if="isDarkMode">🌞</span>
-      <span v-else>🌙</span>
-    </button>
 
-    <button ref="musicToggle"
-      class="p-3 rounded-full shadow-lg bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all">
-      <span ref="musicIcon">🎵</span>
-    </button>
-  </div>
 
-</nav>
+    <!-- Tombol Toggle Tema dan Musik -->
+    <div class="flex justify-between gap-4 mt-4 md:mt-0">
+      <!-- Tombol Toggle Tema -->
+      <button
+        @click="toggleTheme"
+        class="p-3 rounded-full shadow-lg bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all"
+      >
+        <span v-if="isDarkMode">🌞</span>
+        <span v-else>🌙</span>
+      </button>
 
+      <!-- Tombol Musik -->
+      <button
+        ref="musicToggle"
+        class="p-3 rounded-full shadow-lg bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all"
+      >
+        <span ref="musicIcon">🎵</span>
+      </button>
+    </div>
+  </nav>
 
     <!-- Audio -->
     <audio ref="backgroundMusic" loop>
@@ -220,16 +245,27 @@ onMounted(() => {
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=id&appid=${apiKey}`;
 
   fetch(url)
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+      return res.json();
+    })
     .then(data => {
-      weatherDescription.value = `${data.weather[0].description}`;
-      const iconCode = data.weather[0].icon;
-      weatherIcon.value = `<img src="https://openweathermap.org/img/wn/${iconCode}@2x.png" class="w-8 h-8" />`;
+      if (data.weather && data.weather.length > 0) {
+        weatherDescription.value = `${data.weather[0].description}`;
+        const iconCode = data.weather[0].icon;
+        weatherIcon.value = `<img src="https://openweathermap.org/img/wn/${iconCode}@2x.png" class="w-8 h-8" />`;
+      } else {
+        weatherDescription.value = 'Data cuaca kosong';
+        weatherIcon.value = '';
+      }
     })
     .catch(err => {
       weatherDescription.value = 'Gagal ambil cuaca';
       console.error('Fetch weather error:', err);
     });
+
 });
 
 
