@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { inject } from "vue";
 import Home from "@/views/HomeView.vue";
 import WeekPage from "@/views/WeekView.vue";
 import Swal from "sweetalert2";
@@ -63,10 +64,14 @@ const routes = [
       const timeValid = isTimeValid(week.date);
       const inHoliday = isHolidayUnlocked(week.date);
 
+      // Mengakses nilai isDarkMode dari inject
+      const isDarkMode = inject('isDarkMode', ref(false));  // Pastikan ref(false) adalah nilai default jika inject gagal
+
+      // Gunakan isDarkMode di sini sesuai kebutuhan, misalnya untuk menyesuaikan tema dalam SweetAlert
       if (!isUnlockedByDate) {
         Swal.fire({
           title: "🔒 Belum Bisa Diakses!",
-          html: `📅 Pertemuan <b style="color:#3B82F6">${weekId}</b> baru bisa dibuka pada <b>${week.date.toLocaleDateString("id-ID", {
+          html: `📅 Pertemuan <b style="color:${isDarkMode.value ? '#9CA3AF' : '#3B82F6'}">${weekId}</b> baru bisa dibuka pada <b>${week.date.toLocaleDateString("id-ID", {
             weekday: "long",
             day: "numeric",
             month: "long",
@@ -74,8 +79,8 @@ const routes = [
           })}</b>`,
           icon: "info",
           confirmButtonText: "Oke deh 😢",
-          background: "#EFF6FF",
-          confirmButtonColor: "#3B82F6",
+          background: isDarkMode.value ? "#1F2937" : "#EFF6FF",  // Menyesuaikan warna latar belakang
+          confirmButtonColor: isDarkMode.value ? "#3B82F6" : "#3B82F6",
         });
         next("/");
       } else if (!timeValid) {
@@ -88,8 +93,8 @@ const routes = [
           }`,
           icon: "warning",
           confirmButtonText: "Mengerti 🫡",
-          background: "#FEF2F2",
-          confirmButtonColor: "#EF4444",
+          background: isDarkMode.value ? "#1F2937" : "#FEF2F2",  // Menyesuaikan latar belakang
+          confirmButtonColor: isDarkMode.value ? "#EF4444" : "#EF4444",
         });
 
         if (inHoliday) {
