@@ -23,45 +23,70 @@
     </div>
 
     <!-- Navbar -->
-   <nav class="relative z-10 w-full max-w-7xl mx-auto bg-white/20 backdrop-blur-md shadow-lg rounded-xl p-6 flex flex-col md:flex-row justify-between items-center border border-white/30 mt-6 space-y-4 md:space-y-0 md:space-x-6">
-    <!-- Logo -->
-    <div class="flex items-center gap-3">
-      <h1 class="text-2xl md:text-3xl font-bold text-white drop-shadow-md flex items-center gap-2">
-        <span class="text-4xl animate-glow">📱</span>
+    <nav class="relative z-10 w-full max-w-7xl mx-auto bg-white/20 backdrop-blur-md shadow-lg rounded-xl p-4 flex flex-col md:flex-row justify-between items-center border border-white/30 mt-6">
+    <!-- Logo dan Petir -->
+    <div class="lightning-container flex items-center gap-2">
+      <h1 class="text-2xl font-bold text-white drop-shadow-md flex items-center gap-2">
+        <span class="text-3xl animate-glow">📱</span>
         <span class="animate-glow">Mobile Teknologi</span>
       </h1>
-      <!-- Petir SVG -->
-      <svg class="lightning w-6 h-6" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 0 L60 30 L50 40 L70 50 L40 70 L50 60 L30 50 Z" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- SVG untuk petir -->
+      <svg class="lightning" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M50 0 L60 30 L50 40 L70 50 L40 70 L50 60 L30 50 Z"
+          fill="none"
+          stroke="#ffffff"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
       </svg>
     </div>
 
-    <!-- Jam + Cuaca -->
-    <div class="flex items-center gap-4 flex-wrap justify-center">
-      <!-- Jam -->
-      <div
-        class="flex items-center gap-3 px-6 py-4 rounded-2xl font-mono text-3xl tracking-widest shadow-lg transition-all duration-700 backdrop-blur-md"
-        :class="[isDarkMode ? 'text-blue-300 bg-white/10 border border-blue-500/30' : 'text-blue-900 bg-white/70 border border-blue-300/30']"
-      >
-        ⏰ <span>{{ currentTime }}</span>
-      </div>
-
-      <!-- Cuaca -->
-      <div
-        class="flex items-center gap-3 px-5 py-4 rounded-2xl shadow-lg transition-all duration-700 backdrop-blur-md min-w-[220px]"
-        :class="[isDarkMode ? 'text-white bg-white/10 border border-white/20' : 'text-blue-900 bg-white/70 border border-blue-300/30']"
-      >
-        <span v-if="weatherIcon" v-html="weatherIcon" class="text-2xl"></span>
-        <div class="text-sm md:text-base leading-tight">
-          <div class="font-semibold">{{ location }}</div>
-          <div class="opacity-80">{{ weatherDescription }}</div>
-        </div>
-      </div>
+    <!-- Form Pencarian Custom -->
+    <!-- <div class="flex-grow mx-4 w-full md:w-auto mt-4 md:mt-0">
+      <form @submit.prevent="performSearch" class="flex items-center gap-2">
+        <input
+          v-model="searchQuery"
+          type="text"
+          placeholder="Cari di Google..."
+          class="w-full px-4 py-2 rounded-lg bg-white/20 backdrop-blur-md text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+        />
+        <button
+          type="submit"
+          class="px-4 py-2 rounded-lg bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all"
+        >
+          🔍
+        </button>
+      </form>
+    </div> -->
+   <!-- Jam Digital + Cuaca -->
+    <div class="flex-grow mx-4 w-full md:w-auto mt-4 md:mt-0 flex flex-col md:flex-row justify-center items-center gap-4">
+    <!-- Jam -->
+    <div
+      class="px-6 py-3 rounded-2xl font-mono text-3xl md:text-4xl text-center tracking-[0.3em] shadow-lg transition-all duration-700 backdrop-blur-md"
+      :class="[isDarkMode ? 'text-blue-300 bg-white/10 border border-blue-500/30' : 'text-blue-900 bg-white/70 border border-blue-300/30']"
+    >
+      ⏰ {{ currentTime }}
     </div>
 
-    <!-- Tombol Tema & Musik -->
-    <div class="flex items-center gap-3">
-      <!-- Tema -->
+    <!-- Cuaca -->
+    <div
+      class="flex items-center gap-3 px-5 py-3 rounded-2xl shadow-lg transition-all duration-700 backdrop-blur-md"
+      :class="[isDarkMode ? 'text-white bg-white/10 border border-white/20' : 'text-blue-900 bg-white/70 border border-blue-300/30']"
+    >
+      <span v-if="weatherIcon" v-html="weatherIcon" class="text-2xl"></span>
+      <div class="text-base md:text-lg leading-snug">
+        <div class="font-semibold">{{ location }}</div>
+        <div class="opacity-80">{{ weatherDescription }}</div>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- Tombol Toggle Tema dan Musik -->
+    <div class="flex justify-between gap-4 mt-4 md:mt-0">
+      <!-- Tombol Toggle Tema -->
       <button
         @click="toggleTheme"
         class="p-3 rounded-full shadow-lg bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all"
@@ -70,7 +95,7 @@
         <span v-else>🌙</span>
       </button>
 
-      <!-- Musik -->
+      <!-- Tombol Musik -->
       <button
         ref="musicToggle"
         class="p-3 rounded-full shadow-lg bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all"
