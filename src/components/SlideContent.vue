@@ -371,16 +371,16 @@ const playerVars = {
     width: 100%; /* Content mengambil lebar penuh */
   }
 }
-.slide-description * {
-  color: inherit !important;
-}
-
 .slide-description {
-  color: #1a1a1a; /* default light */
+  color: #1a1a1a;
 }
 
 .dark .slide-description {
-  color: #fff; /* for dark mode */
+  color: #fff;
+}
+
+.slide-description :where(p, span, li, strong, em, code) {
+  color: inherit !important;
 }
 
 
