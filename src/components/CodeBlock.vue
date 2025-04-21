@@ -5,7 +5,7 @@
         <i :class="isCodeVisible ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
         {{ isCodeVisible ? 'Hide Code' : 'Show Code' }}
       </button>
-      <button ref="copyButton" @click="copyCode" class="btn">
+      <button ref="copyButton" @click="copyCode" class="btn copy-btn">
         <i class="fas fa-copy"></i> Copy
       </button>
       <button @click="runCode" class="btn">
@@ -19,8 +19,16 @@
       </pre>
     </transition>
 
-    <div v-if="isRunning" class="dartpad-container">
-      <iframe :src="dartpadUrl" frameborder="0" width="100%" height="500"></iframe>
+    <!-- DartPad iframe with key binding to force re-render -->
+    <div v-if="isRunning" class="dartpad-container mt-4">
+      <iframe 
+        :key="iframeKey"
+        :src="dartpadUrl" 
+        frameborder="0" 
+        width="100%" 
+        height="500"
+        sandbox="allow-scripts allow-same-origin"
+      ></iframe>
     </div>
   </div>
 </template>
@@ -44,26 +52,61 @@ export default {
     return {
       isCodeVisible: true,
       isRunning: false,
+      processedCode: "",
+      iframeKey: 0, // Add this to force iframe re-render
     };
-  },
-  computed: {
-    dartpadUrl() {
-      return `https://dartpad.dev/embed-flutter.html?theme=dark&run=true&split=50&ga_id=your-ga-id&code=${encodeURIComponent(this.code)}`;
-    },
   },
   setup() {
     const isDarkMode = inject('isDarkMode');
     return { isDarkMode };
+  },
+  computed: {
+    dartpadUrl() {
+      this.processCodeForDartPad();
+      const encodedCode = encodeURIComponent(this.processedCode);
+      return `https://dartpad.dev/embed-dart.html?theme=${this.isDarkMode ? 'dark' : 'light'}&run=true&split=60%&code=${encodedCode}`;
+    }
+  },
+  watch: {
+    // Watch for code changes and reset iframe
+    code() {
+      this.resetDartPad();
+    }
   },
   mounted() {
     this.highlightCode();
     this.initClipboard();
   },
   methods: {
-    highlightCode() {
-      if (this.$refs.codeBlock) {
-        Prism.highlightElement(this.$refs.codeBlock);
+    resetDartPad() {
+      if (this.isRunning) {
+        this.iframeKey++; // This forces the iframe to re-render
       }
+    },
+    processCodeForDartPad() {
+      let code = this.code;
+      
+      // Remove any HTML tags from syntax highlighting
+      code = code.replace(/<[^>]*>?/gm, '');
+      
+      // Decode HTML entities
+      const textarea = document.createElement('textarea');
+      textarea.innerHTML = code;
+      code = textarea.value;
+      
+      // Ensure proper Dart main() function
+      if (this.language === 'dart' && !code.includes('void main()')) {
+        code = `void main() {\n${code}\n}`;
+      }
+      
+      this.processedCode = code.trim();
+    },
+    highlightCode() {
+      this.$nextTick(() => {
+        if (this.$refs.codeBlock) {
+          Prism.highlightElement(this.$refs.codeBlock);
+        }
+      });
     },
     initClipboard() {
       new ClipboardJS(".copy-btn", {
@@ -98,11 +141,19 @@ export default {
     },
     runCode() {
       this.isRunning = true;
+      this.isCodeVisible = false;
+      this.resetDartPad(); // Force refresh with new code
+      
+      this.$nextTick(() => {
+        const element = this.$el.querySelector('.controls');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
     },
   },
 };
 </script>
-
 
 <style scoped>
 .code-container {
@@ -136,8 +187,6 @@ export default {
     margin-left: 0; /* ⬅️ Di mobile, Run Code tidak mepet ke kanan */
   }
 }
-
-
 
 .toggle-btn,
 .copy-btn {
@@ -183,6 +232,14 @@ pre {
 
 .btn:hover {
   background: rgba(255, 255, 255, 0.3);
+}
+pre[class*="language-"] {
+  @apply m-0 rounded-none;
+}
+
+.dartpad-container {
+  @apply rounded-lg overflow-hidden border;
+  border-color: #4a5568;
 }
 
 .fade-enter-active, .fade-leave-active {

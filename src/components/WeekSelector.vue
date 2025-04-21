@@ -106,7 +106,7 @@ const isHolidayUnlocked = (date) => {
 // Cek waktu akses valid (jam 09:00–23:59 atau dalam masa libur)
 const isTimeValid = (weekDate) => {
   if (isHolidayUnlocked(weekDate)) return true;
-  return currentHour >= 9 && (currentHour < 21 || (currentHour === 20 && currentMinutes <= 30));
+  return currentHour >= 9 && (currentHour < 24 || (currentHour === 23 && currentMinutes <= 59));
 };
 
 // Cek apakah minggu sudah terbuka
@@ -137,9 +137,9 @@ const handleClick = (week) => {
   if (!dateValid) {
     message = `📅 Pertemuan <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${week.id}</b> baru bisa diakses pada <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${formatDate(week.date)}</b>`;
   } else if (past && !timeValid) {
-    message = `⚠️ Pertemuan <b>${week.id}</b> sudah lewat, tapi masih bisa dibuka. Namun hanya bisa diakses antara <b>09:00 - 20:30</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
+    message = `⚠️ Pertemuan <b>${week.id}</b> sudah lewat, tapi masih bisa dibuka. Namun hanya bisa diakses antara <b>09:00 - 24:00</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
   } else if (!timeValid) {
-    message = `⏰ Pertemuan hanya bisa diakses antara pukul <b>09:00 - 20:30</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
+    message = `⏰ Pertemuan hanya bisa diakses antara pukul <b>09:00 - 24:00</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
   }
 
   if (isUnlocked(week) && timeValid) {
