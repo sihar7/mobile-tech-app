@@ -596,7 +596,7 @@ footer::before {
 .light-theme-footer {
   background: linear-gradient(80deg, #388e3c, #388e3c);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+  box-shadow: 0 4px 15px #388e3c;
 }
 
 /* Sembunyikan form default Google */
