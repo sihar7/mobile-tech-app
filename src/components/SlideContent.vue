@@ -57,14 +57,12 @@
           />
         </div>
           <!-- Slide Description -->
-          <div
+          <div 
             class="slide-description"
-            v-html="
-              isExpanded[activeIndex]
-                ? slides[activeIndex].description
-                : shortenText(slides[activeIndex].description, 300)
-            "
+            :class="isDarkMode ? 'text-white' : 'text-gray-900'"
+            v-html="isExpanded[activeIndex] ? slides[activeIndex].description : shortenText(slides[activeIndex].description, 300)"
           ></div>
+
 
           <!-- Code Block -->
           <CodeBlock 
@@ -380,4 +378,12 @@ const playerVars = {
     width: 100%; /* Content mengambil lebar penuh */
   }
 }
+.slide-description {
+  color: #1a1a1a; /* default light */
+}
+
+.dark .slide-description {
+  color: #fff; /* for dark mode */
+}
+
 </style>
