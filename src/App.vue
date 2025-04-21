@@ -65,7 +65,7 @@
    <div class="flex flex-col items-center gap-1">
    <div
         class="px-6 py-3 rounded-2xl font-mono text-3xl md:text-4xl text-center tracking-[0.2em] shadow-lg transition-all duration-700 backdrop-blur-md"
-        :class="[isDarkMode ? 'text-white bg-white/10 border border-green-300/30' : 'text-green-900 bg-white/70 border border-blue-300/30']"
+        :class="[isDarkMode ? 'text-white bg-white/10 border border-white-300/30' : 'text-green-900 bg-white/70 border border-blue-300/30']"
       >
       <span class="text-yellow-500 text-3xl">⏰</span>
       <span class="tracking-widest">{{ currentTime }}</span>
@@ -475,16 +475,15 @@ onMounted(() => {
 :root .animate-glow {
   animation: glow-light 1.5s infinite alternate;
 }
-
 @keyframes glow-light {
   0% {
     text-shadow: 
       0 0 5px #ffffff, 
       0 0 10px #ffffff, 
-      0 0 20px #388e3c, 
-      0 0 40px #388e3c, 
-      0 0 80px #388e3c;
-    filter: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 10px #388e3c);
+      0 0 20px #4caf50, 
+      0 0 40px #4caf50, 
+      0 0 80px #4caf50;
+    filter: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 10px #4caf50);
   }
   90% {
     text-shadow: none;
@@ -494,12 +493,13 @@ onMounted(() => {
     text-shadow: 
       0 0 5px #ffffff, 
       0 0 10px #ffffff, 
-      0 0 20px #388e3c, 
-      0 0 40px #388e3c, 
-      0 0 80px #388e3c;
-    filter: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 10px #388e3c);
+      0 0 20px #4caf50, 
+      0 0 40px #4caf50, 
+      0 0 80px #4caf50;
+    filter: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 10px #4caf50);
   }
 }
+
 
 
 .dark-theme .animate-glow {
