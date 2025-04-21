@@ -336,13 +336,6 @@ const playerVars = {
   margin: 20px 0;
 }
 
-/* Deskripsi */
-.slide-description {
-  font-size: 16px;
-  color: #555;
-  text-align: justify;
-}
-
 .toggle-btn {
   margin-top: 10px;
   background-color: #28a745;
@@ -378,6 +371,10 @@ const playerVars = {
     width: 100%; /* Content mengambil lebar penuh */
   }
 }
+.slide-description * {
+  color: inherit !important;
+}
+
 .slide-description {
   color: #1a1a1a; /* default light */
 }
@@ -385,5 +382,6 @@ const playerVars = {
 .dark .slide-description {
   color: #fff; /* for dark mode */
 }
+
 
 </style>
