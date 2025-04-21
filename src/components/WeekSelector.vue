@@ -124,37 +124,51 @@ const isPast = (week) => {
 // Klik handler
 const handleClick = (week) => {
   const isDark = isDarkMode.value;
-  const now = new Date(); // Ambil waktu terkini
+  const now = new Date();
   const currentHour = now.getHours();
   const currentMinutes = now.getMinutes();
 
+  const green = isDark ? '#A5D6A7' : '#388e3c'; // hijau yang nyaman
+  const gray = isDark ? '#CBD5E1' : '#4B5563';  // abu lembut
   const dateValid = now >= week.date || isHolidayUnlocked(week.date);
   const timeValid = isHolidayUnlocked(week.date) || (currentHour >= 9 && (currentHour < 24 || (currentHour === 23 && currentMinutes <= 59)));
   const past = isPast(week);
 
+  const timeNow = `${currentHour}:${currentMinutes.toString().padStart(2, '0')}`;
+
   let message = '';
 
   if (!dateValid) {
-    message = `📅 Pertemuan <b style="color: ${isDark ? '#9CA3AF' : '#388e3c'};">${week.id}</b> baru bisa diakses pada <b style="color: ${isDark ? '#9CA3AF' : '#388e3c'};">${formatDate(week.date)}</b>`;
+    message = `
+      📅 Pertemuan <b style="color: ${green};">Minggu ${week.id}</b> baru bisa diakses pada 
+      <b style="color: ${green};">${formatDate(week.date)}</b>.
+    `;
   } else if (past && !timeValid) {
-    message = `⚠️ Pertemuan <b>${week.id}</b> sudah lewat, tapi masih bisa dibuka. Namun hanya bisa diakses antara <b>09:00 - 24:00</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
+    message = `
+      ⚠️ Pertemuan <b>Minggu ${week.id}</b> sudah lewat, namun masih bisa dibuka.
+      <br/>⏰ Hanya bisa diakses antara pukul <b>09:00 - 24:00</b>.<br/>
+      Sekarang jam <b>${timeNow}</b>.
+    `;
   } else if (!timeValid) {
-    message = `⏰ Pertemuan hanya bisa diakses antara pukul <b>09:00 - 24:00</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
+    message = `
+      ⏰ Pertemuan hanya bisa diakses antara pukul <b>09:00 - 24:00</b>.
+      <br/>Sekarang jam <b>${timeNow}</b>.
+    `;
   }
 
   if (isUnlocked(week) && timeValid) {
     router.push(`/week/${week.id}`);
   } else if (message) {
     Swal.fire({
-      title: `<span style="color: ${isDark ? '#9CA3AF' : '#388e3c'}; font-weight: bold; font-size: 1.5rem;">🔒 Belum Bisa Diakses!</span>`,
+      title: `<span style="color: ${green}; font-weight: bold; font-size: 1.4rem;">🔒 Belum Bisa Diakses!</span>`,
       html: `
-        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 1rem; font-size: 1rem; color: ${isDark ? '#9CA3AF' : '#388e3c'};">
+        <div style="font-size: 1rem; color: ${gray}; text-align: center; margin-top: 0.75rem; line-height: 1.6;">
           ${message}
         </div>
       `,
       icon: 'info',
-      background: isDark ? '#111827' : '#b9f6ca',
-      confirmButtonColor: isDark ? '#1F2937' : '#388e3c',
+      background: isDark ? '#1e293b' : '#e8f5e9',
+      confirmButtonColor: isDark ? '#334155' : '#4caf50',
       confirmButtonText: 'Oke deh 😢',
       showClass: { popup: 'animate__animated animate__fadeInDown' },
       hideClass: { popup: 'animate__animated animate__fadeOutUp' },
