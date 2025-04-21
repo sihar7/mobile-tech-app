@@ -228,7 +228,7 @@ const playerVars = {
 
 .progress {
   height: 100%;
-  background: #007bff;
+  background: #4caf50;
   transition: width 0.3s ease-in-out;
 }
 
@@ -246,13 +246,13 @@ const playerVars = {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #007bff;
+  background-color: #4caf50;
   color: white;
   transition: background 0.3s;
 }
 
 .btn:hover {
-  background-color: #0056b3;
+  background-color: #a5d6a7;
 }
 
 /* Layout Sidebar dan Konten */
@@ -284,13 +284,13 @@ const playerVars = {
 }
 
 .sidebar-item.active {
-  background: #007bff;
+  background: #4caf50;
   color: white;
 }
 
 .sidebar-item.active .slide-badge {
   background: white;
-  color: #007bff;
+  color: #4caf50;
 }
 
 .sidebar-item.active .slide-title {
@@ -298,7 +298,7 @@ const playerVars = {
 }
 
 .slide-badge {
-  background: #007bff;
+  background: #4caf50;
   color: white;
   padding: 5px 10px;
   border-radius: 15px;

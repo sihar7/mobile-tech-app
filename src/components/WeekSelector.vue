@@ -9,7 +9,7 @@
         isUnlocked(week) && !isPast(week)
           ? isDarkMode
             ? 'bg-gradient-to-br from-gray-700 to-gray-900 text-white hover:from-gray-600 hover:to-gray-800 border-4 border-gray-600'
-            : 'bg-gradient-to-br from-sky-400 to-blue-600 text-white hover:from-sky-500 hover:to-blue-700 border-4 border-blue-500'
+            : 'bg-gradient-to-br from-green-400 to-green-600 text-white hover:from-green-500 hover:to-green-700 border-4 border-green-500'
           : '',
         isPast(week)
           ? isDarkMode
@@ -19,7 +19,7 @@
         !isUnlocked(week)
           ? isDarkMode
             ? 'bg-gray-900 text-gray-500 border-gray-700'
-            : 'bg-blue-50 text-blue-600 border-blue-200'
+            : 'bg-blue-50 text-green-600 border-green-200'
           : ''
       ]"
       @click="handleClick(week)"
@@ -135,7 +135,7 @@ const handleClick = (week) => {
   let message = '';
 
   if (!dateValid) {
-    message = `📅 Pertemuan <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${week.id}</b> baru bisa diakses pada <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${formatDate(week.date)}</b>`;
+    message = `📅 Pertemuan <b style="color: ${isDark ? '#9CA3AF' : '#388e3c'};">${week.id}</b> baru bisa diakses pada <b style="color: ${isDark ? '#9CA3AF' : '#388e3c'};">${formatDate(week.date)}</b>`;
   } else if (past && !timeValid) {
     message = `⚠️ Pertemuan <b>${week.id}</b> sudah lewat, tapi masih bisa dibuka. Namun hanya bisa diakses antara <b>09:00 - 24:00</b>. Sekarang jam <b>${currentHour}:${currentMinutes.toString().padStart(2, '0')}</b>`;
   } else if (!timeValid) {
@@ -146,15 +146,15 @@ const handleClick = (week) => {
     router.push(`/week/${week.id}`);
   } else if (message) {
     Swal.fire({
-      title: `<span style="color: ${isDark ? '#9CA3AF' : '#3B82F6'}; font-weight: bold; font-size: 1.5rem;">🔒 Belum Bisa Diakses!</span>`,
+      title: `<span style="color: ${isDark ? '#9CA3AF' : '#388e3c'}; font-weight: bold; font-size: 1.5rem;">🔒 Belum Bisa Diakses!</span>`,
       html: `
-        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 1rem; font-size: 1rem; color: ${isDark ? '#9CA3AF' : '#1E40AF'};">
+        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 1rem; font-size: 1rem; color: ${isDark ? '#9CA3AF' : '#388e3c'};">
           ${message}
         </div>
       `,
       icon: 'info',
-      background: isDark ? '#111827' : '#EFF6FF',
-      confirmButtonColor: isDark ? '#1F2937' : '#3B82F6',
+      background: isDark ? '#111827' : '#b9f6ca',
+      confirmButtonColor: isDark ? '#1F2937' : '#388e3c',
       confirmButtonText: 'Oke deh 😢',
       showClass: { popup: 'animate__animated animate__fadeInDown' },
       hideClass: { popup: 'animate__animated animate__fadeOutUp' },

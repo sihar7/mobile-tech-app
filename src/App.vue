@@ -65,7 +65,7 @@
     <!-- Jam -->
     <div
       class="px-6 py-3 rounded-2xl font-mono text-3xl md:text-4xl text-center tracking-[0.3em] shadow-lg transition-all duration-700 backdrop-blur-md"
-      :class="[isDarkMode ? 'text-blue-300 bg-white/10 border border-blue-500/30' : 'text-blue-900 bg-white/70 border border-blue-300/30']"
+      :class="[isDarkMode ? 'text-white-300 bg-white/10 border white-green-500/30' : 'text-green-900 bg-white/70 border border-blue-300/30']"
     >
       ⏰ {{ currentTime }}
     </div>
@@ -73,7 +73,7 @@
     <!-- Cuaca -->
     <div
       class="flex items-center gap-3 px-5 py-3 rounded-2xl shadow-lg transition-all duration-700 backdrop-blur-md"
-      :class="[isDarkMode ? 'text-white bg-white/10 border border-white/20' : 'text-blue-900 bg-white/70 border border-blue-300/30']"
+      :class="[isDarkMode ? 'text-white bg-white/10 border border-white/20' : 'text-green-900 bg-white/70 border border-blue-300/30']"
     >
       <span v-if="weatherIcon" v-html="weatherIcon" class="text-2xl"></span>
       <div class="text-base md:text-lg leading-snug">
@@ -112,11 +112,11 @@
     </audio>
     <!-- Main Content -->
     <div
-      class="relative z-10 flex-grow w-full max-w-7xl mx-auto mt-8 p-8 rounded-2xl shadow-lg backdrop-blur-md border border-white/20 hover:shadow-2xl hover:border-blue-400/50 transition-all duration-500 transform hover:-translate-y-1"
+      class="relative z-10 flex-grow w-full max-w-7xl mx-auto mt-8 p-8 rounded-2xl shadow-lg backdrop-blur-md border border-white/20 hover:shadow-2xl hover:border-grey-400/50 transition-all duration-500 transform hover:-translate-y-1"
       :style="{
         backgroundImage: isDarkMode
           ? 'url(https://www.transparenttextures.com/patterns/cartographer.png), linear-gradient(to bottom, #0a0a23, #1a1a2e)' /* Gradien gerhana bulan */
-          : 'url(https://www.transparenttextures.com/patterns/cartographer.png), linear-gradient(to bottom, #0091ff, #a4dcfc)', /* Gradien langit cerah */
+          : 'url(https://www.transparenttextures.com/patterns/cartographer.png), linear-gradient(to bottom, #388e3c, #81c784)', /* Gradien langit cerah */
         backgroundBlendMode: 'overlay',
       }"
     >
@@ -328,7 +328,7 @@ onMounted(() => {
 
 /* Tema Terang */
 :root:root {
-  background: linear-gradient(to bottom, #0091ff, #a4dcfc); /* Gradien biru langit cerah */
+  background: linear-gradient(to bottom, #388e3c, #81c784); /* Gradien biru langit cerah */
   color: #000000; /* Warna teks hitam */
 }
 
@@ -468,10 +468,10 @@ onMounted(() => {
     text-shadow: 
       0 0 5px #ffffff, 
       0 0 10px #ffffff, 
-      0 0 20px #00ffff, 
-      0 0 40px #00ffff, 
-      0 0 80px #00ffff;
-    filter: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 10px #00ffff);
+      0 0 20px #388e3c, 
+      0 0 40px #388e3c, 
+      0 0 80px #388e3c;
+    filter: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 10px #388e3c);
   }
   90% {
     text-shadow: none;
@@ -481,10 +481,10 @@ onMounted(() => {
     text-shadow: 
       0 0 5px #ffffff, 
       0 0 10px #ffffff, 
-      0 0 20px #00ffff, 
-      0 0 40px #00ffff, 
-      0 0 80px #00ffff;
-    filter: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 10px #00ffff);
+      0 0 20px #388e3c, 
+      0 0 40px #388e3c, 
+      0 0 80px #388e3c;
+    filter: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 10px #388e3c);
   }
 }
 
@@ -548,7 +548,7 @@ onMounted(() => {
 footer {
   position: relative;
   overflow: hidden; /* Agar efek ripple tidak keluar dari footer */
-   background: linear-gradient(to bottom, #0091ff, #a4dcfc);
+   background: linear-gradient(to bottom, #388e3c, #81c784);
   background-size: 200% 100%; /* Membuat gradien lebih lebar untuk animasi */
   animation: flowing-water 6s infinite linear; /* Animasi gradien bergerak */
   border: 1px solid rgba(255, 255, 255, 0.3); /* Border transparan */
@@ -581,7 +581,7 @@ footer::before {
 }
 
 .light-theme-footer {
-  background: linear-gradient(90deg, rgba(0, 123, 255, 0.6), rgba(0, 255, 255, 0.6), rgba(0, 123, 255, 0.6));
+  background: linear-gradient(80deg, #388e3c, #388e3c);
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
 }

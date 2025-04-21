@@ -24,5 +24,4 @@ import { pertemuanData } from "@/data.js";
 const route = useRoute();
 const slides = computed(() => pertemuanData[route.params.id] || []);
 
-console.log("Slides Data:", slides.value);
 </script>
