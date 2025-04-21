@@ -148,7 +148,7 @@ export default {
       this.resetDartPad();
       
       this.$nextTick(() => {
-        const element = this.$el.querySelector('.code-container');
+        const element = this.$el.querySelector('.controls');
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
