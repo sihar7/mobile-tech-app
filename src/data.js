@@ -3,14 +3,14 @@ export const pertemuanData = {
     {
       title: "Apa itu mobile teknologi?",
       description: `
-   <h2 class="text-2xl font-bold text-gray-800">Apa itu Mobile Teknologi?</h2>
-  <p class="mt-2 text-gray-600">Mobile Teknologi adalah teknologi yang memungkinkan perangkat bergerak seperti smartphone, tablet, dan perangkat wearable untuk berfungsi dengan koneksi nirkabel. Teknologi ini mencakup perangkat keras, perangkat lunak, dan jaringan yang mendukung komunikasi serta akses informasi dari mana saja.</p>
+   <h2 class="text-2xl font-bold text-white-800">Apa itu Mobile Teknologi?</h2>
+  <p class="mt-2 text-white-800">Mobile Teknologi adalah teknologi yang memungkinkan perangkat bergerak seperti smartphone, tablet, dan perangkat wearable untuk berfungsi dengan koneksi nirkabel. Teknologi ini mencakup perangkat keras, perangkat lunak, dan jaringan yang mendukung komunikasi serta akses informasi dari mana saja.</p>
   
-  <h2 class="text-2xl font-bold text-gray-800">Perkembangan Mobile Teknologi</h2>
-  <p class="mt-2 text-gray-600">Mobile Teknologi telah berkembang pesat dari era komunikasi dasar hingga era modern yang mencakup teknologi seperti 4G/5G, Internet of Things (IoT), kecerdasan buatan (AI), dan cloud computing.</p>
+  <h2 class="text-2xl font-bold text-white-800">Perkembangan Mobile Teknologi</h2>
+  <p class="mt-2 text-white-600">Mobile Teknologi telah berkembang pesat dari era komunikasi dasar hingga era modern yang mencakup teknologi seperti 4G/5G, Internet of Things (IoT), kecerdasan buatan (AI), dan cloud computing.</p>
   
-  <h2 class="text-2xl font-bold text-gray-800">Komponen Utama Mobile Teknologi</h2>
-  <ul class="list-disc list-inside mt-2 text-gray-700">
+  <h2 class="text-2xl font-bold text-white-800">Komponen Utama Mobile Teknologi</h2>
+  <ul class="list-disc list-inside mt-2 text-white-700">
     <li><strong>Perangkat Mobile:</strong> Seperti smartphone, tablet, dan smartwatch.</li>
     <li><strong>Sistem Operasi:</strong> Android, iOS, dan lainnya.</li>
     <li><strong>Jaringan & Konektivitas:</strong> WiFi, 4G, 5G, dan Bluetooth.</li>
@@ -18,11 +18,11 @@ export const pertemuanData = {
     <li><strong>Keamanan Mobile:</strong> Enkripsi data, autentikasi biometrik, dan proteksi dari malware.</li>
   </ul>
   
-  <h2 class="text-2xl font-bold text-gray-800">Dampak Mobile Teknologi</h2>
-  <p class="mt-2 text-gray-600">Mobile Teknologi telah mengubah cara manusia berinteraksi, bekerja, dan mengakses informasi. Dengan teknologi ini, komunikasi menjadi lebih cepat, bisnis lebih fleksibel, dan akses ke layanan digital semakin mudah.</p>
+  <h2 class="text-2xl font-bold text-white-800">Dampak Mobile Teknologi</h2>
+  <p class="mt-2 text-white-600">Mobile Teknologi telah mengubah cara manusia berinteraksi, bekerja, dan mengakses informasi. Dengan teknologi ini, komunikasi menjadi lebih cepat, bisnis lebih fleksibel, dan akses ke layanan digital semakin mudah.</p>
   
-  <h2 class="text-2xl font-bold text-gray-800">Spesifikasi Minimum dan Rekomendasi</h2>
-  <ul class="list-disc list-inside mt-2 text-gray-700">
+  <h2 class="text-2xl font-bold text-white-800">Spesifikasi Minimum dan Rekomendasi</h2>
+  <ul class="list-disc list-inside mt-2 text-white-700">
     <li><strong>Sistem Operasi:</strong>
       <ul class="list-inside ml-4">
         <li>Windows: Windows 10 (64-bit) atau lebih baru</li>
@@ -55,38 +55,38 @@ export const pertemuanData = {
   2: [
     {
       title: "Panduan Instalasi Android Studio",
-      description: `<h2 class="text-2xl font-bold text-gray-800">Cara Instal Android Studio</h2>
-        <p class="mt-2 text-gray-700">Ikuti langkah-langkah berikut untuk menginstal Android Studio di sistem operasi yang kamu gunakan.</p>
+      description: `<h2 class="text-2xl font-bold text-white-800">Cara Instal Android Studio</h2>
+        <p class="mt-2 text-white-700">Ikuti langkah-langkah berikut untuk menginstal Android Studio di sistem operasi yang kamu gunakan.</p>
         
-        <h3 class="text-xl font-semibold text-gray-800 mt-4">1. Unduh Android Studio</h3>
-        <p class="text-gray-700">Kunjungi situs resmi Android Studio dan unduh versi terbaru:</p>
-        <p class="text-gray-700"><a href="https://developer.android.com/studio" class="text-blue-500 underline">Download Android Studio</a></p>
+        <h3 class="text-xl font-semibold text-white-800 mt-4">1. Unduh Android Studio</h3>
+        <p class="text-white-700">Kunjungi situs resmi Android Studio dan unduh versi terbaru:</p>
+        <p class="text-white-700"><a href="https://developer.android.com/studio" class="text-blue-500 underline">Download Android Studio</a></p>
         
-        <h3 class="text-xl font-semibold text-gray-800 mt-4">2. Instalasi di Windows</h3>
-        <ul class="list-disc list-inside mt-2 text-gray-700">
-          <li>Jalankan file <code class="bg-gray-200 p-1 rounded">.exe</code> yang telah diunduh.</li>
+        <h3 class="text-xl font-semibold text-white-800 mt-4">2. Instalasi di Windows</h3>
+        <ul class="list-disc list-inside mt-2 text-white-700">
+          <li>Jalankan file <code class="bg-white-200 p-1 rounded">.exe</code> yang telah diunduh.</li>
           <li>Ikuti wizard instalasi dan pilih opsi default.</li>
           <li>Pastikan opsi "Android Virtual Device (AVD)" dicentang.</li>
           <li>Setelah selesai, buka Android Studio dan lakukan konfigurasi awal.</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-gray-800 mt-4">3. Instalasi di macOS</h3>
-        <ul class="list-disc list-inside mt-2 text-gray-700">
-          <li>Ekstrak file <code class="bg-gray-200 p-1 rounded">.dmg</code> yang telah diunduh.</li>
-          <li>Seret ikon Android Studio ke folder <code class="bg-gray-200 p-1 rounded">Applications</code>.</li>
+        <h3 class="text-xl font-semibold text-white-800 mt-4">3. Instalasi di macOS</h3>
+        <ul class="list-disc list-inside mt-2 text-white-700">
+          <li>Ekstrak file <code class="bg-white-200 p-1 rounded">.dmg</code> yang telah diunduh.</li>
+          <li>Seret ikon Android Studio ke folder <code class="bg-white-200 p-1 rounded">Applications</code>.</li>
           <li>Buka Android Studio dan ikuti wizard konfigurasi.</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-gray-800 mt-4">4. Instalasi di Linux</h3>
-        <ul class="list-disc list-inside mt-2 text-gray-700">
+        <h3 class="text-xl font-semibold text-white-800 mt-4">4. Instalasi di Linux</h3>
+        <ul class="list-disc list-inside mt-2 text-white-700">
           <li>Ekstrak file ZIP yang telah diunduh.</li>
           <li>Jalankan perintah berikut di terminal:</li>
-          <pre class="bg-gray-900 text-white p-2 rounded"><code>cd android-studio/bin && ./studio.sh</code></pre>
+          <pre class="bg-white-900 text-white p-2 rounded"><code>cd android-studio/bin && ./studio.sh</code></pre>
           <li>Ikuti wizard instalasi untuk menyelesaikan konfigurasi.</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-gray-800 mt-4">5. Instal SDK dan Emulator</h3>
-        <ul class="list-disc list-inside mt-2 text-gray-700">
+        <h3 class="text-xl font-semibold text-white-800 mt-4">5. Instal SDK dan Emulator</h3>
+        <ul class="list-disc list-inside mt-2 text-white-700">
           <li>Setelah instalasi selesai, buka Android Studio.</li>
           <li>Pilih opsi "More Actions" > "SDK Manager".</li>
           <li>Pastikan SDK terbaru telah diinstal.</li>
@@ -101,29 +101,29 @@ export const pertemuanData = {
     },
     {
       title: "Panduan Instalasi Visual Studio Code dan Ekstensi untuk Flutter",
-      description: `<h2 class="text-2xl font-bold text-gray-800">Cara Instal Visual Studio Code</h2>
-        <p class="mt-2 text-gray-700">Ikuti langkah-langkah berikut untuk menginstal Visual Studio Code serta ekstensi yang dibutuhkan untuk pengembangan Android dan Flutter.</p>
+      description: `<h2 class="text-2xl font-bold text-white-800">Cara Instal Visual Studio Code</h2>
+        <p class="mt-2 text-white-700">Ikuti langkah-langkah berikut untuk menginstal Visual Studio Code serta ekstensi yang dibutuhkan untuk pengembangan Android dan Flutter.</p>
 
-        <h3 class="text-xl font-semibold text-gray-800 mt-4">1. Unduh Visual Studio Code</h3>
-        <p class="text-gray-700">Kunjungi situs resmi dan unduh VS Code sesuai sistem operasi kamu:</p>
-        <p class="text-gray-700"><a href="https://code.visualstudio.com/" class="text-blue-500 underline">Download Visual Studio Code</a></p>
+        <h3 class="text-xl font-semibold text-white-800 mt-4">1. Unduh Visual Studio Code</h3>
+        <p class="text-white-700">Kunjungi situs resmi dan unduh VS Code sesuai sistem operasi kamu:</p>
+        <p class="text-white-700"><a href="https://code.visualstudio.com/" class="text-blue-500 underline">Download Visual Studio Code</a></p>
 
-        <h3 class="text-xl font-semibold text-gray-800 mt-4">2. Instal Visual Studio Code</h3>
-        <ul class="list-disc list-inside mt-2 text-gray-700">
+        <h3 class="text-xl font-semibold text-white-800 mt-4">2. Instal Visual Studio Code</h3>
+        <ul class="list-disc list-inside mt-2 text-white-700">
           <li>Jalankan file installer yang telah diunduh.</li>
           <li>Ikuti petunjuk instalasi dan centang opsi **"Add to PATH"** agar bisa diakses dari terminal.</li>
           <li>Klik **Next**, lalu **Install**, dan tunggu hingga proses selesai.</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-gray-800 mt-4">3. Instal Ekstensi Wajib</h3>
-        <p class="text-gray-700">Buka VS Code, lalu instal ekstensi berikut untuk pengembangan Flutter:</p>
-        <ul class="list-disc list-inside mt-2 text-gray-700">
+        <h3 class="text-xl font-semibold text-white-800 mt-4">3. Instal Ekstensi Wajib</h3>
+        <p class="text-white-700">Buka VS Code, lalu instal ekstensi berikut untuk pengembangan Flutter:</p>
+        <ul class="list-disc list-inside mt-2 text-white-700">
           <li><strong>Flutter & Dart</strong> - Untuk mengembangkan aplikasi Flutter.</li>
           <li><strong>Android iOS Emulator</strong> - Untuk menjalankan emulator langsung dari VS Code.</li>
           <li><strong>Material Icon Theme</strong> - Untuk ikon yang lebih menarik di file explorer.</li>
           <li><strong>Code Runner</strong> - Untuk menjalankan kode langsung di VS Code.</li>
         </ul>
-        <p class="text-gray-700">Kamu bisa menginstal ekstensi ini dengan membuka <strong>Extensions Marketplace (Ctrl+Shift+X)</strong>, lalu cari nama ekstensi dan klik **Install**.</p>`,
+        <p class="text-white-700">Kamu bisa menginstal ekstensi ini dengan membuka <strong>Extensions Marketplace (Ctrl+Shift+X)</strong>, lalu cari nama ekstensi dan klik **Install**.</p>`,
       image: "",
       code: "",
       language: "bash",
@@ -131,13 +131,13 @@ export const pertemuanData = {
     {
       title: "Tutorial Instalasi Flutter dan Sinkronisasi dengan VS Code",
       description: `
-        <h2 class="text-2xl font-bold text-gray-800">Tutorial Instalasi Flutter</h2>
-        <p class="mt-2 text-gray-600">Berikut adalah langkah-langkah untuk menginstal Flutter di sistem Anda dan menyinkronkan Android Studio dengan Visual Studio Code:</p>
-        <ol class="list-decimal list-inside mt-4 space-y-2 text-gray-700">
+        <h2 class="text-2xl font-bold text-white-800">Tutorial Instalasi Flutter</h2>
+        <p class="mt-2 text-white-600">Berikut adalah langkah-langkah untuk menginstal Flutter di sistem Anda dan menyinkronkan Android Studio dengan Visual Studio Code:</p>
+        <ol class="list-decimal list-inside mt-4 space-y-2 text-white-700">
           <li><strong>Unduh Flutter SDK</strong>: Kunjungi situs resmi Flutter <a href="https://flutter.dev" target="_blank" class="text-blue-600 hover:underline">di sini</a> dan unduh Flutter SDK sesuai sistem operasi Anda.</li>
-          <li><strong>Ekstrak Flutter SDK</strong>: Ekstrak file yang telah diunduh ke direktori yang diinginkan, misalnya <code class="bg-gray-200 px-1 rounded">C:\\flutter</code> (Windows) atau <code class="bg-gray-200 px-1 rounded">/opt/flutter</code> (Linux/macOS).</li>
+          <li><strong>Ekstrak Flutter SDK</strong>: Ekstrak file yang telah diunduh ke direktori yang diinginkan, misalnya <code class="bg-white-200 px-1 rounded">C:\\flutter</code> (Windows) atau <code class="bg-white-200 px-1 rounded">/opt/flutter</code> (Linux/macOS).</li>
           <li><strong>Tambahkan Flutter ke PATH</strong>: Buka terminal atau command prompt dan tambahkan path Flutter ke variabel lingkungan PATH.</li>
-          <li><strong>Cek Instalasi</strong>: Jalankan perintah <code class="bg-gray-200 px-1 rounded">flutter doctor</code> untuk memastikan Flutter terinstal dengan benar.</li>
+          <li><strong>Cek Instalasi</strong>: Jalankan perintah <code class="bg-white-200 px-1 rounded">flutter doctor</code> untuk memastikan Flutter terinstal dengan benar.</li>
           <li><strong>Instal Plugin Flutter dan Dart di Android Studio</strong>:  
             <ul class="list-disc list-inside ml-5">
               <li>Buka Android Studio, lalu masuk ke <strong>Preferences/Settings</strong>.</li>
@@ -148,7 +148,7 @@ export const pertemuanData = {
           </li>
           <li><strong>Instal Ekstensi Flutter dan Dart di VS Code</strong>:  
             <ul class="list-disc list-inside ml-5">
-              <li>Buka VS Code, tekan <code class="bg-gray-200 px-1 rounded">Ctrl + Shift + X</code> untuk membuka Extensions Marketplace.</li>
+              <li>Buka VS Code, tekan <code class="bg-white-200 px-1 rounded">Ctrl + Shift + X</code> untuk membuka Extensions Marketplace.</li>
               <li>Cari **Flutter** dan klik **Install**.</li>
               <li>Ekstensi Dart akan otomatis terinstal bersama Flutter.</li>
             </ul>
@@ -157,10 +157,10 @@ export const pertemuanData = {
             <ul class="list-disc list-inside ml-5">
               <li>Buka terminal dan jalankan perintah berikut untuk menambahkan Android SDK ke Flutter:</li>
             </ul>
-            <pre class="bg-gray-900 text-white p-3 rounded"><code>flutter config --android-sdk "C:\\Users\\NamaAnda\\AppData\\Local\\Android\\Sdk"</code></pre>
-            <p class="mt-2 text-gray-700">Gantilah <code>C:\\Users\\NamaAnda\\AppData\\Local\\Android\\Sdk</code> dengan lokasi Android SDK Anda.</p>
+            <pre class="bg-white-900 text-white p-3 rounded"><code>flutter config --android-sdk "C:\\Users\\NamaAnda\\AppData\\Local\\Android\\Sdk"</code></pre>
+            <p class="mt-2 text-white-700">Gantilah <code>C:\\Users\\NamaAnda\\AppData\\Local\\Android\\Sdk</code> dengan lokasi Android SDK Anda.</p>
           </li>
-          <li><strong>Cek Instalasi</strong>: Jalankan perintah <code class="bg-gray-200 px-1 rounded">flutter doctor</code> dan pastikan tidak ada error.</li>
+          <li><strong>Cek Instalasi</strong>: Jalankan perintah <code class="bg-white-200 px-1 rounded">flutter doctor</code> dan pastikan tidak ada error.</li>
           <li><strong>Buat Proyek Flutter Pertama</strong>: Jalankan perintah berikut untuk membuat proyek Flutter baru:</li>
         </ol>`,
       image: "",
@@ -176,8 +176,8 @@ export const pertemuanData = {
     {
       title: "Contoh Kode Sederhana Flutter",
       description: `
-       <h2 class="text-2xl font-bold text-gray-800">Contoh Kode Sederhana Flutter</h2>
-      <p class="mt-2 text-gray-600">Berikut adalah contoh kode sederhana Flutter untuk menampilkan pesan 'Hello, Flutter!' di layar.</p>`,
+       <h2 class="text-2xl font-bold text-white-800">Contoh Kode Sederhana Flutter</h2>
+      <p class="mt-2 text-white-600">Berikut adalah contoh kode sederhana Flutter untuk menampilkan pesan 'Hello, Flutter!' di layar.</p>`,
       image: "",
       code: `import 'package:flutter/material.dart';
         
@@ -225,8 +225,8 @@ export const pertemuanData = {
     {
       title: "Membuat Halaman Utama di Flutter",
       description: `
-      <h2 class="text-2xl font-bold text-gray-800">Membuat Halaman Utama di Flutter</h2>
-      <p class="mt-2 text-gray-600">
+      <h2 class="text-2xl font-bold text-white-800">Membuat Halaman Utama di Flutter</h2>
+      <p class="mt-2 text-white-600">
         Kita akan membuat halaman utama menggunakan <code>Scaffold</code>, yang terdiri dari <b>AppBar</b>, <b>Body</b>, dan <b>FloatingActionButton</b>.
       </p>`,
       image: "",
@@ -277,8 +277,8 @@ export const pertemuanData = {
     {
       title: "Membuat Tombol yang Bergerak Secara Acak",
       description: `
-        <h2 class="text-2xl font-bold text-gray-800">Membuat Tombol yang Bergerak Secara Acak</h2>
-        <p class="mt-2 text-gray-600">
+        <h2 class="text-2xl font-bold text-white-800">Membuat Tombol yang Bergerak Secara Acak</h2>
+        <p class="mt-2 text-white-600">
           Kita akan membuat tombol yang berpindah posisi secara acak ketika ditekan, menggunakan <code>AnimatedPositioned</code>.
         </p>`,
       image: "",
@@ -347,8 +347,8 @@ export const pertemuanData = {
     {
       title: "Form Input dengan Validasi",
       description: `
-          <h2 class="text-2xl font-bold text-gray-800">Form Input dengan Validasi</h2>
-          <p class="mt-2 text-gray-600">
+          <h2 class="text-2xl font-bold text-white-800">Form Input dengan Validasi</h2>
+          <p class="mt-2 text-white-600">
             Kita akan membuat form input yang memvalidasi apakah pengguna sudah mengisi nama atau belum.
           </p>`,
       image: "",
@@ -445,8 +445,8 @@ export const pertemuanData = {
     {
       title: "Membuat ListView dengan Data Dummy",
       description: `
-          <h2 class="text-2xl font-bold text-gray-800">Membuat ListView dengan Data Dummy</h2>
-          <p class="mt-2 text-gray-600">
+          <h2 class="text-2xl font-bold text-white-800">Membuat ListView dengan Data Dummy</h2>
+          <p class="mt-2 text-white-600">
             Kita akan membuat daftar item menggunakan <code>ListView.builder</code> untuk menampilkan data secara dinamis.
           </p>`,
       image: "",
@@ -500,27 +500,23 @@ export const pertemuanData = {
       <p class="text-gray-600 mb-6">Gabungkan 4 materi utama (Halaman Utama, Tombol Acak, Form Validasi, dan ListView) dalam satu aplikasi.</p>
 
       <div class="space-y-6">
-        <!-- TASK 1 - Halaman Utama -->
         <div class="border-l-4 border-blue-500 pl-4">
           <h3 class="text-xl font-semibold text-gray-700">1. Halaman Utama (Scaffold)</h3>
           <ul class="list-disc pl-5 mt-2 text-gray-600">
             <li>Buat Scaffold dengan AppBar (judul "Kontak Saya")</li>
             <li>Body berisi Column dengan:
-              <ul class="list-circle pl-5">
+              <ul class="list-disc pl-5">
                 <li>Text "Selamat Datang" di center</li>
                 <li>Tombol "Tambah Kontak" yang navigasi ke form</li>
               </ul>
             </li>
           </ul>
-          <div class="mt-2 p-3 bg-gray-50 rounded">
-            <pre class="bg-gray-800 text-white p-2 rounded text-sm">Scaffold(
-  appBar: AppBar(title: Text("Kontak Saya")),
-  body: Center(child: Text("Selamat Datang")),
-)</pre>
-          </div>
+          <pre class="bg-gray-100 text-gray-800 p-3 rounded mt-2 text-sm">Scaffold(
+          appBar: AppBar(title: Text("Kontak Saya")),
+          body: Center(child: Text("Selamat Datang")),
+        )</pre>
         </div>
 
-        <!-- TASK 2 - Tombol Acak -->
         <div class="border-l-4 border-green-500 pl-4">
           <h3 class="text-xl font-semibold text-gray-700">2. Tombol Acak (Game)</h3>
           <ul class="list-disc pl-5 mt-2 text-gray-600">
@@ -530,12 +526,11 @@ export const pertemuanData = {
           </ul>
         </div>
 
-        <!-- TASK 3 - Form Validasi -->
         <div class="border-l-4 border-purple-500 pl-4">
           <h3 class="text-xl font-semibold text-gray-700">3. Form Validasi Kontak</h3>
           <ul class="list-disc pl-5 mt-2 text-gray-600">
             <li>Buat form dengan field:
-              <ul class="list-circle pl-5">
+              <ul class="list-disc pl-5">
                 <li>Nama (min 3 karakter)</li>
                 <li>Nomor HP (harus angka, min 10 digit)</li>
                 <li>Email (harus mengandung @)</li>
@@ -545,13 +540,12 @@ export const pertemuanData = {
           </ul>
         </div>
 
-        <!-- TASK 4 - ListView -->
         <div class="border-l-4 border-yellow-500 pl-4">
           <h3 class="text-xl font-semibold text-gray-700">4. ListView Kontak</h3>
           <ul class="list-disc pl-5 mt-2 text-gray-600">
             <li>Tampilkan daftar kontak dalam ListView.builder</li>
             <li>Setiap item menampilkan:
-              <ul class="list-circle pl-5">
+              <ul class="list-disc pl-5">
                 <li>Avatar lingkaran (gunakan CircleAvatar)</li>
                 <li>Nama kontak</li>
                 <li>Nomor HP</li>
@@ -561,133 +555,116 @@ export const pertemuanData = {
           </ul>
         </div>
 
-      
-<!-- SUBMISSION -->
-<div class="bg-blue-50 p-4 rounded-lg">
-  <h3 class="font-bold text-lg text-blue-800">Pengumpulan Tugas:</h3>
-  
-  <div class="mt-3 bg-white p-4 rounded-lg border border-blue-200 shadow-sm">
-    <h4 class="font-semibold text-blue-700 mb-3 flex items-center">
-      <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-      </svg>
-      Petunjuk Pengumpulan
-    </h4>
-    
-    <!-- File Naming Section -->
-    <div class="mb-4 p-3 bg-gray-50 rounded-md border border-gray-200">
-      <h5 class="font-medium text-gray-700 mb-2">1. Format Penamaan File</h5>
-      
-      <div class="flex items-start mb-2">
-        <div class="flex-shrink-0 mt-1">
-          <div class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center">
-            <svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-            </svg>
-          </div>
-        </div>
-        <div class="ml-3">
-          <p class="text-sm text-gray-600">Buat folder utama dengan format:</p>
-          <div class="mt-1 flex items-center">
-            <code class="bg-gray-100 px-2 py-1 rounded-md text-sm font-mono">NIM_Nama_Kelas</code>
-            <span class="ml-2 text-xs text-gray-500">(Contoh: <code class="bg-gray-100 px-1 rounded text-xs">10520056_SigitHardianto_IF2</code>)</span>
-          </div>
-        </div>
-      </div>
+        <div class="bg-blue-50 p-4 rounded-lg">
+          <h3 class="font-bold text-lg text-blue-800">Pengumpulan Tugas:</h3>
+          <div class="mt-3 bg-white p-4 rounded-lg border border-blue-200 shadow-sm">
+            <h4 class="font-semibold text-blue-700 mb-3">Petunjuk Pengumpulan</h4>
+            <!-- File Naming Section -->
+<div class="mb-4 p-3 bg-white-50 rounded-md border border-white-200">
+  <h5 class="font-medium text-gray-700 mb-2">1. Format Penamaan File</h5>
 
-      <div class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <div class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center">
-            <svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-            </svg>
-          </div>
-        </div>
-        <div class="ml-3">
-          <p class="text-sm text-gray-600">Dalam folder tersebut, masukkan file dengan format:</p>
-          <ul class="list-disc list-inside ml-4 mt-1 space-y-1 text-sm">
-            <li>Screenshot: <code class="bg-gray-100 px-1 rounded">1_HomePage.jpg</code>, <code class="bg-gray-100 px-1 rounded">2_RandomButton.jpg</code>, dst</li>
-            <li>Video demo: <code class="bg-gray-100 px-1 rounded">Demo_NIM.mp4</code></li>
-            <li>Dokumentasi: <code class="bg-gray-100 px-1 rounded">Readme_NIM.pdf</code></li>
-          </ul>
-          <p class="mt-1 text-xs text-gray-500">• Gunakan underscore (_) sebagai pemisah<br>• Hindari spasi dan karakter khusus</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Upload Section -->
-    <div class="mb-4 p-3 bg-blue-50 rounded-md border border-blue-200">
-      <h5 class="font-medium text-blue-700 mb-2">2. Upload ke Google Drive</h5>
-      <div class="flex items-center">
-        <svg class="w-5 h-5 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+  <div class="flex items-start mb-2">
+    <div class="flex-shrink-0 mt-1">
+      <div class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center">
+        <svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
         </svg>
-        <a href="https://drive.google.com/drive/folders/1AEESOBAdB7rs_7whHa5ibv11RA3zI0eJ?usp=sharing" 
-           class="text-blue-600 hover:underline font-medium" 
-           target="_blank">
-          Klik di sini untuk mengumpulkan
-        </a>
       </div>
-      <p class="ml-7 mt-1 text-sm text-gray-600">Pastikan mengupload ke folder kelas Anda</p>
     </div>
-
-    <!-- Documentation Section -->
-    <div class="p-3 bg-purple-50 rounded-md border border-purple-200">
-      <h5 class="font-medium text-purple-700 mb-2">3. Dokumentasi Wajib</h5>
-      <div class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-          </svg>
-        </div>
-        <div class="ml-3">
-          <p class="text-sm text-gray-600">Buat file PDF berisi:</p>
-          <ul class="list-disc list-inside ml-4 mt-1 space-y-1 text-sm">
-            <li>Identitas (Nama, NIM, Kelas)</li>
-            <li>Penjelasan singkat tiap fitur</li>
-            <li>Kendala yang dihadapi + solusi</li>
-            <li>Screenshot alur aplikasi</li>
-          </ul>
-          <p class="mt-2 text-xs text-purple-600">Format nama file: <code class="bg-purple-100 px-1 rounded">Readme_NIM.pdf</code></p>
-        </div>
+    <div class="ml-3">
+      <p class="text-sm text-gray-600">Buat folder utama dengan format:</p>
+      <div class="mt-1 flex items-center">
+        <code class="bg-gray-100 px-2 py-1 rounded-md text-sm font-mono">NIM_Nama_Kelas</code>
+        <span class="ml-2 text-xs text-gray-500">(Contoh: <code class="bg-gray-100 px-1 rounded text-xs">10520056_SigitHardianto_IF2</code>)</span>
       </div>
     </div>
   </div>
 
-  <!-- Deadline Notice -->
-  <div class="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200 flex items-start">
-    <svg class="flex-shrink-0 h-5 w-5 text-yellow-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-      <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-    </svg>
+  <div class="flex items-start">
+    <div class="flex-shrink-0 mt-1">
+      <div class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center">
+        <svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+        </svg>
+      </div>
+    </div>
     <div class="ml-3">
-      <h4 class="font-semibold text-yellow-800">Penting!</h4>
-      <ul class="list-disc list-inside ml-4 mt-1 text-sm text-yellow-700">
-        <li>Deadline: <span class="font-bold">1 minggu setelah tugas diberikan</span></li>
-        <li>File yang tidak sesuai format akan dikembalikan</li>
-        <li>Pastikan semua file dapat diakses (tidak private)</li>
-        <li>Tidak menerima pengumpulan terlambat</li>
+      <p class="text-sm text-gray-600">Dalam folder tersebut, masukkan file dengan format:</p>
+      <ul class="list-disc list-inside ml-4 mt-1 space-y-1 text-sm text-gray-600">
+        <li><code class="bg-gray-100 px-1 rounded">1_HomePage.jpg</code></li>
+        <li><code class="bg-gray-100 px-1 rounded">2_RandomButton.jpg</code></li>
+        <li><code class="bg-gray-100 px-1 rounded">3_FormValidation.jpg</code></li>
+        <li><code class="bg-gray-100 px-1 rounded">4_ListView.jpg</code></li>
+        <li><code class="bg-gray-100 px-1 rounded">Demo_NIM.mp4</code></li>
+        <li><code class="bg-gray-100 px-1 rounded">Readme_NIM.pdf</code></li>
       </ul>
+      <p class="mt-1 text-xs text-gray-500">• Gunakan underscore (_) sebagai pemisah<br>• Hindari spasi dan karakter khusus</p>
     </div>
   </div>
 </div>
-  </div>
+
+
+            <!-- Upload Section -->
+            <div class="mb-4 p-3 bg-blue-50 rounded-md border border-blue-200">
+              <h5 class="font-medium text-blue-700 mb-2">2. Upload ke Google Drive</h5>
+              <div class="flex items-center">
+                <!-- Ikon upload -->
+                <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                        d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12v8m0-8l-3 3m3-3l3 3M12 4v8" />
+                </svg>
+
+                <!-- Link ke Google Drive -->
+                <a href="https://drive.google.com/drive/folders/1AEESOBAdB7rs_7whHa5ibv11RA3zI0eJ?usp=sharing" 
+                  class="text-blue-600 hover:underline font-medium" 
+                  target="_blank">
+                  Klik di sini untuk mengumpulkan
+                </a>
+              </div>
+              <p class="ml-7 mt-1 text-sm text-white-600">Pastikan mengupload ke folder kelas Anda</p>
+            </div>
+
+
+            <div>
+              <h5 class="font-medium text-purple-700 mb-2">3. Dokumentasi Wajib</h5>
+              <p class="text-sm text-gray-600">Buat file PDF berisi:</p>
+              <ul class="list-disc ml-5 text-sm text-gray-600">
+                <li>Identitas (Nama, NIM, Kelas)</li>
+                <li>Penjelasan singkat tiap fitur</li>
+                <li>Kendala yang dihadapi + solusi</li>
+                <li>Screenshot alur aplikasi</li>
+              </ul>
+              <p class="mt-2 text-sm text-purple-600">Format nama file: <code class="bg-purple-100 px-1 rounded">Readme_NIM.pdf</code></p>
+            </div>
+          </div>
+
+          <div class="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+            <h4 class="font-semibold text-yellow-800">Penting!</h4>
+            <ul class="list-disc ml-5 text-sm text-yellow-700 mt-1">
+              <li>Deadline: <strong>1 minggu setelah tugas diberikan</strong></li>
+              <li>File yang tidak sesuai format akan dikembalikan</li>
+              <li>Pastikan semua file dapat diakses (tidak private)</li>
+              <li>Tidak menerima pengumpulan terlambat</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>`,
+    </div>
+  `,
       image: "",
       code: `// Contoh data kontak
-          List<Map<String, dynamic>> contacts = [
-            {
-              'name': 'Budi',
-              'phone': '08123456789',
-              'email': 'budi@example.com'
-            },
-            {
-              'name': 'Ani',
-              'phone': '08987654321', 
-              'email': 'ani@example.com'
-            }
-          ];`,
+        List<Map<String, dynamic>> contacts = [
+          {
+            'name': 'Budi',
+            'phone': '08123456789',
+            'email': 'budi@example.com'
+          },
+          {
+            'name': 'Ani',
+            'phone': '08987654321', 
+            'email': 'ani@example.com'
+          }
+        ];`,
       language: "dart",
       submitLink:
         "https://drive.google.com/drive/folders/1AEESOBAdB7rs_7whHa5ibv11RA3zI0eJ?usp=sharing",
@@ -697,8 +674,8 @@ export const pertemuanData = {
     {
       title: "Membuat Button dengan Style Kustom",
       description: `
-      <h2 class="text-2xl font-bold text-gray-800">Membuat Button dengan Style Kustom</h2>
-      <p class="mt-2 text-gray-600">
+      <h2 class="text-2xl font-bold text-white-800">Membuat Button dengan Style Kustom</h2>
+      <p class="mt-2 text-white-600">
         Menggunakan <code>ElevatedButton.styleFrom()</code> untuk mengubah warna, padding, dan radius button.
       </p>`,
       code: `import 'package:flutter/material.dart'; // Import package Material untuk UI
@@ -745,8 +722,8 @@ export const pertemuanData = {
     {
       title: "Menambahkan Background Gambar di Flutter",
       description: `
-      <h2 class="text-2xl font-bold text-gray-800">Menambahkan Background Gambar</h2>
-      <p class="mt-2 text-gray-600">
+      <h2 class="text-2xl font-bold text-white-800">Menambahkan Background Gambar</h2>
+      <p class="mt-2 text-white-600">
         Menggunakan <code>BoxDecoration</code> untuk menambahkan background gambar di aplikasi Flutter.
       </p>`,
       code: `import 'package:flutter/material.dart'; // Import Flutter Material
@@ -795,8 +772,8 @@ export const pertemuanData = {
     {
       title: "Membuat GridView di Flutter",
       description: `
-      <h2 class="text-2xl font-bold text-gray-800">Membuat GridView</h2>
-      <p class="mt-2 text-gray-600">
+      <h2 class="text-2xl font-bold text-white-800">Membuat GridView</h2>
+      <p class="mt-2 text-white-600">
         Menggunakan <code>GridView.builder()</code> untuk membuat tata letak grid di Flutter.
       </p>`,
       code: `import 'package:flutter/material.dart'; // Import Flutter Material
@@ -847,8 +824,8 @@ export const pertemuanData = {
     {
       title: "Membuat Menu Chat di Flutter",
       description: `
-      <h2 class="text-2xl font-bold text-gray-800">Membuat Menu Chat</h2>
-      <p class="mt-2 text-gray-600">
+      <h2 class="text-2xl font-bold text-white-800">Membuat Menu Chat</h2>
+      <p class="mt-2 text-white-600">
         Menggunakan <code>ListView</code> dan <code>TextField</code> untuk membuat tampilan menu chat.
       </p>`,
       code: `import 'package:flutter/material.dart';

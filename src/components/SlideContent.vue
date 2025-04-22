@@ -59,11 +59,10 @@
           <!-- Slide Description -->
           <div
             class="slide-description"
-            v-html="
-              isExpanded[activeIndex]
-                ? slides[activeIndex].description
-                : shortenText(slides[activeIndex].description, 300)
-            "
+            :class="isDarkMode ? 'text-gray-100' : 'text-gray-800'"
+            v-html="isExpanded[activeIndex]
+              ? slides[activeIndex].description
+              : shortenText(slides[activeIndex].description, 300)"
           ></div>
 
           <!-- Code Block -->
@@ -207,8 +206,9 @@ const playerVars = {
 };
 
 </script>
-
 <style scoped>
+/* ==================== GENERAL STYLING ==================== */
+
 /* Kontainer Utama */
 .sidebar-accordion-container {
   max-width: 1200px;
@@ -268,8 +268,8 @@ const playerVars = {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px;
-  flex: 0 0 250px; /* Sidebar lebar tetap 250px */
-  overflow-y: auto; /* Scroll jika konten terlalu panjang */
+  flex: 0 0 250px;
+  overflow-y: auto;
 }
 
 .sidebar-item {
@@ -318,7 +318,7 @@ const playerVars = {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  overflow-y: auto; 
+  overflow-y: auto;
 }
 
 .empty-content {
@@ -330,10 +330,9 @@ const playerVars = {
 /* Gambar */
 .slide-image {
   max-width: 100%;
-  height: auto; 
+  height: auto;
   object-fit: cover;
   border-radius: 5px;
-  margin-bottom: 15px;
   display: block;
   margin: 20px 0;
 }
@@ -350,9 +349,10 @@ const playerVars = {
   background-color: #28a745;
 }
 
+/* Video */
 .video-container {
   position: relative;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  padding-bottom: 56.25%;
   height: 0;
   overflow: hidden;
   margin: 20px 0;
@@ -366,18 +366,122 @@ const playerVars = {
   height: 100%;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   .sidebar-layout {
-    flex-direction: column; /* Sidebar dan content ditumpuk secara vertikal */
+    flex-direction: column;
   }
 
   .sidebar {
-    flex: 0 0 auto; /* Sidebar menyesuaikan tinggi konten */
-    width: 100%; /* Sidebar mengambil lebar penuh */
+    flex: 0 0 auto;
+    width: 100%;
   }
 
   .content {
-    width: 100%; /* Content mengambil lebar penuh */
+    width: 100%;
   }
 }
+
+/* ==================== DARK MODE STYLING ==================== */
+
+/* Global background & text */
+:deep(.bg-gray-900) {
+  background-color: #1a202c !important;
+}
+
+:deep(.text-white) {
+  color: #f8f9fa !important;
+}
+
+:deep(.text-gray-900) {
+  color: #1a202c !important;
+}
+
+/* Konten */
+.content.bg-gray-900 {
+  color: #e2e8f0;
+}
+
+.content.bg-gray-900 h1,
+.content.bg-gray-900 h2,
+.content.bg-gray-900 h3 {
+  color: #f1f5f9;
+}
+
+.content.bg-gray-900 .slide-description {
+  color: #e0e0e0;
+}
+
+.content.bg-gray-900 .empty-content {
+  color: #cbd5e0;
+}
+
+/* Progress Bar Dark Mode */
+.progress-bar {
+  background-color: #2d3748;
+}
+
+.progress {
+  background-color: #63b3ed;
+}
+
+/* Sidebar dark */
+.sidebar.bg-gray-900 .sidebar-item {
+  color: #cbd5e0;
+}
+
+.sidebar.bg-gray-900 .sidebar-item:hover {
+  background: #2d3748;
+}
+
+.sidebar.bg-gray-900 .sidebar-item.active {
+  background: #3182ce;
+  color: white;
+}
+
+.sidebar.bg-gray-900 .sidebar-item.active .slide-badge {
+  background: white;
+  color: #3182ce;
+}
+
+.sidebar.bg-gray-900 .slide-title {
+  color: #f8f9fa;
+}
+
+.sidebar.bg-gray-900 .slide-badge {
+  background: #4299e1;
+  color: white;
+}
+
+/* Tombol umum dark mode */
+.btn {
+  background-color: #3182ce;
+  color: white;
+}
+
+.btn:hover {
+  background-color: #2563eb;
+}
+
+/* Tombol toggle deskripsi */
+.bg-gray-700.text-white {
+  background-color: #4a5568 !important;
+  color: #f8f9fa !important;
+}
+
+/* Tombol seperti Run Code / Copy */
+button.btn.bg-white\/20 {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #f8f9fa !important;
+}
+
+button.btn.bg-white\/20:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+/* Pastikan teks deskripsi terlihat jelas saat dark mode */
+:deep(.content.bg-gray-900 .slide-description) {
+  color: #f9fafb !important; /* SUPER terang */
+}
+
+
 </style>
