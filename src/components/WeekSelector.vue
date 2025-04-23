@@ -129,7 +129,7 @@ const handleClick = (week) => {
   const currentMinutes = now.getMinutes();
 
   const dateValid = now >= week.date || isHolidayUnlocked(week.date);
-  const timeValid = isHolidayUnlocked(week.date) || (currentHour >= 9 && (currentHour < 24 || (currentHour === 23 && currentMinutes <= 59)));
+  const timeValid = isHolidayUnlocked(week.date) || (currentHour >= 8 && (currentHour < 24 || (currentHour === 23 && currentMinutes <= 59)));
   const past = isPast(week);
 
   let message = '';
