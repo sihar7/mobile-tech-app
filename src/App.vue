@@ -299,8 +299,6 @@ onMounted(() => {
 </script>
 
 <style>
-
-
 /* Tema Gelap */
 .dark-theme {
   background: linear-gradient(to bottom, #0a0a23, #1a1a2e); /* Gradien biru tua ke hitam */
