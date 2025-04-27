@@ -5,10 +5,10 @@ export const pertemuanData = {
       description: `
    <h2 class="text-2xl font-bold text-white-800">Apa itu Mobile Teknologi?</h2>
   <p class="mt-2 text-white-800">Mobile Teknologi adalah teknologi yang memungkinkan perangkat bergerak seperti smartphone, tablet, dan perangkat wearable untuk berfungsi dengan koneksi nirkabel. Teknologi ini mencakup perangkat keras, perangkat lunak, dan jaringan yang mendukung komunikasi serta akses informasi dari mana saja.</p>
-  
+
   <h2 class="text-2xl font-bold text-white-800">Perkembangan Mobile Teknologi</h2>
   <p class="mt-2 text-white-600">Mobile Teknologi telah berkembang pesat dari era komunikasi dasar hingga era modern yang mencakup teknologi seperti 4G/5G, Internet of Things (IoT), kecerdasan buatan (AI), dan cloud computing.</p>
-  
+
   <h2 class="text-2xl font-bold text-white-800">Komponen Utama Mobile Teknologi</h2>
   <ul class="list-disc list-inside mt-2 text-white-700">
     <li><strong>Perangkat Mobile:</strong> Seperti smartphone, tablet, dan smartwatch.</li>
@@ -17,10 +17,10 @@ export const pertemuanData = {
     <li><strong>Aplikasi Mobile:</strong> Software yang berjalan di perangkat mobile.</li>
     <li><strong>Keamanan Mobile:</strong> Enkripsi data, autentikasi biometrik, dan proteksi dari malware.</li>
   </ul>
-  
+
   <h2 class="text-2xl font-bold text-white-800">Dampak Mobile Teknologi</h2>
   <p class="mt-2 text-white-600">Mobile Teknologi telah mengubah cara manusia berinteraksi, bekerja, dan mengakses informasi. Dengan teknologi ini, komunikasi menjadi lebih cepat, bisnis lebih fleksibel, dan akses ke layanan digital semakin mudah.</p>
-  
+
   <h2 class="text-2xl font-bold text-white-800">Spesifikasi Minimum dan Rekomendasi</h2>
   <ul class="list-disc list-inside mt-2 text-white-700">
     <li><strong>Sistem Operasi:</strong>
@@ -57,11 +57,11 @@ export const pertemuanData = {
       title: "Panduan Instalasi Android Studio",
       description: `<h2 class="text-2xl font-bold text-white-800">Cara Instal Android Studio</h2>
         <p class="mt-2 text-white-700">Ikuti langkah-langkah berikut untuk menginstal Android Studio di sistem operasi yang kamu gunakan.</p>
-        
+
         <h3 class="text-xl font-semibold text-white-800 mt-4">1. Unduh Android Studio</h3>
         <p class="text-white-700">Kunjungi situs resmi Android Studio dan unduh versi terbaru:</p>
         <p class="text-white-700"><a href="https://developer.android.com/studio" class="text-blue-500 underline">Download Android Studio</a></p>
-        
+
         <h3 class="text-xl font-semibold text-white-800 mt-4">2. Instalasi di Windows</h3>
         <ul class="list-disc list-inside mt-2 text-white-700">
           <li>Jalankan file <code class="bg-white-200 p-1 rounded">.exe</code> yang telah diunduh.</li>
@@ -138,7 +138,7 @@ export const pertemuanData = {
           <li><strong>Ekstrak Flutter SDK</strong>: Ekstrak file yang telah diunduh ke direktori yang diinginkan, misalnya <code class="bg-white-200 px-1 rounded">C:\\flutter</code> (Windows) atau <code class="bg-white-200 px-1 rounded">/opt/flutter</code> (Linux/macOS).</li>
           <li><strong>Tambahkan Flutter ke PATH</strong>: Buka terminal atau command prompt dan tambahkan path Flutter ke variabel lingkungan PATH.</li>
           <li><strong>Cek Instalasi</strong>: Jalankan perintah <code class="bg-white-200 px-1 rounded">flutter doctor</code> untuk memastikan Flutter terinstal dengan benar.</li>
-          <li><strong>Instal Plugin Flutter dan Dart di Android Studio</strong>:  
+          <li><strong>Instal Plugin Flutter dan Dart di Android Studio</strong>:
             <ul class="list-disc list-inside ml-5">
               <li>Buka Android Studio, lalu masuk ke <strong>Preferences/Settings</strong>.</li>
               <li>Pilih **Plugins** → Cari **Flutter** → Klik **Install**.</li>
@@ -146,14 +146,14 @@ export const pertemuanData = {
               <li>Restart Android Studio setelah instalasi.</li>
             </ul>
           </li>
-          <li><strong>Instal Ekstensi Flutter dan Dart di VS Code</strong>:  
+          <li><strong>Instal Ekstensi Flutter dan Dart di VS Code</strong>:
             <ul class="list-disc list-inside ml-5">
               <li>Buka VS Code, tekan <code class="bg-white-200 px-1 rounded">Ctrl + Shift + X</code> untuk membuka Extensions Marketplace.</li>
               <li>Cari **Flutter** dan klik **Install**.</li>
               <li>Ekstensi Dart akan otomatis terinstal bersama Flutter.</li>
             </ul>
           </li>
-          <li><strong>Sinkronisasi Android Studio dengan VS Code</strong>:  
+          <li><strong>Sinkronisasi Android Studio dengan VS Code</strong>:
             <ul class="list-disc list-inside ml-5">
               <li>Buka terminal dan jalankan perintah berikut untuk menambahkan Android SDK ke Flutter:</li>
             </ul>
@@ -180,7 +180,7 @@ export const pertemuanData = {
       <p class="mt-2 text-white-600">Berikut adalah contoh kode sederhana Flutter untuk menampilkan pesan 'Hello, Flutter!' di layar.</p>`,
       image: "",
       code: `import 'package:flutter/material.dart';
-        
+
         // Fungsi utama yang akan dijalankan pertama kali
         void main() {
           runApp(MyApp());
@@ -200,7 +200,7 @@ export const pertemuanData = {
             );
           }
         }
-        
+
         // Class halaman utama
         class MyHomePage extends StatelessWidget {
           @override
@@ -233,7 +233,7 @@ export const pertemuanData = {
       code: `import 'package:flutter/material.dart';
 
         void main() {
-          runApp(MyApp()); 
+          runApp(MyApp());
         }
 
         // StatelessWidget digunakan karena halaman ini tidak memiliki perubahan state
@@ -241,9 +241,9 @@ export const pertemuanData = {
           @override
           Widget build(BuildContext context) {
             return MaterialApp(
-              debugShowCheckedModeBanner: false, 
+              debugShowCheckedModeBanner: false,
               title: 'Home Page',
-              home: HomePage(), 
+              home: HomePage(),
             );
           }
         }
@@ -254,7 +254,7 @@ export const pertemuanData = {
           Widget build(BuildContext context) {
             return Scaffold(
               appBar: AppBar(
-                title: Text('Home Page'), 
+                title: Text('Home Page'),
               ),
               body: Center(
                 child: Text(
@@ -266,7 +266,7 @@ export const pertemuanData = {
                 onPressed: () {
                   print('Tombol ditekan!');
                 },
-                child: Icon(Icons.add), 
+                child: Icon(Icons.add),
               ),
             );
           }
@@ -308,15 +308,15 @@ export const pertemuanData = {
         }
 
         class _AnimatedButtonPageState extends State<AnimatedButtonPage> {
-          double _top = 150; 
-          double _left = 150; 
+          double _top = 150;
+          double _left = 150;
 
           // Fungsi untuk memindahkan tombol ke posisi acak
           void _moveButton() {
             final random = Random();
             setState(() {
-              _top = random.nextDouble() * 400; 
-              _left = random.nextDouble() * 300; 
+              _top = random.nextDouble() * 400;
+              _left = random.nextDouble() * 300;
             });
           }
 
@@ -324,7 +324,7 @@ export const pertemuanData = {
           Widget build(BuildContext context) {
             return Scaffold(
               appBar: AppBar(title: Text('Animated Button')),
-              body: Stack( 
+              body: Stack(
                 children: [
                   AnimatedPositioned(
                     duration: Duration(milliseconds: 500),
@@ -332,7 +332,7 @@ export const pertemuanData = {
                     top: _top,
                     left: _left,
                     child: ElevatedButton(
-                      onPressed: _moveButton, 
+                      onPressed: _moveButton,
                       child: Text('Pindah!'),
                     ),
                   ),
@@ -377,12 +377,12 @@ export const pertemuanData = {
         }
 
         class _FormPageState extends State<FormPage> {
-          final _formKey = GlobalKey<FormState>(); 
-          final TextEditingController _nameController = TextEditingController(); 
+          final _formKey = GlobalKey<FormState>();
+          final TextEditingController _nameController = TextEditingController();
 
           @override
           void dispose() {
-            _nameController.dispose(); 
+            _nameController.dispose();
             super.dispose();
           }
 
@@ -401,7 +401,7 @@ export const pertemuanData = {
                         decoration: InputDecoration(labelText: 'Nama'),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Nama tidak boleh kosong'; 
+                            return 'Nama tidak boleh kosong';
                           }
                           return null;
                         },
@@ -416,7 +416,7 @@ export const pertemuanData = {
                               builder: (context) {
                                 return AlertDialog(
                                   title: Text('Berhasil'),
-                                  content: Text('Halo, ' + enteredName + '!'), 
+                                  content: Text('Halo, ' + enteredName + '!'),
                                   actions: [
                                     TextButton(
                                       onPressed: () {
@@ -560,48 +560,48 @@ export const pertemuanData = {
           <div class="mt-3 bg-white p-4 rounded-lg border border-blue-200 shadow-sm">
             <h4 class="font-semibold text-blue-700 mb-3">Petunjuk Pengumpulan</h4>
             <!-- File Naming Section -->
-<div class="mb-4 p-3 bg-white-50 rounded-md border border-white-200">
-  <h5 class="font-medium text-gray-700 mb-2">1. Format Penamaan File</h5>
+            <div class="mb-4 p-3 bg-white-50 rounded-md border border-white-200">
+              <h5 class="font-medium text-gray-700 mb-2">1. Format Penamaan File</h5>
 
-  <div class="flex items-start mb-2">
-    <div class="flex-shrink-0 mt-1">
-      <div class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center">
-        <svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-        </svg>
-      </div>
-    </div>
-    <div class="ml-3">
-      <p class="text-sm text-gray-600">Buat folder utama dengan format:</p>
-      <div class="mt-1 flex items-center">
-        <code class="bg-gray-100 px-2 py-1 rounded-md text-sm font-mono">NIM_Nama_Kelas</code>
-        <span class="ml-2 text-xs text-gray-500">(Contoh: <code class="bg-gray-100 px-1 rounded text-xs">10520056_SigitHardianto_IF2</code>)</span>
-      </div>
-    </div>
-  </div>
+              <div class="flex items-start mb-2">
+                <div class="flex-shrink-0 mt-1">
+                  <div class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center">
+                    <svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="ml-3">
+                  <p class="text-sm text-gray-600">Buat folder utama dengan format:</p>
+                  <div class="mt-1 flex items-center">
+                    <code class="bg-gray-100 px-2 py-1 rounded-md text-sm font-mono">NIM_Nama_Kelas</code>
+                    <span class="ml-2 text-xs text-gray-500">(Contoh: <code class="bg-gray-100 px-1 rounded text-xs">10520056_SigitHardianto_IF2</code>)</span>
+                  </div>
+                </div>
+              </div>
 
-  <div class="flex items-start">
-    <div class="flex-shrink-0 mt-1">
-      <div class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center">
-        <svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-        </svg>
-      </div>
-    </div>
-    <div class="ml-3">
-      <p class="text-sm text-gray-600">Dalam folder tersebut, masukkan file dengan format:</p>
-      <ul class="list-disc list-inside ml-4 mt-1 space-y-1 text-sm text-gray-600">
-        <li><code class="bg-gray-100 px-1 rounded">1_HomePage.jpg</code></li>
-        <li><code class="bg-gray-100 px-1 rounded">2_RandomButton.jpg</code></li>
-        <li><code class="bg-gray-100 px-1 rounded">3_FormValidation.jpg</code></li>
-        <li><code class="bg-gray-100 px-1 rounded">4_ListView.jpg</code></li>
-        <li><code class="bg-gray-100 px-1 rounded">Demo_NIM.mp4</code></li>
-        <li><code class="bg-gray-100 px-1 rounded">Readme_NIM.pdf</code></li>
-      </ul>
-      <p class="mt-1 text-xs text-gray-500">• Gunakan underscore (_) sebagai pemisah<br>• Hindari spasi dan karakter khusus</p>
-    </div>
-  </div>
-</div>
+              <div class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <div class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center">
+                    <svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="ml-3">
+                  <p class="text-sm text-gray-600">Dalam folder tersebut, masukkan file dengan format:</p>
+                  <ul class="list-disc list-inside ml-4 mt-1 space-y-1 text-sm text-gray-600">
+                    <li><code class="bg-gray-100 px-1 rounded">1_HomePage.jpg</code></li>
+                    <li><code class="bg-gray-100 px-1 rounded">2_RandomButton.jpg</code></li>
+                    <li><code class="bg-gray-100 px-1 rounded">3_FormValidation.jpg</code></li>
+                    <li><code class="bg-gray-100 px-1 rounded">4_ListView.jpg</code></li>
+                    <li><code class="bg-gray-100 px-1 rounded">Demo_NIM.mp4</code></li>
+                    <li><code class="bg-gray-100 px-1 rounded">Readme_NIM.pdf</code></li>
+                  </ul>
+                  <p class="mt-1 text-xs text-gray-500">• Gunakan underscore (_) sebagai pemisah<br>• Hindari spasi dan karakter khusus</p>
+                </div>
+              </div>
+            </div>
 
 
             <!-- Upload Section -->
@@ -610,13 +610,13 @@ export const pertemuanData = {
               <div class="flex items-center">
                 <!-- Ikon upload -->
                 <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12v8m0-8l-3 3m3-3l3 3M12 4v8" />
                 </svg>
 
                 <!-- Link ke Google Drive -->
-                <a href="https://drive.google.com/drive/folders/1AEESOBAdB7rs_7whHa5ibv11RA3zI0eJ?usp=sharing" 
-                  class="text-blue-600 hover:underline font-medium" 
+                <a href="https://drive.google.com/drive/folders/1AEESOBAdB7rs_7whHa5ibv11RA3zI0eJ?usp=sharing"
+                  class="text-blue-600 hover:underline font-medium"
                   target="_blank">
                   Klik di sini untuk mengumpulkan
                 </a>
@@ -661,7 +661,7 @@ export const pertemuanData = {
           },
           {
             'name': 'Ani',
-            'phone': '08987654321', 
+            'phone': '08987654321',
             'email': 'ani@example.com'
           }
         ];`,
@@ -876,18 +876,406 @@ export const pertemuanData = {
 
   5: [
     {
-      title: "Pengenalan Flutter",
-      description:
-        "Flutter adalah framework open-source dari Google untuk membangun aplikasi mobile yang indah dan cepat. Flutter menggunakan bahasa pemrograman Dart dan mendukung pengembangan aplikasi cross-platform.",
-      image: "https://example.com/flutter.jpg",
+      title: "Setup Project Flutter dan Install HTTP",
+      description: `
+        <h2 class="text-2xl font-bold text-white-800">Setup Project Flutter</h2>
+        <p class="mt-2 text-white-600">
+          1. Buat project baru Flutter dengan perintah <code>flutter create crud_flutter</code>.<br/>
+          2. Masuk ke folder project menggunakan <code>cd crud_flutter</code>.<br/>
+          3. Tambahkan package <code>http</code> di file <code>pubspec.yaml</code> untuk koneksi ke API Laravel.<br/>
+          4. Setelah itu, jalankan perintah <code>flutter pub get</code> untuk menginstall package.<br/>
+          Pastikan semua langkah diikuti agar tidak terjadi error saat import package <code>http</code>.
+        </p>`,
+      code: `# Buat project Flutter
+          flutter create crud_flutter
+
+          # Masuk ke folder project
+          cd crud_flutter
+
+          # Tambahkan di pubspec.yaml
+          dependencies:
+            flutter:
+              sdk: flutter
+            http: ^1.2.0
+
+          # Jalankan untuk install package
+          flutter pub get
+          `,
+      language: "bash",
     },
+
     {
-      title: "Instalasi Flutter",
-      description:
-        "Langkah-langkah instalasi Flutter di berbagai platform (Windows, macOS, Linux) dan konfigurasi lingkungan pengembangan.",
-      image: "https://example.com/flutter-install.jpg",
+      title: "Membuat Model Materi untuk Parsing JSON",
+      description: `
+        <h2 class="text-2xl font-bold text-white-800">Membuat Model Materi</h2>
+        <p class="mt-2 text-white-600">
+          1. Buat folder baru <code>models/</code> di dalam project Flutter kamu.<br/>
+          2. Di dalam folder <code>models/</code>, buat file baru dengan nama <code>materi.dart</code>.<br/>
+          3. Isi file <code>materi.dart</code> dengan kode berikut untuk membuat model Materi.<br/>
+          Model ini berguna untuk parsing data JSON dari API Laravel ke dalam object di Flutter.<br/>
+          Pastikan kamu menggunakan keyword <code>required</code> agar setiap field wajib diisi saat membuat object baru.
+        </p>`,
+      code: `// File: models/materi.dart
+
+        class Materi {
+          final int id;
+          final String title;
+          final String description;
+          final String image;
+
+          Materi({
+            required this.id,
+            required this.title,
+            required this.description,
+            required this.image,
+          });
+
+          factory Materi.fromJson(Map<String, dynamic> json) {
+            return Materi(
+              id: json['id'],
+              title: json['title'],
+              description: json['description'],
+              image: json['image'],
+            );
+          }
+        }
+        `,
+      language: "dart",
     },
-  ],
+
+    {
+    "title": "Membuat Service Flutter untuk Akses API",
+    "description": `
+      <h2 class="text-2xl font-bold text-white-800">Membuat API Service</h2>
+      <p class="mt-2 text-white-600">
+        Buat file <code>api_service.dart</code> untuk menghubungkan Flutter dengan API Laravel menggunakan metode <code>GET</code>, <code>POST</code>, <code>PUT</code>, dan <code>DELETE</code>.
+      </p>
+      <p class="mt-4 text-white-600">
+        Sebelum membuat service ini, pastikan struktur folder Flutter kamu sudah seperti berikut:
+        <ul class="list-disc ml-5 mt-2">
+          <li><b>lib/</b> — folder utama kode Flutter kamu.</li>
+          <li><b>lib/services/</b> — buat folder baru untuk semua file service API.</li>
+          <li><b>lib/models/</b> — buat folder ini untuk file model, misalnya file <code>materi.dart</code>.</li>
+        </ul>
+        Setelah itu, buat file baru <code>api_service.dart</code> di dalam folder <code>services</code>.
+      </p>
+    `,
+    "code": `import 'dart:convert';
+      import 'package:http/http.dart' as http;
+      import '../models/materi.dart';
+
+      class ApiService {
+        // URL dasar API. Ganti IP jika menggunakan emulator atau device fisik
+        static const String _baseUrl = "http://127.0.0.1:8000/api/materi";
+
+        // GET: Mengambil semua data Materi
+        Future<List<Materi>> getMateri() async {
+          try {
+            final response = await http.get(Uri.parse(_baseUrl));
+
+            if (response.statusCode == 200) {
+              List<dynamic> jsonResponse = json.decode(response.body);
+              return jsonResponse.map((data) => Materi.fromJson(data)).toList();
+            } else {
+              throw Exception('Gagal memuat data materi');
+            }
+          } catch (e) {
+            throw Exception('Error getMateri: \$e');
+          }
+        }
+
+        // POST: Membuat data Materi baru
+        Future<void> createMateri({
+          required String title,
+          required String description,
+          required String image,
+        }) async {
+          try {
+            final response = await http.post(
+              Uri.parse(_baseUrl),
+              headers: {'Content-Type': 'application/json'},
+              body: jsonEncode({
+                'title': title,
+                'description': description,
+                'image': image,
+              }),
+            );
+
+            if (response.statusCode != 201) {
+              throw Exception('Gagal membuat materi');
+            }
+          } catch (e) {
+            throw Exception('Error createMateri: \$e');
+          }
+        }
+
+        // PUT: Mengupdate data Materi
+        Future<void> updateMateri({
+          required int id,
+          required String title,
+          required String description,
+          required String image,
+        }) async {
+          try {
+            final response = await http.put(
+              Uri.parse('\$_baseUrl/\$id'),
+              headers: {'Content-Type': 'application/json'},
+              body: jsonEncode({
+                'title': title,
+                'description': description,
+                'image': image,
+              }),
+            );
+
+            if (response.statusCode != 200) {
+              throw Exception('Gagal memperbarui materi');
+            }
+          } catch (e) {
+            throw Exception('Error updateMateri: \$e');
+          }
+        }
+
+        // DELETE: Menghapus data Materi
+        Future<void> deleteMateri(int id) async {
+          try {
+            final response = await http.delete(
+              Uri.parse('\$_baseUrl/\$id'),
+              headers: {'Content-Type': 'application/json'},
+            );
+
+            if (response.statusCode != 200) {
+              throw Exception('Gagal menghapus materi');
+            }
+          } catch (e) {
+            throw Exception('Error deleteMateri: \$e');
+          }
+        }
+      }
+      `
+  ,
+    "language": "dart"
+  },
+  {
+    "title": "Membuat UI CRUD Materi di Flutter (Lengkap dengan Tambah, Hapus, Tampilkan)",
+    "description": `
+      <h2 class="text-2xl font-bold text-white-800">Membuat UI CRUD Materi</h2>
+      <p class="mt-2 text-white-600">
+        Pada halaman ini, kita akan membuat halaman Flutter lengkap untuk:
+      </p>
+      <ul class="list-disc ml-5 mt-2 text-white-600">
+        <li>Menampilkan daftar data Materi menggunakan <code>ListView</code> dan <code>FutureBuilder</code>.</li>
+        <li>Menambahkan data baru Materi menggunakan <code>TextField</code> dan <code>AlertDialog</code>.</li>
+        <li>Menghapus data Materi dengan tombol <code>Delete</code>.</li>
+      </ul>
+      <p class="mt-4 text-white-600">
+        <b>Struktur folder sebelum membuat halaman ini:</b>
+        <ul class="list-disc ml-5 mt-2">
+          <li><b>lib/</b> — folder utama project Flutter kamu.</li>
+          <li><b>lib/models/</b> — tempat file <code>materi.dart</code>.</li>
+          <li><b>lib/services/</b> — tempat file <code>api_service.dart</code>.</li>
+          <li><b>lib/screens/</b> — buat file baru <code>materi_screen.dart</code> di sini.</li>
+        </ul>
+      </p>
+      <p class="mt-4 text-white-600">
+        <b>Cara pakai:</b> Panggil halaman ini di <code>main.dart</code> dengan mengimport <code>MateriScreen</code>.
+      </p>
+    `,
+    "code": `// File: lib/screens/materi_screen.dart
+
+        import 'package:flutter/material.dart';
+        import 'package:crud_flutter/services/api_service.dart';
+        import 'package:crud_flutter/models/materi.dart';
+
+        class MateriScreen extends StatefulWidget {
+          const MateriScreen({Key? key}) : super(key: key);
+
+          @override
+          _MateriScreenState createState() => _MateriScreenState();
+        }
+
+        class _MateriScreenState extends State<MateriScreen> {
+          // Variabel untuk menyimpan daftar data materi
+          late Future<List<Materi>> _futureMateri;
+          final ApiService _apiService = ApiService();
+
+          @override
+          void initState() {
+            super.initState();
+            _loadMateri(); // Memuat data materi saat halaman pertama dibuka
+          }
+
+          // Fungsi untuk memuat ulang data dari server
+          void _loadMateri() {
+            setState(() {
+              _futureMateri = _apiService.getMateri();
+            });
+          }
+
+          // Fungsi untuk menampilkan form tambah data menggunakan AlertDialog
+          void _showAddMateriDialog() {
+            String title = '';
+            String description = '';
+            String image = '';
+
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text('Tambah Materi'),
+                  content: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        TextField(
+                          decoration: InputDecoration(labelText: 'Title'),
+                          onChanged: (value) => title = value,
+                        ),
+                        TextField(
+                          decoration: InputDecoration(labelText: 'Description'),
+                          onChanged: (value) => description = value,
+                        ),
+                        TextField(
+                          decoration: InputDecoration(labelText: 'Image URL'),
+                          onChanged: (value) => image = value,
+                        ),
+                      ],
+                    ),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () async {
+                        await _apiService.createMateri(
+                          title: title,
+                          description: description,
+                          image: image,
+                        );
+                        Navigator.of(context).pop();
+                        _loadMateri(); // Refresh data setelah tambah
+                      },
+                      child: Text('Simpan'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text('Batal'),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+
+          @override
+          Widget build(BuildContext context) {
+            return Scaffold(
+              appBar: AppBar(
+                title: Text('Daftar Materi'),
+              ),
+              body: FutureBuilder<List<Materi>>(
+                future: _futureMateri,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: \${snapshot.error}'));
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return Center(child: Text('Belum ada data materi.'));
+                  } else {
+                    final materiList = snapshot.data!;
+                    return ListView.builder(
+                      itemCount: materiList.length,
+                      itemBuilder: (context, index) {
+                        final materi = materiList[index];
+                        return Card(
+                          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          child: ListTile(
+                            title: Text(materi.title),
+                            subtitle: Text(materi.description),
+                            trailing: IconButton(
+                              icon: Icon(Icons.delete, color: Colors.red),
+                              onPressed: () async {
+                                await _apiService.deleteMateri(materi.id);
+                                _loadMateri(); // Refresh data setelah hapus
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }
+                },
+              ),
+              floatingActionButton: FloatingActionButton(
+                onPressed: _showAddMateriDialog,
+                child: Icon(Icons.add),
+              ),
+            );
+          }
+        }
+        `,
+          "language": "dart"
+        },
+        {
+        "title": "Membuat UI CRUD Materi ( Main Dart )",
+        "description": `
+          <h2 class="text-2xl font-bold text-white-800">Membuat UI CRUD Materi</h2>
+          <p class="mt-2 text-white-600">
+            Pada halaman ini, kita akan membuat halaman Flutter lengkap untuk:
+          </p>
+          <ul class="list-disc ml-5 mt-2 text-white-600">
+            <li>Menampilkan daftar data Materi menggunakan <code>ListView</code> dan <code>FutureBuilder</code>.</li>
+            <li>Menambahkan data baru Materi menggunakan <code>TextField</code> dan <code>AlertDialog</code>.</li>
+            <li>Menghapus data Materi dengan tombol <code>Delete</code>.</li>
+          </ul>
+          <p class="mt-4 text-white-600">
+            <b>Struktur folder sebelum membuat halaman ini:</b>
+            <ul class="list-disc ml-5 mt-2">
+              <li><b>lib/</b> — folder utama project Flutter kamu.</li>
+              <li><b>lib/models/</b> — tempat file <code>materi.dart</code>.</li>
+              <li><b>lib/services/</b> — tempat file <code>api_service.dart</code>.</li>
+              <li><b>lib/screens/</b> — memuat file <code>materi_screen.dart</code> di sini.</li>
+            </ul>
+          </p>
+          <p class="mt-4 text-white-600">
+            <b>Cara pakai:</b> Buat file <code>main.dart</code> seperti contoh di bawah ini untuk menampilkan halaman <code>MateriScreen</code> langsung saat app dibuka.
+          </p>
+        `,
+        "code": `// File: lib/main.dart
+
+        import 'package:flutter/material.dart';
+        import 'package:crud_flutter/screens/materi_screen.dart'; // Import halaman Materi
+
+        void main() {
+          runApp(MyApp());
+        }
+
+        class MyApp extends StatelessWidget {
+          @override
+          Widget build(BuildContext context) {
+            return MaterialApp(
+              title: 'CRUD Materi',
+              theme: ThemeData(
+                primarySwatch: Colors.blue,
+              ),
+              home: MateriScreen(), // Langsung tampilkan halaman daftar materi
+              debugShowCheckedModeBanner: false, // Hilangkan banner debug
+            );
+          }
+        }
+      `,
+        "language": "dart"
+      },
+        {
+          title: "Mengetes CRUD Flutter dengan API Laravel",
+          description: `
+            <h2 class="text-2xl font-bold text-white-800">Testing CRUD</h2>
+            <p class="mt-2 text-white-600">
+            jalankan aplikasi Flutter di emulator atau device.
+              Cek apakah data berhasil ditampilkan, ditambah, diupdate, dan dihapus dari database.
+            </p>`,
+          code: ` flutter run`,
+          language: "bash",
+        },
+      ],
+
   6: [
     {
       title: "Dasar-Dasar Flutter",
