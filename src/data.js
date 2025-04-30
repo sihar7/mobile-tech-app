@@ -961,98 +961,98 @@ export const pertemuanData = {
       </p>
     `,
     "code": `import 'dart:convert';
-      import 'package:http/http.dart' as http;
-      import '../models/materi.dart';
+        import 'package:http/http.dart' as http;
+        import '../models/materi.dart';
 
-      class ApiService {
-        // URL dasar API. Ganti IP jika menggunakan emulator atau device fisik
-        static const String _baseUrl = "http://127.0.0.1:8000/api/materi";
+        class ApiService {
+          // URL dasar API. Ganti IP jika menggunakan emulator atau device fisik
+          static const String _baseUrl = "http://127.0.0.1:8000/api/materi";
 
-        // GET: Mengambil semua data Materi
-        Future<List<Materi>> getMateri() async {
-          try {
-            final response = await http.get(Uri.parse(_baseUrl));
+          // GET: Mengambil semua data Materi
+          Future<List<Materi>> getMateri() async {
+            try {
+              final response = await http.get(Uri.parse(_baseUrl));
 
-            if (response.statusCode == 200) {
-              List<dynamic> jsonResponse = json.decode(response.body);
-              return jsonResponse.map((data) => Materi.fromJson(data)).toList();
-            } else {
-              throw Exception('Gagal memuat data materi');
+              if (response.statusCode == 200) {
+                List<dynamic> jsonResponse = json.decode(response.body);
+                return jsonResponse.map((data) => Materi.fromJson(data)).toList();
+              } else {
+                throw Exception('Gagal memuat data materi');
+              }
+            } catch (e) {
+              throw Exception('Error getMateri: \$e');
             }
-          } catch (e) {
-            throw Exception('Error getMateri: \$e');
+          }
+
+          // POST: Membuat data Materi baru
+          Future<void> createMateri({
+            required String title,
+            required String description,
+            required String image,
+          }) async {
+            try {
+              final response = await http.post(
+                Uri.parse(_baseUrl),
+                headers: {'Content-Type': 'application/json'},
+                body: jsonEncode({
+                  'title': title,
+                  'description': description,
+                  'image': image,
+                }),
+              );
+
+              if (response.statusCode != 201) {
+                throw Exception('Gagal membuat materi');
+              }
+            } catch (e) {
+              throw Exception('Error createMateri: \$e');
+            }
+          }
+
+          // PUT: Mengupdate data Materi
+          Future<void> updateMateri({
+            required int id,
+            required String title,
+            required String description,
+            required String image,
+          }) async {
+            try {
+              final response = await http.put(
+                Uri.parse('\$_baseUrl/\$id'),
+                headers: {'Content-Type': 'application/json'},
+                body: jsonEncode({
+                  'title': title,
+                  'description': description,
+                  'image': image,
+                }),
+              );
+
+              if (response.statusCode != 200) {
+                throw Exception('Gagal memperbarui materi');
+              }
+            } catch (e) {
+              throw Exception('Error updateMateri: \$e');
+            }
+          }
+
+          // DELETE: Menghapus data Materi
+          Future<void> deleteMateri(int id) async {
+            try {
+              final response = await http.delete(
+                Uri.parse('\$_baseUrl/\$id'),
+                headers: {'Content-Type': 'application/json'},
+              );
+
+              if (response.statusCode != 200) {
+                throw Exception('Gagal menghapus materi');
+              }
+            } catch (e) {
+              throw Exception('Error deleteMateri: \$e');
+            }
           }
         }
-
-        // POST: Membuat data Materi baru
-        Future<void> createMateri({
-          required String title,
-          required String description,
-          required String image,
-        }) async {
-          try {
-            final response = await http.post(
-              Uri.parse(_baseUrl),
-              headers: {'Content-Type': 'application/json'},
-              body: jsonEncode({
-                'title': title,
-                'description': description,
-                'image': image,
-              }),
-            );
-
-            if (response.statusCode != 201) {
-              throw Exception('Gagal membuat materi');
-            }
-          } catch (e) {
-            throw Exception('Error createMateri: \$e');
-          }
-        }
-
-        // PUT: Mengupdate data Materi
-        Future<void> updateMateri({
-          required int id,
-          required String title,
-          required String description,
-          required String image,
-        }) async {
-          try {
-            final response = await http.put(
-              Uri.parse('\$_baseUrl/\$id'),
-              headers: {'Content-Type': 'application/json'},
-              body: jsonEncode({
-                'title': title,
-                'description': description,
-                'image': image,
-              }),
-            );
-
-            if (response.statusCode != 200) {
-              throw Exception('Gagal memperbarui materi');
-            }
-          } catch (e) {
-            throw Exception('Error updateMateri: \$e');
-          }
-        }
-
-        // DELETE: Menghapus data Materi
-        Future<void> deleteMateri(int id) async {
-          try {
-            final response = await http.delete(
-              Uri.parse('\$_baseUrl/\$id'),
-              headers: {'Content-Type': 'application/json'},
-            );
-
-            if (response.statusCode != 200) {
-              throw Exception('Gagal menghapus materi');
-            }
-          } catch (e) {
-            throw Exception('Error deleteMateri: \$e');
-          }
-        }
-      }
-      `
-  ,
+        `
+    ,
     "language": "dart"
   },
   {
