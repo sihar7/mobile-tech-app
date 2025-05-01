@@ -7,12 +7,10 @@
 
     <!-- Fullscreen & Back Button -->
     <div class="controls">
-      <!-- Back Button -->
       <button @click="goBack" class="btn bg-white/20 backdrop-blur-md hover:bg-white/30">
         <i class="fas fa-arrow-left"></i>
       </button>
 
-      <!-- Fullscreen Button -->
       <button @click="toggleFullscreen" class="btn bg-white/20 backdrop-blur-md hover:bg-white/30">
         <i :class="isFullscreen ? 'fas fa-compress' : 'fas fa-expand'"></i>
       </button>
@@ -24,7 +22,7 @@
       <div :class="['sidebar', isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900']">
         <div
           v-for="(slide, index) in slides"
-          :key="index"
+          :key="'slide-' + index"
           class="sidebar-item"
           :class="{ active: activeIndex === index }"
           @click="toggleAccordion(index)"
@@ -38,7 +36,7 @@
 
       <!-- Content -->
       <div :class="['content', isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900']">
-        <div v-if="activeIndex !== null" class="accordion-content" :key="activeIndex">
+        <div v-if="activeIndex !== null && slides[activeIndex]" class="accordion-content" :key="'content-' + activeIndex">
           <!-- Slide Image -->
           <img
             v-if="slides[activeIndex].image"
@@ -47,15 +45,17 @@
             class="slide-image"
           />
 
-        <div v-if="getYouTubeVideoId(slides[activeIndex].video)">
-          <Youtube
-            :video-id="getYouTubeVideoId(slides[activeIndex].video)"
-            :player-vars="playerVars"
-            :key="slides[activeIndex]?.video"
-            width="100%"
-            height="400"
-          />
-        </div>
+          <!-- YouTube Video -->
+          <div v-if="getYouTubeVideoId(slides[activeIndex].video)">
+            <Youtube
+              :video-id="getYouTubeVideoId(slides[activeIndex].video)"
+              :player-vars="playerVars"
+              :key="slides[activeIndex].video"
+              width="100%"
+              height="400"
+            />
+          </div>
+
           <!-- Slide Description -->
           <div
             class="slide-description"
@@ -76,14 +76,14 @@
           <button
             v-if="slides[activeIndex].description.length > 300"
             @click="toggleExpand(activeIndex)"
-            class="btn toggle-btn"
+            class="btn toggle-btn mt-2"
             :class="isDarkMode ? 'bg-gray-700 text-white' : 'bg-gray-200 text-gray-900'"
             style="float: right;"
           >
             {{ isExpanded[activeIndex] ? "Tampilkan Ringkas" : "Lihat Selengkapnya" }}
           </button>
 
-          <!-- Soal Submit Link (jika type soal) -->
+          <!-- Submit Link -->
           <div
             v-if="slides[activeIndex].type === 'question' && slides[activeIndex].submitLink"
             class="submit-link mt-4"
@@ -105,92 +105,65 @@
   </div>
 </template>
 
-
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch, inject } from "vue";
 import { useRouter } from "vue-router";
 import CodeBlock from "@/components/CodeBlock.vue";
-import Youtube from 'vue3-youtube'; // ✅ Benar
+import Youtube from "vue3-youtube";
 
 const props = defineProps({
   slides: {
     type: Array,
-    default: () => [], // Mencegah null/undefined
+    default: () => [],
   },
 });
 
-const router = useRouter(); 
-// Refs
+const router = useRouter();
 const activeIndex = ref(null);
 const isExpanded = ref([]);
 const isFullscreen = ref(false);
+const isDarkMode = inject("isDarkMode");
 
-const isDarkMode = inject('isDarkMode');
-// Progress bar calculation
+// Progress Calculation
 const progressPercentage = computed(() => {
-  if (!props.slides || props.slides.length === 0) return 0;
+  if (!props.slides.length || activeIndex.value === null) return 0;
   return ((activeIndex.value + 1) / props.slides.length) * 100;
 });
 
-// Toggle Accordion
+// Accordion Toggle
 const toggleAccordion = (index) => {
-  if (activeIndex.value === index) {
-    activeIndex.value = null; // Tutup materi jika diklik lagi
-  } else {
-    activeIndex.value = index; // Buka materi baru
-    isExpanded.value[index] = false; // Reset state isExpanded untuk materi baru
-  }
+  activeIndex.value = activeIndex.value === index ? null : index;
 };
 
-// Fungsi untuk mempersingkat teks
+// Text Shortener
 const shortenText = (text, maxLength) => {
-  if (text.length > maxLength) {
-    return text.substring(0, maxLength) + "...";
-  }
-  return text;
+  return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
 };
 
-// Toggle deskripsi panjang/pendek
+// Toggle Expand
 const toggleExpand = (index) => {
   isExpanded.value[index] = !isExpanded.value[index];
 };
 
-// Toggle Fullscreen
+// Fullscreen Handling
 const handleFullscreenChange = () => {
   isFullscreen.value = !!document.fullscreenElement;
 };
 
 const toggleFullscreen = () => {
   if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
+    document.documentElement.requestFullscreen().catch(console.error);
   } else {
-    document.exitFullscreen();
+    document.exitFullscreen().catch(console.error);
   }
 };
 
+// Navigation
 const goBack = () => {
-  router.push("/"); // ⬅️ Pindah ke halaman utama
+  router.push("/");
 };
 
-watch(activeIndex, (newIndex) => {
-  if (newIndex !== null) {
-    // Reset state isExpanded untuk materi baru
-    isExpanded.value[newIndex] = false;
-  }
-});
-
-// Tambahkan event listener saat mounted
-onMounted(() => {
-  document.addEventListener("fullscreenchange", handleFullscreenChange);
-  isExpanded.value = Array(props.slides.length).fill(false);
-});
-
-// Hapus event listener saat unmounted
-onUnmounted(() => {
-  document.removeEventListener("fullscreenchange", handleFullscreenChange);
-});
-
-// Fungsi untuk mengekstrak video ID dari URL YouTube
+// YouTube ID Extractor
 const getYouTubeVideoId = (url) => {
   if (!url) return null;
   const regExp = /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
@@ -198,14 +171,34 @@ const getYouTubeVideoId = (url) => {
   return match ? match[1] : null;
 };
 
-
-// Opsi pemutar YouTube
+// YouTube Player Settings
 const playerVars = {
   autoplay: 0,
-  controls: 1
+  controls: 1,
 };
 
+// Lifecycle
+onMounted(() => {
+  document.addEventListener("fullscreenchange", handleFullscreenChange);
+  isExpanded.value = Array(props.slides.length).fill(false);
+
+  // Optional: Clear cache if needed
+  // localStorage.clear();
+  // sessionStorage.clear();
+});
+
+onUnmounted(() => {
+  document.removeEventListener("fullscreenchange", handleFullscreenChange);
+});
+
+// Watchers
+watch(activeIndex, (newIndex) => {
+  if (newIndex !== null) {
+    isExpanded.value[newIndex] = false;
+  }
+});
 </script>
+
 <style scoped>
 /* ==================== GENERAL STYLING ==================== */
 
