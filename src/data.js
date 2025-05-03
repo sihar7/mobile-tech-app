@@ -1278,73 +1278,52 @@ export const pertemuanData = {
 
   6: [
     {
-      title: "Dasar-Dasar Flutter",
-      description:
-        "Mempelajari widget, layout, dan state management dalam Flutter. Widget adalah komponen utama dalam Flutter untuk membangun antarmuka pengguna.",
-      image: "https://example.com/flutter-basics.jpg",
-    },
-    {
-      title: "Membuat Aplikasi Pertama dengan Flutter",
-      description:
-        "Panduan langkah demi langkah untuk membuat aplikasi sederhana seperti to-do list atau kalkulator menggunakan Flutter.",
-      image: "https://example.com/flutter-app.jpg",
+      title: "Pembuatan Fitur Login & Dashboard di Flutter",
+      description: `
+        <h2 class="text-2xl font-bold text-white-800">Langkah-langkah Pengembangan</h2>
+        
+        <h3 class="text-xl font-semibold mt-4 text-white-700">1. Membuat Models & Services Login Register</h3>
+        <p class="text-white-600">
+          Langkah awal adalah membuat model data pengguna dalam file <code>user.dart</code>, lalu menyiapkan service untuk komunikasi API di file <code>auth_service.dart</code>.
+          Service ini akan menangani proses login dan register menggunakan metode <code>POST</code> ke server backend.
+        </p>
+
+        <h3 class="text-xl font-semibold mt-4 text-white-700">2. Membuat UI Login & Register</h3>
+        <p class="text-white-600">
+          Di bagian ini, UI dibuat menggunakan kombinasi <code>TextField</code>, <code>Form</code>, dan <code>ElevatedButton</code>.
+          Form memiliki validasi dasar seperti pengecekan email kosong dan panjang password minimal 6 karakter.
+        </p>
+
+        <h3 class="text-xl font-semibold mt-4 text-white-700">3. Membuat Login & Register API dengan 3 Role</h3>
+        <p class="text-white-600">
+          Backend disiapkan agar mendukung 3 peran berbeda: admin, petugas, dan user.
+          Setelah login berhasil, token JWT disimpan dan peran user digunakan untuk menavigasi ke halaman yang sesuai.
+        </p>
+
+        <h3 class="text-xl font-semibold mt-4 text-white-700">4. Membuat Validasi Login Register</h3>
+        <p class="text-white-600">
+          Validasi ditambahkan baik di sisi frontend (menggunakan Flutter Form Validator) maupun backend (menggunakan Laravel Validator).
+          Validasi mencakup email valid, password tidak kosong, dan konfirmasi password cocok.
+        </p>
+
+        <h3 class="text-xl font-semibold mt-4 text-white-700">5. Membuat Dashboard Flutter</h3>
+        <p class="text-white-600">
+          Setelah login berhasil, pengguna diarahkan ke halaman dashboard.
+          Halaman ini menampilkan informasi akun dan fitur lanjutan seperti statistik atau menu navigasi.
+        </p>
+      `,
+     image: "/src/assets/materi6/1.jpg",
     },
   ],
   7: [
-    {
-      title: "Pengenalan React Native",
-      description:
-        "React Native adalah framework untuk membangun aplikasi mobile menggunakan JavaScript dan React. React Native memungkinkan pengembangan aplikasi cross-platform dengan performa yang baik.",
-      image: "https://example.com/react-native.jpg",
-    },
-    {
-      title: "Instalasi React Native",
-      description:
-        "Langkah-langkah instalasi React Native dan konfigurasi lingkungan pengembangan.",
-      image: "https://example.com/react-native-install.jpg",
-    },
+  
   ],
   8: [
-    {
-      title: "Dasar-Dasar React Native",
-      description:
-        "Mempelajari komponen, state, dan props dalam React Native. Komponen adalah blok bangunan utama dalam React Native.",
-      image: "https://example.com/react-native-basics.jpg",
-    },
-    {
-      title: "Membuat Aplikasi Pertama dengan React Native",
-      description:
-        "Panduan langkah demi langkah untuk membuat aplikasi sederhana seperti to-do list atau kalkulator menggunakan React Native.",
-      image: "https://example.com/react-native-app.jpg",
-    },
-  ],
+     ],
   9: [
-    {
-      title: "UI/UX Design untuk Aplikasi Mobile",
-      description:
-        "Prinsip-prinsip desain antarmuka pengguna (UI) dan pengalaman pengguna (UX) untuk aplikasi mobile. Desain yang baik meningkatkan kepuasan pengguna.",
-      image: "https://example.com/ui-ux.jpg",
-    },
-    {
-      title: "Tools untuk Desain UI/UX",
-      description:
-        "Alat-alat populer untuk desain UI/UX seperti Figma, Adobe XD, dan Sketch.",
-      image: "https://example.com/design-tools.jpg",
-    },
   ],
   10: [
-    {
-      title: "Pengujian Aplikasi Mobile",
-      description:
-        "Metode pengujian aplikasi mobile seperti unit testing, integration testing, dan user acceptance testing (UAT).",
-      image: "https://example.com/testing.jpg",
-    },
-    {
-      title: "Alat Pengujian Aplikasi Mobile",
-      description:
-        "Alat-alat untuk pengujian aplikasi mobile seperti Appium, Espresso, dan XCTest.",
-      image: "https://example.com/testing-tools.jpg",
-    },
+    
   ],
   11: [
     {
