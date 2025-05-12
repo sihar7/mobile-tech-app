@@ -1,61 +1,3 @@
-<template>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
-    <router-link
-      v-for="week in weeks"
-      :key="week.id"
-      :to="(isUnlocked(week) || isHolidayUnlocked(week)) ? `/week/${week.id}` : '#'"
-      :class="[ 
-        'p-6 rounded-2xl shadow-2xl text-center transition-all duration-300 transform hover:scale-105 relative overflow-hidden',
-        isUnlocked(week) && !isPast(week)
-          ? isDarkMode
-            ? 'bg-gradient-to-br from-gray-700 to-gray-900 text-white hover:from-gray-600 hover:to-gray-800 border-4 border-gray-600'
-            : 'bg-gradient-to-br from-sky-400 to-blue-600 text-white hover:from-sky-500 hover:to-blue-700 border-4 border-blue-500'
-          : '',
-        isPast(week)
-          ? isDarkMode
-            ? 'bg-gray-800 text-gray-400 cursor-not-allowed border-gray-600'
-            : 'bg-pink-100 text-pink-700 cursor-not-allowed border-pink-300'
-          : '',
-        !isUnlocked(week)
-          ? isDarkMode
-            ? 'bg-gray-900 text-gray-500 border-gray-700'
-            : 'bg-blue-50 text-blue-600 border-blue-200'
-          : ''
-      ]"
-      @click="handleClick(week)"
-    >
-      <span class="text-xl font-bold tracking-wide">Pertemuan {{ week.id }}</span>
-
-      <!-- Ikon untuk minggu yang bisa diakses karena masih liburan -->
-      <span
-        v-if="isHolidayUnlocked(week.date)"
-        class="absolute top-2 left-2 text-2xl opacity-90 text-green-500"
-      >
-        🌴
-      </span>
-
-      <!-- Icon untuk minggu yang sudah lewat -->
-      <span
-        v-if="isPast(week)"
-        class="absolute top-2 right-2 text-2xl opacity-90 text-red-500"
-      >
-        ❌
-      </span>
-
-      <!-- Overlay untuk minggu yang terkunci -->
-      <div
-        v-if="!(isUnlocked(week) || isHolidayUnlocked(week.date))"
-        class="absolute inset-0 bg-gradient-to-br from-blue-900/30 to-blue-800/40 dark:from-gray-700/30 dark:to-gray-600/40 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl"
-      >
-        <span class="text-white text-2xl drop-shadow-md">🔒</span>
-        <span class="text-white text-sm font-bold drop-shadow-md mt-1">Terkunci</span>
-        <span class="text-white text-xs font-normal drop-shadow-md mt-0 text-center max-w-xs break-words">
-          Buka pada {{ formatDate(week.date) }}
-        </span>
-      </div>
-    </router-link>
-  </div>
-</template>
 
 <script setup>
 import { ref, inject } from 'vue';
@@ -162,4 +104,3 @@ const handleClick = (week) => {
 };
 
 </script>
-

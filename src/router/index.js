@@ -72,7 +72,7 @@ const routes = [
     component: WeekPage,
     beforeEnter: (to, from, next) => {
       if (!isUnlocked(to.params.id)) {
-        next("/");
+        next();
       } else {
         next();
       }
