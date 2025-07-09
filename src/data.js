@@ -1438,7 +1438,7 @@ export const pertemuanData = {
           <div class="bg-teal-50 p-4 rounded">
             <h3 class="text-lg font-semibold text-teal-700">9. Manajemen User</h3>
             <ul class="list-disc ml-5 mt-1 text-teal-800">
-              <li>CRUD user (role admin dan kasir) </li>
+              <li>CRUD user (role admin saja) </li>
               <li>Aktivasi/nonaktif akun</li>
             </ul>
           </div>
