@@ -1494,6 +1494,13 @@ export const pertemuanData = {
             <li>Struktur folder & teknis tambahan – 10%</li>
           </ul>
         </div>
+
+        <div class="mt-4 bg-red-100 p-4 rounded-lg border border-red-300">
+          <h4 class="text-lg font-bold text-red-800">⏰ Deadline Pengumpulan:</h4>
+          <p class="text-sm text-red-700 mt-1">
+            <strong>Besok, pukul 15.00 WIB (jam 3 sore)</strong>. Jangan sampai terlambat!
+          </p>
+        </div>
       </div>
     `,
     code: `// Contoh struktur penjualan
