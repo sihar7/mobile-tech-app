@@ -1368,17 +1368,106 @@ export const pertemuanData = {
     },
   ],
   14: [
-    {
-      title: "Studi Kasus: Aplikasi E-Commerce",
-      description:
-        "Membahas studi kasus pengembangan aplikasi e-commerce, termasuk fitur-fitur utama seperti keranjang belanja, pembayaran, dan notifikasi.",
-      image: "https://example.com/ecommerce.jpg",
-    },
-    {
-      title: "Studi Kasus: Aplikasi Kesehatan",
-      description:
-        "Membahas studi kasus pengembangan aplikasi kesehatan, termasuk fitur-fitur seperti konsultasi dokter, pemantauan kesehatan, dan reminder obat.",
-      image: "https://example.com/health-app.jpg",
-    },
-  ],
+  {
+    title: "UAS Flutter: Aplikasi Manajemen Penjualan",
+    description: `
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">UAS Flutter: Aplikasi Penjualan</h2>
+        <p class="text-gray-600 mb-6">
+          Mahasiswa harus membuat aplikasi Flutter yang terdiri dari <strong>8 menu saling terhubung</strong> 
+          dengan koneksi ke API, validasi form lengkap, dan desain modern.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+          <div class="bg-blue-50 p-4 rounded">
+            <h3 class="text-lg font-semibold text-blue-700">1. Dashboard</h3>
+            <ul class="list-disc ml-5 mt-1 text-blue-800">
+              <li>Total produk, penjualan, & user</li>
+              <li>Ringkasan performa hari ini</li>
+            </ul>
+          </div>
+          <div class="bg-green-50 p-4 rounded">
+            <h3 class="text-lg font-semibold text-green-700">2. Produk</h3>
+            <ul class="list-disc ml-5 mt-1 text-green-800">
+              <li>Tambah/edit/hapus produk</li>
+              <li>Terhubung ke kategori</li>
+            </ul>
+          </div>
+          <div class="bg-yellow-50 p-4 rounded">
+            <h3 class="text-lg font-semibold text-yellow-700">3. Penjualan</h3>
+            <ul class="list-disc ml-5 mt-1 text-yellow-800">
+              <li>Input penjualan berdasarkan produk</li>
+              <li>Otomatis kurangi stok</li>
+            </ul>
+          </div>
+          <div class="bg-purple-50 p-4 rounded">
+            <h3 class="text-lg font-semibold text-purple-700">4. Riwayat</h3>
+            <ul class="list-disc ml-5 mt-1 text-purple-800">
+              <li>List transaksi</li>
+              <li>Filter berdasarkan tanggal</li>
+            </ul>
+          </div>
+          <div class="bg-pink-50 p-4 rounded">
+            <h3 class="text-lg font-semibold text-pink-700">5. Profil</h3>
+            <ul class="list-disc ml-5 mt-1 text-pink-800">
+              <li>Lihat & edit data user</li>
+              <li>Terhubung ke Dashboard</li>
+            </ul>
+          </div>
+          <div class="bg-orange-50 p-4 rounded">
+            <h3 class="text-lg font-semibold text-orange-700">6. Kategori Produk</h3>
+            <ul class="list-disc ml-5 mt-1 text-orange-800">
+              <li>Tambah/edit/hapus kategori</li>
+              <li>Produk harus memilih kategori</li>
+            </ul>
+          </div>
+          <div class="bg-cyan-50 p-4 rounded">
+            <h3 class="text-lg font-semibold text-cyan-700">7. Laporan</h3>
+            <ul class="list-disc ml-5 mt-1 text-cyan-800">
+              <li>Tampilkan grafik penjualan</li>
+              <li>Produk terlaris dan income</li>
+            </ul>
+          </div>
+          <div class="bg-gray-50 p-4 rounded">
+            <h3 class="text-lg font-semibold text-gray-700">8. Pengaturan</h3>
+            <ul class="list-disc ml-5 mt-1 text-gray-800">
+              <li>Mode gelap/terang</li>
+              <li>Logout dan atur API base URL</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-6 bg-gray-100 p-4 rounded-lg border">
+          <h4 class="font-bold text-gray-700 mb-2">💡 Tips Pengumpulan:</h4>
+          <ul class="list-disc ml-5 text-sm text-gray-600">
+            <li>Screenshot setiap menu: <code>1_Dashboard.jpg</code> sampai <code>8_Pengaturan.jpg</code></li>
+            <li>Kode rapi dan terstruktur</li>
+          </ul>
+        </div>
+      </div>
+    `,
+    code: `// Struktur kategori
+        Map<String, dynamic> kategori = {
+          "id": 3,
+          "nama": "Elektronik"
+        };
+
+        // Contoh grafik laporan
+        Map<String, dynamic> laporan = {
+          "produk_terlaris": "Smartphone",
+          "total_penjualan": 105000000,
+          "tanggal": "2025-07-09"
+        };
+
+        // Setting user
+        Map<String, dynamic> userSettings = {
+          "darkMode": true,
+          "baseUrl": "https://api.uasflutter.com"
+        };`,
+            language: "dart",
+            type: "question",
+            submitLink: "https://drive.google.com/drive/folders/1AEESOBAdB7rs_7whHa5ibv11RA3zI0eJ?usp=sharing",
+          },
+        ]
+
 };
