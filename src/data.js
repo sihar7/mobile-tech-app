@@ -1454,8 +1454,8 @@ export const pertemuanData = {
         <div class="mt-6 bg-gray-100 p-4 rounded-lg border">
           <h4 class="font-bold text-gray-700 mb-2">🧠 Teknis Tambahan:</h4>
           <ul class="list-disc ml-5 text-sm text-gray-600">
-            <li>Gunakan Provider atau Bloc (minimal Provider)</li>
-            <li>Gunakan shared_preferences atau secure_storage</li>
+            <li>Gunakan <strong>Provider</strong> atau <strong>Bloc</strong> (minimal Provider)</li>
+            <li>Gunakan <code>shared_preferences</code> atau <code>secure_storage</code></li>
             <li>Struktur folder modular: <code>pages, models, services, widgets, providers</code></li>
           </ul>
         </div>
@@ -1477,31 +1477,49 @@ export const pertemuanData = {
             <li>Bonus: export ke APK (opsional)</li>
           </ul>
         </div>
+
+        <div class="mt-4 bg-red-50 p-4 rounded-lg border border-red-200">
+          <h4 class="font-semibold text-red-800">📊 Penilaian Per Fitur:</h4>
+          <ul class="list-disc ml-5 text-sm text-red-700">
+            <li>Login & Register – 10%</li>
+            <li>Dashboard – 10%</li>
+            <li>Produk – 10%</li>
+            <li>Penjualan – 10%</li>
+            <li>Riwayat Transaksi – 10%</li>
+            <li>Kategori Produk – 10%</li>
+            <li>Grafik Penjualan – 10%</li>
+            <li>Pengaturan – 5%</li>
+            <li>Manajemen User – 10%</li>
+            <li>Notifikasi & Feedback – 5%</li>
+            <li>Struktur folder & teknis tambahan – 10%</li>
+          </ul>
+        </div>
       </div>
     `,
     code: `// Contoh struktur penjualan
-        Map<String, dynamic> transaksi = {
-          "id": 1,
-          "produk": [
-            {"nama": "Laptop", "qty": 2, "harga": 5000000}
-          ],
-          "total": 10000000,
-          "tanggal": "2025-07-09"
-        };
+      Map<String, dynamic> transaksi = {
+        "id": 1,
+        "produk": [
+          {"nama": "Laptop", "qty": 2, "harga": 5000000}
+        ],
+        "total": 10000000,
+        "tanggal": "2025-07-09"
+      };
 
-        // Simpan token dari login
-        String? token = "eyJhbGciOiJIUzI1NiIs..."; // JWT Token
+      // Simpan token dari login
+      String? token = "eyJhbGciOiJIUzI1NiIs..."; // JWT Token
 
-        // Contoh grafik data
-        List<Map<String, dynamic>> chartData = [
-          {"label": "Laptop", "value": 30},
-          {"label": "Smartphone", "value": 20},
-        ];`,
+      // Contoh grafik data
+      List<Map<String, dynamic>> chartData = [
+        {"label": "Laptop", "value": 30},
+        {"label": "Smartphone", "value": 20},
+      ];`,
     language: "dart",
     type: "question",
-    submitLink: "https://drive.google.com/drive/folders/1bQvP2eTiPUvAr49VIHWav_PZ9tWmhFAV",
+    submitLink: "https://drive.google.com/drive/folders/1bQvP2eTiPUvAr49VIHWav_PZ9tWmhFAV"
   }
 ]
+
 
 
 };
