@@ -1369,105 +1369,130 @@ export const pertemuanData = {
   ],
   14: [
   {
-    title: "UAS Flutter: Aplikasi Manajemen Penjualan",
+    title: "UAS Flutter: Aplikasi Penjualan Terintegrasi",
     description: `
       <div class="bg-white p-6 rounded-lg shadow">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">UAS Flutter: Aplikasi Penjualan</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">UAS Flutter 2025 — Aplikasi Penjualan Terintegrasi (Tingkat Lanjut)</h2>
         <p class="text-gray-600 mb-6">
-          Mahasiswa harus membuat aplikasi Flutter yang terdiri dari <strong>8 menu saling terhubung</strong> 
-          dengan koneksi ke API, validasi form lengkap, dan desain modern.
+          Mahasiswa diwajibkan membuat aplikasi Flutter dengan <strong>10 menu yang saling terhubung</strong>, <strong>Autentikasi</strong>, integrasi API (CRUD), serta menampilkan <strong>grafik dan statistik</strong>. UI harus modern, responsif, dan interaktif.
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
           <div class="bg-blue-50 p-4 rounded">
-            <h3 class="text-lg font-semibold text-blue-700">1. Dashboard</h3>
+            <h3 class="text-lg font-semibold text-blue-700">1. Login & Register</h3>
             <ul class="list-disc ml-5 mt-1 text-blue-800">
-              <li>Total produk, penjualan, & user</li>
-              <li>Ringkasan performa hari ini</li>
+              <li>Form validasi lengkap</li>
+              <li>Terhubung ke API</li>
+              <li>Simpan token JWT (simulasi aman)</li>
             </ul>
           </div>
           <div class="bg-green-50 p-4 rounded">
-            <h3 class="text-lg font-semibold text-green-700">2. Produk</h3>
+            <h3 class="text-lg font-semibold text-green-700">2. Dashboard</h3>
             <ul class="list-disc ml-5 mt-1 text-green-800">
-              <li>Tambah/edit/hapus produk</li>
-              <li>Terhubung ke kategori</li>
+              <li>Total produk, penjualan, & user aktif</li>
+              <li>Info saldo, penjualan hari ini</li>
             </ul>
           </div>
           <div class="bg-yellow-50 p-4 rounded">
-            <h3 class="text-lg font-semibold text-yellow-700">3. Penjualan</h3>
+            <h3 class="text-lg font-semibold text-yellow-700">3. Produk</h3>
             <ul class="list-disc ml-5 mt-1 text-yellow-800">
-              <li>Input penjualan berdasarkan produk</li>
-              <li>Otomatis kurangi stok</li>
+              <li>CRUD produk + gambar</li>
+              <li>Pencarian, filter by kategori</li>
             </ul>
           </div>
           <div class="bg-purple-50 p-4 rounded">
-            <h3 class="text-lg font-semibold text-purple-700">4. Riwayat</h3>
+            <h3 class="text-lg font-semibold text-purple-700">4. Penjualan</h3>
             <ul class="list-disc ml-5 mt-1 text-purple-800">
-              <li>List transaksi</li>
-              <li>Filter berdasarkan tanggal</li>
+              <li>Tambah item ke keranjang</li>
+              <li>Checkout & simpan transaksi</li>
             </ul>
           </div>
           <div class="bg-pink-50 p-4 rounded">
-            <h3 class="text-lg font-semibold text-pink-700">5. Profil</h3>
+            <h3 class="text-lg font-semibold text-pink-700">5. Riwayat Transaksi</h3>
             <ul class="list-disc ml-5 mt-1 text-pink-800">
-              <li>Lihat & edit data user</li>
-              <li>Terhubung ke Dashboard</li>
+              <li>List riwayat lengkap</li>
+              <li>Cetak PDF / share struk</li>
             </ul>
           </div>
           <div class="bg-orange-50 p-4 rounded">
             <h3 class="text-lg font-semibold text-orange-700">6. Kategori Produk</h3>
             <ul class="list-disc ml-5 mt-1 text-orange-800">
-              <li>Tambah/edit/hapus kategori</li>
-              <li>Produk harus memilih kategori</li>
+              <li>CRUD kategori</li>
+              <li>Digunakan saat input produk</li>
             </ul>
           </div>
           <div class="bg-cyan-50 p-4 rounded">
-            <h3 class="text-lg font-semibold text-cyan-700">7. Laporan</h3>
+            <h3 class="text-lg font-semibold text-cyan-700">7. Grafik Penjualan</h3>
             <ul class="list-disc ml-5 mt-1 text-cyan-800">
-              <li>Tampilkan grafik penjualan</li>
-              <li>Produk terlaris dan income</li>
+              <li>Grafik produk terlaris (bar)</li>
+              <li>Grafik total penjualan (line/pie)</li>
             </ul>
           </div>
           <div class="bg-gray-50 p-4 rounded">
             <h3 class="text-lg font-semibold text-gray-700">8. Pengaturan</h3>
             <ul class="list-disc ml-5 mt-1 text-gray-800">
-              <li>Mode gelap/terang</li>
-              <li>Logout dan atur API base URL</li>
+              <li>Dark mode, logout</li>
+              <li>Set API Endpoint</li>
+            </ul>
+          </div>
+          <div class="bg-teal-50 p-4 rounded">
+            <h3 class="text-lg font-semibold text-teal-700">9. Manajemen User</h3>
+            <ul class="list-disc ml-5 mt-1 text-teal-800">
+              <li>CRUD user (role admin saja)</li>
+              <li>Aktivasi/nonaktif akun</li>
+            </ul>
+          </div>
+          <div class="bg-indigo-50 p-4 rounded">
+            <h3 class="text-lg font-semibold text-indigo-700">10. Notifikasi & Feedback</h3>
+            <ul class="list-disc ml-5 mt-1 text-indigo-800">
+              <li>Dialog snackbar/toast setiap aksi</li>
+              <li>Toast saat berhasil/validasi gagal</li>
             </ul>
           </div>
         </div>
 
         <div class="mt-6 bg-gray-100 p-4 rounded-lg border">
-          <h4 class="font-bold text-gray-700 mb-2">💡 Tips Pengumpulan:</h4>
+          <h4 class="font-bold text-gray-700 mb-2">🧠 Teknis Tambahan:</h4>
           <ul class="list-disc ml-5 text-sm text-gray-600">
-            <li>Screenshot setiap menu: <code>1_Dashboard.jpg</code> sampai <code>8_Pengaturan.jpg</code></li>
-            <li>Kode rapi dan terstruktur</li>
+            <li>Gunakan Provider atau Bloc (minimal Provider)</li>
+            <li>Gunakan shared_preferences atau secure_storage</li>
+            <li>Struktur folder modular: <code>pages, models, services, widgets, providers</code></li>
+          </ul>
+        </div>
+
+        <div class="mt-4 bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+          <h4 class="font-semibold text-yellow-800">📁 Pengumpulan:</h4>
+          <ul class="list-disc ml-5 text-sm text-yellow-700">
+            <li>10 Screenshot (1-10)</li>
+            <li>Readme PDF: Penjelasan fitur, struktur folder, alur login</li>
+            <li>Bonus: export ke APK (opsional)</li>
           </ul>
         </div>
       </div>
     `,
-    code: `// Struktur kategori
-        Map<String, dynamic> kategori = {
-          "id": 3,
-          "nama": "Elektronik"
-        };
-
-        // Contoh grafik laporan
-        Map<String, dynamic> laporan = {
-          "produk_terlaris": "Smartphone",
-          "total_penjualan": 105000000,
+    code: `// Contoh struktur penjualan
+        Map<String, dynamic> transaksi = {
+          "id": 1,
+          "produk": [
+            {"nama": "Laptop", "qty": 2, "harga": 5000000}
+          ],
+          "total": 10000000,
           "tanggal": "2025-07-09"
         };
 
-        // Setting user
-        Map<String, dynamic> userSettings = {
-          "darkMode": true,
-          "baseUrl": "https://api.uasflutter.com"
-        };`,
-            language: "dart",
-            type: "question",
-            submitLink: "https://drive.google.com/drive/folders/1bQvP2eTiPUvAr49VIHWav_PZ9tWmhFAV",
-          },
-        ]
+        // Simpan token dari login
+        String? token = "eyJhbGciOiJIUzI1NiIs..."; // JWT Token
+
+        // Contoh grafik data
+        List<Map<String, dynamic>> chartData = [
+          {"label": "Laptop", "value": 30},
+          {"label": "Smartphone", "value": 20},
+        ];`,
+    language: "dart",
+    type: "question",
+    submitLink: "https://drive.google.com/drive/folders/1bQvP2eTiPUvAr49VIHWav_PZ9tWmhFAV",
+  }
+]
+
 
 };
