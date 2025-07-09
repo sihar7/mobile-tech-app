@@ -1460,6 +1460,15 @@ export const pertemuanData = {
           </ul>
         </div>
 
+        <div class="mt-4 bg-blue-50 p-4 rounded-lg border border-blue-200">
+          <h4 class="font-semibold text-blue-800">📂 Download Database SQL:</h4>
+          <p class="text-sm text-blue-700 mt-1">
+            <a class="underline" href="https://drive.google.com/drive/folders/1D1wlr6x8KJbTGh55_WyTus5C2gvnC29v?hl=ID" target="_blank">
+              Klik di sini untuk mengambil struktur & data database (.sql)
+            </a>
+          </p>
+        </div>
+
         <div class="mt-4 bg-yellow-50 p-4 rounded-lg border border-yellow-200">
           <h4 class="font-semibold text-yellow-800">📁 Pengumpulan:</h4>
           <ul class="list-disc ml-5 text-sm text-yellow-700">
