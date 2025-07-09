@@ -1497,23 +1497,23 @@ export const pertemuanData = {
       </div>
     `,
     code: `// Contoh struktur penjualan
-      Map<String, dynamic> transaksi = {
-        "id": 1,
-        "produk": [
-          {"nama": "Laptop", "qty": 2, "harga": 5000000}
-        ],
-        "total": 10000000,
-        "tanggal": "2025-07-09"
-      };
+        Map<String, dynamic> transaksi = {
+          "id": 1,
+          "produk": [
+            {"nama": "Laptop", "qty": 2, "harga": 5000000}
+          ],
+          "total": 10000000,
+          "tanggal": "2025-07-09"
+        };
 
-      // Simpan token dari login
-      String? token = "eyJhbGciOiJIUzI1NiIs..."; // JWT Token
+        // Simpan token dari login
+        String? token = "eyJhbGciOiJIUzI1NiIs..."; // JWT Token
 
-      // Contoh grafik data
-      List<Map<String, dynamic>> chartData = [
-        {"label": "Laptop", "value": 30},
-        {"label": "Smartphone", "value": 20},
-      ];`,
+        // Contoh grafik data
+        List<Map<String, dynamic>> chartData = [
+          {"label": "Laptop", "value": 30},
+          {"label": "Smartphone", "value": 20},
+        ];`,
     language: "dart",
     type: "question",
     submitLink: "https://drive.google.com/drive/folders/1bQvP2eTiPUvAr49VIHWav_PZ9tWmhFAV"
