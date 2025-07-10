@@ -1498,7 +1498,7 @@ export const pertemuanData = {
         <div class="mt-4 bg-red-100 p-4 rounded-lg border border-red-300">
           <h4 class="text-lg font-bold text-red-800">⏰ Deadline Pengumpulan:</h4>
           <p class="text-sm text-red-700 mt-1">
-            <strong>Besok, pukul 15.00 WIB (jam 3 sore)</strong>. Jangan sampai terlambat!
+            <strong>10 Juli 2025, pukul 15.00 WIB (jam 3 sore)</strong>. Jangan sampai terlambat!
           </p>
         </div>
       </div>
