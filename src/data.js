@@ -1,3 +1,5 @@
+import imgMateri from '@/assets/materi6/1.jpg';
+
 export const pertemuanData = {
   1: [
     {
@@ -1312,7 +1314,7 @@ export const pertemuanData = {
           Halaman ini menampilkan informasi akun dan fitur lanjutan seperti statistik atau menu navigasi.
         </p>
       `,
-     image: "/assets/materi6/1.jpg",
+     image: imgMateri,
     },
   ],
   7: [
