@@ -1277,45 +1277,115 @@ export const pertemuanData = {
           language: "bash",
         },
       ],
-
   6: [
     {
       title: "Pembuatan Fitur Login & Dashboard di Flutter",
       description: `
-        <h2 class="text-2xl font-bold text-white-800">Langkah-langkah Pengembangan</h2>
-        
-        <h3 class="text-xl font-semibold mt-4 text-white-700">1. Membuat Models & Services Login Register</h3>
-        <p class="text-white-600">
-          Langkah awal adalah membuat model data pengguna dalam file <code>user.dart</code>, lalu menyiapkan service untuk komunikasi API di file <code>auth_service.dart</code>.
-          Service ini akan menangani proses login dan register menggunakan metode <code>POST</code> ke server backend.
-        </p>
+        <div class="space-y-6 text-gray-800">
+          <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-md">
+            <h2 class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200">Langkah-langkah Pengembangan</h2>
+            
+            <div class="space-y-6">
+              <div class="group hover:bg-gray-50 transition-all duration-300 p-4 rounded-lg border border-gray-200">
+                <h3 class="text-xl font-semibold flex items-center">
+                  <span class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-3 text-sm font-bold">1</span>
+                  Membuat Models & Services Login Register
+                </h3>
+                <p class="text-gray-600 mt-2 pl-11">
+                  Langkah awal adalah membuat model data pengguna dalam file <code class="bg-gray-200 px-2 py-1 rounded text-blue-600 font-mono text-sm">user.dart</code>, lalu menyiapkan service untuk komunikasi API di file <code class="bg-gray-200 px-2 py-1 rounded text-blue-600 font-mono text-sm">auth_service.dart</code>.
+                  Service ini akan menangani proses login dan register menggunakan metode <code class="bg-gray-200 px-2 py-1 rounded text-blue-600 font-mono text-sm">POST</code> ke server backend.
+                </p>
+              </div>
 
-        <h3 class="text-xl font-semibold mt-4 text-white-700">2. Membuat UI Login & Register</h3>
-        <p class="text-white-600">
-          Di bagian ini, UI dibuat menggunakan kombinasi <code>TextField</code>, <code>Form</code>, dan <code>ElevatedButton</code>.
-          Form memiliki validasi dasar seperti pengecekan email kosong dan panjang password minimal 6 karakter.
-        </p>
+              <div class="group hover:bg-gray-50 transition-all duration-300 p-4 rounded-lg border border-gray-200">
+                <h3 class="text-xl font-semibold flex items-center">
+                  <span class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-3 text-sm font-bold">2</span>
+                  Membuat UI Login & Register
+                </h3>
+                <p class="text-gray-600 mt-2 pl-11">
+                  Di bagian ini, UI dibuat menggunakan kombinasi <code class="bg-gray-200 px-2 py-1 rounded text-blue-600 font-mono text-sm">TextField</code>, <code class="bg-gray-200 px-2 py-1 rounded text-blue-600 font-mono text-sm">Form</code>, dan <code class="bg-gray-200 px-2 py-1 rounded text-blue-600 font-mono text-sm">ElevatedButton</code>.
+                  Form memiliki validasi dasar seperti pengecekan email kosong dan panjang password minimal 6 karakter.
+                </p>
+                <div class="mt-3 pl-11 flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">TextField</span>
+                  <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-medium">Form Validation</span>
+                  <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">UI Design</span>
+                </div>
+              </div>
 
-        <h3 class="text-xl font-semibold mt-4 text-white-700">3. Membuat Login & Register API dengan 3 Role</h3>
-        <p class="text-white-600">
-          Backend disiapkan agar mendukung 3 peran berbeda: admin, petugas, dan user.
-          Setelah login berhasil, token JWT disimpan dan peran user digunakan untuk menavigasi ke halaman yang sesuai.
-        </p>
+              <div class="group hover:bg-gray-50 transition-all duration-300 p-4 rounded-lg border border-gray-200">
+                <h3 class="text-xl font-semibold flex items-center">
+                  <span class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-3 text-sm font-bold">3</span>
+                  Membuat Login & Register API dengan 3 Role
+                </h3>
+                <p class="text-gray-600 mt-2 pl-11">
+                  Backend disiapkan agar mendukung 3 peran berbeda: admin, petugas, dan user.
+                  Setelah login berhasil, token JWT disimpan dan peran user digunakan untuk menavigasi ke halaman yang sesuai.
+                </p>
+                <div class="mt-3 pl-11 grid grid-cols-3 gap-2 max-w-md">
+                  <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-medium text-center">Admin</span>
+                  <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium text-center">Petugas</span>
+                  <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium text-center">User</span>
+                </div>
+              </div>
 
-        <h3 class="text-xl font-semibold mt-4 text-white-700">4. Membuat Validasi Login Register</h3>
-        <p class="text-white-600">
-          Validasi ditambahkan baik di sisi frontend (menggunakan Flutter Form Validator) maupun backend (menggunakan Laravel Validator).
-          Validasi mencakup email valid, password tidak kosong, dan konfirmasi password cocok.
-        </p>
+              <div class="group hover:bg-gray-50 transition-all duration-300 p-4 rounded-lg border border-gray-200">
+                <h3 class="text-xl font-semibold flex items-center">
+                  <span class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-3 text-sm font-bold">4</span>
+                  Membuat Validasi Login Register
+                </h3>
+                <p class="text-gray-600 mt-2 pl-11">
+                  Validasi ditambahkan baik di sisi frontend (menggunakan Flutter Form Validator) maupun backend (menggunakan Laravel Validator).
+                  Validasi mencakup email valid, password tidak kosong, dan konfirmasi password cocok.
+                </p>
+              </div>
 
-        <h3 class="text-xl font-semibold mt-4 text-white-700">5. Membuat Dashboard Flutter</h3>
-        <p class="text-white-600">
-          Setelah login berhasil, pengguna diarahkan ke halaman dashboard.
-          Halaman ini menampilkan informasi akun dan fitur lanjutan seperti statistik atau menu navigasi.
-        </p>
+              <div class="group hover:bg-gray-50 transition-all duration-300 p-4 rounded-lg border border-gray-200">
+                <h3 class="text-xl font-semibold flex items-center">
+                  <span class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-3 text-sm font-bold">5</span>
+                  Membuat Dashboard Flutter
+                </h3>
+                <p class="text-gray-600 mt-2 pl-11">
+                  Setelah login berhasil, pengguna diarahkan ke halaman dashboard.
+                  Halaman ini menampilkan informasi akun dan fitur lanjutan seperti statistik atau menu navigasi.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-md mt-6">
+            <h3 class="text-xl font-semibold mb-3">Teknologi yang Digunakan</h3>
+            <div class="flex flex-wrap gap-3">
+              <div class="flex items-center px-3 py-2 bg-blue-100 text-blue-800 rounded-md text-sm font-medium">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                </svg>
+                Flutter
+              </div>
+              <div class="flex items-center px-3 py-2 bg-red-100 text-red-800 rounded-md text-sm font-medium">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"></path>
+                </svg>
+                Laravel
+              </div>
+              <div class="flex items-center px-3 py-2 bg-yellow-100 text-yellow-800 rounded-md text-sm font-medium">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+                </svg>
+                JWT
+              </div>
+              <div class="flex items-center px-3 py-2 bg-purple-100 text-purple-800 rounded-md text-sm font-medium">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+                REST API
+              </div>
+            </div>
+          </div>
+        </div>
       `,
-     image: imgMateri,
-    },
+      image: imgMateri,
+    }
   ],
   7: [
   
