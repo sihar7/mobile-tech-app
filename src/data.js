@@ -1312,7 +1312,7 @@ export const pertemuanData = {
           Halaman ini menampilkan informasi akun dan fitur lanjutan seperti statistik atau menu navigasi.
         </p>
       `,
-     image: "/src/assets/materi6/1.jpg",
+     image: "/assets/materi6/1.jpg",
     },
   ],
   7: [
