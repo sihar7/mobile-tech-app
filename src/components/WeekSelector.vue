@@ -3,10 +3,10 @@
     <router-link
       v-for="week in weeks"
       :key="week.id"
-      :to="week.id <= 5 ? `/week/${week.id}` : '#'"
+      :to="week.id <= 6 ? `/week/${week.id}` : '#'"
       :class="[ 
         'p-6 rounded-2xl shadow-2xl text-center transition-all duration-300 transform hover:scale-105 relative overflow-hidden',
-        week.id <= 5
+        week.id <= 6
           ? isDarkMode
             ? 'bg-gradient-to-br from-gray-700 to-gray-900 text-white hover:from-gray-600 hover:to-gray-800 border-4 border-gray-600'
             : 'bg-gradient-to-br from-sky-400 to-blue-600 text-white hover:from-sky-500 hover:to-blue-700 border-4 border-blue-500'
@@ -20,7 +20,7 @@
 
       <!-- Overlay untuk minggu yang terkunci -->
       <div
-        v-if="week.id > 5"
+        v-if="week.id > 6"
         class="absolute inset-0 bg-gradient-to-br from-blue-900/30 to-blue-800/40 dark:from-gray-700/30 dark:to-gray-600/40 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl"
       >
         <span class="text-white text-2xl drop-shadow-md">🔒</span>
@@ -49,7 +49,7 @@ for (let i = 1; i <= 14; i++) {
 const handleClick = (week) => {
   const isDark = isDarkMode.value;
 
-  if (week.id <= 5) {
+  if (week.id <= 6) {
     router.push(`/week/${week.id}`);
   } else {
     Swal.fire({
