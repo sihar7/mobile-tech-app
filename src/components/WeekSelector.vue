@@ -22,27 +22,31 @@
             : 'bg-blue-50 text-blue-600 border-blue-200'
           : ''
       ]"
-      @click="handleClick(week)"
+      @click.prevent="handleClick(week)"
     >
-      <span class="text-xl font-bold tracking-wide">Pertemuan {{ week.id }}</span>
+      <span class="text-xl font-bold tracking-wide">
+        Pertemuan {{ week.id }}<span v-if="week.id === 15"> (Perbaikan)</span>
+      </span>
 
-      <!-- Ikon untuk minggu yang bisa diakses karena masih liburan -->
+      <!-- Ikon liburan -->
       <span
         v-if="isHolidayUnlocked(week.date)"
         class="absolute top-2 left-2 text-2xl opacity-90 text-green-500"
-      >
-        🌴
-      </span>
+      >🌴</span>
 
-      <!-- Icon untuk minggu yang sudah lewat -->
+      <!-- Ikon lewat -->
       <span
         v-if="isPast(week)"
         class="absolute top-2 right-2 text-2xl opacity-90 text-red-500"
-      >
-        ❌
-      </span>
+      >❌</span>
 
-      <!-- Overlay untuk minggu yang terkunci -->
+      <!-- Ikon khusus minggu perbaikan -->
+      <span
+        v-if="week.id === 15"
+        class="absolute bottom-2 right-2 text-2xl opacity-90 text-emerald-500"
+      >✅</span>
+
+      <!-- Overlay terkunci -->
       <div
         v-if="!(isUnlocked(week) || isHolidayUnlocked(week.date))"
         class="absolute inset-0 bg-gradient-to-br from-blue-900/30 to-blue-800/40 dark:from-gray-700/30 dark:to-gray-600/40 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl"
@@ -72,17 +76,16 @@ const isDarkMode = inject('isDarkMode', ref(false));
 const router = useRouter();
 const today = new Date();
 
-// Tanggal mulai pertemuan dan liburan
+// Tanggal awal dan libur
 const startDate = new Date(2025, 2, 12); // 12 Maret 2025
 const holidayStart = new Date(2025, 2, 26); // Libur mulai 26 Maret
 const holidayEnd = new Date(2025, 3, 15); // Libur selesai 15 April
 
-// Generate minggu-minggu kuliah
+// Generate 15 minggu
 const weeks = [];
 let currentDate = new Date(startDate);
 
-for (let i = 1; i <= 14; i++) {
-  // Skip jika sedang masa libur
+for (let i = 1; i <= 15; i++) {
   while (currentDate >= holidayStart && currentDate <= holidayEnd) {
     currentDate.setDate(currentDate.getDate() + 7);
   }
@@ -95,33 +98,73 @@ for (let i = 1; i <= 14; i++) {
   currentDate.setDate(currentDate.getDate() + 7);
 }
 
-// Cek apakah tanggal berada dalam masa libur
 const isHolidayUnlocked = (date) => {
   return date >= holidayStart && date <= holidayEnd;
 };
 
-// Cek apakah minggu sudah terbuka
 const isUnlocked = (week) => {
   return today >= week.date || isHolidayUnlocked(week.date);
 };
 
-// Cek apakah minggu sudah lewat (kecuali minggu terakhir)
 const isPast = (week) => {
   const endOfValidTime = new Date(week.date);
   endOfValidTime.setHours(23, 59, 0, 0);
   return today > endOfValidTime && week.id !== weeks.length;
 };
 
-// Klik handler
-const handleClick = (week) => {
+const handleClick = async (week) => {
   const isDark = isDarkMode.value;
   const now = new Date();
 
   const dateValid = now >= week.date || isHolidayUnlocked(week.date);
   const past = isPast(week);
 
-  let message = '';
+  // Pertemuan 15: Perbaikan dengan password
+  if (week.id === 15) {
+    if (!dateValid) {
+      return Swal.fire({
+        title: `🔒 Belum Bisa Diakses!`,
+        text: `Pertemuan ${week.id} baru bisa dibuka setelah tanggal ${formatDate(week.date)}`,
+        icon: 'info',
+        background: isDark ? '#111827' : '#EFF6FF',
+        confirmButtonColor: isDark ? '#1F2937' : '#3B82F6',
+        confirmButtonText: 'Oke',
+      });
+    }
 
+    const result = await Swal.fire({
+      title: '🔐 Akses Pertemuan Perbaikan',
+      input: 'password',
+      inputLabel: 'Masukkan password untuk membuka',
+      inputPlaceholder: 'Password...',
+      inputAttributes: {
+        autocapitalize: 'off',
+        autocorrect: 'off'
+      },
+      showCancelButton: true,
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      confirmButtonText: 'Akses',
+      background: isDark ? '#111827' : '#EFF6FF',
+      confirmButtonColor: isDark ? '#1F2937' : '#3B82F6',
+      cancelButtonColor: '#d33',
+      preConfirm: (password) => {
+        if (password !== 'mobilekuteknologi2025') {
+          Swal.showValidationMessage('❌ Password salah');
+        }
+        return password;
+      },
+    });
+
+    if (!result.isConfirmed || result.value !== 'mobilekuteknologi2025') {
+      return router.push('/');
+    }
+
+    return router.push(`/week/${week.id}`);
+  }
+
+  // Pertemuan 1–14
+  let message = '';
   if (!dateValid) {
     message = `📅 Pertemuan <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${week.id}</b> baru bisa diakses pada <b style="color: ${isDark ? '#9CA3AF' : '#3B82F6'};">${formatDate(week.date)}</b>`;
   } else if (past) {

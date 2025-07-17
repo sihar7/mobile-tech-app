@@ -1440,165 +1440,320 @@ export const pertemuanData = {
     },
   ],
   14: [
-  {
-    title: "UAS Flutter: Aplikasi Penjualan Terintegrasi",
-    description: `
-      <div class="bg-white p-6 rounded-lg shadow">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">UAS Flutter 2025 — Aplikasi Penjualan Terintegrasi (Tingkat Lanjut)</h2>
-        <p class="text-gray-600 mb-6">
-          Mahasiswa diwajibkan membuat aplikasi Flutter dengan <strong>10 menu yang saling terhubung</strong>, <strong>Autentikasi</strong>, integrasi API (CRUD), serta menampilkan <strong>grafik dan statistik</strong>. UI harus modern, responsif, dan interaktif.
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-          <div class="bg-blue-50 p-4 rounded">
-            <h3 class="text-lg font-semibold text-blue-700">1. Login & Register</h3>
-            <ul class="list-disc ml-5 mt-1 text-blue-800">
-              <li>Form validasi lengkap</li>
-              <li>Terhubung ke API</li>
-              <li>Simpan token JWT (simulasi aman)</li>
-            </ul>
-          </div>
-          <div class="bg-green-50 p-4 rounded">
-            <h3 class="text-lg font-semibold text-green-700">2. Dashboard</h3>
-            <ul class="list-disc ml-5 mt-1 text-green-800">
-              <li>Total produk, penjualan, & user aktif</li>
-              <li>Info saldo, penjualan hari ini</li>
-            </ul>
-          </div>
-          <div class="bg-yellow-50 p-4 rounded">
-            <h3 class="text-lg font-semibold text-yellow-700">3. Produk</h3>
-            <ul class="list-disc ml-5 mt-1 text-yellow-800">
-              <li>CRUD produk + gambar</li>
-              <li>Pencarian, filter by kategori</li>
-            </ul>
-          </div>
-          <div class="bg-purple-50 p-4 rounded">
-            <h3 class="text-lg font-semibold text-purple-700">4. Penjualan</h3>
-            <ul class="list-disc ml-5 mt-1 text-purple-800">
-              <li>Tambah item ke keranjang</li>
-              <li>Checkout & simpan transaksi</li>
-            </ul>
-          </div>
-          <div class="bg-pink-50 p-4 rounded">
-            <h3 class="text-lg font-semibold text-pink-700">5. Riwayat Transaksi</h3>
-            <ul class="list-disc ml-5 mt-1 text-pink-800">
-              <li>List riwayat lengkap</li>
-              <li>Cetak PDF / share struk</li>
-            </ul>
-          </div>
-          <div class="bg-orange-50 p-4 rounded">
-            <h3 class="text-lg font-semibold text-orange-700">6. Kategori Produk</h3>
-            <ul class="list-disc ml-5 mt-1 text-orange-800">
-              <li>CRUD kategori</li>
-              <li>Digunakan saat input produk</li>
-            </ul>
-          </div>
-          <div class="bg-cyan-50 p-4 rounded">
-            <h3 class="text-lg font-semibold text-cyan-700">7. Grafik Penjualan</h3>
-            <ul class="list-disc ml-5 mt-1 text-cyan-800">
-              <li>Grafik produk terlaris (bar)</li>
-              <li>Grafik total penjualan (line/pie)</li>
-            </ul>
-          </div>
-          <div class="bg-gray-50 p-4 rounded">
-            <h3 class="text-lg font-semibold text-gray-700">8. Pengaturan</h3>
-            <ul class="list-disc ml-5 mt-1 text-gray-800">
-              <li>Dark mode, logout</li>
-              <li>Set API Endpoint</li>
-            </ul>
-          </div>
-          <div class="bg-teal-50 p-4 rounded">
-            <h3 class="text-lg font-semibold text-teal-700">9. Manajemen User</h3>
-            <ul class="list-disc ml-5 mt-1 text-teal-800">
-              <li>CRUD user (role admin saja) </li>
-              <li>Aktivasi/nonaktif akun</li>
-            </ul>
-          </div>
-          <div class="bg-indigo-50 p-4 rounded">
-            <h3 class="text-lg font-semibold text-indigo-700">10. Notifikasi & Feedback</h3>
-            <ul class="list-disc ml-5 mt-1 text-indigo-800">
-              <li>Dialog snackbar/toast setiap aksi</li>
-              <li>Toast saat berhasil/validasi gagal</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="mt-6 bg-gray-100 p-4 rounded-lg border">
-          <h4 class="font-bold text-gray-700 mb-2">🧠 Teknis Tambahan:</h4>
-          <ul class="list-disc ml-5 text-sm text-gray-600">
-            <li>Gunakan <strong>Provider</strong> atau <strong>Bloc</strong> (minimal Provider)</li>
-            <li>Gunakan <code>shared_preferences</code> atau <code>secure_storage</code></li>
-            <li>Struktur folder modular: <code>pages, models, services, widgets, providers</code></li>
-          </ul>
-        </div>
-
-        <div class="mt-4 bg-blue-50 p-4 rounded-lg border border-blue-200">
-          <h4 class="font-semibold text-blue-800">📂 Download Database SQL:</h4>
-          <p class="text-sm text-blue-700 mt-1">
-            <a class="underline" href="https://drive.google.com/drive/folders/1D1wlr6x8KJbTGh55_WyTus5C2gvnC29v?hl=ID" target="_blank">
-              Klik di sini untuk mengambil struktur & data database (.sql)
-            </a>
+    {
+      title: "UAS Flutter: Aplikasi Penjualan Terintegrasi",
+      description: `
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h2 class="text-2xl font-bold text-gray-800 mb-4">UAS Flutter 2025 — Aplikasi Penjualan Terintegrasi (Tingkat Lanjut)</h2>
+          <p class="text-gray-600 mb-6">
+            Mahasiswa diwajibkan membuat aplikasi Flutter dengan <strong>10 menu yang saling terhubung</strong>, <strong>Autentikasi</strong>, integrasi API (CRUD), serta menampilkan <strong>grafik dan statistik</strong>. UI harus modern, responsif, dan interaktif.
           </p>
-        </div>
 
-        <div class="mt-4 bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-          <h4 class="font-semibold text-yellow-800">📁 Pengumpulan:</h4>
-          <ul class="list-disc ml-5 text-sm text-yellow-700">
-            <li>10 Screenshot (1-10)</li>
-            <li>Readme PDF: Penjelasan fitur, struktur folder, alur login</li>
-            <li>Bonus: export ke APK (opsional)</li>
-          </ul>
-        </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+            <div class="bg-blue-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-blue-700">1. Login & Register</h3>
+              <ul class="list-disc ml-5 mt-1 text-blue-800">
+                <li>Form validasi lengkap</li>
+                <li>Terhubung ke API</li>
+                <li>Simpan token JWT (simulasi aman)</li>
+              </ul>
+            </div>
+            <div class="bg-green-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-green-700">2. Dashboard</h3>
+              <ul class="list-disc ml-5 mt-1 text-green-800">
+                <li>Total produk, penjualan, & user aktif</li>
+                <li>Info saldo, penjualan hari ini</li>
+              </ul>
+            </div>
+            <div class="bg-yellow-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-yellow-700">3. Produk</h3>
+              <ul class="list-disc ml-5 mt-1 text-yellow-800">
+                <li>CRUD produk + gambar</li>
+                <li>Pencarian, filter by kategori</li>
+              </ul>
+            </div>
+            <div class="bg-purple-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-purple-700">4. Penjualan</h3>
+              <ul class="list-disc ml-5 mt-1 text-purple-800">
+                <li>Tambah item ke keranjang</li>
+                <li>Checkout & simpan transaksi</li>
+              </ul>
+            </div>
+            <div class="bg-pink-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-pink-700">5. Riwayat Transaksi</h3>
+              <ul class="list-disc ml-5 mt-1 text-pink-800">
+                <li>List riwayat lengkap</li>
+                <li>Cetak PDF / share struk</li>
+              </ul>
+            </div>
+            <div class="bg-orange-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-orange-700">6. Kategori Produk</h3>
+              <ul class="list-disc ml-5 mt-1 text-orange-800">
+                <li>CRUD kategori</li>
+                <li>Digunakan saat input produk</li>
+              </ul>
+            </div>
+            <div class="bg-cyan-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-cyan-700">7. Grafik Penjualan</h3>
+              <ul class="list-disc ml-5 mt-1 text-cyan-800">
+                <li>Grafik produk terlaris (bar)</li>
+                <li>Grafik total penjualan (line/pie)</li>
+              </ul>
+            </div>
+            <div class="bg-gray-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-gray-700">8. Pengaturan</h3>
+              <ul class="list-disc ml-5 mt-1 text-gray-800">
+                <li>Dark mode, logout</li>
+                <li>Set API Endpoint</li>
+              </ul>
+            </div>
+            <div class="bg-teal-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-teal-700">9. Manajemen User</h3>
+              <ul class="list-disc ml-5 mt-1 text-teal-800">
+                <li>CRUD user (role admin saja) </li>
+                <li>Aktivasi/nonaktif akun</li>
+              </ul>
+            </div>
+            <div class="bg-indigo-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-indigo-700">10. Notifikasi & Feedback</h3>
+              <ul class="list-disc ml-5 mt-1 text-indigo-800">
+                <li>Dialog snackbar/toast setiap aksi</li>
+                <li>Toast saat berhasil/validasi gagal</li>
+              </ul>
+            </div>
+          </div>
 
-        <div class="mt-4 bg-red-50 p-4 rounded-lg border border-red-200">
-          <h4 class="font-semibold text-red-800">📊 Penilaian Per Fitur:</h4>
-          <ul class="list-disc ml-5 text-sm text-red-700">
-            <li>Login & Register – 10%</li>
-            <li>Dashboard – 10%</li>
-            <li>Produk – 10%</li>
-            <li>Penjualan – 10%</li>
-            <li>Riwayat Transaksi – 10%</li>
-            <li>Kategori Produk – 10%</li>
-            <li>Grafik Penjualan – 10%</li>
-            <li>Pengaturan – 5%</li>
-            <li>Manajemen User – 10%</li>
-            <li>Notifikasi & Feedback – 5%</li>
-            <li>Struktur folder & teknis tambahan – 10%</li>
-          </ul>
-        </div>
+          <div class="mt-6 bg-gray-100 p-4 rounded-lg border">
+            <h4 class="font-bold text-gray-700 mb-2">🧠 Teknis Tambahan:</h4>
+            <ul class="list-disc ml-5 text-sm text-gray-600">
+              <li>Gunakan <strong>Provider</strong> atau <strong>Bloc</strong> (minimal Provider)</li>
+              <li>Gunakan <code>shared_preferences</code> atau <code>secure_storage</code></li>
+              <li>Struktur folder modular: <code>pages, models, services, widgets, providers</code></li>
+            </ul>
+          </div>
 
-        <div class="mt-4 bg-red-100 p-4 rounded-lg border border-red-300">
-          <h4 class="text-lg font-bold text-red-800">⏰ Deadline Pengumpulan:</h4>
-          <p class="text-sm text-red-700 mt-1">
-            <strong>10 Juli 2025, pukul 15.00 WIB (jam 3 sore)</strong>. Jangan sampai terlambat!
+          <div class="mt-4 bg-blue-50 p-4 rounded-lg border border-blue-200">
+            <h4 class="font-semibold text-blue-800">📂 Download Database SQL:</h4>
+            <p class="text-sm text-blue-700 mt-1">
+              <a class="underline" href="https://drive.google.com/drive/folders/1D1wlr6x8KJbTGh55_WyTus5C2gvnC29v?hl=ID" target="_blank">
+                Klik di sini untuk mengambil struktur & data database (.sql)
+              </a>
+            </p>
+          </div>
+
+          <div class="mt-4 bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+            <h4 class="font-semibold text-yellow-800">📁 Pengumpulan:</h4>
+            <ul class="list-disc ml-5 text-sm text-yellow-700">
+              <li>10 Screenshot (1-10)</li>
+              <li>Readme PDF: Penjelasan fitur, struktur folder, alur login</li>
+              <li>Bonus: export ke APK (opsional)</li>
+            </ul>
+          </div>
+
+          <div class="mt-4 bg-red-50 p-4 rounded-lg border border-red-200">
+            <h4 class="font-semibold text-red-800">📊 Penilaian Per Fitur:</h4>
+            <ul class="list-disc ml-5 text-sm text-red-700">
+              <li>Login & Register – 10%</li>
+              <li>Dashboard – 10%</li>
+              <li>Produk – 10%</li>
+              <li>Penjualan – 10%</li>
+              <li>Riwayat Transaksi – 10%</li>
+              <li>Kategori Produk – 10%</li>
+              <li>Grafik Penjualan – 10%</li>
+              <li>Pengaturan – 5%</li>
+              <li>Manajemen User – 10%</li>
+              <li>Notifikasi & Feedback – 5%</li>
+              <li>Struktur folder & teknis tambahan – 10%</li>
+            </ul>
+          </div>
+
+          <div class="mt-4 bg-red-100 p-4 rounded-lg border border-red-300">
+            <h4 class="text-lg font-bold text-red-800">⏰ Deadline Pengumpulan:</h4>
+            <p class="text-sm text-red-700 mt-1">
+              <strong>10 Juli 2025, pukul 15.00 WIB (jam 3 sore)</strong>. Jangan sampai terlambat!
+            </p>
+          </div>
+        </div>
+      `,
+      code: `// Contoh struktur penjualan
+          Map<String, dynamic> transaksi = {
+            "id": 1,
+            "produk": [
+              {"nama": "Laptop", "qty": 2, "harga": 5000000}
+            ],
+            "total": 10000000,
+            "tanggal": "2025-07-09"
+          };
+
+          // Simpan token dari login
+          String? token = "eyJhbGciOiJIUzI1NiIs..."; // JWT Token
+
+          // Contoh grafik data
+          List<Map<String, dynamic>> chartData = [
+            {"label": "Laptop", "value": 30},
+            {"label": "Smartphone", "value": 20},
+          ];`,
+      language: "dart",
+      type: "question",
+      submitLink: "https://drive.google.com/drive/folders/1bQvP2eTiPUvAr49VIHWav_PZ9tWmhFAV"
+    }
+  ],
+  15: [
+    {
+      title: "UAS Flutter: Aplikasi Perencana Perjalanan",
+      description: `
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h2 class="text-2xl font-bold text-gray-800 mb-4">UAS Flutter 2025 — Travel Planner dengan Integrasi API</h2>
+          <p class="text-gray-600 mb-6">
+            Buat aplikasi perencana perjalanan pribadi dengan <strong>10 fitur utama</strong> yang terintegrasi dengan API. Aplikasi harus mendukung manajemen itinerary dan penyimpanan lokal.
           </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+            <div class="bg-blue-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-blue-700">1. Auth System</h3>
+              <ul class="list-disc ml-5 mt-1 text-blue-800">
+                <li>Login/Register dengan JWT token response</li>
+                <li>Remember me function</li>
+              </ul>
+            </div>
+            <div class="bg-green-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-green-700">2. Buat Trip</h3>
+              <ul class="list-disc ml-5 mt-1 text-green-800">
+                <li>Form tambah trip baru</li>
+                <li>Pilih tanggal & destinasi</li>
+              </ul>
+            </div>
+            <div class="bg-yellow-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-yellow-700">3. Itinerary Planner</h3>
+              <ul class="list-disc ml-5 mt-1 text-yellow-800">
+                <li>Atur jadwal harian</li>
+                <li>Drag-n-drop activity</li>
+              </ul>
+            </div>
+            <div class="bg-purple-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-purple-700">4. Destinasi Wisata</h3>
+              <ul class="list-disc ml-5 mt-1 text-purple-800">
+                <li>Daftar tempat menarik</li>
+                <li>Detail & rating</li>
+              </ul>
+            </div>
+            <div class="bg-pink-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-pink-700">5. Budget Tracker</h3>
+              <ul class="list-disc ml-5 mt-1 text-pink-800">
+                <li>Catatan pengeluaran</li>
+                <li>Progress budget</li>
+              </ul>
+            </div>
+            <div class="bg-red-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-red-700">6. Packing List</h3>
+              <ul class="list-disc ml-5 mt-1 text-red-800">
+                <li>Daftar barang bawaan</li>
+                <li>Checklist persiapan</li>
+              </ul>
+            </div>
+            <div class="bg-indigo-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-indigo-700">7. Maps Integration</h3>
+              <ul class="list-disc ml-5 mt-1 text-indigo-800">
+                <li>Lokasi destinasi</li>
+                <li>Rute perjalanan</li>
+              </ul>
+            </div>
+            <div class="bg-teal-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-teal-700">8. Photo Journal</h3>
+              <ul class="list-disc ml-5 mt-1 text-teal-800">
+                <li>Upload foto perjalanan</li>
+                <li>Caption & lokasi</li>
+              </ul>
+            </div>
+            <div class="bg-orange-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-orange-700">9. Weather Forecast</h3>
+              <ul class="list-disc ml-5 mt-1 text-orange-800">
+                <li>Prediksi cuaca</li>
+                <li>Notifikasi perubahan</li>
+              </ul>
+            </div>
+            <div class="bg-gray-50 p-4 rounded">
+              <h3 class="text-lg font-semibold text-gray-700">10. Sharing Trip</h3>
+              <ul class="list-disc ml-5 mt-1 text-gray-800">
+                <li>Bagikan itinerary</li>
+                <li>Kolaborasi trip</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mt-6 bg-gray-100 p-4 rounded-lg border">
+            <h4 class="font-bold text-gray-700 mb-2">🧰 Teknik Implementasi:</h4>
+            <ul class="list-disc ml-5 text-sm text-gray-600">
+              <li>State Management: <strong>Provider</strong> atau <strong>Riverpod</strong></li>
+              <li>API: <strong>Node.js/Laravel</strong> (minimal 15 endpoint)</li>
+              <li>Package wajib: <code>http, shared_preferences, google_maps_flutter</code></li>
+              <li>Database lokal: <code>MySQL</code> atau <code>SQLite</code></li>
+            </ul>
+          </div>
+
+          <div class="mt-4 bg-blue-50 p-4 rounded-lg border border-blue-200">
+            <h4 class="font-semibold text-blue-800">📌 Contoh Struktur Data:</h4>
+            <pre class="text-sm bg-white p-2 rounded mt-1 overflow-x-auto">
+// Model Trip
+{
+  "id": 1,
+  "title": "Liburan Bali",
+  "start_date": "2025-08-10",
+  "end_date": "2025-08-17",
+  "destinations": ["Ubud", "Kuta"],
+  "budget": 5000000,
+  "activities": [
+    {
+      "day": 1,
+      "items": [
+        {"time": "09:00", "place": "Pantai Kuta", "notes": "Surfing"}
+      ]
+    }
+  ]
+}</pre>
+          </div>
+
+          <div class="mt-4 bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+            <h4 class="font-semibold text-yellow-800">📁 Persyaratan Pengumpulan:</h4>
+            <ul class="list-disc ml-5 text-sm text-yellow-700">
+              <li>Source code Flutter lengkap</li>
+              <li>Source code backend (API) + dokumentasi Postman</li>
+              <li>Screenshot 10 fitur utama</li>
+            </ul>
+          </div>
+
         </div>
-      </div>
-    `,
-    code: `// Contoh struktur penjualan
-        Map<String, dynamic> transaksi = {
-          "id": 1,
-          "produk": [
-            {"nama": "Laptop", "qty": 2, "harga": 5000000}
-          ],
-          "total": 10000000,
-          "tanggal": "2025-07-09"
-        };
+      `,
+      code: `// Contoh model trip
+          class Trip {
+            final String id;
+            final String title;
+            final List<Destination> destinations;
+            
+            Trip({required this.id, required this.title, required this.destinations});
+            
+            factory Trip.fromJson(Map<String, dynamic> json) {
+              return Trip(
+                id: json['id'],
+                title: json['title'],
+                destinations: List<Destination>.from(
+                  json['destinations'].map((x) => Destination.fromJson(x))
+                ),
+              );
+            }
+          }
 
-        // Simpan token dari login
-        String? token = "eyJhbGciOiJIUzI1NiIs..."; // JWT Token
-
-        // Contoh grafik data
-        List<Map<String, dynamic>> chartData = [
-          {"label": "Laptop", "value": 30},
-          {"label": "Smartphone", "value": 20},
-        ];`,
-    language: "dart",
-    type: "question",
-    submitLink: "https://drive.google.com/drive/folders/1bQvP2eTiPUvAr49VIHWav_PZ9tWmhFAV"
-  }
-]
-
-
-
+          // Contoh API call
+          Future<List<Trip>> fetchUserTrips(String userId) async {
+            final response = await http.get(
+              Uri.parse('https://your-api.com/users/$userId/trips'),
+              headers: {'Authorization': 'Bearer $token'},
+            );
+            // ... handle response
+          }`,
+      language: "dart",
+      type: "question",
+      submitLink: "https://drive.google.com/drive/folders/1TRAVELPLANNER_UAS_FLUTTER_2025"
+    }
+  ]
 };
