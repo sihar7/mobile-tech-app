@@ -1717,7 +1717,6 @@ export const pertemuanData = {
             <h4 class="font-semibold text-yellow-800">📁 Persyaratan Pengumpulan:</h4>
             <ul class="list-disc ml-5 text-sm text-yellow-700">
               <li>Source code Flutter lengkap</li>
-              <li>Source code backend (API) + dokumentasi Postman</li>
               <li>Screenshot 10 fitur utama</li>
             </ul>
           </div>
