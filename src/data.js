@@ -1669,7 +1669,7 @@ export const pertemuanData = {
               <h3 class="text-lg font-semibold text-orange-700">9. Weather Forecast</h3>
               <ul class="list-disc ml-5 mt-1 text-orange-800">
                 <li>Prediksi cuaca</li>
-                <li>Notifikasi perubahan</li>
+                <li>Notifikasi perubahan (opsional)</li>
               </ul>
             </div>
             <div class="bg-gray-50 p-4 rounded">
