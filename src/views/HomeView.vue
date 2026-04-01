@@ -207,7 +207,7 @@ const formatClosingDate = (week) => {
   return formatDate(closingDate);
 };
 
-// Hitung sisa waktu
+// Hitung sisa waktu dengan format fleksibel (hari/jam/menit/detik)
 const calculateTimeRemaining = (week) => {
   if (!isUnlocked(week) || week.id === 15 || isExpired(week)) return null;
   
@@ -219,24 +219,32 @@ const calculateTimeRemaining = (week) => {
   
   if (diff <= 0) return null;
   
-  const hours = Math.floor(diff / (1000 * 60 * 60));
-  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+  // Hitung semua unit
+  const totalSeconds = Math.floor(diff / 1000);
+  const days = Math.floor(totalSeconds / (24 * 3600));
+  const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
   
-  return { hours, minutes, seconds, total: diff };
+  return { days, hours, minutes, seconds, total: diff };
 };
 
-// Format sisa waktu untuk ditampilkan
+// Format sisa waktu dengan logika fleksibel:
+// - Jika masih > 24 jam: tampilkan hari
+// - Jika < 24 jam: tampilkan jam dan menit
+// - Jika < 1 jam: tampilkan menit dan detik
 const getTimeRemaining = (week) => {
   const remaining = timeRemaining.value[week.id];
   if (!remaining) return '';
   
-  if (remaining.hours > 0) {
-    return `${remaining.hours}h ${remaining.minutes}m`;
-  } else if (remaining.minutes > 0) {
-    return `${remaining.minutes}m ${remaining.seconds}s`;
+  const { days, hours, minutes, seconds } = remaining;
+  
+  if (days > 0) {
+    return `${days} hari ${hours} jam`;
+  } else if (hours > 0) {
+    return `${hours} jam ${minutes} menit`;
   } else {
-    return `${remaining.seconds}s`;
+    return `${minutes} menit ${seconds} detik`;
   }
 };
 
@@ -253,7 +261,9 @@ const getTimerProgress = (week) => {
   
   const totalDuration = closingDate - openDate;
   const elapsed = totalDuration - remaining.total;
-  const percentage = (elapsed / totalDuration) * 100;
+  let percentage = (elapsed / totalDuration) * 100;
+  // Batasi percentage antara 0 dan 100
+  percentage = Math.min(100, Math.max(0, percentage));
   
   const circumference = 2 * Math.PI * 45; // 2 * π * r = 283
   const offset = circumference - (percentage / 100) * circumference;
@@ -736,6 +746,7 @@ onUnmounted(() => {
   font-weight: 700;
   color: var(--accent);
   display: block;
+  white-space: nowrap;
 }
 
 /* ─── Status ─────────────────────────────────── */
@@ -849,6 +860,7 @@ onUnmounted(() => {
   .stats-bar { padding: 6px 12px; }
   .stat-item { padding: 0 10px; }
   .timer-wrapper { width: 70px; height: 70px; }
+  .timer-value { font-size: 0.7rem; white-space: normal; word-break: keep-all; }
 }
 
 @media (max-width: 480px) {
@@ -857,7 +869,8 @@ onUnmounted(() => {
   .header-title { font-size: 1.6rem; }
   .week-card { padding: 16px; }
   .timer-wrapper { width: 60px; height: 60px; }
-  .timer-value { font-size: 0.65rem; }
+  .timer-value { font-size: 0.6rem; }
+  .timer-label { font-size: 0.5rem; }
 }
 
 /* Dark mode adjustments */
