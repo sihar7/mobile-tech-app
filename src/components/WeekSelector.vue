@@ -25,25 +25,28 @@
       @click.prevent="handleClick(week)"
     >
       <span class="text-xl font-bold tracking-wide">
-        Pertemuan {{ week.id }}<span v-if="week.id === 15"> (Perbaikan)</span>
+        Pertemuan {{ week.id }}<span v-if="week.id === 15"></span>
       </span>
 
-      <!-- Ikon liburan -->
+      <!-- Ikon liburan - Fixed colors for light/dark mode -->
       <span
         v-if="isHolidayUnlocked(week.date)"
-        class="absolute top-2 left-2 text-2xl opacity-90 text-green-500"
+        class="absolute top-2 left-2 text-2xl opacity-90"
+        :class="isDarkMode ? 'text-green-500' : 'text-green-600'"
       >🌴</span>
 
-      <!-- Ikon lewat -->
+      <!-- Ikon lewat - Fixed colors for light/dark mode -->
       <span
         v-if="isPast(week)"
-        class="absolute top-2 right-2 text-2xl opacity-90 text-red-500"
+        class="absolute top-2 right-2 text-2xl opacity-90"
+        :class="isDarkMode ? 'text-red-500' : 'text-red-600'"
       >❌</span>
 
-      <!-- Ikon khusus minggu perbaikan -->
+      <!-- Ikon khusus minggu perbaikan - Fixed colors for light/dark mode -->
       <span
         v-if="week.id === 15"
-        class="absolute bottom-2 right-2 text-2xl opacity-90 text-emerald-500"
+        class="absolute bottom-2 right-2 text-2xl opacity-90"
+        :class="isDarkMode ? 'text-emerald-500' : 'text-emerald-600'"
       >✅</span>
 
       <!-- Overlay terkunci -->
