@@ -2,9 +2,9 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/views/HomeView.vue";
 import WeekPage from "@/views/WeekView.vue";
 
-const startDate = new Date(2025, 2, 12); // 12 Maret 2025
-const holidayStart = new Date(2025, 2, 26); // 26 Maret 2025
-const holidayEnd = new Date(2025, 3, 15); // 15 April 2025
+const startDate = new Date(2026, 2, 25); // 25 Maret 2026 → Pertemuan 1
+const holidayStart = new Date(2026, 11, 24); // Geser libur agar tidak bentrok
+const holidayEnd = new Date(2026, 11, 31);
 const today = new Date();
 const currentHour = today.getHours();
 const currentMinutes = today.getMinutes();

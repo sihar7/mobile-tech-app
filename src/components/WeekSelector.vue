@@ -77,9 +77,9 @@ const router = useRouter();
 const today = new Date();
 
 // Tanggal awal dan libur
-const startDate = new Date(2025, 2, 12); // 12 Maret 2025
-const holidayStart = new Date(2025, 2, 26); // Libur mulai 26 Maret
-const holidayEnd = new Date(2025, 3, 15); // Libur selesai 15 April
+const startDate = new Date(2026, 2, 25); // 25 Maret 2026 → Pertemuan 1
+const holidayStart = new Date(2026, 11, 24); // geser libur jauh agar tidak mengganggu
+const holidayEnd = new Date(2026, 11, 31);
 
 // Generate 15 minggu
 const weeks = [];
