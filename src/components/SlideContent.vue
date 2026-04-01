@@ -1,240 +1,358 @@
 <template>
-  <div class="modern-learning-container" :class="{ 'dark-mode': isDarkMode }">
-    <!-- Header dengan Progress & Controls -->
-    <div class="learning-header">
-      <div class="header-left">
-        <button @click="goBack" class="icon-btn glass-effect" aria-label="Kembali">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="icon">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+  <div class="ios-learning-container" :class="{ 'dark-mode': isDarkMode }">
+    <!-- Dynamic Header with Progress -->
+    <header class="ios-header" :style="{ paddingTop: safeAreaTop + 'px' }">
+      <div class="header-content">
+        <button @click="goBack" class="ios-icon-btn" aria-label="Kembali">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 18l-6-6 6-6" />
           </svg>
         </button>
         
-        <div class="progress-info">
-          <div class="progress-stats">
-            <span class="stat-badge gradient-text">{{ activeIndex + 1 }}/{{ slides.length }}</span>
-            <span class="stat-label">Materi</span>
-            <div class="completion-badge" v-if="completionRate > 0">
-              <span class="completion-percent">{{ completionRate }}%</span>
-              <span class="completion-label">Selesai</span>
-            </div>
+        <div class="header-progress">
+          <div class="progress-ring">
+            <svg viewBox="0 0 36 36" class="progress-svg">
+              <path class="progress-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              <path class="progress-fill" :stroke-dasharray="`${progressPercentage}, 100`" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              <text x="18" y="20.35" class="progress-text">{{ Math.round(progressPercentage) }}%</text>
+            </svg>
           </div>
-          <div class="progress-bar-modern">
-            <div class="progress-fill" :style="{ width: progressPercentage + '%' }">
-              <div class="progress-glow"></div>
-            </div>
+          <div class="progress-stats">
+            <span class="material-counter">{{ activeIndex + 1 }}/{{ slides.length }}</span>
+            <span class="completion-badge" v-if="completionRate > 0">
+              <span class="completion-icon">✅</span>
+              <span>{{ completionRate }}% selesai</span>
+            </span>
           </div>
         </div>
+
+        <div class="header-actions">
+          <button @click="toggleViewMode" class="ios-icon-btn" aria-label="Mode tampilan">
+            <svg v-if="viewMode === 'grid'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="3" y="3" width="7" height="7" rx="1" />
+              <rect x="14" y="3" width="7" height="7" rx="1" />
+              <rect x="3" y="14" width="7" height="7" rx="1" />
+              <rect x="14" y="14" width="7" height="7" rx="1" />
+            </svg>
+            <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 6h18M3 12h18M3 18h18" />
+            </svg>
+          </button>
+        </div>
       </div>
-      
-      <div class="header-right">
-        <button @click="toggleViewMode" class="icon-btn glass-effect" aria-label="View Mode">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="icon">
-            <path v-if="viewMode === 'grid'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-            <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-        <button @click="toggleFullscreen" class="icon-btn glass-effect" :aria-label="isFullscreen ? 'Keluar Fullscreen' : 'Fullscreen'">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="icon">
-            <path v-if="!isFullscreen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-            <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-    </div>
+    </header>
 
     <!-- Main Content Area -->
-    <div class="learning-main">
-      <!-- Sidebar Navigation -->
-      <div class="sidebar-modern" :class="{ collapsed: isSidebarCollapsed }">
-        <button @click="toggleSidebar" class="sidebar-toggle" aria-label="Toggle Sidebar">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="icon-small">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="isSidebarCollapsed ? 'M13 5l7 7-7 7M5 5l7 7-7 7' : 'M11 19l-7-7 7-7m8 14l-7-7 7-7'" />
-          </svg>
-        </button>
+    <main class="ios-main">
+      <!-- Material Navigation Tray -->
+      <div class="material-tray" :class="{ collapsed: isTrayCollapsed }">
+        <div class="tray-handle" @click="toggleTray">
+          <div class="handle-bar"></div>
+          <span class="tray-label">{{ isTrayCollapsed ? 'Buka daftar materi' : 'Tutup' }}</span>
+        </div>
         
-        <div class="sidebar-content" :class="{ hidden: isSidebarCollapsed }">
-          <div class="sidebar-header">
-            <h3 class="sidebar-title">Daftar Materi</h3>
-            <span class="material-count">{{ slides.length }} item</span>
+        <div class="tray-content" :class="{ hidden: isTrayCollapsed }">
+          <div class="tray-header">
+            <h3 class="tray-title">📚 Daftar Materi</h3>
+            <span class="tray-badge">{{ slides.length }} pertemuan</span>
           </div>
           
-          <div class="material-list">
-            <button
-              v-for="(slide, index) in slides"
-              :key="index"
-              @click="selectMaterial(index)"
-              :class="['material-item', { active: activeIndex === index, completed: slide.completed }]"
+          <div class="material-scroll">
+            <div
+              v-for="(slide, idx) in slides"
+              :key="idx"
+              @click="selectMaterial(idx)"
+              :class="['material-card', { 
+                active: activeIndex === idx, 
+                completed: slide.completed,
+                'has-notes': slide.userNotes?.length > 0
+              }]"
             >
-              <div class="material-icon">
-                <svg v-if="slide.type === 'question'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="icon-small">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <svg v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="icon-small">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
+              <div class="material-card-left">
+                <div class="material-number">{{ idx + 1 }}</div>
+                <div class="material-info">
+                  <span class="material-type" :class="slide.type">
+                    {{ slide.type === 'question' ? '📝 Latihan' : '📖 Materi' }}
+                  </span>
+                  <span class="material-title">{{ slide.title }}</span>
+                </div>
               </div>
-              <div class="material-info">
-                <span class="material-badge">{{ slide.type === 'question' ? 'Soal' : 'Materi' }}</span>
-                <span class="material-title">{{ slide.title }}</span>
+              <div class="material-card-right">
+                <div v-if="slide.completed" class="check-indicator">✓</div>
+                <div v-else-if="slide.userNotes?.length > 0" class="notes-indicator">📝</div>
+                <div v-else class="progress-dot" :class="{ active: activeIndex === idx }"></div>
               </div>
-              <div v-if="slide.completed" class="material-check">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="icon-small">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-            </button>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Content Area -->
-      <div class="content-modern" :class="{ 'full-width': isSidebarCollapsed, 'grid-view': viewMode === 'grid' }">
-        <Transition name="slide-fade" mode="out-in">
-          <div v-if="activeIndex !== null && slides[activeIndex]" class="material-content" :key="activeIndex">
-            <!-- Header Content -->
-            <div class="content-header animate-in">
-              <div class="content-badge">
-                <span class="badge" :class="slides[activeIndex].type === 'question' ? 'badge-question' : 'badge-material'">
-                  <span class="badge-icon">{{ slides[activeIndex].type === 'question' ? '📝' : '📚' }}</span>
-                  {{ slides[activeIndex].type === 'question' ? 'Latihan Soal' : 'Materi Pembelajaran' }}
-                </span>
-                <span class="content-number">Pertemuan {{ activeIndex + 1 }}</span>
-                <button v-if="slides[activeIndex].type === 'question'" @click="markAsCompleted" class="complete-btn" :class="{ completed: slides[activeIndex].completed }">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>{{ slides[activeIndex].completed ? 'Sudah Selesai' : 'Tandai Selesai' }}</span>
+      <div class="content-area" :class="{ 'grid-mode': viewMode === 'grid', 'tray-collapsed': isTrayCollapsed }">
+        <Transition name="fade-slide" mode="out-in">
+          <div v-if="activeSlide" class="material-view" :key="activeIndex">
+            <!-- Hero Section -->
+            <div class="hero-section">
+              <div class="hero-badge">
+                <span class="badge-icon">{{ activeSlide.type === 'question' ? '📝' : '📘' }}</span>
+                <span class="badge-text">{{ activeSlide.type === 'question' ? 'Latihan Soal' : 'Materi Pembelajaran' }}</span>
+                <span class="badge-number">Pertemuan {{ activeIndex + 1 }}</span>
+              </div>
+              <h1 class="hero-title">{{ activeSlide.title }}</h1>
+              
+              <div class="hero-actions">
+                <button 
+                  v-if="activeSlide.type === 'question'" 
+                  @click="markAsCompleted" 
+                  :class="['action-btn', { completed: activeSlide.completed }]"
+                >
+                  <span class="btn-icon">{{ activeSlide.completed ? '✅' : '○' }}</span>
+                  <span>{{ activeSlide.completed ? 'Selesai' : 'Tandai Selesai' }}</span>
+                </button>
+                <button 
+                  v-if="getPlainTextDescription(activeSlide.description)" 
+                  @click="toggleSpeech" 
+                  class="action-btn speech-btn"
+                  :class="{ active: isSpeaking }"
+                >
+                  <span class="btn-icon">🔊</span>
+                  <span>{{ isSpeaking ? 'Berhenti' : 'Dengarkan' }}</span>
+                </button>
+                <button 
+                  v-if="activeSlide.description" 
+                  @click="openSummaryModal" 
+                  class="action-btn summary-btn"
+                >
+                  <span class="btn-icon">✨</span>
+                  <span>Ringkasan AI</span>
                 </button>
               </div>
-              <h1 class="content-title gradient-text">{{ slides[activeIndex].title }}</h1>
             </div>
 
-            <!-- Media Content -->
-            <div v-if="slides[activeIndex].image || getYouTubeVideoId(slides[activeIndex].video)" class="media-container">
-              <!-- Image -->
-              <div v-if="slides[activeIndex].image" class="image-wrapper">
-                <img :src="slides[activeIndex].image" :alt="slides[activeIndex].title" class="content-image" />
-                <div class="image-overlay"></div>
+            <!-- Media Section -->
+            <div v-if="activeSlide.image || getYouTubeVideoId(activeSlide.video)" class="media-section">
+              <div v-if="activeSlide.image" class="image-card">
+                <img :src="activeSlide.image" :alt="activeSlide.title" @click="expandImage = activeSlide.image" />
+                <div class="image-caption" v-if="activeSlide.imageCaption">{{ activeSlide.imageCaption }}</div>
               </div>
-
-              <!-- YouTube Video -->
-              <div v-if="getYouTubeVideoId(slides[activeIndex].video)" class="video-wrapper">
+              <div v-if="getYouTubeVideoId(activeSlide.video)" class="video-card">
                 <Youtube
-                  :video-id="getYouTubeVideoId(slides[activeIndex].video)"
+                  :video-id="getYouTubeVideoId(activeSlide.video)"
                   :player-vars="playerVars"
-                  :key="slides[activeIndex].video"
                   class="youtube-player"
                 />
               </div>
             </div>
 
-            <!-- Description -->
-            <div class="description-wrapper glass-effect">
-              <div class="description-content" v-html="currentDescription"></div>
+            <!-- Description with Comprehension Tools -->
+            <div class="description-section" v-if="activeSlide.description">
+              <div class="section-header">
+                <h2>📖 Materi Pembahasan</h2>
+                <div class="comprehension-tools">
+                  <button @click="toggleHighlightMode" :class="{ active: highlightMode }" class="tool-btn">
+                    <span>🖍️</span> Sorot
+                  </button>
+                  <button @click="openNoteModal" class="tool-btn">
+                    <span>📝</span> Catatan
+                  </button>
+                  <button @click="openQuestionModal" class="tool-btn">
+                    <span>💭</span> Tanya
+                  </button>
+                </div>
+              </div>
               
-              <Transition name="fade">
-                <button
-                  v-if="slides[activeIndex].description && slides[activeIndex].description.length > 300"
-                  @click="toggleExpand(activeIndex)"
-                  class="expand-btn interactive"
-                >
-                  <span>{{ isExpanded[activeIndex] ? 'Tampilkan Ringkas' : 'Lihat Selengkapnya' }}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="icon-small">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="isExpanded[activeIndex] ? 'M5 15l7-7 7 7' : 'M19 9l-7 7-7-7'" />
-                  </svg>
-                </button>
-              </Transition>
+              <div 
+                ref="descriptionRef"
+                class="description-content"
+                :class="{ 'highlight-mode': highlightMode }"
+                @mouseup="handleTextSelection"
+                v-html="processedDescription"
+              ></div>
+              
+              <button 
+                v-if="getPlainTextDescription(activeSlide.description).length > 500" 
+                @click="toggleExpand" 
+                class="expand-toggle"
+              >
+                <span>{{ isExpanded ? 'Tampilkan ringkas' : 'Baca selengkapnya' }}</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path :d="isExpanded ? 'M5 15l7-7 7 7' : 'M19 9l-7 7-7-7'" />
+                </svg>
+              </button>
             </div>
 
             <!-- Code Block -->
-            <div v-if="slides[activeIndex].code && slides[activeIndex].language" class="code-wrapper">
+            <div v-if="activeSlide.code" class="code-section">
               <div class="code-header">
-                <span class="code-language">{{ slides[activeIndex].language }}</span>
-                <button @click="copyCode(slides[activeIndex].code)" class="copy-btn">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="icon-small">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                <span class="code-lang">{{ activeSlide.language || 'code' }}</span>
+                <button @click="copyCode(activeSlide.code)" class="copy-code-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                   </svg>
-                  Copy
+                  Salin
                 </button>
               </div>
-              <CodeBlock :code="slides[activeIndex].code" :language="slides[activeIndex].language" />
+              <CodeBlock :code="activeSlide.code" :language="activeSlide.language" />
+            </div>
+
+            <!-- User Notes Display -->
+            <div v-if="activeSlide.userNotes?.length" class="notes-section">
+              <div class="section-header">
+                <h2>📔 Catatan Kamu</h2>
+                <button @click="openNoteModal" class="add-note-btn">+ Tambah</button>
+              </div>
+              <div class="notes-list">
+                <div v-for="(note, idx) in activeSlide.userNotes" :key="idx" class="note-item">
+                  <div class="note-header">
+                    <span class="note-date">{{ formatDate(note.date) }}</span>
+                    <button @click="deleteNote(idx)" class="delete-note">✕</button>
+                  </div>
+                  <p class="note-text">{{ note.content }}</p>
+                </div>
+              </div>
             </div>
 
             <!-- Submit Link -->
-            <div v-if="slides[activeIndex].type === 'question' && slides[activeIndex].submitLink" class="submit-wrapper">
-              <a :href="slides[activeIndex].submitLink" target="_blank" class="submit-btn interactive" rel="noopener noreferrer">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="icon">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            <div v-if="activeSlide.submitLink" class="submit-section">
+              <a :href="activeSlide.submitLink" target="_blank" class="submit-btn" rel="noopener noreferrer">
+                <span>📤 Kumpulkan Tugas</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 3v12m0 0-3-3m3 3 3-3M5 21h14" />
                 </svg>
-                Kumpulkan Jawaban via Google Drive
-                <span class="btn-glow"></span>
               </a>
+              <p class="submit-hint">Kumpulkan jawaban melalui Google Drive sebelum batas waktu</p>
             </div>
 
-            <!-- Navigation Buttons -->
-            <div class="navigation-buttons">
+            <!-- Navigation -->
+            <div class="navigation-section">
               <button 
                 @click="previousMaterial" 
                 :disabled="activeIndex === 0"
-                class="nav-btn"
-                :class="{ disabled: activeIndex === 0 }"
+                class="nav-btn prev"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="icon-small">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 18l-6-6 6-6" />
                 </svg>
-                Sebelumnya
+                <span>Sebelumnya</span>
               </button>
               
-              <div class="nav-center-info">
-                <span class="nav-indicator">{{ activeIndex + 1 }} of {{ slides.length }}</span>
+              <div class="nav-indicators">
                 <div class="nav-dots">
-                  <span v-for="i in slides.length" :key="i" class="nav-dot" :class="{ active: i - 1 === activeIndex, completed: slides[i - 1]?.completed }"></span>
+                  <span 
+                    v-for="i in slides.length" 
+                    :key="i" 
+                    class="nav-dot" 
+                    :class="{ 
+                      active: i - 1 === activeIndex,
+                      completed: slides[i - 1]?.completed
+                    }"
+                    @click="selectMaterial(i - 1)"
+                  ></span>
                 </div>
               </div>
               
               <button 
                 @click="nextMaterial" 
                 :disabled="activeIndex === slides.length - 1"
-                class="nav-btn"
-                :class="{ disabled: activeIndex === slides.length - 1 }"
+                class="nav-btn next"
               >
-                Selanjutnya
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="icon-small">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                <span>Selanjutnya</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 18l6-6-6-6" />
                 </svg>
               </button>
             </div>
           </div>
           
           <!-- Empty State -->
-          <div v-else class="empty-state glass-effect animate-in">
-            <div class="empty-animation">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="empty-icon">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
-            </div>
-            <h3>Mulai Perjalanan Belajarmu</h3>
-            <p>Pilih materi dari sidebar untuk memulai pembelajaran interaktif</p>
+          <div v-else class="empty-state">
+            <div class="empty-icon">📚</div>
+            <h3>Mulai Belajar</h3>
+            <p>Pilih materi dari daftar di atas untuk memulai pembelajaran</p>
           </div>
         </Transition>
       </div>
-    </div>
+    </main>
 
-    <!-- Floating Progress Indicator -->
-    <div class="floating-progress" :style="{ transform: `scale(${hoverProgress ? 1.1 : 1})` }" @mouseenter="hoverProgress = true" @mouseleave="hoverProgress = false">
-      <div class="floating-ring">
-        <svg viewBox="0 0 36 36" class="circular-chart">
-          <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-          <path class="circle" :stroke-dasharray="`${progressPercentage}, 100`" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-          <text x="18" y="20.35" class="percentage">{{ Math.round(progressPercentage) }}%</text>
-        </svg>
+    <!-- Modals -->
+    <Teleport to="body">
+      <!-- Note Modal -->
+      <div v-if="showNoteModal" class="ios-modal" @click.self="showNoteModal = false">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>📝 Tambah Catatan</h3>
+            <button @click="showNoteModal = false" class="modal-close">✕</button>
+          </div>
+          <textarea 
+            v-model="noteContent" 
+            class="note-textarea" 
+            placeholder="Tulis catatanmu di sini...\n\n💡 Tips: Catat poin-poin penting yang kamu pelajari"
+            rows="6"
+          ></textarea>
+          <div class="modal-footer">
+            <button class="modal-btn cancel" @click="showNoteModal = false">Batal</button>
+            <button class="modal-btn save" @click="saveNote">Simpan Catatan</button>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <!-- Question Modal -->
+      <div v-if="showQuestionModal" class="ios-modal" @click.self="showQuestionModal = false">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>💭 Ajukan Pertanyaan</h3>
+            <button @click="showQuestionModal = false" class="modal-close">✕</button>
+          </div>
+          <textarea 
+            v-model="questionContent" 
+            class="note-textarea" 
+            placeholder="Tulis pertanyaanmu di sini...\n\nContoh: Apa perbedaan antara variabel let dan const?"
+            rows="4"
+          ></textarea>
+          <div class="modal-footer">
+            <button class="modal-btn cancel" @click="showQuestionModal = false">Batal</button>
+            <button class="modal-btn save" @click="submitQuestion">Kirim Pertanyaan</button>
+          </div>
+          <p class="modal-hint">Pertanyaan akan disimpan dan bisa kamu diskusikan dengan teman</p>
+        </div>
+      </div>
+
+      <!-- Summary Modal -->
+      <div v-if="showSummaryModal" class="ios-modal" @click.self="showSummaryModal = false">
+        <div class="modal-content summary-modal">
+          <div class="modal-header">
+            <h3>✨ Ringkasan Materi</h3>
+            <button @click="showSummaryModal = false" class="modal-close">✕</button>
+          </div>
+          <div class="summary-content" v-if="aiSummary">
+            <div class="summary-point" v-for="(point, idx) in aiSummary" :key="idx">
+              <span class="point-icon">{{ idx + 1 }}.</span>
+              <p>{{ point }}</p>
+            </div>
+          </div>
+          <div v-else class="summary-loading">
+            <div class="loading-spinner"></div>
+            <p>Membuat ringkasan pintar...</p>
+          </div>
+          <div class="modal-footer">
+            <button class="modal-btn copy" @click="copySummary">📋 Salin Ringkasan</button>
+            <button class="modal-btn close" @click="showSummaryModal = false">Tutup</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Image Expand Modal -->
+      <div v-if="expandImage" class="image-expand-modal" @click="expandImage = null">
+        <img :src="expandImage" alt="Preview" />
+        <button class="close-expand">✕</button>
+      </div>
+    </Teleport>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch, inject } from "vue";
+import { ref, computed, onMounted, onUnmounted, watch, nextTick, inject } from "vue";
 import { useRouter } from "vue-router";
 import CodeBlock from "@/components/CodeBlock.vue";
 import Youtube from "vue3-youtube";
@@ -243,60 +361,120 @@ import Swal from 'sweetalert2';
 const props = defineProps({
   slides: {
     type: Array,
-    default: () => [],
-  },
+    required: true,
+    default: () => []
+  }
 });
 
 const router = useRouter();
 const isDarkMode = inject("isDarkMode", ref(false));
 
-// State Management
-const activeIndex = ref(null);
-const isExpanded = ref([]);
-const isFullscreen = ref(false);
-const isSidebarCollapsed = ref(false);
+// ========== State ==========
+const activeIndex = ref(0);
+const isExpanded = ref(false);
+const isTrayCollapsed = ref(false);
 const viewMode = ref('list');
-const hoverProgress = ref(false);
+const highlightMode = ref(false);
+const isSpeaking = ref(false);
+let speechSynth = null;
+let speechUtterance = null;
 
-// Computed Properties
+// Notes & Questions
+const showNoteModal = ref(false);
+const showQuestionModal = ref(false);
+const showSummaryModal = ref(false);
+const noteContent = ref('');
+const questionContent = ref('');
+const aiSummary = ref(null);
+
+// Image expand
+const expandImage = ref(null);
+
+// Safe area for iOS
+const safeAreaTop = ref(0);
+
+// DOM refs
+const descriptionRef = ref(null);
+
+// ========== Helper Functions ==========
+// Strip HTML tags from description for speech synthesis and summary
+const stripHtmlTags = (html) => {
+  if (!html) return '';
+  // Remove HTML tags
+  let text = html.replace(/<[^>]*>/g, ' ');
+  // Remove extra whitespace
+  text = text.replace(/\s+/g, ' ').trim();
+  // Decode HTML entities
+  text = text.replace(/&nbsp;/g, ' ')
+             .replace(/&amp;/g, '&')
+             .replace(/&lt;/g, '<')
+             .replace(/&gt;/g, '>')
+             .replace(/&quot;/g, '"')
+             .replace(/&#39;/g, "'");
+  return text;
+};
+
+// Get plain text description without HTML
+const getPlainTextDescription = (html) => {
+  return stripHtmlTags(html);
+};
+
+// ========== Computed ==========
+const activeSlide = computed(() => props.slides[activeIndex.value]);
+
 const progressPercentage = computed(() => {
-  if (!props.slides.length || activeIndex.value === null) return 0;
+  if (!props.slides.length) return 0;
   return ((activeIndex.value + 1) / props.slides.length) * 100;
 });
 
 const completionRate = computed(() => {
   if (!props.slides.length) return 0;
-  const completed = props.slides.filter(slide => slide.completed).length;
+  const completed = props.slides.filter(s => s.completed).length;
   return Math.round((completed / props.slides.length) * 100);
 });
 
-const currentDescription = computed(() => {
-  if (activeIndex.value === null) return '';
-  const slide = props.slides[activeIndex.value];
-  if (!slide || !slide.description) return '';
-  return isExpanded.value[activeIndex.value] 
-    ? slide.description 
-    : shortenText(slide.description, 300);
+const processedDescription = computed(() => {
+  if (!activeSlide.value?.description) return '';
+  let desc = activeSlide.value.description;
+  
+  // Add highlights for saved highlights
+  if (activeSlide.value.highlights) {
+    activeSlide.value.highlights.forEach(highlight => {
+      const regex = new RegExp(`(${highlight.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+      desc = desc.replace(regex, '<mark class="user-highlight">$1</mark>');
+    });
+  }
+  
+  const plainTextLength = getPlainTextDescription(desc).length;
+  if (!isExpanded.value && plainTextLength > 500) {
+    // Find a good cut point (after a paragraph or sentence)
+    let cutPoint = 500;
+    const lastPeriod = desc.lastIndexOf('.', 500);
+    const lastTag = desc.lastIndexOf('>', 500);
+    if (lastPeriod > 400) cutPoint = lastPeriod + 1;
+    else if (lastTag > 400) cutPoint = lastTag + 1;
+    
+    return desc.substring(0, cutPoint) + '...';
+  }
+  return desc;
 });
 
-// Methods
-const shortenText = (text, maxLength) => {
-  if (!text) return '';
-  return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
-};
-
+// ========== Methods ==========
 const selectMaterial = (index) => {
   activeIndex.value = index;
+  isExpanded.value = false;
   if (window.innerWidth < 768) {
-    isSidebarCollapsed.value = true;
+    isTrayCollapsed.value = true;
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  stopSpeaking();
 };
 
 const previousMaterial = () => {
   if (activeIndex.value > 0) {
     activeIndex.value--;
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    stopSpeaking();
   }
 };
 
@@ -304,6 +482,7 @@ const nextMaterial = () => {
   if (activeIndex.value < props.slides.length - 1) {
     activeIndex.value++;
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    stopSpeaking();
   } else if (activeIndex.value === props.slides.length - 1) {
     showCompletionCelebration();
   }
@@ -311,27 +490,26 @@ const nextMaterial = () => {
 
 const showCompletionCelebration = () => {
   Swal.fire({
-    title: '🎓 Selamat!',
-    html: 'Anda telah menyelesaikan semua materi!<br><strong>Terima kasih telah belajar bersama kami</strong>',
+    title: '🎉 Selamat!',
+    html: 'Kamu telah menyelesaikan semua materi!<br><strong>Terus belajar dan berkembang!</strong>',
     icon: 'success',
     confirmButtonText: 'Kembali ke Beranda',
-    confirmButtonColor: '#10b981',
-    backdrop: true,
-    allowOutsideClick: false,
+    confirmButtonColor: '#007aff',
+    background: isDarkMode.value ? '#1c1c1e' : '#ffffff',
   }).then(() => {
     router.push("/");
   });
 };
 
 const markAsCompleted = () => {
-  if (activeIndex.value !== null) {
-    props.slides[activeIndex.value].completed = !props.slides[activeIndex.value].completed;
-    localStorage.setItem(`material_${activeIndex.value}_completed`, props.slides[activeIndex.value].completed);
+  if (activeSlide.value) {
+    activeSlide.value.completed = !activeSlide.value.completed;
+    localStorage.setItem(`material_${activeIndex.value}_completed`, activeSlide.value.completed);
     
     Swal.fire({
-      title: props.slides[activeIndex.value].completed ? '✅ Selamat!' : '📝 Materi',
-      text: props.slides[activeIndex.value].completed ? 'Materi telah ditandai selesai. Lanjutkan ke materi berikutnya!' : 'Materi ditandai belum selesai',
-      icon: props.slides[activeIndex.value].completed ? 'success' : 'info',
+      title: activeSlide.value.completed ? '✅ Selesai!' : '📖 Materi',
+      text: activeSlide.value.completed ? 'Materi ditandai selesai. Lanjutkan ke materi berikutnya!' : 'Materi ditandai belum selesai',
+      icon: activeSlide.value.completed ? 'success' : 'info',
       toast: true,
       timer: 2000,
       showConfirmButton: false,
@@ -340,8 +518,8 @@ const markAsCompleted = () => {
   }
 };
 
-const toggleExpand = (index) => {
-  isExpanded.value[index] = !isExpanded.value[index];
+const toggleExpand = () => {
+  isExpanded.value = !isExpanded.value;
 };
 
 const toggleViewMode = () => {
@@ -349,51 +527,249 @@ const toggleViewMode = () => {
   localStorage.setItem('learning_view_mode', viewMode.value);
 };
 
+const toggleTray = () => {
+  isTrayCollapsed.value = !isTrayCollapsed.value;
+};
+
+const toggleHighlightMode = () => {
+  highlightMode.value = !highlightMode.value;
+  if (!highlightMode.value) {
+    document.body.style.userSelect = '';
+  } else {
+    document.body.style.userSelect = 'text';
+  }
+};
+
+const handleTextSelection = () => {
+  if (!highlightMode.value) return;
+  
+  const selection = window.getSelection();
+  const selectedText = selection.toString().trim();
+  
+  if (selectedText.length > 0 && selectedText.length < 200) {
+    Swal.fire({
+      title: 'Sorot teks ini?',
+      text: `"${selectedText.substring(0, 100)}${selectedText.length > 100 ? '...' : ''}"`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sorot',
+      cancelButtonText: 'Batal',
+      confirmButtonColor: '#007aff',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (!activeSlide.value.highlights) activeSlide.value.highlights = [];
+        if (!activeSlide.value.highlights.includes(selectedText)) {
+          activeSlide.value.highlights.push(selectedText);
+          localStorage.setItem(`material_${activeIndex.value}_highlights`, JSON.stringify(activeSlide.value.highlights));
+        }
+        selection.removeAllRanges();
+      }
+    });
+  }
+};
+
+// Speech Synthesis - Fixed to use plain text without HTML
+const toggleSpeech = () => {
+  if (!window.speechSynthesis) {
+    Swal.fire('Maaf', 'Browser tidak mendukung text-to-speech', 'info');
+    return;
+  }
+  
+  if (isSpeaking.value) {
+    stopSpeaking();
+  } else {
+    startSpeaking();
+  }
+};
+
+const startSpeaking = () => {
+  const htmlText = activeSlide.value.description;
+  if (!htmlText) return;
+  
+  // Get plain text without HTML tags
+  const plainText = getPlainTextDescription(htmlText);
+  
+  if (!plainText.trim()) {
+    Swal.fire('Info', 'Tidak ada teks yang dapat dibacakan', 'info');
+    return;
+  }
+  
+  stopSpeaking();
+  
+  // Use Web Speech API
+  speechUtterance = new SpeechSynthesisUtterance(plainText);
+  speechUtterance.lang = 'id-ID';
+  speechUtterance.rate = 0.9;
+  speechUtterance.pitch = 1;
+  speechUtterance.onend = () => {
+    isSpeaking.value = false;
+  };
+  speechUtterance.onerror = (event) => {
+    console.error('Speech error:', event);
+    isSpeaking.value = false;
+  };
+  
+  window.speechSynthesis.speak(speechUtterance);
+  isSpeaking.value = true;
+};
+
+const stopSpeaking = () => {
+  if (window.speechSynthesis) {
+    window.speechSynthesis.cancel();
+  }
+  isSpeaking.value = false;
+};
+
+// Notes
+const openNoteModal = () => {
+  noteContent.value = '';
+  showNoteModal.value = true;
+};
+
+const saveNote = () => {
+  if (!noteContent.value.trim()) {
+    Swal.fire('Catatan kosong', 'Tulis sesuatu untuk dicatat', 'info');
+    return;
+  }
+  
+  if (!activeSlide.value.userNotes) activeSlide.value.userNotes = [];
+  activeSlide.value.userNotes.push({
+    content: noteContent.value.trim(),
+    date: new Date().toISOString()
+  });
+  
+  localStorage.setItem(`material_${activeIndex.value}_notes`, JSON.stringify(activeSlide.value.userNotes));
+  showNoteModal.value = false;
+  noteContent.value = '';
+  
+  Swal.fire({
+    title: 'Catatan tersimpan!',
+    text: 'Catatanmu sudah disimpan',
+    icon: 'success',
+    toast: true,
+    timer: 1500,
+    showConfirmButton: false,
+  });
+};
+
+const deleteNote = (idx) => {
+  activeSlide.value.userNotes.splice(idx, 1);
+  localStorage.setItem(`material_${activeIndex.value}_notes`, JSON.stringify(activeSlide.value.userNotes));
+};
+
+// Questions
+const openQuestionModal = () => {
+  questionContent.value = '';
+  showQuestionModal.value = true;
+};
+
+const submitQuestion = () => {
+  if (!questionContent.value.trim()) {
+    Swal.fire('Pertanyaan kosong', 'Tulis pertanyaanmu terlebih dahulu', 'info');
+    return;
+  }
+  
+  if (!activeSlide.value.questions) activeSlide.value.questions = [];
+  activeSlide.value.questions.push({
+    content: questionContent.value.trim(),
+    date: new Date().toISOString()
+  });
+  
+  localStorage.setItem(`material_${activeIndex.value}_questions`, JSON.stringify(activeSlide.value.questions));
+  showQuestionModal.value = false;
+  questionContent.value = '';
+  
+  Swal.fire({
+    title: 'Pertanyaan terkirim!',
+    text: 'Pertanyaanmu akan membantu pemahaman materi',
+    icon: 'success',
+    toast: true,
+    timer: 1500,
+    showConfirmButton: false,
+  });
+};
+
+// AI Summary - Fixed to use plain text without HTML
+const openSummaryModal = () => {
+  showSummaryModal.value = true;
+  generateSummary();
+};
+
+const generateSummary = () => {
+  aiSummary.value = null;
+  
+  // Simulate AI processing
+  setTimeout(() => {
+    const htmlText = activeSlide.value.description;
+    if (htmlText) {
+      // Get plain text without HTML tags
+      const plainText = getPlainTextDescription(htmlText);
+      
+      if (plainText.trim()) {
+        // Extract key points from plain text
+        const sentences = plainText.split(/[.!?]+/).filter(s => s.trim().length > 30);
+        const keyPoints = sentences.slice(0, 5).map(s => s.trim());
+        
+        if (keyPoints.length) {
+          aiSummary.value = keyPoints;
+        } else {
+          // Fallback summary based on title
+          aiSummary.value = [
+            `Materi "${activeSlide.value.title}" membahas konsep penting yang perlu dipahami.`,
+            'Pastikan untuk mempelajari contoh-contoh yang diberikan dengan seksama.',
+            'Latihan soal akan membantu memperkuat pemahaman Anda terhadap materi ini.'
+          ];
+        }
+      } else {
+        aiSummary.value = [
+          `Materi "${activeSlide.value.title}" berisi informasi penting yang perlu dipelajari.`,
+          'Tidak ada deskripsi teks yang dapat diringkas untuk materi ini.',
+          'Silakan baca materi secara langsung untuk memahami konsep yang disampaikan.'
+        ];
+      }
+    } else {
+      aiSummary.value = [
+        `Materi "${activeSlide.value.title || 'ini'}" tidak memiliki deskripsi teks untuk diringkas.`,
+        'Fokus pada kode contoh yang disediakan untuk memahami implementasinya.',
+        'Praktik langsung adalah cara terbaik untuk menguasai materi ini.'
+      ];
+    }
+  }, 1500);
+};
+
+const copySummary = () => {
+  if (aiSummary.value) {
+    const summaryText = aiSummary.value.map((p, i) => `${i + 1}. ${p}`).join('\n');
+    navigator.clipboard.writeText(summaryText);
+    Swal.fire({
+      title: 'Tersalin!',
+      text: 'Ringkasan sudah disalin ke clipboard',
+      icon: 'success',
+      toast: true,
+      timer: 1500,
+      showConfirmButton: false,
+    });
+  }
+};
+
+// Copy code
 const copyCode = async (code) => {
   try {
     await navigator.clipboard.writeText(code);
     Swal.fire({
       title: 'Berhasil!',
-      text: 'Kode berhasil disalin ke clipboard',
+      text: 'Kode berhasil disalin',
       icon: 'success',
       toast: true,
-      timer: 2000,
+      timer: 1500,
       showConfirmButton: false,
-      position: 'top-end',
     });
   } catch (err) {
-    Swal.fire({
-      title: 'Gagal!',
-      text: 'Gagal menyalin kode',
-      icon: 'error',
-      toast: true,
-      timer: 2000,
-      showConfirmButton: false,
-      position: 'top-end',
-    });
+    Swal.fire('Gagal', 'Tidak dapat menyalin kode', 'error');
   }
 };
 
-const toggleSidebar = () => {
-  isSidebarCollapsed.value = !isSidebarCollapsed.value;
-};
-
-const handleFullscreenChange = () => {
-  isFullscreen.value = !!document.fullscreenElement;
-};
-
-const toggleFullscreen = () => {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen().catch(console.error);
-  } else {
-    document.exitFullscreen().catch(console.error);
-  }
-};
-
-const goBack = () => {
-  router.push("/");
-};
-
+// YouTube helper
 const getYouTubeVideoId = (url) => {
   if (!url) return null;
   const regExp = /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
@@ -409,551 +785,605 @@ const playerVars = {
   showinfo: 0,
 };
 
-const handleResize = () => {
-  if (window.innerWidth < 768) {
-    isSidebarCollapsed.value = true;
-  }
+// Format date
+const formatDate = (isoString) => {
+  if (!isoString) return '';
+  const date = new Date(isoString);
+  return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
 };
 
+// Go back
+const goBack = () => {
+  router.push("/");
+};
+
+// Load saved data
 const loadSavedProgress = () => {
-  props.slides.forEach((slide, index) => {
-    const saved = localStorage.getItem(`material_${index}_completed`);
-    if (saved === 'true') {
-      slide.completed = true;
-    }
+  props.slides.forEach((slide, idx) => {
+    const completed = localStorage.getItem(`material_${idx}_completed`);
+    if (completed === 'true') slide.completed = true;
+    
+    const notes = localStorage.getItem(`material_${idx}_notes`);
+    if (notes) slide.userNotes = JSON.parse(notes);
+    
+    const highlights = localStorage.getItem(`material_${idx}_highlights`);
+    if (highlights) slide.highlights = JSON.parse(highlights);
+    
+    const questions = localStorage.getItem(`material_${idx}_questions`);
+    if (questions) slide.questions = JSON.parse(questions);
   });
   
   const savedViewMode = localStorage.getItem('learning_view_mode');
-  if (savedViewMode) {
-    viewMode.value = savedViewMode;
+  if (savedViewMode) viewMode.value = savedViewMode;
+};
+
+// iOS safe area
+const getSafeArea = () => {
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  if (isIOS && window.visualViewport) {
+    safeAreaTop.value = window.visualViewport.offsetTop;
   }
 };
 
-// Lifecycle
+// ========== Lifecycle ==========
 onMounted(() => {
   loadSavedProgress();
-  document.addEventListener("fullscreenchange", handleFullscreenChange);
-  window.addEventListener("resize", handleResize);
-  isExpanded.value = Array(props.slides.length).fill(false);
-  handleResize();
+  getSafeArea();
   
-  if (props.slides.length > 0 && activeIndex.value === null) {
-    activeIndex.value = 0;
+  if (props.slides.length === 0) {
+    console.warn('No slides provided to LearningView');
   }
 });
 
 onUnmounted(() => {
-  document.removeEventListener("fullscreenchange", handleFullscreenChange);
-  window.removeEventListener("resize", handleResize);
-});
-
-watch(activeIndex, (newIndex) => {
-  if (newIndex !== null) {
-    isExpanded.value[newIndex] = false;
-  }
+  stopSpeaking();
+  document.body.style.userSelect = '';
 });
 </script>
 
 <style scoped>
-/* ===================== VARIABLES & BASE ===================== */
-.modern-learning-container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 1.5rem;
+/* ========== iOS Design System ========== */
+:root {
+  --ios-blue: #007aff;
+  --ios-green: #34c759;
+  --ios-orange: #ff9500;
+  --ios-red: #ff3b30;
+  --ios-gray: #8e8e93;
+  --ios-light-gray: #e5e5ea;
+  --ios-bg-light: #f2f2f6;
+  --ios-bg-dark: #000000;
+  --ios-surface-light: #ffffff;
+  --ios-surface-dark: #1c1c1e;
+  --ios-border-light: rgba(60, 60, 67, 0.08);
+  --ios-border-dark: rgba(84, 84, 88, 0.2);
+  --ios-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.08);
+  --ios-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.ios-learning-container {
   min-height: 100vh;
-  color: var(--text-primary);
-  transition: var(--transition);
-  position: relative;
+  background: var(--bg-base);
+  transition: background 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* ===================== GLASS EFFECT ===================== */
-.glass-effect {
-  background: var(--surface);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--surface-border);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+/* Dark mode overrides */
+.dark-mode {
+  --ios-bg: var(--ios-bg-dark);
+  --ios-surface: var(--ios-surface-dark);
+  --ios-border: var(--ios-border-dark);
 }
 
-.glass-effect:hover {
-  border-color: var(--accent);
-  box-shadow: 0 8px 32px var(--accent-soft);
+/* ========== Header ========== */
+.ios-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-base);
+  backdrop-filter: blur(20px);
+  border-bottom: 0.5px solid var(--surface-border);
+  padding: 8px 16px;
 }
 
-/* ===================== HEADER ===================== */
-.learning-header {
+.header-content {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid var(--surface-border);
-  flex-wrap: wrap;
-  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.header-left {
+.ios-icon-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  flex: 1;
-  min-width: 200px;
+  justify-content: center;
+  transition: all 0.2s ease;
+  color: var(--text-primary);
 }
 
-.progress-info {
-  flex: 1;
-  max-width: 500px;
+.ios-icon-btn:active {
+  transform: scale(0.95);
+  background: var(--surface-border);
+}
+
+.ios-icon-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Progress Ring */
+.header-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-ring {
+  width: 48px;
+  height: 48px;
+}
+
+.progress-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.progress-bg {
+  fill: none;
+  stroke: var(--surface-border);
+  stroke-width: 2.5;
+}
+
+.progress-fill {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.5s ease;
+}
+
+.progress-text {
+  fill: var(--text-primary);
+  font-size: 8px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  font-weight: 600;
 }
 
 .progress-stats {
   display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  margin-bottom: 0.5rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
 }
 
-.stat-badge {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--accent);
-  letter-spacing: -0.02em;
-}
-
-.gradient-text {
-  background: linear-gradient(135deg, var(--accent), #8b5cf6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.stat-label {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 500;
+.material-counter {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
 .completion-badge {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.25rem;
-  background: var(--accent-soft);
-  padding: 0.25rem 0.75rem;
-  border-radius: 100px;
-}
-
-.completion-percent {
-  font-size: 0.875rem;
-  font-weight: 700;
+  font-size: 0.7rem;
   color: var(--accent);
-}
-
-.completion-label {
-  font-size: 0.625rem;
-  color: var(--text-secondary);
-}
-
-.progress-bar-modern {
-  height: 6px;
-  background: var(--surface-border);
-  border-radius: 3px;
-  overflow: hidden;
-  position: relative;
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent), #8b5cf6);
-  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 3px;
-  position: relative;
-  overflow: hidden;
-}
-
-.progress-glow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(90deg, 
-    rgba(255,255,255,0) 0%, 
-    rgba(255,255,255,0.3) 50%, 
-    rgba(255,255,255,0) 100%);
-  animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-/* ===================== ICON BUTTONS ===================== */
-.icon-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  color: var(--text-primary);
-  background: var(--surface);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--surface-border);
-}
-
-.icon-btn:hover {
   background: var(--accent-soft);
-  border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
+  padding: 2px 8px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.icon {
-  width: 20px;
-  height: 20px;
-  stroke: currentColor;
+/* ========== Main Layout ========== */
+.ios-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 16px;
 }
 
-.icon-small {
-  width: 16px;
-  height: 16px;
-  stroke: currentColor;
-}
-
-/* ===================== MAIN LAYOUT ===================== */
-.learning-main {
-  display: flex;
-  gap: 2rem;
-  position: relative;
-}
-
-.content-modern {
-  flex: 1;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.content-modern.full-width {
-  margin-left: 0;
-}
-
-.content-modern.grid-view .material-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-/* ===================== SIDEBAR ===================== */
-.sidebar-modern {
-  position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  width: 320px;
-  flex-shrink: 0;
-}
-
-.sidebar-modern.collapsed {
-  width: 50px;
-}
-
-.sidebar-toggle {
-  position: absolute;
-  top: 12px;
-  right: -12px;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
+/* Material Tray */
+.material-tray {
   background: var(--surface);
-  border: 2px solid var(--surface-border);
-  cursor: pointer;
+  border-radius: 24px;
+  margin-bottom: 24px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--ios-shadow);
+}
+
+.tray-handle {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
-  transition: var(--transition);
-  color: var(--text-primary);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(8px);
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-radius: 24px;
 }
 
-.sidebar-toggle:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: white;
-  transform: scale(1.1);
+.tray-handle:active {
+  background: var(--surface-border);
 }
 
-.sidebar-content {
-  background: var(--surface);
-  backdrop-filter: blur(20px);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  transition: var(--transition);
-  border: 1px solid var(--surface-border);
+.handle-bar {
+  width: 36px;
+  height: 4px;
+  background: var(--text-muted);
+  border-radius: 4px;
+  opacity: 0.5;
 }
 
-.sidebar-content.hidden {
-  opacity: 0;
-  visibility: hidden;
-  width: 0;
-}
-
-.sidebar-header {
-  padding: 1.25rem;
-  border-bottom: 1px solid var(--surface-border);
-  background: linear-gradient(135deg, var(--surface), var(--accent-soft));
-}
-
-.sidebar-title {
-  font-size: 1.125rem;
-  font-weight: 700;
-  margin: 0 0 0.25rem 0;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-}
-
-.material-count {
+.tray-label {
   font-size: 0.75rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
-.material-list {
-  max-height: calc(100vh - 200px);
-  overflow-y: auto;
+.tray-content {
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border-top: 0.5px solid var(--surface-border);
 }
 
-.material-item {
-  width: 100%;
+.tray-content.hidden {
+  display: none;
+}
+
+.tray-header {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  transition: var(--transition);
-  text-align: left;
-  border-bottom: 1px solid var(--surface-border);
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 16px 20px 8px;
+}
+
+.tray-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
   color: var(--text-primary);
-  position: relative;
 }
 
-.material-item:hover {
-  background: var(--accent-soft);
-  transform: translateX(4px);
+.tray-badge {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  background: var(--surface-border);
+  padding: 2px 8px;
+  border-radius: 20px;
 }
 
-.material-item.active {
+.material-scroll {
+  max-height: 280px;
+  overflow-y: auto;
+  padding: 0 8px 12px;
+}
+
+.material-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  margin: 4px 0;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--surface);
+}
+
+.material-card:active {
+  transform: scale(0.98);
+  background: var(--surface-border);
+}
+
+.material-card.active {
   background: var(--accent-soft);
   border-left: 3px solid var(--accent);
 }
 
-.material-item.completed {
+.material-card.completed {
   opacity: 0.7;
 }
 
-.material-icon {
-  flex-shrink: 0;
-}
-
-.material-info {
+.material-card-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   flex: 1;
 }
 
-.material-badge {
-  font-size: 0.625rem;
-  font-weight: 700;
-  text-transform: uppercase;
+.material-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  background: var(--surface-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.material-card.active .material-number {
+  background: var(--accent);
+  color: white;
+}
+
+.material-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.material-type {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+.material-type.materi {
   color: var(--accent);
-  display: block;
-  margin-bottom: 0.25rem;
-  letter-spacing: 0.05em;
+}
+
+.material-type.question {
+  color: var(--ios-orange);
 }
 
 .material-title {
   font-size: 0.875rem;
   font-weight: 500;
-  line-height: 1.3;
+  color: var(--text-primary);
 }
 
-.material-check {
-  color: #10b981;
+.material-card-right {
   flex-shrink: 0;
 }
 
-/* ===================== CONTENT ===================== */
-.material-content {
-  animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-in {
-  animation: fadeInUp 0.5s ease-out;
-}
-
-.content-header {
-  margin-bottom: 2rem;
-}
-
-.content-badge {
+.check-indicator {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--ios-green);
+  color: white;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
 }
 
-.badge {
-  padding: 0.5rem 1rem;
-  border-radius: 100px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  display: inline-flex;
+.notes-indicator {
+  font-size: 16px;
+}
+
+.progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.progress-dot.active {
+  background: var(--accent);
+  width: 10px;
+  height: 10px;
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* Content Area */
+.content-area {
+  transition: all 0.3s ease;
+}
+
+.content-area.grid-mode .material-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.content-area.grid-mode .hero-section,
+.content-area.grid-mode .media-section,
+.content-area.grid-mode .description-section,
+.content-area.grid-mode .code-section,
+.content-area.grid-mode .notes-section,
+.content-area.grid-mode .submit-section,
+.content-area.grid-mode .navigation-section {
+  grid-column: 1 / -1;
+}
+
+/* Hero Section */
+.hero-section {
+  margin-bottom: 24px;
+}
+
+.hero-badge {
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
-}
-
-.badge-material {
-  background: linear-gradient(135deg, var(--accent), #8b5cf6);
-  color: white;
-}
-
-.badge-question {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  color: white;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
 }
 
 .badge-icon {
   font-size: 1rem;
 }
 
-.content-number {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-
-.complete-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: var(--surface);
-  border: 1px solid var(--surface-border);
-  border-radius: 100px;
-  cursor: pointer;
+.badge-text {
   font-size: 0.75rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
+  font-weight: 600;
+  background: var(--accent-soft);
+  padding: 4px 12px;
+  border-radius: 20px;
+  color: var(--accent);
+}
+
+.badge-number {
+  font-size: 0.75rem;
   color: var(--text-secondary);
 }
 
-.complete-btn svg {
-  width: 14px;
-  height: 14px;
-}
-
-.complete-btn:hover {
-  background: var(--accent-soft);
-  border-color: var(--accent);
-  transform: translateY(-2px);
-}
-
-.complete-btn.completed {
-  background: #10b98120;
-  border-color: #10b981;
-  color: #10b981;
-}
-
-.content-title {
-  font-size: clamp(1.5rem, 5vw, 2.5rem);
-  font-weight: 800;
-  margin: 0;
-  line-height: 1.2;
+.hero-title {
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
+  font-weight: 700;
+  margin: 12px 0 16px;
   color: var(--text-primary);
+  line-height: 1.3;
   letter-spacing: -0.02em;
 }
 
-/* Media */
-.media-container {
-  margin-bottom: 2rem;
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
-.image-wrapper {
-  position: relative;
-  border-radius: var(--radius-lg);
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 40px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: var(--surface);
+  border: 0.5px solid var(--surface-border);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-primary);
+}
+
+.action-btn:active {
+  transform: scale(0.96);
+}
+
+.action-btn.completed {
+  background: var(--ios-green);
+  border-color: var(--ios-green);
+  color: white;
+}
+
+.speech-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.summary-btn {
+  background: linear-gradient(135deg, var(--accent), #8b5cf6);
+  border: none;
+  color: white;
+}
+
+/* Media Section */
+.media-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.image-card {
+  border-radius: 24px;
   overflow: hidden;
-  background: var(--surface-border);
+  background: var(--surface);
+  box-shadow: var(--ios-shadow);
   cursor: pointer;
 }
 
-.content-image {
+.image-card img {
   width: 100%;
   height: auto;
   display: block;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s ease;
 }
 
-.image-wrapper:hover .content-image {
-  transform: scale(1.05);
+.image-card:active img {
+  transform: scale(1.02);
 }
 
-.image-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.2));
-  pointer-events: none;
+.image-caption {
+  padding: 12px 16px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  background: var(--surface);
+  border-top: 0.5px solid var(--surface-border);
 }
 
-.video-wrapper {
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
+.video-card {
+  border-radius: 24px;
   overflow: hidden;
-  border-radius: var(--radius-lg);
+  background: #000;
+  aspect-ratio: 16 / 9;
 }
 
 .youtube-player {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  border-radius: var(--radius-lg);
 }
 
-/* Description */
-.description-wrapper {
-  border-radius: var(--radius-lg);
-  padding: 1.75rem;
-  margin-bottom: 1.5rem;
+/* Description Section */
+.description-section {
   background: var(--surface);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--surface-border);
+  border-radius: 24px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--ios-shadow);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.section-header h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.comprehension-tools {
+  display: flex;
+  gap: 8px;
+}
+
+.tool-btn {
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  background: var(--surface-border);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tool-btn.active {
+  background: var(--accent);
+  color: white;
+}
+
+.tool-btn:active {
+  transform: scale(0.95);
 }
 
 .description-content {
   font-size: 1rem;
-  line-height: 1.7;
+  line-height: 1.6;
   color: var(--text-primary);
 }
 
@@ -963,173 +1393,227 @@ watch(activeIndex, (newIndex) => {
 
 .description-content :deep(strong) {
   color: var(--accent);
-  font-weight: 700;
+  font-weight: 600;
 }
 
-.expand-btn {
+.description-content :deep(mark.user-highlight) {
+  background: rgba(255, 149, 0, 0.2);
+  border-radius: 4px;
+  padding: 2px 0;
+}
+
+.description-content.highlight-mode {
+  cursor: text;
+  user-select: text;
+}
+
+.expand-toggle {
+  margin-top: 16px;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background: transparent;
-  border: 1px solid var(--surface-border);
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.875rem;
-  font-weight: 500;
+  gap: 6px;
+  background: none;
+  border: none;
   color: var(--accent);
-  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 8px 0;
 }
 
-.expand-btn:hover {
-  background: var(--accent-soft);
-  border-color: var(--accent);
-  transform: translateX(4px);
+.expand-toggle svg {
+  width: 16px;
+  height: 16px;
 }
 
-/* Code Block */
-.code-wrapper {
-  margin-bottom: 1.5rem;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
+/* Code Section */
+.code-section {
   background: #1e1e1e;
-  border: 1px solid var(--surface-border);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 20px;
 }
 
 .code-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 1rem;
+  padding: 12px 16px;
   background: #2d2d2d;
   border-bottom: 1px solid #3d3d3d;
 }
 
-.code-language {
-  font-size: 0.75rem;
-  font-weight: 700;
+.code-lang {
+  font-size: 0.7rem;
+  font-weight: 600;
   color: #9ca3af;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
-.copy-btn {
+.copy-code-btn {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.375rem 0.875rem;
+  gap: 6px;
   background: transparent;
-  border: 1px solid #3d3d3d;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.75rem;
-  font-weight: 500;
+  border: none;
   color: #9ca3af;
-  transition: var(--transition);
+  font-size: 0.7rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: all 0.2s;
 }
 
-.copy-btn:hover {
+.copy-code-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.copy-code-btn:active {
   background: #3d3d3d;
   color: white;
-  transform: translateY(-1px);
 }
 
-/* Submit Button */
-.submit-wrapper {
-  margin: 2rem 0;
+/* Notes Section */
+.notes-section {
+  background: var(--surface);
+  border-radius: 24px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--ios-shadow);
+}
+
+.add-note-btn {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  background: var(--accent-soft);
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.note-item {
+  background: var(--surface-border);
+  border-radius: 16px;
+  padding: 12px;
+}
+
+.note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.note-date {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+}
+
+.delete-note {
+  background: none;
+  border: none;
+  color: var(--ios-red);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.note-text {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+}
+
+/* Submit Section */
+.submit-section {
   text-align: center;
+  margin-bottom: 24px;
+  padding: 20px;
+  background: var(--surface);
+  border-radius: 24px;
+  box-shadow: var(--ios-shadow);
 }
 
 .submit-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.875rem 1.75rem;
-  background: linear-gradient(135deg, #10b981, #059669);
+  gap: 12px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--ios-green), #2e7d32);
   color: white;
   text-decoration: none;
-  border-radius: 12px;
-  font-weight: 700;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
+  border-radius: 60px;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
-.submit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+.submit-btn:active {
+  transform: scale(0.97);
 }
 
-.btn-glow {
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-  transition: left 0.5s ease;
-}
-
-.submit-btn:hover .btn-glow {
-  left: 100%;
+.submit-hint {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 12px;
 }
 
 /* Navigation */
-.navigation-buttons {
+.navigation-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 2px solid var(--surface-border);
+  padding-top: 16px;
+  border-top: 0.5px solid var(--surface-border);
+  margin-top: 16px;
 }
 
 .nav-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.75rem;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 40px;
   background: var(--surface);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--surface-border);
-  border-radius: 12px;
+  border: 0.5px solid var(--surface-border);
   cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s;
+  font-weight: 500;
   color: var(--text-primary);
 }
 
-.nav-btn:hover:not(.disabled) {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
-}
-
-.nav-btn.disabled {
+.nav-btn:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
-.nav-center-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
+.nav-btn:active:not(:disabled) {
+  transform: scale(0.97);
 }
 
-.nav-indicator {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text-secondary);
+.nav-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.nav-indicators {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .nav-dots {
   display: flex;
-  gap: 0.5rem;
+  gap: 8px;
 }
 
 .nav-dot {
@@ -1137,7 +1621,8 @@ watch(activeIndex, (newIndex) => {
   height: 8px;
   border-radius: 50%;
   background: var(--surface-border);
-  transition: all 0.3s ease;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
 .nav-dot.active {
@@ -1146,42 +1631,27 @@ watch(activeIndex, (newIndex) => {
 }
 
 .nav-dot.completed {
-  background: #10b981;
+  background: var(--ios-green);
 }
 
 /* Empty State */
 .empty-state {
   text-align: center;
-  padding: 4rem 2rem;
-  border-radius: var(--radius-lg);
+  padding: 60px 20px;
   background: var(--surface);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--surface-border);
-}
-
-.empty-animation {
-  margin-bottom: 1.5rem;
+  border-radius: 32px;
 }
 
 .empty-icon {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto;
-  color: var(--text-muted);
-  opacity: 0.5;
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  font-size: 4rem;
+  margin-bottom: 16px;
 }
 
 .empty-state h3 {
   font-size: 1.25rem;
-  margin: 0 0 0.5rem 0;
+  font-weight: 600;
+  margin: 0 0 8px;
   color: var(--text-primary);
-  font-weight: 700;
 }
 
 .empty-state p {
@@ -1189,234 +1659,289 @@ watch(activeIndex, (newIndex) => {
   margin: 0;
 }
 
-/* Floating Progress */
-.floating-progress {
+/* ========== Modals ========== */
+.ios-modal {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 1000;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-}
-
-.floating-ring {
-  width: 70px;
-  height: 70px;
-  background: var(--surface);
-  backdrop-filter: blur(20px);
-  border-radius: 50%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--surface-border);
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: var(--surface);
+  border-radius: 28px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--ios-shadow-lg);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px 12px;
+  border-bottom: 0.5px solid var(--surface-border);
+}
+
+.modal-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--surface-border);
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.note-textarea {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  background: var(--surface-border);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  resize: vertical;
+  font-family: inherit;
+  color: var(--text-primary);
+}
+
+.note-textarea:focus {
+  outline: none;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 20px;
+  border-top: 0.5px solid var(--surface-border);
+}
+
+.modal-btn {
+  padding: 10px 20px;
+  border-radius: 40px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.modal-btn.cancel {
+  background: var(--surface-border);
+  color: var(--text-secondary);
+}
+
+.modal-btn.save {
+  background: var(--accent);
+  color: white;
+}
+
+.modal-btn.copy {
+  background: var(--surface-border);
+  color: var(--text-primary);
+}
+
+.modal-btn.close {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.modal-hint {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  padding: 12px 20px 20px;
+  margin: 0;
+  text-align: center;
+}
+
+/* Summary Modal */
+.summary-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.summary-point {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.point-icon {
+  font-weight: 600;
+  color: var(--accent);
+  min-width: 24px;
+}
+
+.summary-point p {
+  margin: 0;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.summary-loading {
+  text-align: center;
+  padding: 40px;
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--surface-border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Image Expand Modal */
+.image-expand-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  cursor: pointer;
+}
+
+.image-expand-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+}
+
+.close-expand {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* ========== Animations ========== */
+.fade-slide-enter-active,
+.fade-slide-leave-active {
   transition: all 0.3s ease;
 }
 
-.floating-progress:hover .floating-ring {
-  transform: scale(1.1);
-  border-color: var(--accent);
-}
-
-.circular-chart {
-  width: 60px;
-  height: 60px;
-}
-
-.circle-bg {
-  fill: none;
-  stroke: var(--surface-border);
-  stroke-width: 2.5;
-}
-
-.circle {
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  transition: stroke-dasharray 0.5s ease;
-}
-
-.percentage {
-  fill: var(--text-primary);
-  font-size: 8px;
-  text-anchor: middle;
-  dominant-baseline: middle;
-  font-weight: bold;
-}
-
-/* Transitions */
-.slide-fade-enter-active,
-.slide-fade-leave-active {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.slide-fade-enter-from {
+.fade-slide-enter-from {
   opacity: 0;
   transform: translateX(20px);
 }
 
-.slide-fade-leave-to {
+.fade-slide-leave-to {
   opacity: 0;
   transform: translateX(-20px);
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-/* ===================== RESPONSIVE ===================== */
-@media (max-width: 1024px) {
-  .modern-learning-container {
-    padding: 1rem;
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .ios-main {
+    padding: 16px;
   }
   
-  .sidebar-modern {
-    width: 280px;
-  }
-}
-
-@media (max-width: 768px) {
-  .modern-learning-container {
-    padding: 0.75rem;
-  }
-
-  .sidebar-modern {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 1000;
-    background: var(--surface);
-    backdrop-filter: blur(20px);
-    box-shadow: var(--shadow);
-    transform: translateX(-100%);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .sidebar-modern:not(.collapsed) {
-    transform: translateX(0);
-  }
-
-  .sidebar-modern.collapsed {
-    width: 0;
-  }
-
-  .sidebar-toggle {
-    display: none;
-  }
-
-  .content-modern {
-    width: 100%;
-  }
-
-  .navigation-buttons {
+  .hero-actions {
     flex-direction: column;
   }
-
-  .nav-btn {
+  
+  .action-btn {
     width: 100%;
     justify-content: center;
   }
   
-  .description-wrapper {
-    padding: 1.25rem;
+  .navigation-section {
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
   }
   
-  .floating-progress {
-    bottom: 1rem;
-    right: 1rem;
+  .nav-btn {
+    padding: 10px 16px;
   }
   
-  .floating-ring {
-    width: 50px;
-    height: 50px;
+  .nav-indicators {
+    order: 3;
+    width: 100%;
+    justify-content: center;
   }
   
-  .circular-chart {
-    width: 40px;
-    height: 40px;
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
   
-  .percentage {
-    font-size: 6px;
+  .comprehension-tools {
+    width: 100%;
+    justify-content: flex-start;
   }
 }
 
 @media (max-width: 480px) {
-  .learning-header {
-    flex-direction: column;
+  .material-card {
+    padding: 10px 12px;
   }
   
-  .header-left {
-    width: 100%;
+  .material-number {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
   }
   
-  .progress-info {
-    max-width: none;
+  .description-content {
+    font-size: 0.875rem;
   }
   
-  .content-title {
-    font-size: 1.25rem;
-  }
-  
-  .badge {
-    font-size: 0.65rem;
-  }
-  
-  .complete-btn span {
-    display: none;
-  }
-  
-  .complete-btn svg {
-    width: 18px;
-    height: 18px;
+  .modal-content {
+    margin: 0 16px;
   }
 }
 
-/* Scrollbar */
+/* ========== Scrollbar ========== */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--surface-border);
-  border-radius: 4px;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-border);
-}
-
-/* Print */
-@media print {
-  .sidebar-modern,
-  .learning-header .header-right,
-  .navigation-buttons,
-  .expand-btn,
-  .complete-btn,
-  .floating-progress {
-    display: none;
-  }
-  
-  .modern-learning-container {
-    padding: 0;
-  }
-  
-  .material-content {
-    page-break-after: avoid;
-  }
+  background: var(--text-muted);
+  border-radius: 3px;
 }
 </style>
