@@ -328,99 +328,107 @@ onUnmounted(() => {
   --radius-xl:  32px;
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-/* ===================== LIGHT MODE (MODERN) ===================== */
+/* ===================== LIGHT MODE (SOFT MODERN) ===================== */
+/* ===================== LIGHT MODE (CLEAN MODERN) ===================== */
 .light {
-  /* Background - modern gradient */
-  --bg-base:      linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #d9f9f9 100%);
-  --bg-mesh-1:    #7dd3fc;
-  --bg-mesh-2:    #5eead4;
-  --bg-mesh-3:    #a5f3fc;
-  --bg-mesh-4:    #99f6e4;
+  /* Background - clean soft blue */
+  --bg-base:      linear-gradient(135deg, #0357a5 0%, #0751b3 50%, #055c96 100%);
 
-  /* Surfaces — modern glass */
-  --surface:         rgba(255, 255, 255, 0.75);
-  --surface-border:  rgba(14, 165, 233, 0.25);
-  --pill-bg:         rgba(255, 255, 255, 0.85);
-  --pill-border:     rgba(14, 165, 233, 0.3);
+  --bg-mesh-1:    #052a57;
+  --bg-mesh-2:    #93c5fd;
+  --bg-mesh-3:    #dbeafe;
+  --bg-mesh-4:    #054774;
 
-  /* Text (TIDAK DIUBAH) */
+  /* Surface - clean glass */
+  --surface:         rgba(255, 255, 255, 0.7);
+  --surface-border:  rgba(148, 163, 184, 0.15);
+  --pill-bg:         rgba(255, 255, 255, 0.8);
+  --pill-border:     rgba(148, 163, 184, 0.2);
+
+  /* Text (tetap) */
   --text-primary:   #0f172a;
   --text-secondary: #334155;
   --text-muted:     #64748b;
 
-  /* Accent - modern cyan/blue */
-  --accent:         #0ea5e9;
-  --accent-soft:    rgba(14, 165, 233, 0.12);
-  --accent-border:  rgba(14, 165, 233, 0.35);
+  /* Accent - satu arah (biru clean) */
+  --accent:         #2563eb;
+  --accent-soft:    rgba(37, 99, 235, 0.08);
+  --accent-border:  rgba(37, 99, 235, 0.25);
 
-  /* Card states */
-  --card-active-bg:      rgba(255, 255, 255, 0.9);
-  --card-active-border:  #0ea5e9;
-  --card-active-shadow:  rgba(14, 165, 233, 0.2);
-  --card-past-bg:        rgba(241, 245, 249, 0.85);
-  --card-past-border:    rgba(100, 116, 139, 0.4);
-  --card-locked-bg:      rgba(241, 245, 249, 0.7);
-  --card-locked-border:  rgba(100, 116, 139, 0.35);
-  --card-time-bg:        rgba(254, 243, 199, 0.85);
+  /* Card */
+  --card-active-bg:      rgba(255, 255, 255, 0.85);
+  --card-active-border:  #5688f3;
+  --card-active-shadow:  rgba(37, 99, 235, 0.15);
+
+  --card-past-bg:        rgba(248, 250, 252, 0.8);
+  --card-past-border:    rgba(148, 163, 184, 0.25);
+
+  --card-locked-bg:      rgba(248, 250, 252, 0.6);
+  --card-locked-border:  rgba(148, 163, 184, 0.2);
+
+  --card-time-bg:        rgba(254, 243, 199, 0.8);
   --card-time-border:    rgba(245, 158, 11, 0.4);
 
   /* Overlay */
-  --overlay-bg:    rgba(224, 242, 254, 0.95);
+  --overlay-bg:    rgba(248, 250, 252, 0.85);
   --overlay-title: #0f172a;
   --overlay-date:  #334155;
 
-  /* Shadow */
-  --shadow:    0 8px 32px rgba(14, 165, 233, 0.12);
-  --shadow-sm: 0 2px 12px rgba(14, 165, 233, 0.08);
-  --shadow-lg: 0 20px 40px rgba(14, 165, 233, 0.15);
+  /* Shadow - clean */
+  --shadow:    0 8px 24px rgba(0, 0, 0, 0.06);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.08);
 }
 
-/* ===================== DARK MODE (MODERN) ===================== */
-.dark {
-  /* Background - modern dark gradient */
-  --bg-base:      linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0c4a6e 100%);
-  --bg-mesh-1:    #1e3a8a;
-  --bg-mesh-2:    #2d4a6e;
-  --bg-mesh-3:    #155e75;
-  --bg-mesh-4:    #1e40af;
 
-  /* Surfaces - modern dark glass */
-  --surface:         rgba(15, 23, 42, 0.75);
-  --surface-border:  rgba(56, 189, 248, 0.2);
-  --pill-bg:         rgba(30, 41, 59, 0.85);
-  --pill-border:     rgba(56, 189, 248, 0.25);
+/* ===================== DARK MODE (SOFT MODERN) ===================== */
+.dark {
+  /* Background - deep soft gradient */
+  --bg-base:      linear-gradient(135deg, #0f172a 0%, #1e1b4b 40%, #0f172a 100%);
+  --bg-mesh-1:    #1e293b;
+  --bg-mesh-2:    #312e81;
+  --bg-mesh-3:    #134e4a;
+  --bg-mesh-4:    #1e3a8a;
+
+  /* Surfaces - smooth glass */
+  --surface:         rgba(15, 23, 42, 0.6);
+  --surface-border:  rgba(148, 163, 184, 0.15);
+  --pill-bg:         rgba(30, 41, 59, 0.7);
+  --pill-border:     rgba(148, 163, 184, 0.2);
 
   /* Text (TIDAK DIUBAH) */
   --text-primary:   #e2e8f0;
   --text-secondary: #94a3b8;
   --text-muted:     #64748b;
 
-  /* Accent - modern cyan */
-  --accent:         #38bdf8;
-  --accent-soft:    rgba(56, 189, 248, 0.12);
-  --accent-border:  rgba(56, 189, 248, 0.3);
+  /* Accent - soft neon blue */
+  --accent:         #818cf8;
+  --accent-soft:    rgba(129, 140, 248, 0.12);
+  --accent-border:  rgba(129, 140, 248, 0.25);
 
   /* Card states */
-  --card-active-bg:      rgba(30, 41, 59, 0.85);
-  --card-active-border:  #38bdf8;
-  --card-active-shadow:  rgba(56, 189, 248, 0.2);
-  --card-past-bg:        rgba(15, 23, 42, 0.7);
-  --card-past-border:    rgba(56, 189, 248, 0.15);
-  --card-locked-bg:      rgba(15, 23, 42, 0.6);
-  --card-locked-border:  rgba(56, 189, 248, 0.1);
-  --card-time-bg:        rgba(120, 53, 15, 0.7);
-  --card-time-border:    rgba(249, 115, 22, 0.3);
+  --card-active-bg:      rgba(30, 41, 59, 0.7);
+  --card-active-border:  #818cf8;
+  --card-active-shadow:  rgba(129, 140, 248, 0.2);
+
+  --card-past-bg:        rgba(15, 23, 42, 0.6);
+  --card-past-border:    rgba(148, 163, 184, 0.15);
+
+  --card-locked-bg:      rgba(15, 23, 42, 0.5);
+  --card-locked-border:  rgba(148, 163, 184, 0.1);
+
+  --card-time-bg:        rgba(120, 53, 15, 0.5);
+  --card-time-border:    rgba(251, 146, 60, 0.3);
 
   /* Overlay */
-  --overlay-bg:    rgba(15, 23, 42, 0.9);
+  --overlay-bg:    rgba(15, 23, 42, 0.75);
   --overlay-title: #e2e8f0;
   --overlay-date:  #94a3b8;
 
-  /* Shadow */
-  --shadow:    0 8px 32px rgba(0, 0, 0, 0.4);
-  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.5);
+  /* Shadow lebih halus */
+  --shadow:    0 10px 30px rgba(0, 0, 0, 0.35);
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.45);
 }
 
 /* ===================== RESET ===================== */

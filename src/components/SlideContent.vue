@@ -352,22 +352,45 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch, nextTick, inject } from "vue";
-import { useRouter } from "vue-router";
+import { ref, computed, onMounted, onUnmounted, inject, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import CodeBlock from "@/components/CodeBlock.vue";
 import Youtube from "vue3-youtube";
 import Swal from 'sweetalert2';
+import { pertemuanData } from "@/data.js";
 
-const props = defineProps({
-  slides: {
-    type: Array,
-    required: true,
-    default: () => []
-  }
-});
-
+const route = useRoute();
 const router = useRouter();
 const isDarkMode = inject("isDarkMode", ref(false));
+
+// ========== Data ==========
+const slides = ref(pertemuanData[route.params.id] || []);
+const meetingId = computed(() => parseInt(route.params.id));
+
+// Check if this is a special meeting (week 15)
+const isSpecialMeeting = computed(() => meetingId.value === 15);
+
+// Get meeting description based on the week
+const getMeetingDescription = computed(() => {
+  const descriptions = {
+    1: "Pengenalan dan Dasar-dasar Pemrograman",
+    2: "Struktur Data Dasar",
+    3: "Algoritma Sorting",
+    4: "Algoritma Searching",
+    5: "Pemrograman Berorientasi Objek",
+    6: "Database dan SQL",
+    7: "UI/UX Design Principles",
+    8: "Frontend Development",
+    9: "Backend Development",
+    10: "API Integration",
+    11: "Testing dan Debugging",
+    12: "Version Control dengan Git",
+    13: "Deployment dan Hosting",
+    14: "Final Project Preparation",
+    15: "Ujian Perbaikan dan Remedial"
+  };
+  return descriptions[meetingId.value] || "Materi pembelajaran pertemuan ini";
+});
 
 // ========== State ==========
 const activeIndex = ref(0);
@@ -415,17 +438,17 @@ const getPlainTextDescription = (html) => {
 };
 
 // ========== Computed ==========
-const activeSlide = computed(() => props.slides[activeIndex.value]);
+const activeSlide = computed(() => slides.value[activeIndex.value]);
 
 const progressPercentage = computed(() => {
-  if (!props.slides.length) return 0;
-  return ((activeIndex.value + 1) / props.slides.length) * 100;
+  if (!slides.value.length) return 0;
+  return ((activeIndex.value + 1) / slides.value.length) * 100;
 });
 
 const completionRate = computed(() => {
-  if (!props.slides.length) return 0;
-  const completed = props.slides.filter(s => s.completed).length;
-  return Math.round((completed / props.slides.length) * 100);
+  if (!slides.value.length) return 0;
+  const completed = slides.value.filter(s => s.completed).length;
+  return Math.round((completed / slides.value.length) * 100);
 });
 
 const processedDescription = computed(() => {
@@ -472,11 +495,11 @@ const previousMaterial = () => {
 };
 
 const nextMaterial = () => {
-  if (activeIndex.value < props.slides.length - 1) {
+  if (activeIndex.value < slides.value.length - 1) {
     activeIndex.value++;
     window.scrollTo({ top: 0, behavior: 'smooth' });
     stopSpeaking();
-  } else if (activeIndex.value === props.slides.length - 1) {
+  } else if (activeIndex.value === slides.value.length - 1) {
     showCompletionCelebration();
   }
 };
@@ -774,7 +797,7 @@ const goBack = () => {
 };
 
 const loadSavedProgress = () => {
-  props.slides.forEach((slide, idx) => {
+  slides.value.forEach((slide, idx) => {
     const completed = localStorage.getItem(`material_${idx}_completed`);
     if (completed === 'true') slide.completed = true;
     
@@ -798,6 +821,12 @@ const getSafeArea = () => {
     safeAreaTop.value = window.visualViewport.offsetTop;
   }
 };
+
+// ========== Watch for slide changes to reset expand ==========
+watch(activeIndex, () => {
+  isExpanded.value = false;
+  stopSpeaking();
+});
 
 // ========== Lifecycle ==========
 onMounted(() => {
