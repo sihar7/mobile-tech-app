@@ -1,9 +1,9 @@
 <template>
-  <div class="ios-learning-container" :class="{ 'dark-mode': isDarkMode }">
+  <div class="learning-container" :class="{ 'dark-mode': isDarkMode }">
     <!-- Dynamic Header with Progress -->
-    <header class="ios-header" :style="{ paddingTop: safeAreaTop + 'px' }">
+    <header class="learning-header" :style="{ paddingTop: safeAreaTop + 'px' }">
       <div class="header-content">
-        <button @click="goBack" class="ios-icon-btn" aria-label="Kembali">
+        <button @click="goBack" class="icon-btn" aria-label="Kembali">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M15 18l-6-6 6-6" />
           </svg>
@@ -27,7 +27,7 @@
         </div>
 
         <div class="header-actions">
-          <button @click="toggleViewMode" class="ios-icon-btn" aria-label="Mode tampilan">
+          <button @click="toggleViewMode" class="icon-btn" aria-label="Mode tampilan">
             <svg v-if="viewMode === 'grid'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <rect x="3" y="3" width="7" height="7" rx="1" />
               <rect x="14" y="3" width="7" height="7" rx="1" />
@@ -43,7 +43,7 @@
     </header>
 
     <!-- Main Content Area -->
-    <main class="ios-main">
+    <main class="learning-main">
       <!-- Material Navigation Tray -->
       <div class="material-tray" :class="{ collapsed: isTrayCollapsed }">
         <div class="tray-handle" @click="toggleTray">
@@ -278,7 +278,7 @@
     <!-- Modals -->
     <Teleport to="body">
       <!-- Note Modal -->
-      <div v-if="showNoteModal" class="ios-modal" @click.self="showNoteModal = false">
+      <div v-if="showNoteModal" class="modal-overlay" @click.self="showNoteModal = false">
         <div class="modal-content">
           <div class="modal-header">
             <h3>📝 Tambah Catatan</h3>
@@ -298,7 +298,7 @@
       </div>
 
       <!-- Question Modal -->
-      <div v-if="showQuestionModal" class="ios-modal" @click.self="showQuestionModal = false">
+      <div v-if="showQuestionModal" class="modal-overlay" @click.self="showQuestionModal = false">
         <div class="modal-content">
           <div class="modal-header">
             <h3>💭 Ajukan Pertanyaan</h3>
@@ -319,7 +319,7 @@
       </div>
 
       <!-- Summary Modal -->
-      <div v-if="showSummaryModal" class="ios-modal" @click.self="showSummaryModal = false">
+      <div v-if="showSummaryModal" class="modal-overlay" @click.self="showSummaryModal = false">
         <div class="modal-content summary-modal">
           <div class="modal-header">
             <h3>✨ Ringkasan Materi</h3>
@@ -397,14 +397,10 @@ const safeAreaTop = ref(0);
 const descriptionRef = ref(null);
 
 // ========== Helper Functions ==========
-// Strip HTML tags from description for speech synthesis and summary
 const stripHtmlTags = (html) => {
   if (!html) return '';
-  // Remove HTML tags
   let text = html.replace(/<[^>]*>/g, ' ');
-  // Remove extra whitespace
   text = text.replace(/\s+/g, ' ').trim();
-  // Decode HTML entities
   text = text.replace(/&nbsp;/g, ' ')
              .replace(/&amp;/g, '&')
              .replace(/&lt;/g, '<')
@@ -414,7 +410,6 @@ const stripHtmlTags = (html) => {
   return text;
 };
 
-// Get plain text description without HTML
 const getPlainTextDescription = (html) => {
   return stripHtmlTags(html);
 };
@@ -437,7 +432,6 @@ const processedDescription = computed(() => {
   if (!activeSlide.value?.description) return '';
   let desc = activeSlide.value.description;
   
-  // Add highlights for saved highlights
   if (activeSlide.value.highlights) {
     activeSlide.value.highlights.forEach(highlight => {
       const regex = new RegExp(`(${highlight.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
@@ -447,7 +441,6 @@ const processedDescription = computed(() => {
   
   const plainTextLength = getPlainTextDescription(desc).length;
   if (!isExpanded.value && plainTextLength > 500) {
-    // Find a good cut point (after a paragraph or sentence)
     let cutPoint = 500;
     const lastPeriod = desc.lastIndexOf('.', 500);
     const lastTag = desc.lastIndexOf('>', 500);
@@ -568,7 +561,6 @@ const handleTextSelection = () => {
   }
 };
 
-// Speech Synthesis - Fixed to use plain text without HTML
 const toggleSpeech = () => {
   if (!window.speechSynthesis) {
     Swal.fire('Maaf', 'Browser tidak mendukung text-to-speech', 'info');
@@ -586,7 +578,6 @@ const startSpeaking = () => {
   const htmlText = activeSlide.value.description;
   if (!htmlText) return;
   
-  // Get plain text without HTML tags
   const plainText = getPlainTextDescription(htmlText);
   
   if (!plainText.trim()) {
@@ -596,7 +587,6 @@ const startSpeaking = () => {
   
   stopSpeaking();
   
-  // Use Web Speech API
   speechUtterance = new SpeechSynthesisUtterance(plainText);
   speechUtterance.lang = 'id-ID';
   speechUtterance.rate = 0.9;
@@ -604,8 +594,7 @@ const startSpeaking = () => {
   speechUtterance.onend = () => {
     isSpeaking.value = false;
   };
-  speechUtterance.onerror = (event) => {
-    console.error('Speech error:', event);
+  speechUtterance.onerror = () => {
     isSpeaking.value = false;
   };
   
@@ -620,7 +609,6 @@ const stopSpeaking = () => {
   isSpeaking.value = false;
 };
 
-// Notes
 const openNoteModal = () => {
   noteContent.value = '';
   showNoteModal.value = true;
@@ -657,7 +645,6 @@ const deleteNote = (idx) => {
   localStorage.setItem(`material_${activeIndex.value}_notes`, JSON.stringify(activeSlide.value.userNotes));
 };
 
-// Questions
 const openQuestionModal = () => {
   questionContent.value = '';
   showQuestionModal.value = true;
@@ -689,7 +676,6 @@ const submitQuestion = () => {
   });
 };
 
-// AI Summary - Fixed to use plain text without HTML
 const openSummaryModal = () => {
   showSummaryModal.value = true;
   generateSummary();
@@ -698,22 +684,18 @@ const openSummaryModal = () => {
 const generateSummary = () => {
   aiSummary.value = null;
   
-  // Simulate AI processing
   setTimeout(() => {
     const htmlText = activeSlide.value.description;
     if (htmlText) {
-      // Get plain text without HTML tags
       const plainText = getPlainTextDescription(htmlText);
       
       if (plainText.trim()) {
-        // Extract key points from plain text
         const sentences = plainText.split(/[.!?]+/).filter(s => s.trim().length > 30);
         const keyPoints = sentences.slice(0, 5).map(s => s.trim());
         
         if (keyPoints.length) {
           aiSummary.value = keyPoints;
         } else {
-          // Fallback summary based on title
           aiSummary.value = [
             `Materi "${activeSlide.value.title}" membahas konsep penting yang perlu dipahami.`,
             'Pastikan untuk mempelajari contoh-contoh yang diberikan dengan seksama.',
@@ -723,14 +705,12 @@ const generateSummary = () => {
       } else {
         aiSummary.value = [
           `Materi "${activeSlide.value.title}" berisi informasi penting yang perlu dipelajari.`,
-          'Tidak ada deskripsi teks yang dapat diringkas untuk materi ini.',
           'Silakan baca materi secara langsung untuk memahami konsep yang disampaikan.'
         ];
       }
     } else {
       aiSummary.value = [
-        `Materi "${activeSlide.value.title || 'ini'}" tidak memiliki deskripsi teks untuk diringkas.`,
-        'Fokus pada kode contoh yang disediakan untuk memahami implementasinya.',
+        `Materi "${activeSlide.value.title || 'ini'}" fokus pada kode contoh yang disediakan.`,
         'Praktik langsung adalah cara terbaik untuk menguasai materi ini.'
       ];
     }
@@ -752,7 +732,6 @@ const copySummary = () => {
   }
 };
 
-// Copy code
 const copyCode = async (code) => {
   try {
     await navigator.clipboard.writeText(code);
@@ -769,7 +748,6 @@ const copyCode = async (code) => {
   }
 };
 
-// YouTube helper
 const getYouTubeVideoId = (url) => {
   if (!url) return null;
   const regExp = /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
@@ -785,19 +763,16 @@ const playerVars = {
   showinfo: 0,
 };
 
-// Format date
 const formatDate = (isoString) => {
   if (!isoString) return '';
   const date = new Date(isoString);
   return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
 };
 
-// Go back
 const goBack = () => {
   router.push("/");
 };
 
-// Load saved data
 const loadSavedProgress = () => {
   props.slides.forEach((slide, idx) => {
     const completed = localStorage.getItem(`material_${idx}_completed`);
@@ -817,7 +792,6 @@ const loadSavedProgress = () => {
   if (savedViewMode) viewMode.value = savedViewMode;
 };
 
-// iOS safe area
 const getSafeArea = () => {
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
   if (isIOS && window.visualViewport) {
@@ -829,10 +803,6 @@ const getSafeArea = () => {
 onMounted(() => {
   loadSavedProgress();
   getSafeArea();
-  
-  if (props.slides.length === 0) {
-    console.warn('No slides provided to LearningView');
-  }
 });
 
 onUnmounted(() => {
@@ -842,40 +812,14 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* ========== iOS Design System ========== */
-:root {
-  --ios-blue: #007aff;
-  --ios-green: #34c759;
-  --ios-orange: #ff9500;
-  --ios-red: #ff3b30;
-  --ios-gray: #8e8e93;
-  --ios-light-gray: #e5e5ea;
-  --ios-bg-light: #f2f2f6;
-  --ios-bg-dark: #000000;
-  --ios-surface-light: #ffffff;
-  --ios-surface-dark: #1c1c1e;
-  --ios-border-light: rgba(60, 60, 67, 0.08);
-  --ios-border-dark: rgba(84, 84, 88, 0.2);
-  --ios-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.08);
-  --ios-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
-}
-
-.ios-learning-container {
+/* ========== Container ========== */
+.learning-container {
   min-height: 100vh;
-  background: var(--bg-base);
   transition: background 0.3s ease;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-}
-
-/* Dark mode overrides */
-.dark-mode {
-  --ios-bg: var(--ios-bg-dark);
-  --ios-surface: var(--ios-surface-dark);
-  --ios-border: var(--ios-border-dark);
 }
 
 /* ========== Header ========== */
-.ios-header {
+.learning-header {
   position: sticky;
   top: 0;
   z-index: 100;
@@ -893,12 +837,12 @@ onUnmounted(() => {
   margin: 0 auto;
 }
 
-.ios-icon-btn {
+.icon-btn {
   width: 44px;
   height: 44px;
   border-radius: 50%;
   background: var(--surface);
-  border: none;
+  border: 0.5px solid var(--surface-border);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -907,14 +851,14 @@ onUnmounted(() => {
   color: var(--text-primary);
 }
 
-.ios-icon-btn:active {
+.icon-btn:active {
   transform: scale(0.95);
-  background: var(--surface-border);
 }
 
-.ios-icon-btn svg {
+.icon-btn svg {
   width: 22px;
   height: 22px;
+  stroke: currentColor;
 }
 
 /* Progress Ring */
@@ -982,7 +926,7 @@ onUnmounted(() => {
 }
 
 /* ========== Main Layout ========== */
-.ios-main {
+.learning-main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px 16px;
@@ -994,7 +938,7 @@ onUnmounted(() => {
   border-radius: 24px;
   margin-bottom: 24px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: var(--ios-shadow);
+  box-shadow: var(--shadow);
 }
 
 .tray-handle {
@@ -1078,7 +1022,6 @@ onUnmounted(() => {
 
 .material-card:active {
   transform: scale(0.98);
-  background: var(--surface-border);
 }
 
 .material-card.active {
@@ -1133,7 +1076,7 @@ onUnmounted(() => {
 }
 
 .material-type.question {
-  color: var(--ios-orange);
+  color: var(--ios-orange, #ff9500);
 }
 
 .material-title {
@@ -1150,7 +1093,7 @@ onUnmounted(() => {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--ios-green);
+  background: #34c759;
   color: white;
   display: flex;
   align-items: center;
@@ -1264,8 +1207,8 @@ onUnmounted(() => {
 }
 
 .action-btn.completed {
-  background: var(--ios-green);
-  border-color: var(--ios-green);
+  background: #34c759;
+  border-color: #34c759;
   color: white;
 }
 
@@ -1293,7 +1236,7 @@ onUnmounted(() => {
   border-radius: 24px;
   overflow: hidden;
   background: var(--surface);
-  box-shadow: var(--ios-shadow);
+  box-shadow: var(--shadow);
   cursor: pointer;
 }
 
@@ -1334,7 +1277,7 @@ onUnmounted(() => {
   border-radius: 24px;
   padding: 20px;
   margin-bottom: 20px;
-  box-shadow: var(--ios-shadow);
+  box-shadow: var(--shadow);
 }
 
 .section-header {
@@ -1423,6 +1366,7 @@ onUnmounted(() => {
 .expand-toggle svg {
   width: 16px;
   height: 16px;
+  stroke: currentColor;
 }
 
 /* Code Section */
@@ -1466,6 +1410,7 @@ onUnmounted(() => {
 .copy-code-btn svg {
   width: 14px;
   height: 14px;
+  stroke: currentColor;
 }
 
 .copy-code-btn:active {
@@ -1479,7 +1424,7 @@ onUnmounted(() => {
   border-radius: 24px;
   padding: 20px;
   margin-bottom: 20px;
-  box-shadow: var(--ios-shadow);
+  box-shadow: var(--shadow);
 }
 
 .add-note-btn {
@@ -1520,7 +1465,7 @@ onUnmounted(() => {
 .delete-note {
   background: none;
   border: none;
-  color: var(--ios-red);
+  color: #ff3b30;
   font-size: 12px;
   cursor: pointer;
   padding: 4px;
@@ -1541,7 +1486,7 @@ onUnmounted(() => {
   padding: 20px;
   background: var(--surface);
   border-radius: 24px;
-  box-shadow: var(--ios-shadow);
+  box-shadow: var(--shadow);
 }
 
 .submit-btn {
@@ -1549,7 +1494,7 @@ onUnmounted(() => {
   align-items: center;
   gap: 12px;
   padding: 14px 28px;
-  background: linear-gradient(135deg, var(--ios-green), #2e7d32);
+  background: linear-gradient(135deg, #34c759, #2e7d32);
   color: white;
   text-decoration: none;
   border-radius: 60px;
@@ -1559,6 +1504,10 @@ onUnmounted(() => {
 
 .submit-btn:active {
   transform: scale(0.97);
+}
+
+.submit-btn svg {
+  stroke: white;
 }
 
 .submit-hint {
@@ -1603,6 +1552,7 @@ onUnmounted(() => {
 .nav-btn svg {
   width: 18px;
   height: 18px;
+  stroke: currentColor;
 }
 
 .nav-indicators {
@@ -1631,7 +1581,7 @@ onUnmounted(() => {
 }
 
 .nav-dot.completed {
-  background: var(--ios-green);
+  background: #34c759;
 }
 
 /* Empty State */
@@ -1660,7 +1610,7 @@ onUnmounted(() => {
 }
 
 /* ========== Modals ========== */
-.ios-modal {
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -1682,7 +1632,7 @@ onUnmounted(() => {
   max-width: 500px;
   max-height: 80vh;
   overflow-y: auto;
-  box-shadow: var(--ios-shadow-lg);
+  box-shadow: var(--shadow-lg);
 }
 
 .modal-header {
@@ -1725,6 +1675,10 @@ onUnmounted(() => {
 
 .note-textarea:focus {
   outline: none;
+}
+
+.note-textarea::placeholder {
+  color: var(--text-muted);
 }
 
 .modal-footer {
@@ -1870,7 +1824,7 @@ onUnmounted(() => {
 
 /* ========== Responsive ========== */
 @media (max-width: 768px) {
-  .ios-main {
+  .learning-main {
     padding: 16px;
   }
   
@@ -1928,20 +1882,5 @@ onUnmounted(() => {
   .modal-content {
     margin: 0 16px;
   }
-}
-
-/* ========== Scrollbar ========== */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--text-muted);
-  border-radius: 3px;
 }
 </style>

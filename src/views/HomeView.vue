@@ -424,15 +424,15 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* ─── Layout ─────────────────────────────────── */
+/* Hanya style spesifik untuk Home yang tidak ada di App.vue */
+
+/* Layout */
 .home {
   padding: 32px 28px 40px;
-  font-family: var(--font-body);
-  background: var(--bg-base);
   min-height: 100vh;
 }
 
-/* ─── Header ─────────────────────────────────── */
+/* Header */
 .home-header {
   text-align: center;
   margin-bottom: 36px;
@@ -455,7 +455,8 @@ onUnmounted(() => {
 }
 
 .badge-dot {
-  width: 6px; height: 6px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--accent);
   animation: pulseDot 2s ease-in-out infinite;
@@ -508,7 +509,9 @@ onUnmounted(() => {
   line-height: 1;
 }
 
-.stat-value.stat-active { color: var(--accent); }
+.stat-value.stat-active {
+  color: var(--accent);
+}
 
 .stat-label {
   font-size: 0.68rem;
@@ -525,14 +528,14 @@ onUnmounted(() => {
   flex-shrink: 0;
 }
 
-/* ─── Grid ───────────────────────────────────── */
+/* Grid */
 .week-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
 }
 
-/* ─── Card base ──────────────────────────────── */
+/* Card base */
 .week-card {
   position: relative;
   border-radius: var(--radius-lg);
@@ -552,27 +555,28 @@ onUnmounted(() => {
 
 @keyframes cardReveal {
   from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* ─── States ─────────────────────────────────── */
+/* Card States */
 .state-active {
   background: var(--surface);
   border-color: var(--accent);
   box-shadow: 0 4px 20px color-mix(in srgb, var(--accent) 20%, transparent),
               inset 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent);
 }
+
 .state-active:hover {
   transform: translateY(-4px) scale(1.01);
   box-shadow: 0 12px 32px color-mix(in srgb, var(--accent) 30%, transparent),
               inset 0 0 0 1px color-mix(in srgb, var(--accent) 60%, transparent);
 }
+
 .state-active:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
-/* Tanggal ok tapi jam belum 08.00 */
 .state-time {
   background: color-mix(in srgb, var(--surface) 60%, transparent);
   border-color: color-mix(in srgb, #f59e0b 40%, transparent);
@@ -592,7 +596,7 @@ onUnmounted(() => {
   cursor: not-allowed;
 }
 
-/* ─── Glow ───────────────────────────────────── */
+/* Card Glow */
 .card-glow {
   position: absolute;
   inset: -40px;
@@ -601,7 +605,7 @@ onUnmounted(() => {
   z-index: 0;
 }
 
-/* ─── Badges ─────────────────────────────────── */
+/* Badges */
 .card-badges {
   display: flex;
   gap: 6px;
@@ -643,7 +647,7 @@ onUnmounted(() => {
   border: 1px solid color-mix(in srgb, #f59e0b 30%, transparent);
 }
 
-/* ─── Number ─────────────────────────────────── */
+/* Card Number */
 .card-number {
   display: flex;
   flex-direction: column;
@@ -666,14 +670,18 @@ onUnmounted(() => {
   color: var(--text-primary);
   line-height: 1;
   letter-spacing: -0.04em;
-  transition: color var(--transition);
 }
 
-.state-active .number-value { color: var(--accent); }
-.state-expired .number-value,
-.state-time .number-value { color: #f59e0b; }
+.state-active .number-value {
+  color: var(--accent);
+}
 
-/* ─── Date chip ──────────────────────────────── */
+.state-expired .number-value,
+.state-time .number-value {
+  color: #f59e0b;
+}
+
+/* Date chip */
 .card-date {
   display: flex;
   align-items: center;
@@ -687,9 +695,11 @@ onUnmounted(() => {
   z-index: 1;
 }
 
-.date-icon { font-size: 0.8rem; }
+.date-icon {
+  font-size: 0.8rem;
+}
 
-/* ─── Timer Container ────────────────────────── */
+/* Timer Container */
 .timer-container {
   position: relative;
   z-index: 1;
@@ -749,7 +759,7 @@ onUnmounted(() => {
   white-space: nowrap;
 }
 
-/* ─── Status ─────────────────────────────────── */
+/* Status */
 .card-status {
   display: flex;
   align-items: center;
@@ -762,7 +772,8 @@ onUnmounted(() => {
 }
 
 .status-dot {
-  width: 7px; height: 7px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -772,27 +783,45 @@ onUnmounted(() => {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
   animation: pulseDot 2s infinite;
 }
+
 .status-dot.time,
-.status-dot.expired { background: #f59e0b; }
-.status-dot.locked { background: var(--text-muted); }
+.status-dot.expired {
+  background: #f59e0b;
+}
 
-.status-text { flex: 1; color: var(--text-secondary); }
-.status-icon { margin-left: auto; }
+.status-dot.locked {
+  background: var(--text-muted);
+}
 
-.state-active .status-text { color: var(--accent); }
+.status-text {
+  flex: 1;
+  color: var(--text-secondary);
+}
+
+.status-icon {
+  margin-left: auto;
+}
+
+.state-active .status-text {
+  color: var(--accent);
+}
+
 .state-active .status-icon {
   animation: arrowBounce 1.5s ease-in-out infinite;
   display: inline-block;
 }
+
 .state-time .status-text,
-.state-expired .status-text { color: #f59e0b; }
+.state-expired .status-text {
+  color: #f59e0b;
+}
 
 @keyframes arrowBounce {
   0%, 100% { transform: translateX(0); }
-  50%       { transform: translateX(4px); }
+  50% { transform: translateX(4px); }
 }
 
-/* ─── Closing Info ──────────────────────────── */
+/* Closing Info */
 .closing-info {
   font-size: 0.65rem;
   color: var(--text-muted);
@@ -804,7 +833,7 @@ onUnmounted(() => {
   z-index: 1;
 }
 
-/* ─── Locked overlay ─────────────────────────── */
+/* Locked Overlay */
 .locked-overlay {
   position: absolute;
   inset: 0;
@@ -827,7 +856,9 @@ onUnmounted(() => {
   padding: 0 12px;
 }
 
-.lock-icon { font-size: 1.8rem; }
+.lock-icon {
+  font-size: 1.8rem;
+}
 
 .lock-info {
   display: flex;
@@ -848,37 +879,81 @@ onUnmounted(() => {
   line-height: 1.3;
 }
 
-/* Lock transition */
-.lock-enter-active, .lock-leave-active { transition: opacity 0.3s; }
-.lock-enter-from, .lock-leave-to       { opacity: 0; }
+/* Lock Transition */
+.lock-enter-active,
+.lock-leave-active {
+  transition: opacity 0.3s;
+}
 
-/* ─── Responsive ─────────────────────────────── */
+.lock-enter-from,
+.lock-leave-to {
+  opacity: 0;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .home { padding: 20px 16px 28px; }
-  .week-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
-  .number-value { font-size: 2rem; }
-  .stats-bar { padding: 6px 12px; }
-  .stat-item { padding: 0 10px; }
-  .timer-wrapper { width: 70px; height: 70px; }
-  .timer-value { font-size: 0.7rem; white-space: normal; word-break: keep-all; }
+  .home {
+    padding: 20px 16px 28px;
+  }
+  
+  .week-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+  }
+  
+  .number-value {
+    font-size: 2rem;
+  }
+  
+  .stats-bar {
+    padding: 6px 12px;
+  }
+  
+  .stat-item {
+    padding: 0 10px;
+  }
+  
+  .timer-wrapper {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .timer-value {
+    font-size: 0.7rem;
+    white-space: normal;
+    word-break: keep-all;
+  }
 }
 
 @media (max-width: 480px) {
-  .week-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .home { padding: 16px 12px 24px; }
-  .header-title { font-size: 1.6rem; }
-  .week-card { padding: 16px; }
-  .timer-wrapper { width: 60px; height: 60px; }
-  .timer-value { font-size: 0.6rem; }
-  .timer-label { font-size: 0.5rem; }
-}
-
-/* Dark mode adjustments */
-:deep(.dark-mode) .closing-info {
-  background: color-mix(in srgb, #ffffff 5%, transparent);
-}
-
-:deep(.dark-mode) .timer-bg {
-  stroke: color-mix(in srgb, #ffffff 15%, transparent);
+  .week-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .home {
+    padding: 16px 12px 24px;
+  }
+  
+  .header-title {
+    font-size: 1.6rem;
+  }
+  
+  .week-card {
+    padding: 16px;
+  }
+  
+  .timer-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .timer-value {
+    font-size: 0.6rem;
+  }
+  
+  .timer-label {
+    font-size: 0.5rem;
+  }
 }
 </style>
