@@ -83,9 +83,9 @@ const routes = [
     beforeEnter: (to, from, next) => {
       const id = parseInt(to.params.id);
 
-      // if (isNaN(id) || id < 1 || id > 15) return next("/");
-      // if (!isUnlocked(id)) return next("/");
-      // if (isPast(id) && id !== 15) return next("/");
+      if (isNaN(id) || id < 1 || id > 15) return next("/");
+      if (!isUnlocked(id)) return next("/");
+      if (isPast(id) && id !== 15) return next("/");
 
       next();
     },
